@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    tools:context=".views.activities.StartAddingServiceActivity">
+
+    <!-- Back Button -->
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:contentDescription="Back button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:progress="50"
+        android:progressTint="#4CAF50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button"
+        android:layout_marginTop="16dp" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Adding Services"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar"
+        android:layout_marginTop="16dp" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add at least one service now. Later you can add more, edit details, and group services into categories."
+        android:textSize="14sp"
+        android:textColor="#808080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:lineSpacingExtra="4dp" />
+
+    <!-- RecyclerView for Service List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/service_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitle"
+        app:layout_constraintBottom_toTopOf="@id/add_service_button"
+        android:layout_marginTop="16dp"
+        tools:listitem="@layout/service_item"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Add Service Button -->
+    <Button
+        android:id="@+id/add_service_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="+ Add service"
+        android:textColor="#4CAF50"
+        android:backgroundTint="#FFFFFF"
+        android:strokeColor="#4CAF50"
+        app:layout_constraintBottom_toTopOf="@id/continue_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Continue Button -->
+    <Button
+        android:id="@+id/continue_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONTINUE"
+        android:textAllCaps="false"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent">
+    <!-- Back Arrow -->
+    <ImageView
+        android:id="@+id/back_arrow"
+        android:layout_width="49dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="Back"
+        android:src="@drawable/baseline_arrow_back_24"
+        tools:ignore="MissingConstraints">
+
+    </ImageView>
+
+    <!-- Title and Description -->
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Tyga, tell us about your business"
+        android:textColor="#020202"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_arrow" />
+
+    <TextView
+        android:id="@+id/description_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Choose a business category that will help your customers find you when they're browsing for services."
+        android:textSize="14sp"
+        android:gravity="center"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/title_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:progress="50"
+        android:max="100"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/description_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+         />
+
+    <!-- Categories List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_category" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
