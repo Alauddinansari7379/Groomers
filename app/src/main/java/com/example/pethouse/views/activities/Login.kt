@@ -26,6 +26,8 @@ class Login : AppCompatActivity() {
         val registerText = findViewById<TextView>(R.id.register)
         val forgotPasswordText = findViewById<TextView>(R.id.forget)
 
+
+
         // Handle login button click
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
