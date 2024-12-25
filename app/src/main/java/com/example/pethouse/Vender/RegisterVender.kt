@@ -1,4 +1,4 @@
-package com.example.pethouse.vendor
+package com.example.pethouse.Vender
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pethouse.R
-import com.example.pethouse.user.UserResister
+import com.example.pethouse.User.UserResister
 import com.google.android.material.textfield.TextInputLayout
 
 class RegisterVender : AppCompatActivity() {
@@ -17,9 +17,6 @@ class RegisterVender : AppCompatActivity() {
          setContentView(R.layout.activity_register_vender)
 
 
-       val addbutton = findViewById<TextInputLayout>(R.id.tipSubUser)
-        val User = findViewById<Switch>(R.id.checkBox)
-        val Vender = findViewById<Button>(R.id.btnRegister)
 
 
 //        addbutton.setOnClickListener {
@@ -28,15 +25,5 @@ class RegisterVender : AppCompatActivity() {
 //
 //        }
 
-        User.setOnClickListener {
-
-            val intent = Intent(this, UserResister::class.java)
-            startActivity(intent)
-        }
-        Vender.setOnClickListener {
-
-            val intent = Intent(this, VendorDashboard::class.java)
-            startActivity(intent)
-        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.pethouse.vendor
+package com.example.pethouse.Vender
 
 data class Order(
     val orderId: String,

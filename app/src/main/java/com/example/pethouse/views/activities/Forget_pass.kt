@@ -8,8 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pethouse.R
-import com.example.pethouse.user.UserResister
-import com.example.pethouse.vendor.VendorDashboard
+import com.example.pethouse.User.UserResister
 
 class Forget_pass : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,10 +42,10 @@ class Forget_pass : AppCompatActivity() {
             if (isPasswordChanged) {
                 Toast.makeText(this, "Password changed successfully", Toast.LENGTH_SHORT).show()
 
-                // Navigate to Vendor Dashboard
-                val intent = Intent(this, VendorDashboard::class.java)
-                startActivity(intent)
-                finish() // Close the Forget Password screen
+//                // Navigate to Vendor Dashboard
+//                val intent = Intent(this, Vender_dash::class.java)
+//                startActivity(intent)
+//                finish() // Close the Forget Password screen
             } else {
                 Toast.makeText(this, "Failed to change password. Please try again.", Toast.LENGTH_SHORT).show()
             }

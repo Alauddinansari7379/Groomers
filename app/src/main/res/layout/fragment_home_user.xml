@@ -48,88 +48,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:background="#90CBE6"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <EditText
+            <androidx.appcompat.widget.SearchView
                 android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/border"
-                android:drawableEnd="@drawable/baseline_search_24"
-                android:hint="@string/search"
-                android:padding="12dp"
-                 />
+                android:background="@color/white"
+                android:iconifiedByDefault="false"
+                android:queryHint="Search for Food, Treats, Pharmacy" />
+
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/location"
-                    android:backgroundTint="#9F367A">
-
-                </androidx.appcompat.widget.AppCompatImageView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvCurrentLocation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Current Address"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"
-                        android:textStyle="bold">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:gravity="end">
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="12sp">
-
-                </androidx.appcompat.widget.AppCompatTextView>
-            </LinearLayout>
-        </LinearLayout>
         <TextView
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
