@@ -1,4 +1,4 @@
-package com.example.pethouse.Vender
+package com.example.pethouse.vendor
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -31,7 +31,7 @@ class list : Fragment(R.layout.fragment_list) {
         )
 
         // Set up the adapter
-      //  orderAdapter = OrderAdapter(orderList)
+        orderAdapter = OrderAdapter(orderList)
         recyclerView.adapter = orderAdapter
     }
 }

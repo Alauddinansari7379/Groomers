@@ -92,4 +92,7 @@
     <string name="zip_code">Zip Code</string>
     <string name="register_new_user">Register New User</string>
     <string name="add_member">Add Member</string>
+    <string name="my_profile">My Profile</string>
+    <string name="add_post">Add Post</string>
+    <string name="search">Search</string>
 </resources>
