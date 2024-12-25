@@ -30,6 +30,7 @@ class UserResister : AppCompatActivity() {
                 startActivity(Intent(context,AddMember::class.java))
             }
 
+
             tvLogin.setOnClickListener {
                 startActivity(Intent(context,Login::class.java))
             }
