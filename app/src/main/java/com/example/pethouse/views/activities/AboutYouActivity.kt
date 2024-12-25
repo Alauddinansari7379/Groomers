@@ -8,7 +8,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.pethouse.R
+import com.example.pethouse.Vender.RegisterVender
+import com.google.android.material.textfield.TextInputLayout
 
 class AboutYouActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -19,9 +23,7 @@ class AboutYouActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.Blue))
 
-         val continebtn = findViewById<Button>(R.id.btnRegister)
-
-
+        val continebtn = findViewById<Button>(R.id.btnRegister)
         continebtn.setOnClickListener {
             val intent = Intent(this, BusinessSizeActivity::class.java)
             startActivity(intent)

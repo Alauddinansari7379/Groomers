@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/hostFragment"
+        android:id="@+id/mtrl_calendar_frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/user_bottomNav"

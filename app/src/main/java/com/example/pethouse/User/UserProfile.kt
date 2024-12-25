@@ -1,4 +1,4 @@
-package com.example.pethouse.user
+package com.example.pethouse.User
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

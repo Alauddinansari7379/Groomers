@@ -4,50 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="Blue">#00A3FF</color>
     <color name="red">#FF0000</color>
-    <color name="purple">#6672FF</color>
-    <color name="mainColorDark">#1F288A</color>
-    <color name="mainColor">#4D57C5</color>
-
-    <!-- Login Screen -->
-    <color name="login_background">#E3F2FD</color> <!-- Light Sky Blue -->
-    <color name="login_button">#1565C0</color> <!-- Deep Blue -->
-    <color name="login_button_text">#FFFFFF</color>
-
-    <!-- Dashboard Screen -->
-    <color name="dashboard_background">#FAFAFA</color> <!-- Soft White -->
-    <color name="dashboard_card">#FFFFFF</color>
-    <color name="dashboard_text">#263238</color> <!-- Charcoal Gray -->
-
-    <!-- Search Screen -->
-    <color name="search_background">#FFFFFF</color>
-    <color name="search_bar">#E0F7FA</color> <!-- Light Cyan -->
-    <color name="search_text">#37474F</color> <!-- Dark Gray -->
-
-    <!-- Order List Screen -->
-    <color name="orderlist_background">#F9FBE7</color> <!-- Light Lime -->
-    <color name="orderlist_card">#FFFFFF</color>
-    <color name="orderlist_text">#212121</color> <!-- Blackish Gray -->
-
-    <!-- Profile Screen -->
-    <color name="profile_background">#FFFDE7</color> <!-- Light Yellow -->
-    <color name="profile_text">#424242</color> <!-- Dark Gray -->
-    <color name="profile_highlight">#D81B60</color> <!-- Vivid Pink -->
-
-    <!-- Primary Colors -->
-    <color name="blue">#1E88E5</color> <!-- Bright Blue -->
-
-    <!-- Secondary Colors -->
-    <color name="light_gray">#F5F5F5</color>
-    <color name="dark_gray">#546E7A</color> <!-- Slate Gray -->
-
-    <!-- Accent Colors -->
-    <color name="green">#66BB6A</color> <!-- Fresh Green -->
+    <color name="purple">#4C57DE</color>
+    <color name="mainColor">#4C57DE</color>
+    <color name="main_Color_Dark">#262E91</color>
 
 
-    <!-- Neutral Colors -->
-    <color name="gray">#B0BEC5</color> <!-- Light Grayish Blue -->
-    <color name="background">#DDDADD  </color> <!-- Light Grayish Blue -->
-
-    <!-- Gradients -->
-    <item name="gradient_blue_to_purple" type="color">#42A5F5,#AB47BC</item> <!-- Light Blue to Soft Purple -->
 </resources>
