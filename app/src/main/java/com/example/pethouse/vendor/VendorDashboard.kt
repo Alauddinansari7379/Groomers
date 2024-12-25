@@ -20,6 +20,7 @@ private val binding by lazy { ActivityVenderDashBinding.inflate(layoutInflater) 
         val smoothBottomBar = binding.bottomNavigation1
             ?: throw NullPointerException("SmoothBottomBar not found in layout")
 //somenath
+
         val popupMenu = PopupMenu(this, null)
         popupMenu.inflate(R.menu.bottom_menu)
         smoothBottomBar.setupWithNavController(popupMenu.menu, navController)
