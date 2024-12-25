@@ -96,4 +96,6 @@
     <string name="my_profile">My Profile</string>
     <string name="add_post">Add Post</string>
     <string name="search">Search</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>

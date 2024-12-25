@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethouse.R
-import com.example.pethouse.views.activities.Item
+import com.example.pethouse.model.Item
 
 class HomeAdapter(private val itemList: List<Item>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
@@ -22,8 +22,8 @@ class HomeAdapter(private val itemList: List<Item>) : RecyclerView.Adapter<HomeA
     override fun getItemCount(): Int = itemList.size
 
     class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val itemImage: ImageView = itemView.findViewById(R.id.shake)
-        private val itemTitle: TextView = itemView.findViewById(R.id.text)
+        private val itemImage: ImageView = itemView.findViewById(R.id.imgPro)
+        private val itemTitle: TextView = itemView.findViewById(R.id.tvTitle)
 
         fun bind(item: Item) {
             itemImage.setImageResource(item.imageResId)

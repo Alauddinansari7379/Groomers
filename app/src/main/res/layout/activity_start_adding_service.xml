@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="16dp"
-    tools:context=".views.activities.StartAddingServiceActivity">
+    tools:context=".activity.StartAddingServiceActivity">
 
     <!-- Back Button -->
     <ImageView

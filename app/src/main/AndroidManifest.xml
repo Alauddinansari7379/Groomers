@@ -18,39 +18,35 @@
         android:theme="@style/Theme.PetHouse"
         tools:targetApi="31">
         <activity
-            android:name=".views.activities.AboutYouActivity"
+            android:name=".activity.AddMember"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.Registration"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.AboutYouActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.StartAddingServiceActivity"
+            android:name=".activity.StartAddingServiceActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.BusinessSizeActivity"
+            android:name=".activity.BusinessSizeActivity"
             android:exported="false" />
         <activity
-            android:name=".StartAddingServicesActivity"
-            android:exported="false"
-            tools:ignore="MissingClass" />
-        <activity
-            android:name=".views.activities.ShowBusinessActivity"
+            android:name=".activity.ShowBusinessActivity"
             android:exported="false" >
         </activity>
+
         <activity
-            android:name=".user.SubUserLogin"
-            android:exported="false" />
-        <activity
-            android:name=".vendor.RegisterVender"
-            android:exported="false" />
-        <activity
-            android:name=".user.UserDashBoard"
-            android:exported="false" /> <!-- Launcher Activity -->
-        <activity
-            android:name=".views.activities.MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false">
 
         </activity>
 
         <activity
-            android:name=".views.activities.Login"
+            android:name=".activity.Login"
             android:exported="true" >
 
             <intent-filter>
@@ -60,14 +56,12 @@
             </intent-filter>
         </activity> <!-- Vendor Dashboard -->
         <activity
-            android:name=".vendor.VendorDashboard"
+            android:name=".activity.Dashboard"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
+
         <activity
-            android:name=".user.UserResister"
-            android:exported="false" />
-        <activity
-            android:name=".views.activities.Forget_pass"
+            android:name=".activity.ForgetPassword"
             android:exported="false" />
 
         <meta-data
