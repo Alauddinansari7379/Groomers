@@ -1,4 +1,4 @@
-package com.example.pethouse.Vender
+package com.example.pethouse.vendor
 
 import android.net.Uri
 import android.os.Bundle

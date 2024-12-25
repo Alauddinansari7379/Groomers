@@ -1,4 +1,4 @@
-package com.example.pethouse.User
+package com.example.pethouse.user
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +19,7 @@ class UserDashBoard : AppCompatActivity() {
         userbottomNav.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.user_home -> {
-                    loadFragment(Home_user())
+                    loadFragment(FragmentHome())
                     true
                 }
                 R.id.user_list -> {
@@ -37,13 +37,13 @@ class UserDashBoard : AppCompatActivity() {
 
         // Set default fragment
         if (savedInstanceState == null) {
-            loadFragment(Home_user())
+            loadFragment(FragmentHome())
         }
     }
 
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.mtrl_calendar_frame, fragment)
+            .replace(R.id.hostFragment, fragment)
             .commit()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.pethouse.User
+package com.example.pethouse.vendor
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,20 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.pethouse.R
 
-
-class OrderList :Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+class Profile : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_list_user, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
-
-
 }

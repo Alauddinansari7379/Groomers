@@ -8,11 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.pethouse.R
-import com.example.pethouse.Vender.RegisterVender
-import com.google.android.material.textfield.TextInputLayout
 
 class AboutYouActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")

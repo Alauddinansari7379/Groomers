@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -33,13 +35,13 @@
             android:exported="false" >
         </activity>
         <activity
-            android:name=".User.SubUserLogin"
+            android:name=".user.SubUserLogin"
             android:exported="false" />
         <activity
-            android:name=".Vender.RegisterVender"
+            android:name=".vendor.RegisterVender"
             android:exported="false" />
         <activity
-            android:name=".User.UserDashBoard"
+            android:name=".user.UserDashBoard"
             android:exported="false" /> <!-- Launcher Activity -->
         <activity
             android:name=".views.activities.MainActivity"
@@ -58,11 +60,11 @@
             </intent-filter>
         </activity> <!-- Vendor Dashboard -->
         <activity
-            android:name=".Vender.Vender_dash"
+            android:name=".vendor.VendorDashboard"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".User.UserResister"
+            android:name=".user.UserResister"
             android:exported="false" />
         <activity
             android:name=".views.activities.Forget_pass"
