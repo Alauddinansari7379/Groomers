@@ -71,6 +71,7 @@
     <string name="enter_phone_number">Enter Phone Number</string>
     <string name="enter_your_password">Enter Your Password</string>
     <string name="log_in">Log In</string>
+
     <string name="new_user">New User?</string>
     <string name="create_account">Create Account</string>
     <string name="home">Home</string>
