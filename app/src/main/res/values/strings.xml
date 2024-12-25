@@ -60,4 +60,8 @@
     <string name="edit_update_your_account_settings">Edit/update your account settings</string>
     <string name="frequently_asked_questions">Frequently asked questions</string>
     <string name="faq_contacts_us">FAQ / Contacts Us</string>
+    <string name="home">Home</string>
+    <string name="add_post">Add Post</string>
+    <string name="my_profile">My Profile</string>
+    <string name="search">Search</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.pethouse.User
+package com.example.pethouse.user
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethouse.views.activities.AboutYouActivity
 import com.example.pethouse.R
-import com.example.pethouse.Vender.RegisterVender
+import com.example.pethouse.vendor.RegisterVender
 import com.example.pethouse.adapter.TextGridAdapter
 import com.google.android.material.textfield.TextInputLayout
 

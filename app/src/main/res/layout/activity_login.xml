@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/top_background"
+    android:background="@color/background"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".views.activities.Login">
@@ -35,8 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/email"
-            app:helperText="Required*"
-            app:helperTextTextColor="@color/red">
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
@@ -53,8 +52,7 @@
             android:layout_height="match_parent"
             android:hint="@string/password"
             app:endIconMode="password_toggle"
-            app:helperText="Required*"
-            app:helperTextTextColor="@color/red">
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"

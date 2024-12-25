@@ -1,4 +1,4 @@
-package com.example.pethouse.User
+package com.example.pethouse.user
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView

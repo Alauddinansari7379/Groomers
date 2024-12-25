@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import com.example.pethouse.R
-import com.example.pethouse.User.UserResister
-import com.example.pethouse.Vender.Vender_dash
+import com.example.pethouse.user.UserResister
+import com.example.pethouse.vendor.VendorDashboard
 
 class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,22 +33,22 @@ class Login : AppCompatActivity() {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-            } else {
+           // if (email.isEmpty() || password.isEmpty()) {
+             //   Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+          //  } else {
                 // Simulated login logic for any user
-                if (isValidEmail(email)) {
+              //  if (isValidEmail(email)) {
                     Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
 
                     // Navigate to Vendor Dashboard
-                    val intent = Intent(this, Vender_dash::class.java)
+                    val intent = Intent(this, VendorDashboard::class.java)
                     startActivity(intent)
                     finish() // Close the login activity
-                } else {
+               // } else {
                     Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show()
-                }
+              //  }
             }
-        }
+       // }
 
         // Navigate to register activity
         registerText.setOnClickListener {
