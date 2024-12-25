@@ -18,6 +18,7 @@ class Vender_dash : AppCompatActivity() {
                     loadFragment(HomeFragment())
                     true
                 }
+
                 R.id.list -> {
                     loadFragment(list())
                     true
