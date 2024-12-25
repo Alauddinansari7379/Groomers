@@ -20,6 +20,7 @@ class UserResister : AppCompatActivity() {
     private val itemText = mutableListOf<String>() // List to hold dynamic items
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //some
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_user)
 
