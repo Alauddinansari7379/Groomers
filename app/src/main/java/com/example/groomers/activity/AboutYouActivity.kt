@@ -22,6 +22,7 @@ class AboutYouActivity : AppCompatActivity() {
          val continebtn = findViewById<Button>(R.id.btnRegister)
 
 
+
         continebtn.setOnClickListener {
             val intent = Intent(this, BusinessSizeActivity::class.java)
             startActivity(intent)
