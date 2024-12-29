@@ -1,4 +1,4 @@
-package com.example.pethouse.fragments
+package com.example.groomers.fragments
 import HomeAdapter
 import android.Manifest
 import android.annotation.SuppressLint
@@ -15,8 +15,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pethouse.R
-import com.example.pethouse.model.Item
+import com.example.groomers.R
+import com.example.groomers.model.Item
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import java.io.IOException

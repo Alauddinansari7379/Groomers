@@ -1,9 +1,9 @@
-package com.example.pethouse.activity
+package com.example.groomers.activity
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pethouse.databinding.ActivityLoginBinding
+import com.example.groomers.databinding.ActivityLoginBinding
 
 class Login : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }

@@ -1,4 +1,4 @@
-package com.example.pethouse.activity
+package com.example.groomers.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,7 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import com.example.pethouse.R
+import com.example.groomers.R
 
 class AboutYouActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")

@@ -1,9 +1,9 @@
-package com.example.pethouse.activity
+package com.example.groomers.activity
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pethouse.databinding.ActivityForgetPasswordBinding
+import com.example.groomers.databinding.ActivityForgetPasswordBinding
 
 class ForgetPassword : AppCompatActivity() {
     private val context=this@ForgetPassword

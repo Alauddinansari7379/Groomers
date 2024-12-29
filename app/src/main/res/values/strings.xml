@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PetHouse</string>
+    <string name="app_name">groomers</string>
     <string name="title_activity_forget_pass">Forget_pass</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

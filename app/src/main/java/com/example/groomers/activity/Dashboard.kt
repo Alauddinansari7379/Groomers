@@ -1,12 +1,12 @@
-package com.example.pethouse.activity
+package com.example.groomers.activity
 
 import android.os.Bundle
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.pethouse.R
-import com.example.pethouse.databinding.ActivityVenderDashBinding
+import com.example.groomers.R
+import com.example.groomers.databinding.ActivityVenderDashBinding
 import me.ibrahimsn.lib.SmoothBottomBar
 
 class Dashboard : AppCompatActivity() {

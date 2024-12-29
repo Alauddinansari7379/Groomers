@@ -1,4 +1,4 @@
-package com.example.pethouse.fragments
+package com.example.groomers.fragments
 
 import android.net.Uri
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.pethouse.R
+import com.example.groomers.R
 
 class AddPost : Fragment(R.layout.fragment_add_post) {
 

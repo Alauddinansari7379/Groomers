@@ -4,8 +4,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pethouse.R
-import com.example.pethouse.model.Item
+import com.example.groomers.R
+import com.example.groomers.model.Item
 
 class HomeAdapter(private val itemList: List<Item>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 

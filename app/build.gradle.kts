@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.pethouse"
+    namespace = "com.example.groomers"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.pethouse"
+        applicationId = "com.groomers.groomers"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

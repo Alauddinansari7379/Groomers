@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Base.Theme.PetHouse" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Base.Theme.groomers" parent="Theme.Material3.Light.NoActionBar">
         <!-- Ensure dark mode is not allowed -->
         <item name="android:forceDarkAllowed">false</item>
     </style>

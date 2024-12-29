@@ -6,18 +6,18 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.pethouse.fragments.HomeFragment"
+        android:name="com.example.groomers.fragments.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/addPostFragment"
-        android:name="com.example.pethouse.fragments.AddPost"
+        android:name="com.example.groomers.fragments.AddPost"
         android:label="Add_post" />
     <fragment
         android:id="@+id/orderListFragment"
-        android:name="com.example.pethouse.fragments.OrderList"
+        android:name="com.example.groomers.fragments.OrderList"
         android:label="OrderList" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.pethouse.fragments.Profile"
+        android:name="com.example.groomers.fragments.Profile"
         android:label="Profile" />
 </navigation>
