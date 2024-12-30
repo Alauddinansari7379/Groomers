@@ -5,11 +5,11 @@
         android:icon="@drawable/home"
         android:title="@string/home"
         />
-    <item
+    <!--<item
         android:id="@+id/addPostFragment"
         android:icon="@drawable/add"
         android:title="@string/add_post"
-        />
+        />-->
     <item
         android:id="@+id/orderListFragment"
         android:icon="@drawable/list"

@@ -14,7 +14,7 @@
         android:label="Add_post" />
     <fragment
         android:id="@+id/orderListFragment"
-        android:name="com.example.groomers.fragments.OrderList"
+        android:name="com.example.groomers.fragments.OrderListFragment"
         android:label="OrderList" />
     <fragment
         android:id="@+id/profileFragment"

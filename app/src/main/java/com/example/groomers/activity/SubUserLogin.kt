@@ -6,22 +6,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.example.groomers.R
+import com.example.groomers.databinding.ActivityLoginBinding
+import com.example.groomers.databinding.ActivitySubUserLoginBinding
 
 class SubUserLogin : AppCompatActivity() {
+    private val binding by lazy { ActivitySubUserLoginBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sub_user_login)
+        setContentView(binding.root)
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.Blue))
-        // Find the ImageView by its ID
-        val imageView: ImageView = findViewById(R.id.image1)
+        with(binding) {
+            subUser1.setOnClickListener { startActivity(Intent(this@SubUserLogin, Dashboard::class.java))}
+            subUser2.setOnClickListener { startActivity(Intent(this@SubUserLogin, Dashboard::class.java))}
+            subUser3.setOnClickListener { startActivity(Intent(this@SubUserLogin, Dashboard::class.java))}
+            subUser4.setOnClickListener { startActivity(Intent(this@SubUserLogin, Dashboard::class.java))}
 
-        // Set a click listener on the ImageView
-        imageView.setOnClickListener {
-            // Navigate to the User Dashboard
-            val intent = Intent(this, Dashboard::class.java)
-            startActivity(intent)
         }
     }
 }

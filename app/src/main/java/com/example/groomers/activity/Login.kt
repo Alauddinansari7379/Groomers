@@ -14,7 +14,7 @@ class Login : AppCompatActivity() {
 
         with(binding){
             btnLogin.setOnClickListener {
-                startActivity(Intent(context,Dashboard::class.java))
+                startActivity(Intent(context,SubUserLogin::class.java))
             }
 
             tvRegister.setOnClickListener {

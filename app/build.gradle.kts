@@ -63,5 +63,7 @@ dependencies {
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.2")
     //Counter Code Picker
     implementation ("com.hbb20:ccp:2.5.0")
+    //Circule image
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
 }

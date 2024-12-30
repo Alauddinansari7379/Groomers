@@ -18,13 +18,17 @@
         android:theme="@style/Theme.groomers"
         tools:targetApi="31">
         <activity
+            android:name=".activity.OrderLists"
+            android:exported="false" />
+        <activity
+            android:name=".activity.OrderDetails"
+            android:exported="false" />
+        <activity
             android:name=".activity.AddMember"
             android:exported="false" />
-
         <activity
             android:name=".activity.Registration"
             android:exported="false" />
-
         <activity
             android:name=".activity.AboutYouActivity"
             android:exported="false" />
@@ -36,19 +40,16 @@
             android:exported="false" />
         <activity
             android:name=".activity.ShowBusinessActivity"
-            android:exported="false" >
-        </activity>
-
+            android:exported="false" />
+        <activity
+            android:name=".activity.SubUserLogin"
+            android:exported="false" />
         <activity
             android:name=".activity.Login"
-            android:exported="false">
-
-        </activity>
-
+            android:exported="false" />
         <activity
             android:name=".activity.SplashScreen"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,7 +60,6 @@
             android:name=".activity.Dashboard"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".activity.ForgetPassword"
             android:exported="false" />

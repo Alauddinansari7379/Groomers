@@ -86,7 +86,7 @@
     <string name="enter_name">Enter Name</string>
     <string name="surname">Surname</string>
     <string name="enter_surname">Enter Surname</string>
-     <string name="sign_up">Sign Up</string>
+    <string name="sign_up">Sign Up</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="street_address_line">Street Address line</string>
     <string name="landmark">Landmark</string>
@@ -98,4 +98,23 @@
     <string name="search">Search</string>
     <string name="dashboard">Dashboard</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="order_detail">Order Detail</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="order">Order</string>
+    <string name="_00">00</string>
+    <string name="service_date">Service Date:</string>
+    <string name="_00_00_0000">00 00 0000</string>
+    <string name="order_details">Order Details</string>
+    <string name="name">Name</string>
+    <string name="type">Type</string>
+    <string name="na">Na</string>
+    <string name="discount">Discount</string>
+    <string name="total">Total</string>
+    <string name="vendor">Vendor</string>
+    <string name="contact_info">Contact Info</string>
+    <string name="at">\@</string>
+    <string name="test_gmail_com">test@gmail.com</string>
+    <string name="_9887667567">9887667567</string>
+    <string name="order_list">Order List</string>
+
 </resources>

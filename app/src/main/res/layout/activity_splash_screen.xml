@@ -9,12 +9,11 @@
     android:background="@color/mainColor"
     tools:context=".activity.SplashScreen">
 
-    <ImageView
-        android:id="@+id/splash_screen"
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:backgroundTint="@color/black"
-        android:src="@drawable/logo">
-    </ImageView>
+        android:background="@mipmap/ic_launcher_round">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
 
 </LinearLayout>
