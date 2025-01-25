@@ -41,6 +41,7 @@ class Dashboard : AppCompatActivity() {
                 R.id.homeFragment -> "Dashboard"
                 R.id.addPostFragment -> "Post"
                 R.id.orderListFragment -> "Order List"
+                R.id.appointmentFragment -> "Appointment"
                 else -> "Profile"
             }
         }

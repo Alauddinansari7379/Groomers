@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!-- Header Image -->
-    <ImageView
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/headerImage"
         android:layout_width="0dp"
         android:layout_height="200dp"
@@ -16,8 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Title Section -->
-    <LinearLayout
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/titleSection"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -27,33 +27,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerImage">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/shopTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="The Executive Men’s Hair Studio"
+            android:text="@string/the_executive_men_s_hair_studio"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/shopAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="503 18 Ave SW, T2S 0C6, Calgary"
+            android:text="@string/_503_18_ave_sw_t2s_0c6_calgary"
             android:textColor="@color/gray"
             android:textSize="14sp" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/ownerDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Entrepreneur"
+            android:text="@string/entrepreneur"
             android:textColor="@color/gray"
             android:textSize="14sp" />
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <!-- Tabs -->
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/tabLayout"
         android:layout_width="wrap_content"
@@ -66,32 +66,32 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SERVICE"
+            android:text="@string/service"
             android:layout_marginEnd="40dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="REVIEWS"
+            android:text="@string/reviews"
             android:layout_marginEnd="40dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PORTFOLIO"
+            android:text="@string/portfolio"
             android:layout_marginEnd="40dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DETAILS" />
+            android:text="@string/details" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <!-- Search Bar -->
 
-    <LinearLayout
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -113,10 +113,10 @@
             android:hint="@string/search"
             android:padding="12dp" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <!-- Popular Services Section -->
-    <LinearLayout
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/popularServicesSection"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -126,15 +126,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchBar">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/popularServicesHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Popular Services"
+            android:text="@string/popular_services"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- Service Item 1 -->
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
                 android:orientation="horizontal"
                 android:paddingVertical="8dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
@@ -157,43 +157,41 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/skin_care2" />
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/serviceTitle1"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/serviceTitle11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Haircut"
+                        android:text="@string/haircut"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/serviceDetails1"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/serviceDetails11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Classic and clean...40min"
+                        android:text="@string/classic_and_clean_40min"
                         android:textSize="14sp" />
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bookButton11"
+                    android:id="@+id/bookButton111"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/border"
                     android:backgroundTint="@color/Blue"
-                    android:text="Book"
+                    android:text="@string/book"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="11sp" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
+        </androidx.cardview.widget.CardView><androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -201,13 +199,13 @@
             app:cardCornerRadius="8dp">
 
             <LinearLayout
-                android:id="@+id/serviceItem12"
+                android:id="@+id/serviceItem11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingVertical="8dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
@@ -215,43 +213,41 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/skin_care2" />
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/serviceTitle2"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/serviceTitle111"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Haircut"
+                        android:text="@string/haircut"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/serviceDetails2"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/serviceDetails111"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Classic and clean...40min"
+                        android:text="@string/classic_and_clean_40min"
                         android:textSize="14sp" />
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bookButton12"
+                    android:id="@+id/bookButton1111"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/border"
                     android:backgroundTint="@color/Blue"
-                    android:text="Book"
+                    android:text="@string/book"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="11sp" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
+        </androidx.cardview.widget.CardView><androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -259,13 +255,13 @@
             app:cardCornerRadius="8dp">
 
             <LinearLayout
-                android:id="@+id/serviceItem13"
+                android:id="@+id/serviceItem111"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingVertical="8dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
@@ -273,44 +269,44 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/skin_care2" />
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/serviceTitle"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/serviceTitle1111"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Haircut"
+                        android:text="@string/haircut"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/serviceDetails"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/serviceDetails1111"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Classic and clean...40min"
+                        android:text="@string/classic_and_clean_40min"
                         android:textSize="14sp" />
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bookButton1"
+                    android:id="@+id/bookButton11111"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/border"
                     android:backgroundTint="@color/Blue"
-                    android:text="Book"
+                    android:text="@string/book"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="11sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-    </LinearLayout>
 
-    <!-- Other Services Section -->
-    <!-- Similar to Popular Services Section -->
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

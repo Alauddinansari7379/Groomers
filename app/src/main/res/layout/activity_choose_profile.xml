@@ -7,34 +7,33 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Title Text -->
-    <TextView
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Choose a profile and Groomers will show you best options and services near by"
+        android:text="@string/choose_a_profile_and_groomers_will_show_you_best_options_and_services_near_by"
         android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
-    <!-- Profile Options -->
+
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <!-- Male and Female Icons -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:orientation="horizontal">
 
-            <!-- Male Icon -->
+
             <LinearLayout
 
                 android:layout_width="wrap_content"
@@ -50,19 +49,19 @@
                     android:padding="8dp"
                     android:src="@drawable/male" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/maleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="Male"
+                    android:text="@string/male"
                     android:textColor="@android:color/white"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Female Icon -->
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,23 +73,22 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:padding="8dp"
-
                     android:src="@drawable/woman" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/femaleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="Female"
+                    android:text="@string/female"
                     android:textColor="@android:color/white"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Pet Icon -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,16 +102,16 @@
                 android:padding="8dp"
                 android:src="@drawable/pets" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/petText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
-                android:text="Pet"
+                android:text="@string/pet"
                 android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

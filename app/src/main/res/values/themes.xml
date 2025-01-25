@@ -3,6 +3,7 @@
     <style name="Base.Theme.groomers" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/mainColor</item>
     </style>
     <style name="BottomNavigationStyle" parent="Widget.Design.BottomNavigationView">
         <!--        <item name="android:foreground">@drawable/ripple_custom</item>-->

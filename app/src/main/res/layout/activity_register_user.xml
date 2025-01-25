@@ -45,9 +45,9 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Let's get started with the Pet's personal profile"
+                android:text="@string/let_s_get_started_with_the_pet_s_personal_profile"
                 android:textColor="@color/black"
-                android:textSize="20sp">
+                android:textSize="16sp">
 
             </androidx.appcompat.widget.AppCompatTextView>
 
@@ -70,9 +70,9 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:hint="Name"
+                android:hint="@string/name"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
@@ -102,9 +102,9 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="What kind of your pet is?"
+                android:text="@string/what_kind_of_your_pet_is"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
@@ -113,7 +113,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
-                android:hint="What kind of your pet is?"
+                android:hint="@string/what_kind_of_your_pet_is"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
@@ -136,9 +136,9 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Breed?"
+                android:text="@string/breed"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
@@ -345,7 +345,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="10dp"
-                android:background="@color/mainColor"
+                android:background="@drawable/gradient_button"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:text="@string/continue1"

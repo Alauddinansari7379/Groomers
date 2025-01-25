@@ -7,18 +7,18 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Title -->
-    <TextView
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:fontFamily="@font/sf_bold"
         android:gravity="center"
-        android:text="Log in or sign up"
+        android:text="@string/log_in_or_sign_up"
         android:textSize="16sp" />
 
-    <!-- Buttons for login providers -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -40,7 +40,7 @@
             android:gravity="center"
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/sf_bold"
-            android:text="Continue with Google"
+            android:text="@string/continue_with_google"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -48,15 +48,15 @@
 
     </LinearLayout>
 
-    <!-- Divider -->
-    <TextView
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:textSize="14sp"
         android:fontFamily="@font/sf_bold"
         android:gravity="center"
-        android:text="OR" />
+        android:text="@string/or" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
@@ -70,30 +70,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawablePadding="5dp"
+            android:paddingVertical="8dp"
             android:fontFamily="@font/poppins_regular"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Continue Button -->
 
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnContinue"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/mainColor"
-        android:text="Continue"
+        android:text="@string/continue1"
+        android:background="@drawable/gradient_button"
         android:textColor="@android:color/white" />
 
-    <!-- Business account -->
-    <TextView
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="Have a business account?" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/signInAsPro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,7 +104,7 @@
         android:text="Sign in as a professional"
         android:textColor="@color/purple" />
 
-    <!-- Footer -->
+
     <LinearLayout
         android:visibility="gone"
         android:layout_width="wrap_content"
@@ -110,14 +112,14 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="🌐 English" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/support"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

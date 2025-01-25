@@ -8,18 +8,17 @@
     android:background="@color/mainColor"
     android:gravity="center">
 
-    <!-- Header Text -->
-    <TextView
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/headerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Who's Watching?"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:text="@string/select_with"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         android:layout_marginBottom="24dp"
         android:fontFamily="sans-serif-medium" />
 
-    <!-- Profiles Grid -->
     <GridLayout
         android:id="@+id/profilesGrid"
         android:layout_width="wrap_content"
@@ -30,7 +29,7 @@
         android:alignmentMode="alignMargins"
         android:useDefaultMargins="true">
 
-        <!-- Profile 1 -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,19 +42,19 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/profile"
-                android:contentDescription="Profile 1"
+                android:contentDescription="@string/profile_1"
                 android:layout_marginBottom="8dp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/profileName1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ayush"
+                android:text="@string/ayush"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
-        <!-- Profile 2 -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,16 +67,16 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/boy"
-                android:contentDescription="Profile 2"
+                android:contentDescription="@string/profile_2"
                 android:layout_marginBottom="8dp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/profileName2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kids"
+                android:text="@string/kids"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
 
@@ -89,26 +88,26 @@
         android:background="@drawable/add_profile_border"
         android:gravity="center">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/addIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+"
+            android:text="@string/plus"
             android:textColor="#FFFFFF"
             android:textSize="36sp"
             android:fontFamily="sans-serif-light" />
     </LinearLayout>
 
-    <!-- Add Profile Text -->
-    <TextView
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/addProfileText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Profile"
+        android:text="@string/add_profile"
         android:textColor="#FFFFFF"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif" />
-    <!-- Edit Button -->
+
 
 </LinearLayout>

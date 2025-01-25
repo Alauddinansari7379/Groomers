@@ -16,7 +16,7 @@ class BookingDetail : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        binding.bookButton11.setOnClickListener {
+        binding.bookButton111.setOnClickListener {
             val intent = Intent(this@BookingDetail, Dashboard::class.java)
             intent.putExtra("navigate_to", "fragment_cart")
             startActivity(intent)

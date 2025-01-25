@@ -158,5 +158,56 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="breed">Breed?</string>
+    <string name="pet">Pet</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="entrepreneur">Entrepreneur</string>
+    <string name="_503_18_ave_sw_t2s_0c6_calgary">503 18 Ave SW, T2S 0C6, Calgary</string>
+    <string name="the_executive_men_s_hair_studio">The Executive Men’s Hair Studio</string>
+    <string name="service">SERVICE</string>
+    <string name="reviews">REVIEWS</string>
+    <string name="portfolio">PORTFOLIO</string>
+    <string name="details">DETAILS</string>
+    <string name="popular_services">Popular Services</string>
+    <string name="haircut">Haircut</string>
+    <string name="classic_and_clean_40min">Classic and clean...40min</string>
+    <string name="book">Book</string>
+    <string name="choose_a_profile_and_groomers_will_show_you_best_options_and_services_near_by">Choose a profile and Groomers will show you best options and services near by</string>
+    <string name="enter_your_mobile_number_to_finish_sign_up">Enter your mobile number to finish sign up</string>
+    <string name="complete_profile">Complete profile</string>
+    <string name="log_in_or_sign_up">Log in or sign up</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="or">OR</string>
+    <string name="let_s_get_started_with_the_pet_s_personal_profile">Let\'s get started with the Pet\'s personal profile</string>
+    <string name="what_kind_of_your_pet_is">What kind of your pet is?</string>
+    <string name="review_and_confirm">Review and confirm</string>
+    <string name="fri_jan_3_2025_10_00_am">Fri, Jan 3, 2025 • 10:00 AM</string>
+    <string name="the_executive_men_s_hair_styling_503_18_ave_sw_t2s_0c6_calgary">The Executive Men\'s Hair Styling • 503 18 Ave SW, T2S 0C6, Calgary</string>
+    <string name="_35_00">$35.00</string>
+    <string name="secure_your_spot_now_pay_later">Secure your spot now, pay later</string>
+    <string name="confirm_your_booking_now_and_pay_once_your_service_is_completed">Confirm your booking now and pay once your service is completed.</string>
+    <string name="confirm_book">Confirm Book</string>
+    <string name="staff_andrew">Staff: Andrew</string>
+    <string name="_10_00_am_10_40_am">10:00 AM - 10:40 AM</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="add_profile">Add Profile</string>
+    <string name="select_with">Select with?</string>
+    <string name="profile_1">Profile 1</string>
+    <string name="ayush">Ayush</string>
+    <string name="profile_2">Profile 2</string>
+    <string name="kids">Kids</string>
+    <string name="plus">+</string>
+    <string name="_9_30_am">9:30 AM</string>
+    <string name="_9_45_am">9:45 AM</string>
+    <string name="_10_30_am">10:30 AM</string>
+    <string name="_10_45_am">10:45 AM</string>
+    <string name="_9_30_am_10_10_am">9:30 AM - 10:10 AM</string>
+    <string name="leave_a_note_optional">Leave a note (optional)</string>
+    <string name="wellness_day_spa">Wellness Day Spa</string>
+    <string name="current_address">Current Address</string>
+    <string name="go_to_my_appointments">Go to my appointments</string>
+    <string name="no_upcoming_appointments">NO UPCOMING APPOINTMENTS</string>
+    <string name="save_up_to_5">Save up to 5%</string>
 
 </resources>

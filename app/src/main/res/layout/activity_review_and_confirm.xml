@@ -7,48 +7,47 @@
     android:background="#FFFFFF"
     android:padding="16dp">
 
-    <!-- Header -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/baseline_arrow_back_24" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Review and confirm"
-            android:textSize="18sp"
+            android:text="@string/review_and_confirm"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginStart="16dp"
             android:fontFamily="sans-serif" />
     </LinearLayout>
 
-    <!-- Booking Info -->
-    <TextView
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fri, Jan 3, 2025 • 10:00 AM"
+        android:text="@string/fri_jan_3_2025_10_00_am"
         android:textSize="16sp"
         android:textColor="#000000"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="sans-serif" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="The Executive Men's Hair Styling • 503 18 Ave SW, T2S 0C6, Calgary"
-        android:textSize="14sp"
+        android:text="@string/the_executive_men_s_hair_styling_503_18_ave_sw_t2s_0c6_calgary"
+        android:textSize="12sp"
         android:textColor="#666666"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif" />
 
-    <!-- Details Card -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,19 +62,19 @@
             android:orientation="horizontal"
           >
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Haircut"
-                android:textSize="16sp"
+                android:text="@string/haircut"
+                android:textSize="12sp"
                 android:textColor="#000000"
                 android:fontFamily="sans-serif-medium" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$35.00"
-                android:textSize="16sp"
+                android:text="@string/_35_00"
+                android:textSize="12sp"
                 android:textColor="#000000"
                 android:fontFamily="sans-serif-medium" />
         </LinearLayout>
@@ -87,18 +86,18 @@
             android:layout_marginTop="8dp"
             >
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Staff: Andrew"
-                android:textSize="14sp"
+                android:text="@string/staff_andrew"
+                android:textSize="12sp"
                 android:textColor="#666666" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10:00 AM - 10:40 AM"
-                android:textSize="14sp"
+                android:text="@string/_10_00_am_10_40_am"
+                android:textSize="12sp"
                 android:textColor="#666666" />
         </LinearLayout>
 
@@ -114,19 +113,19 @@
             android:orientation="horizontal"
             android:layout_marginTop="16dp">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Subtotal:"
-                android:textSize="16sp"
+                android:text="@string/subtotal"
+                android:textSize="12sp"
                 android:textColor="#000000"
                 android:fontFamily="sans-serif" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$35.00"
-                android:textSize="16sp"
+                android:text="@string/_35_00"
+                android:textSize="12sp"
                 android:textColor="#000000"
                 android:fontFamily="sans-serif" />
         </LinearLayout>
@@ -136,7 +135,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="bottom">
-    <!-- Note Section -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -146,35 +145,45 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Secure your spot now, pay later"
+            android:text="@string/secure_your_spot_now_pay_later"
             android:textSize="14sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif"
             android:textColor="#000000" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm your booking now and pay once your service is completed."
-            android:textSize="14sp"
+            android:text="@string/confirm_your_booking_now_and_pay_once_your_service_is_completed"
+            android:textSize="12sp"
             android:layout_marginTop="4dp"
             android:fontFamily="sans-serif"
             android:textColor="#666666" />
     </LinearLayout>
 
-    <!-- Confirm Button -->
-    <Button
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinue"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/mainColor"
-        android:text="Confirm  Book"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:fontFamily="sans-serif"
-        android:layout_marginBottom="16dp" />
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/gradient_button"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="@string/confirm_book"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold">
+
+    </androidx.appcompat.widget.AppCompatButton>
 </LinearLayout>
 
 </LinearLayout>
