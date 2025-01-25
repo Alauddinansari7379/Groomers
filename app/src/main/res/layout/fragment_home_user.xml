@@ -260,6 +260,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 <androidx.cardview.widget.CardView
+    android:id="@+id/imageItem1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:cardCornerRadius="12dp"
@@ -273,7 +274,7 @@
         android:padding="8dp">
 
         <ImageView
-            android:id="@+id/imageItem1"
+
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:scaleType="centerCrop"

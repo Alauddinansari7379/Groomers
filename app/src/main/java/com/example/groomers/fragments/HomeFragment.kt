@@ -13,6 +13,7 @@ import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -39,7 +40,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
     private var currentAddress = ""
     private val REQUEST_CODE = 100
     private lateinit var currentLocation: TextView
-    private lateinit var horizontalScroll: ImageView
+    private lateinit var horizontalScroll: CardView
 
 
     private lateinit var adapter: HomeAdapter
@@ -62,7 +63,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         currentLocation = view.findViewById<TextView>(R.id.tvLocation)
-        horizontalScroll = view.findViewById<ImageView>(R.id.imageItem)
+        horizontalScroll = view.findViewById<CardView>(R.id.imageItem1)
         horizontalScroll.setOnClickListener {
             val intent = Intent(requireContext(), BookingDetail::class.java)
             startActivity(intent)
