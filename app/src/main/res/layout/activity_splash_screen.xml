@@ -12,8 +12,6 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:background="@mipmap/ic_launcher_round">
-
-    </de.hdodenhof.circleimageview.CircleImageView>
+        android:background="@mipmap/ic_launcher_round"/>
 
 </LinearLayout>

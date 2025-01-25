@@ -169,7 +169,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#0277BD"
+        android:backgroundTint="@color/mainColor"
         android:text="Confirm  Book"
         android:textColor="#FFFFFF"
         android:textSize="16sp"

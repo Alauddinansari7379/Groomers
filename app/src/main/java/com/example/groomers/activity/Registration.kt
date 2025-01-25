@@ -14,7 +14,7 @@ class Registration : AppCompatActivity() {
 
         with(binding){
             btnContinue.setOnClickListener {
-                startActivity(Intent(context, AddMember::class.java))
+                startActivity(Intent(context, Watching::class.java))
             }
             tvLogin.setOnClickListener {
                 startActivity(Intent(context, Login::class.java))

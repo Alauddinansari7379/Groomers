@@ -14,7 +14,7 @@ class ChooseProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.root.setOnClickListener { startActivity(Intent(this@ChooseProfile,Watching::class.java)) }
+        binding.root.setOnClickListener { startActivity(Intent(this@ChooseProfile,Registration::class.java)) }
 
     }
 }
