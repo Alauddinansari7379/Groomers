@@ -9,6 +9,10 @@
     <color name="main_Color_Dark">#262E91</color>
     <color name="text_color">#555555</color>
     <color name="green">#21D026</color>
+    <color name="gray">#BBBCBB</color>
+    <color name="bottomNavigationBackground">#2A2E43</color>
+    <color name="bottomNavigationSelectedColor">#4C57DE</color>
+    <color name="bottomNavigationTintColor">#B2B2B2</color>
 
 
 </resources>

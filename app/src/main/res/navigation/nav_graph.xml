@@ -20,4 +20,8 @@
         android:id="@+id/profileFragment"
         android:name="com.example.groomers.fragments.Profile"
         android:label="Profile" />
+    <fragment
+        android:id="@+id/appointmentFragment"
+        android:name="com.example.groomers.fragments.AppointmentFragment"
+        android:label="AppointmentFragment" />
 </navigation>

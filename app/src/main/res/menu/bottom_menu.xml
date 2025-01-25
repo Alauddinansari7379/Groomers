@@ -16,6 +16,11 @@
         android:title="@string/orders"
         />
     <item
+        android:id="@+id/appointmentFragment"
+        android:icon="@drawable/calendar"
+        android:title="Appointments"
+        />
+    <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/profile"
         android:title="@string/my_profile"

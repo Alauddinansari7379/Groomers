@@ -24,34 +24,11 @@ class OrderListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_list_user, container, false)
-        view.findViewById<Button>(R.id.btn_930am).setOnClickListener {
-            val intent = Intent(requireContext(), OrderLists::class.java)
+        view.findViewById<LinearLayout>(R.id.mainLayout).setOnClickListener {
+            val intent = Intent(requireContext(), OrderDetails::class.java)
             startActivity(intent)
         }
-        view . findViewById < Button >(R.id.btn_930am).setOnClickListener {
-            val intent = Intent(requireContext(), OrderLists::class.java)
-            startActivity(intent)
-        }
-        view . findViewById < Button >(R.id.btn_1030am).setOnClickListener {
-            val intent = Intent(requireContext(), OrderLists::class.java)
-            startActivity(intent)
-        }
-        view . findViewById < Button >(R.id.btn_120pm).setOnClickListener {
-            val intent = Intent(requireContext(), OrderLists::class.java)
-            startActivity(intent)
-        }
-        view . findViewById < Button >(R.id.btn_510pm).setOnClickListener {
-            val intent = Intent(requireContext(), OrderLists::class.java)
-            startActivity(intent)
-        }
-        view . findViewById < Button >(R.id.btn_9pm).setOnClickListener {
-            val intent = Intent(requireContext(), OrderLists::class.java)
-            startActivity(intent)
-        }
-        view . findViewById < Button >(R.id.btn_10pm).setOnClickListener {
-            val intent = Intent(requireContext(), OrderLists::class.java)
-            startActivity(intent)
-        }
+
         return view
     }
 

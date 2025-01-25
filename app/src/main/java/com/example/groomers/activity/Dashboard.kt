@@ -7,11 +7,13 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.groomers.R
 import com.example.groomers.databinding.ActivityVenderDashBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import me.ibrahimsn.lib.SmoothBottomBar
 
 class Dashboard : AppCompatActivity() {
     private val binding by lazy { ActivityVenderDashBinding.inflate(layoutInflater) }
-    lateinit var bottomNav: SmoothBottomBar
+    lateinit var bottomNav: BottomNavigationView
+    var destinationFrom = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +25,16 @@ class Dashboard : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment
         val navController = navHostFragment.navController
-        // Set up SmoothBottomBar with NavController
-        val popupMenu = PopupMenu(this, null)
-        popupMenu.inflate(R.menu.bottom_menu)
-        binding.bottomNavigation1.setupWithNavController(popupMenu.menu, navController)
 
+        binding.bottomNavigation1.setupWithNavController(navController)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation1)
+        destinationFrom = intent.getStringExtra("navigate_to").toString()
+        if (destinationFrom == "fragment_cart") {
+            navController.navigate(R.id.appointmentFragment)
+            bottomNavigationView.selectedItemId = R.id.appointmentFragment
+            // setFragment(CartFragment(), "CartFragment")
+            destinationFrom=""
+        }
         // Change the title based on the current destination
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.tvTitle.text = when (destination.id) {

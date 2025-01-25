@@ -3,11 +3,14 @@ import HomeAdapter
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.HorizontalScrollView
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
@@ -16,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.groomers.R
+import com.example.groomers.activity.BookingDetail
 import com.example.groomers.model.Item
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -35,6 +39,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
     private var currentAddress = ""
     private val REQUEST_CODE = 100
     private lateinit var currentLocation: TextView
+    private lateinit var horizontalScroll: ImageView
 
 
     private lateinit var adapter: HomeAdapter
@@ -56,11 +61,17 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        recyclerView = view.findViewById(R.id.recyclerView)
+        currentLocation = view.findViewById<TextView>(R.id.tvLocation)
+        horizontalScroll = view.findViewById<ImageView>(R.id.imageItem)
+        horizontalScroll.setOnClickListener {
+            val intent = Intent(requireContext(), BookingDetail::class.java)
+            startActivity(intent)
+        }
+        /*recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         adapter = HomeAdapter(itemList)
         recyclerView.adapter = adapter
-        currentLocation = view.findViewById<TextView>(R.id.tvLocation)
+
 
         recyclerView2 = view.findViewById(R.id.recyclerView2)
         recyclerView2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -89,7 +100,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         recyclerView6 = view.findViewById(R.id.recyclerView6)
         recyclerView6.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         adapter = HomeAdapter(itemList)
-        recyclerView6.adapter = adapter
+        recyclerView6.adapter = adapter*/
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
         getLastLocation()
 

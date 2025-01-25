@@ -13,17 +13,17 @@ class Login : AppCompatActivity() {
         setContentView(binding.root)
 
         with(binding){
-            btnLogin.setOnClickListener {
-                startActivity(Intent(context,SubUserLogin::class.java))
+            btnContinue.setOnClickListener {
+                startActivity(Intent(context,Contact::class.java))
             }
 
-            tvRegister.setOnClickListener {
-                startActivity(Intent(context,Registration::class.java))
-            }
-
-            tvForget.setOnClickListener {
-                startActivity(Intent(context,ForgetPassword::class.java))
-            }
+//            tvRegister.setOnClickListener {
+//                startActivity(Intent(context,Registration::class.java))
+//            }
+//
+//            tvForget.setOnClickListener {
+//                startActivity(Intent(context,ForgetPassword::class.java))
+//            }
         }
 
     }

@@ -18,6 +18,25 @@
         android:theme="@style/Theme.groomers"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ReviewAndConfirm"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BookingDetail"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BookingDetails"
+            android:exported="false"
+            android:theme="@style/Theme.groomers" />
+        <activity
+            android:name=".activity.Watching"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ChooseProfile"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Contact"
+            android:exported="false" />
+        <activity
             android:name=".activity.OrderLists"
             android:exported="false" />
         <activity
