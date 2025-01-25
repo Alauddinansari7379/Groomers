@@ -13,24 +13,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@font/sf_bold"
         android:gravity="center"
         android:text="Log in or sign up"
-        android:textSize="24sp" />
+        android:textSize="16sp" />
 
     <!-- Buttons for login providers -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/border"
         android:gravity="center"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_weight=".2"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:src="@drawable/google" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -39,6 +39,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/sf_bold"
             android:text="Continue with Google"
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -52,6 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:textSize="14sp"
+        android:fontFamily="@font/sf_bold"
         android:gravity="center"
         android:text="OR" />
 
