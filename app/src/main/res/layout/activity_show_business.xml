@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Back Arrow -->
+
     <ImageView
         android:id="@+id/back_arrow"
         android:layout_width="24dp"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Progress Bar -->
+
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@id/back_arrow"
         android:layout_marginTop="16dp" />
 
-    <!-- Title -->
+
     <TextView
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/progress_bar"
         android:layout_marginTop="16dp" />
 
-    <!-- Subtitle -->
+
     <TextView
         android:id="@+id/subtitle_text"
         android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@id/title_text"
         android:layout_marginTop="8dp" />
 
-    <!-- Scrollable List of Days -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Example Day Row -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,8 +94,7 @@
                     android:textColor="#808080" />
             </LinearLayout>
 
-            <!-- Repeat this block for other days (Monday, Tuesday, etc.) -->
-            <!-- Example for Monday -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -124,7 +123,7 @@
 
     </ScrollView>
 
-    <!-- Continue Button -->
+
     <Button
         android:id="@+id/continue_button"
         android:layout_width="match_parent"

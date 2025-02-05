@@ -7,16 +7,16 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Back arrow -->
+
     <ImageView
         android:id="@+id/back_arrow"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@drawable/baseline_arrow_back_24"
-        android:contentDescription="Back arrow"
+        android:contentDescription="@string/back_arrow"
         android:layout_gravity="start" />
 
-    <!-- Progress bar -->
+
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -26,17 +26,17 @@
         android:progressTint="#4CAF50"
         android:layout_marginVertical="16dp" />
 
-    <!-- Title -->
+
     <TextView
         android:id="@+id/question_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="What's your team size?"
+        android:text="@string/what_s_your_team_size"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
 
-    <!-- RadioGroup for options -->
+
     <RadioGroup
         android:id="@+id/team_size_group"
         android:layout_width="match_parent"
@@ -47,37 +47,37 @@
             android:id="@+id/just_me"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Just me"
+            android:text="@string/just_me"
             android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/two_three_staff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2-3 staff members"
+            android:text="@string/_2_3_staff_members"
             android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/four_six_staff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4-6 staff members"
+            android:text="@string/_4_6_staff_members"
             android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/more_than_six_staff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="More than 6 staff members"
+            android:text="@string/more_than_6_staff_members"
             android:textSize="16sp" />
     </RadioGroup>
 
-    <!-- Continue button -->
+
     <Button
         android:id="@+id/continue_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CONTINUE"
+        android:text="@string/continue1"
         android:textAllCaps="false"
         android:layout_marginTop="24dp"
         android:enabled="false"

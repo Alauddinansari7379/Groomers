@@ -209,5 +209,20 @@
     <string name="go_to_my_appointments">Go to my appointments</string>
     <string name="no_upcoming_appointments">NO UPCOMING APPOINTMENTS</string>
     <string name="save_up_to_5">Save up to 5%</string>
+    <string name="female_haircut">Female Haircut</string>
+    <string name="_45min">45min</string>
+    <string name="title">Title</string>
+    <string name="_299">$299</string>
+    <string name="book_an_appointment">Book an Appointment</string>
+    <string name="more_than_6_staff_members">More than 6 staff members</string>
+    <string name="_4_6_staff_members">4-6 staff members</string>
+    <string name="_2_3_staff_members">2-3 staff members</string>
+    <string name="just_me">Just me</string>
+    <string name="what_s_your_team_size">What\'s your team size?</string>
+    <string name="back_arrow">Back arrow</string>
+    <string name="sign_in_as_a_professional">Sign in as a professional</string>
+    <string name="english">🌐 English</string>
+    <string name="support">⚙️ Support</string>
+    <string name="have_a_business_account">Have a business account?</string>
 
 </resources>

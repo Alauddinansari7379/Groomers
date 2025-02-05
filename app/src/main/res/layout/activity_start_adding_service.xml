@@ -7,7 +7,7 @@
     android:padding="16dp"
     tools:context=".activity.StartAddingServiceActivity">
 
-    <!-- Back Button -->
+
     <ImageView
         android:id="@+id/back_button"
         android:layout_width="24dp"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Progress Bar -->
+
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@id/back_button"
         android:layout_marginTop="16dp" />
 
-    <!-- Title -->
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/progress_bar"
         android:layout_marginTop="16dp" />
 
-    <!-- Subtitle -->
+
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
         android:layout_marginStart="16dp"
         android:lineSpacingExtra="4dp" />
 
-    <!-- RecyclerView for Service List -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/service_list"
         android:layout_width="0dp"
@@ -70,7 +70,7 @@
         tools:listitem="@layout/service_item"
         android:layout_marginBottom="16dp" />
 
-    <!-- Add Service Button -->
+
     <Button
         android:id="@+id/add_service_button"
         android:layout_width="match_parent"
@@ -84,7 +84,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="16dp" />
 
-    <!-- Continue Button -->
+
     <Button
         android:id="@+id/continue_button"
         android:layout_width="match_parent"

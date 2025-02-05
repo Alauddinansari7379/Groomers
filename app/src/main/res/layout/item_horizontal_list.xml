@@ -51,7 +51,7 @@
                             android:layout_marginStart="5dp"
                             android:maxLines="2"
                             android:ellipsize="end"
-                            android:text="Title"
+                            android:text="@string/title"
                             android:textColor="@color/black"
                             android:textSize="11sp"
                             android:textStyle="bold">
@@ -71,7 +71,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="$299"
+                            android:text="@string/_299"
                             android:textSize="11sp"
                             android:textColor="@color/black"
                             android:textStyle="bold">
