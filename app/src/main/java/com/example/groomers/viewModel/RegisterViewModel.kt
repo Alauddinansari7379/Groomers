@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
  import com.example.groomers.retrofit.ApiService
+import com.groomers.groomersvendor.model.modelregister.ModelRegister
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 
