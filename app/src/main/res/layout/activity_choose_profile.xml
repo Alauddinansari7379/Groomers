@@ -35,7 +35,7 @@
 
 
             <LinearLayout
-
+                android:id="@+id/layoutMale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
@@ -63,6 +63,7 @@
 
 
             <LinearLayout
+                android:id="@+id/layoutFemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -90,6 +91,7 @@
 
 
         <LinearLayout
+            android:id="@+id/layoutPet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

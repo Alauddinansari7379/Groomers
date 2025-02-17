@@ -14,7 +14,25 @@ class Watching : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.root.setOnClickListener { startActivity(Intent(this@Watching,Dashboard::class.java)) }
+        with(binding) {
+            profilesGrid.setOnClickListener {
+                startActivity(
+                    Intent(
+                        this@Watching,
+                        Dashboard::class.java
+                    )
+                )
+            }
+
+            layoutAddPro.setOnClickListener {
+                val intent = Intent(this@Watching, Contact::class.java).apply {
+                    putExtra("AddPro", "AddPro")
+                }
+                startActivity(intent)
+            }
+
+
+        }
 
 
     }

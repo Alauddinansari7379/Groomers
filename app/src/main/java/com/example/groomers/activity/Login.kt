@@ -22,16 +22,16 @@ class Login : AppCompatActivity() {
                 val email = binding.etEmail.text.toString()
                 viewModel.email = email
                 if (email.isEmpty()) {
-                    etEmail.error = "Please enter your business name"
+                    etEmail.error = "Please enter your email/username"
                     etEmail.requestFocus()
                     return@setOnClickListener
                 }
-                startActivity(Intent(context,Contact::class.java))
+                startActivity(Intent(context, Watching::class.java))
             }
 
-//            tvRegister.setOnClickListener {
-//                startActivity(Intent(context,Registration::class.java))
-//            }
+            signInAsPro.setOnClickListener {
+                startActivity(Intent(context,Contact::class.java))
+            }
 //
 //            tvForget.setOnClickListener {
 //                startActivity(Intent(context,ForgetPassword::class.java))

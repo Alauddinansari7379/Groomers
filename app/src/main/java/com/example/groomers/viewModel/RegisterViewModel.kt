@@ -37,6 +37,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
    var country: String? =null
    var state: String? =null
    var shopAgreement : String? =null
+   var profileType : String? =null
 
     private val _modelRegister = MutableLiveData<ModelRegister>()
     val modelRegister: LiveData<ModelRegister> = _modelRegister

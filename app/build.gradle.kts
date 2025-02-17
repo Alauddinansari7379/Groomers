@@ -96,5 +96,7 @@ dependencies {
     //dependency injection
     implementation ("com.google.dagger:hilt-android:2.50")
     kapt ("com.google.dagger:hilt-compiler:2.50")
+    //SweetAlert
+    implementation ("com.github.f0ris.sweetalert:library:1.6.2")
 
 }

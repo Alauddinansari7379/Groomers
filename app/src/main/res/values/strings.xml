@@ -84,6 +84,8 @@
     <string name="reset">Reset</string>
     <string name="signup">Signup</string>
     <string name="enter_name">Enter Name</string>
+    <string name="enter_gender">Enter Gender</string>
+    <string name="enter_age">Enter age</string>
     <string name="surname">Surname</string>
     <string name="enter_surname">Enter Surname</string>
     <string name="sign_up">Sign Up</string>
@@ -174,12 +176,13 @@
     <string name="classic_and_clean_40min">Classic and clean...40min</string>
     <string name="book">Book</string>
     <string name="choose_a_profile_and_groomers_will_show_you_best_options_and_services_near_by">Choose a profile and Groomers will show you best options and services near by</string>
-    <string name="enter_your_mobile_number_to_finish_sign_up">Enter your mobile number to finish sign up</string>
+    <string name="enter_your_mobile_number_to_finish_sign_up">Enter your mobile number</string>
     <string name="complete_profile">Complete profile</string>
     <string name="log_in_or_sign_up">Log in or sign up</string>
     <string name="continue_with_google">Continue with Google</string>
     <string name="or">OR</string>
     <string name="let_s_get_started_with_the_pet_s_personal_profile">Let\'s get started with the Pet\'s personal profile</string>
+    <string name="let_s_get_started_with_the_personal_profile">Let\'s get started with the personal profile</string>
     <string name="what_kind_of_your_pet_is">What kind of your pet is?</string>
     <string name="review_and_confirm">Review and confirm</string>
     <string name="fri_jan_3_2025_10_00_am">Fri, Jan 3, 2025 • 10:00 AM</string>
@@ -219,6 +222,8 @@
     <string name="_2_3_staff_members">2-3 staff members</string>
     <string name="just_me">Just me</string>
     <string name="what_s_your_team_size">What\'s your team size?</string>
+    <string name="what_s_your_gender">What\'s your gender?</string>
+    <string name="what_s_your_age">What\'s your age?</string>
     <string name="back_arrow">Back arrow</string>
     <string name="sign_in_as_a_professional">Sign in as a professional</string>
     <string name="english">🌐 English</string>
