@@ -5,6 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class ApiServiceProvider {
 
     companion object {
@@ -32,3 +33,5 @@ class ApiServiceProvider {
         }
     }
 }
+
+

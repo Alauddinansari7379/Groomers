@@ -8,9 +8,6 @@ import com.example.groomers.viewModel.MyApplication
 
 class Login : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
-    private val viewModel by lazy {
-        (application as MyApplication).registerViewModel
-    }
     private val context=this@Login
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +17,6 @@ class Login : AppCompatActivity() {
 
             btnContinue.setOnClickListener {
                 val email = binding.etEmail.text.toString()
-                viewModel.email = email
                 if (email.isEmpty()) {
                     etEmail.error = "Please enter your email/username"
                     etEmail.requestFocus()

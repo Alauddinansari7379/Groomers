@@ -1,4 +1,4 @@
-package com.groomers.groomersvendor.model.modelregister
+package com.example.groomers.model.modelregister
 
 data class ModelRegister(
     val message: String,

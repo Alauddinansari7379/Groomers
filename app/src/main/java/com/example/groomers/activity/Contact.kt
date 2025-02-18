@@ -14,7 +14,6 @@ class Contact : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val email = viewModel.email ?: ""
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
@@ -25,9 +24,26 @@ class Contact : AppCompatActivity() {
             val countryCodeWithPlus: String = spinnerCountryCode.selectedCountryCodeWithPlus // Example: "+91"
 
             btnContinue.setOnClickListener {
+
                 viewModel.email=edtEmail.text.toString().trim()
                 viewModel.mobile=countryCodeWithPlus+edtPhone.text.toString().trim()
                 viewModel.password=edtPassword.text.toString().trim()
+                viewModel.password_confirmation=edtPassword.text.toString().trim()
+                if (viewModel.email!!.isEmpty()) {
+                    edtEmail.error = "Please enter your email"
+                    edtEmail.requestFocus()
+                    return@setOnClickListener
+                }
+                if (viewModel.password!!.isEmpty()) {
+                    edtPassword.error = "Please enter your password"
+                    edtPassword.requestFocus()
+                    return@setOnClickListener
+                }
+                if (!viewModel.mobile!!.isEmpty() && viewModel.mobile!!.length == 3) {
+                    edtPhone.error = "Please enter your phone number"
+                    edtPhone.requestFocus()
+                    return@setOnClickListener
+                }
                 startActivity(
                     Intent(
                         this@Contact,

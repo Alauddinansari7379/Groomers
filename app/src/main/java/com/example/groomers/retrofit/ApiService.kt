@@ -1,6 +1,7 @@
 package com.example.groomers.retrofit
 
-import com.groomers.groomersvendor.model.modelregister.ModelRegister
+
+import com.example.groomers.model.modelregister.ModelRegister
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.GET

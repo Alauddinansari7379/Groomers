@@ -19,7 +19,6 @@ import com.example.groomers.retrofit.ApiServiceProvider
 import com.example.groomers.viewModel.MyApplication
 import com.groomers.groomersvendor.helper.CustomLoader
 import com.groomers.groomersvendor.helper.UploadRequestBody
-import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -34,6 +33,7 @@ class Registration : AppCompatActivity() {
     private val viewModel by lazy {
         (application as MyApplication).registerViewModel
     }
+    private var selectedImagePath: String? = null
     private var formattedDate = ""
     private var selectedImageUri: Uri? = null
     lateinit var parts: MultipartBody.Part
@@ -44,6 +44,33 @@ class Registration : AppCompatActivity() {
         setContentView(binding.root)
         // Observe loading state
 
+
+        // Retrieve data from intent
+
+        val mobile = viewModel.mobile ?: ""
+        val email = viewModel.email ?: ""
+        val password = viewModel.password ?: ""
+        val password_confirmation = viewModel.password_confirmation ?: ""
+        val role = viewModel.role ?: ""
+        val language = viewModel.language ?: ""
+        val user_type = viewModel.user_type ?: ""
+        val address = viewModel.address ?: ""
+        val country = viewModel.country ?: ""
+        val state = viewModel.state ?: ""
+        val city = viewModel.city ?: ""
+        val zipcode = viewModel.zipcode ?: ""
+        val latitude = viewModel.latitude ?: ""
+        val longitude = viewModel.longitude ?: ""
+        val gender = viewModel.gender ?: ""
+        val birthdate = viewModel.birthdate ?: ""
+        val userImage = viewModel.userImage ?: ""
+        val userImageMp = prepareFilePart("shop_agreement", userImage)
+        // Observe error message
+        viewModel.errorMessage.observe(this, Observer { errorMessage ->
+            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+        })
+
+
         viewModel.isLoading.observe(this, Observer { isLoading ->
             if (isLoading) {
                 CustomLoader.showLoaderDialog(context)
@@ -51,12 +78,6 @@ class Registration : AppCompatActivity() {
                 CustomLoader.hideLoaderDialog()
             }
         })
-
-        // Observe error message
-        viewModel.errorMessage.observe(this, Observer { errorMessage ->
-            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-        })
-
         // Observe success response
         viewModel.modelRegister.observe(this, Observer { response ->
             // Handle success - Show success message or navigate to another screen
@@ -80,81 +101,62 @@ class Registration : AppCompatActivity() {
             }
             btnContinue.setOnClickListener {
                 val inputDate = edtAgeN.text.toString().trim()
-
+                viewModel.name = edtNameN.text.toString().trim()
+                viewModel.birthdate = formattedDate
+                viewModel.username = edtUserName.text.toString().trim()
                 // Define the input and output formats
                 val inputFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
                 val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
                 try {
+                    if (viewModel.name!!.isEmpty()) {
+                        binding.edtName.error = "Please enter your name"
+                        binding.edtName.requestFocus()
+                        return@setOnClickListener
+                    }
+                    if (viewModel.username!!.isEmpty()) {
+                        binding.edtUserName.error = "Please enter user name"
+                        binding.edtUserName.requestFocus()
+                        return@setOnClickListener
+                    }
+                    if (inputDate.isEmpty()) {
+                        binding.edtAge.error = "Please enter user age"
+                        binding.edtAge.requestFocus()
+                        return@setOnClickListener
+                    }
                     // Parse the input date
                     val date = inputFormat.parse(inputDate)
 
                     // Format the date to the required format
                     formattedDate = outputFormat.format(date)
 
-                    // Print the formatted date
-                    println(formattedDate)  // Output: 2000-02-22
+
+                    registerUser(
+                        "userName1",
+                        viewModel.name ?: "",
+                        mobile,
+                        email,
+                        password,
+                        password_confirmation,
+                        "user",
+                        "1",
+                        user_type,
+                        address,
+                        "4",
+                        "2",
+                        "43",
+                        "7838",
+                        "64387.7",
+                        "76347.7",
+                        "Male",
+                        viewModel.birthdate ?: "",
+                        userImageMp
+                    )
                 } catch (e: Exception) {
                     Toast.makeText(context, "Invalid date format", Toast.LENGTH_SHORT).show()
 
                 }
-                viewModel.name = edtNameN.text.toString().trim()
-                viewModel.birthdate = formattedDate
-                viewModel.username = edtUserName.text.toString().trim()
 
-                Log.e("ViewModelData", "Name " + viewModel.name.toString())
-                Log.e("ViewModelData", "userName " + viewModel.username.toString())
-                Log.e("ViewModelData", "mobile " + viewModel.mobile.toString())
-                Log.e("ViewModelData", "emai l" + viewModel.email.toString())
-                Log.e("ViewModelData", "password " + viewModel.password.toString())
-                Log.e("ViewModelData", "role " + viewModel.role.toString())
-                Log.e("ViewModelData", "profileType " + viewModel.user_type.toString())
-                Log.e("ViewModelData", "dob " + viewModel.birthdate.toString())
-
-                // Retrieve data from intent
-                val username = viewModel.username ?: ""
-                val mobile = viewModel.mobile ?: ""
-                val email = viewModel.email ?: ""
-                val password = viewModel.password ?: ""
-                val password_confirmation = viewModel.password_confirmation ?: ""
-                val role = viewModel.role ?: ""
-                val language = viewModel.language ?: ""
-                val user_type = viewModel.user_type ?: ""
-                val address = viewModel.address ?: ""
-                val country = viewModel.country ?: ""
-                val state = viewModel.state ?: ""
-                val city = viewModel.city ?: ""
-                val zipcode = viewModel.zipcode ?: ""
-                val latitude = viewModel.latitude ?: ""
-                val longitude = viewModel.longitude ?: ""
-                val gender = viewModel.gender ?: ""
-                val birthdate = viewModel.birthdate ?: ""
-                val userImage = viewModel.userImage ?: ""
-
-                // Convert image path to MultipartBody.Part
-                val userImageNew = prepareFilePart("UserImage", userImage)
-                // Make the API call to register the user
-                registerUser(
-                    "name",
-                    "mobile",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    "email",
-                    userImageNew,
-                )
             }
 
         }
@@ -171,63 +173,19 @@ class Registration : AppCompatActivity() {
             uri?.let {
                 selectedImageUri = it
                 binding.imageViewProfile.setImageURI(it)
-                handleImageSelection(it)
-                //                binding.textImageSelected.text = "Image selected successfully ✅"
-//                binding.textImageSelected.visibility = View.VISIBLE
+                selectedImagePath = getFilePathFromUri(it)
+                viewModel.userImage = selectedImagePath
+
             }
         }
 
-    private fun handleImageSelection(uri: Uri) {
-        createMultipartFromUri(context, uri)?.let {
-            //parts.add(it)
-            parts = it
-            viewModel.userImage = parts
-        }
-    }
-
-    private fun createMultipartFromUri(context: Context, uri: Uri): MultipartBody.Part? {
-        return try {
-            val contentResolver = context.contentResolver
-            val parcelFileDescriptor =
-                contentResolver.openFileDescriptor(uri, "r", null) ?: return null
-            val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-            val file = File(
-                context.cacheDir,
-                contentResolver.getFileName(uri)
-            ) // Ensure filename uniqueness
-            val outputStream = FileOutputStream(file)
-
-            inputStream.copyTo(outputStream)
-            outputStream.close()
-            inputStream.close()
-
-            val body = UploadRequestBody(file, "image", context)
-            MultipartBody.Part.createFormData(
-                "image",
-                file.name,
-                body
-            ) // Use "image[]" for multiple uploads
-        } catch (e: Exception) {
-            e.printStackTrace()
-            null
-        }
-    }
-
-    private fun ContentResolver.getFileName(uri: Uri): String {
-        return query(uri, null, null, null, null)?.use { cursor ->
-            val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-            if (cursor.moveToFirst() && nameIndex != -1) cursor.getString(nameIndex) else "temp_image.jpg"
-        } ?: "temp_image.jpg"
-    }
-
-    // In your ViewModel
-    fun registerUser(
-        username: String,
+    private fun registerUser(
+        userName: String,
         name: String,
         mobile: String,
         email: String,
         password: String,
-        passwordConfirmation: String,
+        confirmPassword: String,
         role: String,
         language: String,
         userType: String,
@@ -235,39 +193,38 @@ class Registration : AppCompatActivity() {
         country: String,
         state: String,
         city: String,
-        zipcode: String,
+        zipCode: String,
         latitude: String,
         longitude: String,
         gender: String,
-        birthdate: String,
+        birthDay: String,
         userImage: MultipartBody.Part
     ) {
 
-        val apiService = ApiServiceProvider.getApiService()
-        // Assuming your API method registerUser is a suspend function
-        val response = apiService.registerUser(
-            username,
-            name,
-            mobile,
-            email,
-            password,
-            passwordConfirmation,
-            role,
-            language,
-            userType,
-            address,
-            country,
-            state,
-            city,
-            zipcode,
-            latitude,
-            longitude,
-            gender,
-            birthdate,
-            userImage
+        val apiService = ApiServiceProvider.getApiService() // Initialize ApiService
+        viewModel.registerUser(
+            apiService,userName,
+            name, mobile, email, password, confirmPassword, // passwordConfirmation
+            role, language, userType,
+            address, country, state,city,zipCode,latitude,longitude
+            ,gender,birthDay,userImage
         )
-
     }
 
+    private fun getFilePathFromUri(uri: Uri): String? {
+        var filePath: String? = null
+        contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+            val columnIndex = cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME)
+            cursor.moveToFirst()
+            val fileName = cursor.getString(columnIndex)
+            val inputStream = contentResolver.openInputStream(uri)
+            val file = File(cacheDir, fileName)
+            file.outputStream().use { outputStream ->
+                inputStream?.copyTo(outputStream)
+            }
+            filePath = file.absolutePath
+        }
+        return filePath
+    }
 
 }

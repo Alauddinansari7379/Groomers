@@ -6,10 +6,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.groomers.model.modelregister.ModelRegister
+
 import com.example.groomers.retrofit.ApiService
-import com.groomers.groomersvendor.model.modelregister.ModelRegister
+import com.example.groomers.retrofit.ApiServiceProvider
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
+import okio.IOException
+import retrofit2.HttpException
 
 class RegisterViewModel(application: Application) : AndroidViewModel(application) {
     var username: String? = null
@@ -30,7 +34,9 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
     var longitude: String? = null
     var gender: String? = null
     var birthdate: String? = null
-    var userImage: MultipartBody.Part? = null
+//    var userImage: MultipartBody.Part? = null
+    var userImage: String? =null
+
 
     private val _modelRegister = MutableLiveData<ModelRegister>()
     val modelRegister: LiveData<ModelRegister> = _modelRegister
@@ -43,38 +49,61 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
 
     fun registerUser(
         apiService: ApiService,
-        username:String,name: String, mobile: String, email: String, password: String,
-        passwordConfirmation: String, role: String, language: String,
-        user_type: String, address: String, country: String,
-        state: String, city: String, zipcode: String, latitude: String,
-        longitude: String, gender: String, birthdate: String, userImage: MultipartBody.Part
+        userName: String,
+        name: String,
+        mobile: String,
+        email: String,
+        password: String,
+        confirmPassword: String,
+        role: String,
+        language: String,
+        userType: String,
+        address: String,
+        country: String,
+        state: String,
+        city: String,
+        zipCode: String,
+        latitude: String,
+        longitude: String,
+        gender: String,
+        birthDay: String,
+        userImage: MultipartBody.Part
+
     ) {
         viewModelScope.launch {
             _isLoading.postValue(true) // Show loading state
             try {
                 val response = apiService.registerUser(
-                    username,name, mobile, email, password, passwordConfirmation, role, language,
-                    user_type, address, country, state, city, zipcode, latitude,
-                    longitude, gender, birthdate, userImage
+                    name,userName, mobile, email, password, confirmPassword, role, language,
+                    userType,  address, country, state, city, zipCode,
+                     latitude, longitude, gender, birthDay,  userImage
                 )
 
-                _isLoading.postValue(false) // Hide loading state
-
                 if (response.isSuccessful) {
-                    if (response.body()?.status == 1) {
-                        _modelRegister.postValue(response.body())
-                    } else {
-                        _errorMessage.postValue("Error: ${response.message()}")
+                    response.body()?.let { body ->
+                        if (body.status == 1) {
+                            _modelRegister.postValue(body)
+                        } else {
+                            _errorMessage.postValue(body.message ?: "Registration unsuccessful. Please try again.")
+                        }
+                    } ?: run {
+                        _errorMessage.postValue("Oops! Something went wrong. Please try again.")
                     }
                 } else {
-                    _errorMessage.postValue("Error: ${response.message()}")
+                    val errorMsg = response.errorBody()?.string() ?: response.message()
+                    _errorMessage.postValue("Couldn't complete registration. Please check your details and try again.")
                 }
-            } catch (e: Exception) {
-                _isLoading.postValue(false)
-                _errorMessage.postValue("Exception: ${e.localizedMessage}")
-                Log.e("RegisterViewModel", "Error: ${e.message}")
+            } catch (e: IOException) { // Handle network errors
+                _errorMessage.postValue("No internet connection. Please check your network and try again.")
+                Log.e("RegisterViewModel", "Network error: ${e.message}", e)
+            } catch (e: HttpException) { // Handle HTTP errors
+                _errorMessage.postValue("We're facing some issues on our end. Please try again later.")
+                Log.e("RegisterViewModel", "HTTP error: ${e.message}", e)
+            } catch (e: Exception) { // Handle unexpected errors
+                _errorMessage.postValue("Something went wrong. Please try again.")
+                Log.e("RegisterViewModel", "Unexpected error: ${e.message}", e)
             } finally {
-                _isLoading.postValue(false)
+                _isLoading.postValue(false) // Hide loading state
             }
         }
     }
