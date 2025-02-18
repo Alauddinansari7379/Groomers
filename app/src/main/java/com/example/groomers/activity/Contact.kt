@@ -3,12 +3,7 @@ package com.example.groomers.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.groomers.R
 import com.example.groomers.databinding.ActivityContactBinding
 import com.example.groomers.viewModel.MyApplication
 
@@ -27,7 +22,12 @@ class Contact : AppCompatActivity() {
             if (intent.getStringExtra("AddPro").toString()=="AddPro"){
                 layoutEmail.visibility=View.GONE
             }
+            val countryCodeWithPlus: String = spinnerCountryCode.selectedCountryCodeWithPlus // Example: "+91"
+
             btnContinue.setOnClickListener {
+                viewModel.email=edtEmail.text.toString().trim()
+                viewModel.mobile=countryCodeWithPlus+edtPhone.text.toString().trim()
+                viewModel.password=edtPassword.text.toString().trim()
                 startActivity(
                     Intent(
                         this@Contact,

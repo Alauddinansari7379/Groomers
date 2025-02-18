@@ -20,15 +20,15 @@ class ChooseProfile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.layoutMale.setOnClickListener {
-            viewModel.profileType = "Male"
+            viewModel.user_type = "Male"
             startActivity(Intent(this@ChooseProfile, Registration::class.java))
         }
         binding.layoutFemale.setOnClickListener {
-            viewModel.profileType = "Female"
+            viewModel.user_type = "Female"
             startActivity(Intent(this@ChooseProfile, Registration::class.java))
         }
         binding.layoutPet.setOnClickListener {
-            viewModel.profileType = "Pet"
+            viewModel.user_type = "Pet"
             startActivity(Intent(this@ChooseProfile, Registration::class.java))
         }
 

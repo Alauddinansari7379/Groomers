@@ -18,29 +18,26 @@ interface ApiService {
 //    ): retrofit2.Response<ModelLogin>
     @Multipart
     @POST("register")
-    suspend fun registerUser(
+    fun registerUser(
+        @Query("username") username: String,
         @Query("name") name: String,
         @Query("mobile") mobile: String,
         @Query("email") email: String,
         @Query("password") password: String,
         @Query("password_confirmation") passwordConfirmation: String,
         @Query("role") role: String,
-        @Query("businessName") businessName: String,
-        @Query("businessCategory") businessCategory: String,
-        @Query("aboutBusiness") aboutBusiness: String,
-        @Query("teamSize") teamSize: String,
+        @Query("language") language: String,
+        @Query("user_type") user_type: String,
         @Query("address") address: String,
+        @Query("country") country: String,
+        @Query("state") state: String,
         @Query("city") city: String,
         @Query("zipcode") zipcode: String,
-        @Query("idproofType") idproofType: String,
-        @Query("services") services: String,
         @Query("latitude") latitude: String,
         @Query("longitude") longitude: String,
-        @Query("country") country: String,  // New field added
-        @Query("state") state: String,      // New field added
-        @Query("slot_interval") slot_interval: String,      // New field added
-        @Query("username") username: String,      // New field added
-        @Part shopAgreement: MultipartBody.Part  // For file upload
+        @Query("gender") gender: String,
+        @Query("birthdate") birthdate: String,
+        @Part UserImage: MultipartBody.Part  // For file upload
     ): Response<ModelRegister>
 //
 //    @POST("city")
