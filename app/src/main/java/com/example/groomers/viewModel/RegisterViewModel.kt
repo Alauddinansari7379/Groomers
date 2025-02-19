@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.groomers.model.modelregister.ModelRegister
+import com.example.groomers.model.modelregister.ModelRegesters
 
 import com.example.groomers.retrofit.ApiService
 import com.example.groomers.retrofit.ApiServiceProvider
@@ -38,8 +38,8 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
     var userImage: String? =null
 
 
-    private val _modelRegister = MutableLiveData<ModelRegister>()
-    val modelRegister: LiveData<ModelRegister> = _modelRegister
+    private val _modelRegister = MutableLiveData<ModelRegesters>()
+    val modelRegister: LiveData<ModelRegesters> = _modelRegister
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage

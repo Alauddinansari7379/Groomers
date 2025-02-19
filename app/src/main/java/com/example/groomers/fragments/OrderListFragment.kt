@@ -8,28 +8,75 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.example.groomers.R
 import com.example.groomers.activity.OrderDetails
 import com.example.groomers.activity.OrderLists
+import com.example.groomers.adapter.BookingsAdapter
+import com.example.groomers.databinding.FragmentListUserBinding
+import com.example.groomers.sharedpreferences.SessionManager
+import com.example.groomers.viewModel.BookingListViewModel
+import com.groomers.groomersvendor.helper.CustomLoader
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class OrderListFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
+    private lateinit var binding: FragmentListUserBinding
+    private val viewModel: BookingListViewModel by viewModels()
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_list_user, container, false)
-        view.findViewById<LinearLayout>(R.id.mainLayout).setOnClickListener {
-            val intent = Intent(requireContext(), OrderDetails::class.java)
-            startActivity(intent)
-        }
-
-        return view
+    ): View {
+        binding = FragmentListUserBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        fetchBookings()
+        observeViewModel()
+
+        binding.mainLayout.setOnClickListener {
+            startActivity(Intent(requireContext(), OrderDetails::class.java))
+        }
+    }
+
+
+    private fun fetchBookings() {
+        sessionManager.accessToken?.let { token ->
+            viewModel.fetchBookingList(token)
+        } ?: showError("Error: Missing Token")
+    }
+
+    private fun observeViewModel() {
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) CustomLoader.showLoaderDialog(requireContext())
+            else CustomLoader.hideLoaderDialog()
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let { showError(it) }
+        }
+
+        viewModel.bookingList.observe(viewLifecycleOwner) { modelBookingList ->
+            modelBookingList?.let { bookingData ->
+                binding.rvBookings.apply {
+                    adapter = BookingsAdapter(bookingData.result)
+                }
+
+            }
+        }
+    }
+
+    private fun showError(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
 }
