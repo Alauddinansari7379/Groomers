@@ -19,7 +19,7 @@ interface ApiService {
 //    ): retrofit2.Response<ModelLogin>
     @Multipart
     @POST("register")
-    fun registerUser(
+   suspend fun registerUser(
         @Query("username") username: String,
         @Query("name") name: String,
         @Query("mobile") mobile: String,

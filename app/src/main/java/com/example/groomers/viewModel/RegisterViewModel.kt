@@ -93,12 +93,6 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
                     val errorMsg = response.errorBody()?.string() ?: response.message()
                     _errorMessage.postValue("Couldn't complete registration. Please check your details and try again.")
                 }
-            } catch (e: IOException) { // Handle network errors
-                _errorMessage.postValue("No internet connection. Please check your network and try again.")
-                Log.e("RegisterViewModel", "Network error: ${e.message}", e)
-            } catch (e: HttpException) { // Handle HTTP errors
-                _errorMessage.postValue("We're facing some issues on our end. Please try again later.")
-                Log.e("RegisterViewModel", "HTTP error: ${e.message}", e)
             } catch (e: Exception) { // Handle unexpected errors
                 _errorMessage.postValue("Something went wrong. Please try again.")
                 Log.e("RegisterViewModel", "Unexpected error: ${e.message}", e)

@@ -142,13 +142,13 @@ class Registration : AppCompatActivity() {
                         "1",
                         user_type,
                         address,
-                        "4",
-                        "2",
-                        "43",
-                        "7838",
+                        "India",
+                        "Telengana",
+                        "Hyderabad",
+                        "500039",
                         "64387.7",
                         "76347.7",
-                        "Male",
+                        viewModel.gender ?: "",
                         viewModel.birthdate ?: "",
                         userImageMp
                     )
