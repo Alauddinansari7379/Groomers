@@ -74,7 +74,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
             _isLoading.postValue(true) // Show loading state
             try {
                 val response = apiService.registerUser(
-                    name,userName, mobile, email, password, confirmPassword, role, language,
+                    userName,name, mobile, email, password, confirmPassword, role, language,
                     userType,  address, country, state, city, zipCode,
                      latitude, longitude, gender, birthDay,  userImage
                 )

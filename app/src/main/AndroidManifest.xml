@@ -25,10 +25,6 @@
             android:name=".activity.BookingDetail"
             android:exported="false" />
         <activity
-            android:name=".activity.BookingDetails"
-            android:exported="false"
-            android:theme="@style/Theme.groomers" />
-        <activity
             android:name=".activity.Watching"
             android:exported="false" />
         <activity
@@ -36,6 +32,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.Contact"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".activity.OrderLists"
@@ -48,6 +45,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.Registration"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".activity.AboutYouActivity"
@@ -66,6 +64,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.Login"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".activity.SplashScreen"

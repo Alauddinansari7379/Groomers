@@ -1,5 +1,6 @@
 package com.example.groomers.activity
 
+import android.app.DatePickerDialog
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
@@ -26,6 +27,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
 class Registration : AppCompatActivity() {
     private val binding by lazy { ActivityRegisterUserBinding.inflate(layoutInflater) }
@@ -61,17 +63,17 @@ class Registration : AppCompatActivity() {
                 layoutGenderMain.visibility = View.GONE
                 tvAge.text = getString(R.string.what_s_your_age)
                 edtGender.hint = getString(R.string.enter_gender)
-                edtAge.hint = "dd-mm-yyyy"
-                edtAgeN.inputType =
-                    InputType.TYPE_NUMBER_FLAG_SIGNED // Set the input type to number
+                tvAgeN.hint = "dd-mm-yyyy"
+                tvAgeN.text=getString(R.string.enter_age)
 
             }
         }
         // Image Picker
         binding.imageViewProfile.setOnClickListener { pickImageLauncher.launch("image/*") }
+        binding.tvAgeN.setOnClickListener {  openDatePickerDialog() }
 
         binding.btnContinue.setOnClickListener {
-            val inputDate = binding.edtAgeN.text.toString().trim()
+            val inputDate = binding.tvAgeN.text.toString().trim()
             viewModel.name = binding.edtNameN.text.toString().trim()
             viewModel.username = binding.edtUserName.text.toString().trim()
 
@@ -87,8 +89,8 @@ class Registration : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (inputDate.isEmpty()) {
-                binding.edtAge.error = "Please enter user age"
-                binding.edtAge.requestFocus()
+                binding.tvAgeN.error = "Please enter user age"
+                binding.tvAgeN.requestFocus()
                 return@setOnClickListener
             }
 
@@ -144,8 +146,8 @@ class Registration : AppCompatActivity() {
         viewModel.registerUser(
             apiService, viewModel.username ?: "", viewModel.name ?: "", viewModel.mobile ?: "",
             viewModel.email ?: "", viewModel.password ?: "", viewModel.password_confirmation ?: "",
-            "user", "1", viewModel.user_type ?: "", viewModel.address ?: "", "India",
-            "Telangana", "Hyderabad", "500039", "64387.7", "76347.7", viewModel.gender ?: "",
+            "user", "1", viewModel.user_type ?: "", viewModel.address ?: "", "5",
+            "12", "46", "500039", "64387.7", "76347.7", viewModel.gender ?: "",
             formattedDate, userImage
         )
     }
@@ -161,5 +163,20 @@ class Registration : AppCompatActivity() {
             Log.e("FileError", "Error saving file: ${e.message}")
             null
         }
+    }
+    private fun openDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, year, month, day ->
+                val formattedDate = "%04d-%02d-%02d".format(year, month + 1, day)
+                binding.tvAgeN.text = formattedDate
+                viewModel.birthdate = formattedDate
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show()
     }
 }
