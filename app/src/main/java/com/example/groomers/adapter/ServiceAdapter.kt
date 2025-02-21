@@ -28,6 +28,9 @@ class ServiceAdapter(
                     Log.d("ServiceAdapter", "Item Clicked: ${service.serviceName}") // Debug log
                     onItemClick(service) // Call click listener
                 }
+                tvPrice.text = service.price.toString()
+                tvDescription.text = service.description
+                tvServiceName.text = service.serviceName
             }
         }
     }
