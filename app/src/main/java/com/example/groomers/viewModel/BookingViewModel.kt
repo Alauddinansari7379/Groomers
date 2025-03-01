@@ -45,7 +45,7 @@ class BookingViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val response = apiService.createBooking("Bearer $token",
-                    customerId, vendorId, total, paymentMode, slotId, serviceId, date, time, notes
+                    customerId, vendorId, total, paymentMode, 6, serviceId, date, time, notes,"12"
                 )
 
                 if (response.isSuccessful) {
@@ -69,7 +69,7 @@ class BookingViewModel @Inject constructor(
             } catch (e: HttpException) {
                 _errorMessage.postValue("Server error (${e.code()}): Unable to process your request.")
             } catch (e: Exception) {
-                _errorMessage.postValue("Something went wrong. Please try again later.")
+                _errorMessage.postValue(e.message)
             } finally {
                 _isLoading.postValue(false)
             }

@@ -5,7 +5,7 @@ data class Result(
     val customer_id: String,
     val date: String,
     val id: Int,
-    val notes: Any,
+    val notes: String,
     val payment_mode: String,
     val service_id: String,
     val slot_id: String,

@@ -90,7 +90,8 @@ interface ApiService {
         @Query("service_id") serviceId: Int,
         @Query("date") date: String,
         @Query("time") time: String,
-        @Query("notes") notes: String? = null // Optional parameter
+        @Query("notes") notes: String? = null,
+        @Query("quantity") quantity: String
     ): Response<ModelBooking>
 
     @POST("getPostAll")
