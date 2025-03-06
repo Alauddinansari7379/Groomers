@@ -19,8 +19,10 @@ interface ApiService {
     @POST("login")
     suspend fun login(
         @Query("email") email: String,
-        @Query("password") password: String
-    ): retrofit2.Response<ModelLogin>
+        @Query("password") password: String,
+        @Query("username") username: String,
+        @Query("role") role: String,
+    ): Response<ModelLogin>
     @Multipart
     @POST("register")
    suspend fun registerUser(

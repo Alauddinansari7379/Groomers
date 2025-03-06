@@ -29,6 +29,7 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+
 class Registration : AppCompatActivity() {
     private val binding by lazy { ActivityRegisterUserBinding.inflate(layoutInflater) }
     private val viewModel by lazy { (application as MyApplication).registerViewModel }
@@ -64,13 +65,16 @@ class Registration : AppCompatActivity() {
                 tvAge.text = getString(R.string.what_s_your_age)
                 edtGender.hint = getString(R.string.enter_gender)
                 tvAgeN.hint = "dd-mm-yyyy"
-                tvAgeN.text=getString(R.string.enter_age)
+                tvAgeN.text = getString(R.string.enter_age)
 
+            } else {
+                edtBreedN.visibility = View.VISIBLE
+                layoutBreed.visibility = View.GONE
             }
         }
         // Image Picker
         binding.imageViewProfile.setOnClickListener { pickImageLauncher.launch("image/*") }
-        binding.tvAgeN.setOnClickListener {  openDatePickerDialog() }
+        binding.tvAgeN.setOnClickListener { openDatePickerDialog() }
 
         binding.btnContinue.setOnClickListener {
             val inputDate = binding.tvAgeN.text.toString().trim()
@@ -95,13 +99,15 @@ class Registration : AppCompatActivity() {
             }
 
             // Convert Date Format
-            formattedDate = try {
-                val inputFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-                val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                outputFormat.format(inputFormat.parse(inputDate)!!)
-            } catch (e: Exception) {
-                Toast.makeText(this, "Invalid date format", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            if (viewModel.user_type != "Pet") {
+                formattedDate = try {
+                    val inputFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                    val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    outputFormat.format(inputFormat.parse(inputDate)!!)
+                } catch (e: Exception) {
+                    Toast.makeText(this, "Invalid date format", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
             }
 
             // Validate Image Selection
@@ -164,6 +170,7 @@ class Registration : AppCompatActivity() {
             null
         }
     }
+
     private fun openDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val datePickerDialog = DatePickerDialog(

@@ -31,19 +31,23 @@ class LoginViewModel @Inject constructor(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun login(email: String, password: String) {
+    fun login(email: String,username:String,password: String) {
         _isLoading.postValue(true)
 
         viewModelScope.launch {
             try {
-                val response = apiService.login(email, password)
+                val response = apiService.login(email, password,username,"user")
 
                 if (response.isSuccessful && response.body() != null) {
                     val responseBody = response.body()
                     if (!responseBody?.access_token.isNullOrEmpty()) {
                         _modelLogin.postValue(responseBody)
-//                        sessionManager.accessToken = responseBody!!.access_token
-                        sessionManager.accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyb29tZXJzLmNvLmluL2FwaS9sb2dpbiIsImlhdCI6MTczOTk2NjkwMywiZXhwIjoxNzQxMjYyOTAzLCJuYmYiOjE3Mzk5NjY5MDMsImp0aSI6IllSdkEyQmFVOU5Gbm0yTzQiLCJzdWIiOiI1MiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W0Lr0OYWvznJfvJJ-rF82UcWmXzkaXqYrCXoy1YjLE0"
+                        sessionManager.accessToken = responseBody!!.access_token
+                        sessionManager.mobile = responseBody!!.user.mobile
+                        sessionManager.email = responseBody!!.user.email
+                        sessionManager.name = responseBody!!.user.name
+                        sessionManager.username = responseBody!!.user.username
+                       // sessionManager.accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyb29tZXJzLmNvLmluL2FwaS9sb2dpbiIsImlhdCI6MTczOTk2NjkwMywiZXhwIjoxNzQxMjYyOTAzLCJuYmYiOjE3Mzk5NjY5MDMsImp0aSI6IllSdkEyQmFVOU5Gbm0yTzQiLCJzdWIiOiI1MiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W0Lr0OYWvznJfvJJ-rF82UcWmXzkaXqYrCXoy1YjLE0"
                         sessionManager.isLogin = true
                     } else {
                         _errorMessage.postValue("Incorrect email or password. Please try again.")

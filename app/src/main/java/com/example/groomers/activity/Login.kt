@@ -16,7 +16,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class Login : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
-    private val context=this@Login
+    private val context = this@Login
+
     @Inject
     lateinit var sessionManager: SessionManager
     private val viewModel: LoginViewModel by viewModels()
@@ -27,14 +28,25 @@ class Login : AppCompatActivity() {
             startActivity(Intent(this@Login, Dashboard::class.java))
             finish()
         }
-        with(binding){
+        with(binding) {
 
             btnContinue.setOnClickListener {
-                val email = binding.etEmail.text.toString()
+                var email = ""
+                var username = ""
                 val password = binding.edtPassword.text.toString()
 
-                if (email.isEmpty()) {
-                    binding.etEmail.error = "Please enter your email"
+
+                val editText = binding.etEmail.text.toString()
+                if (editText.isNotEmpty()) {
+                    val input = editText.substringAfterLast("@")
+
+                    if (input.equals("gmail.com", ignoreCase = true)) {
+                        email = binding.etEmail.text.toString()
+                    } else {
+                        username = binding.etEmail.text.toString()
+                    }
+                }else{
+                    binding.etEmail.error = "Please enter your email or username"
                     binding.etEmail.requestFocus()
                     return@setOnClickListener
                 }
@@ -46,19 +58,18 @@ class Login : AppCompatActivity() {
                 }
 
                 // If both fields are non-empty, proceed with login
-                viewModel.login(email, password)
+                viewModel.login(email, username, password,)
 
             }
 
             signInAsPro.setOnClickListener {
-                startActivity(Intent(context,Contact::class.java))
+                startActivity(Intent(context, Contact::class.java))
             }
 //
 //            tvForget.setOnClickListener {
 //                startActivity(Intent(context,ForgetPassword::class.java))
 //            }
         }
-
 
 
         // Observe isLoading to show/hide progress
