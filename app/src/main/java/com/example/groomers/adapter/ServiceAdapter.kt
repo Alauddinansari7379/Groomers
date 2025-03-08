@@ -1,6 +1,5 @@
 package com.example.groomers.adapter
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.groomers.R
 import com.example.groomers.databinding.ServiceRowBinding
 import com.example.groomers.model.modelservice.Result
+
 class ServiceAdapter(
     private var serviceList: List<Result>,
     private val onItemClick: (Result) -> Unit
@@ -31,6 +31,7 @@ class ServiceAdapter(
                 tvPrice.text = service.price.toString()
                 tvDescription.text = service.description
                 tvServiceName.text = service.serviceName
+                tvAddress.text = service.address
             }
         }
     }

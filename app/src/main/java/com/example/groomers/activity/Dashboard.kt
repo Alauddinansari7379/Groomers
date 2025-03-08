@@ -1,7 +1,6 @@
 package com.example.groomers.activity
 
 import android.os.Bundle
-import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -9,7 +8,7 @@ import com.example.groomers.R
 import com.example.groomers.databinding.ActivityVenderDashBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import me.ibrahimsn.lib.SmoothBottomBar
+
 @AndroidEntryPoint
 class Dashboard : AppCompatActivity() {
     private val binding by lazy { ActivityVenderDashBinding.inflate(layoutInflater) }

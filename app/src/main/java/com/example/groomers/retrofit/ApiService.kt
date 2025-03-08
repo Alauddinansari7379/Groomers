@@ -3,6 +3,7 @@ package com.example.groomers.retrofit
 
 import com.example.groomers.model.modelbooking.ModelBooking
 import com.example.groomers.model.modelbookinglist.ModelBookingList
+import com.example.groomers.model.modelcategory.ModelCategory
 import com.example.groomers.model.modellogin.ModelLogin
 import com.example.groomers.model.modelregister.ModelRegesters
 import com.example.groomers.model.modelservice.ModelService
@@ -46,45 +47,17 @@ interface ApiService {
         @Query("birthdate") birthdate: String,
         @Part UserImage: MultipartBody.Part  // For file upload
     ): Response<ModelRegesters>
-//
-//    @POST("city")
-//    suspend fun getCity(): Response<ModelCity>
-//
-//    @POST("state")
-//    suspend fun getState(): Response<ModelState>
-//    @GET("getCategory")
-//    suspend fun getCategory(): Response<ModelCategory>
-//
+
     @GET("getCustomerBookings")
     suspend fun getBookingList(
         @Header("Authorization") authorization: String
     ): Response<ModelBookingList>
 
-//
-//
-//    @Multipart
-//    @POST("CreateServicePost")
-//    suspend fun createServicePost(
-//        @Header("Authorization") authorization: String,
-//        @Query("serviceName") serviceName: String,
-//        @Query("description") description: String,
-//        @Query("price") price: String,
-//        @Query("time") time: String,
-//        @Query("serviceType") serviceType: String,
-//        @Query("date") date: String,
-//        @Query("category") category: String,
-//        @Query("slot_time") slot_time: String,
-//        @Query("address") address: String,
-//        @Query("user_type") user_type: String,
-//        @Part image: MultipartBody.Part
-//    ): Response<ModelCreateServiceX>
-
-
 
     @POST("createBooking")
     suspend fun createBooking(
         @Header("Authorization") authorization: String,
-        @Query("customer_id") customerId: Int,  // Note: There's a typo in "cutomer_id"
+        @Query("customer_id") customerId: Int,
         @Query("vendor_id") vendorId: Int,
         @Query("total") total: Int,
         @Query("payment_mode") paymentMode: Int,
@@ -96,8 +69,12 @@ interface ApiService {
         @Query("quantity") quantity: String
     ): Response<ModelBooking>
 
-    @POST("getPostAll")
+    @POST("suggestServices")
     suspend fun getServiceList(
-        @Header("Authorization") authorization: String
+        @Header("Authorization") authorization: String,
+        @Query("user_type") user_type: String,
     ): Response<ModelService>
+
+    @GET("getCategory")
+    suspend fun getCategory(): Response<ModelCategory>
 }

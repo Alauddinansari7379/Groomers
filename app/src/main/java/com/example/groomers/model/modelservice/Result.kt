@@ -2,7 +2,7 @@ package com.example.groomers.model.modelservice
 
 data class Result(
     val address: String,
-    val category: Any,
+    val category: String,
     val created_at: String,
     val date: String,
     val description: String,

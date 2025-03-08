@@ -1,10 +1,12 @@
 package com.example.groomers.activity
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.groomers.databinding.ActivityReviewAndConfirmBinding
+import com.example.groomers.helper.Toastic
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.BookingViewModel
 import com.groomers.groomersvendor.helper.CustomLoader
@@ -15,7 +17,7 @@ import javax.inject.Inject
 class ReviewAndConfirm : AppCompatActivity() {
     private val binding by lazy { ActivityReviewAndConfirmBinding.inflate(layoutInflater) }
     private val viewModel: BookingViewModel by viewModels()
-
+    private var changeTextColor: Boolean = false
     @Inject
     lateinit var sessionManager: SessionManager
 
@@ -29,7 +31,7 @@ class ReviewAndConfirm : AppCompatActivity() {
             sessionManager.accessToken?.let { token ->
                 viewModel.createBooking(token,
                     customerId = 11111,
-                    vendorId = 222,
+                    vendorId = 10,
                     total = 5009999,
                     paymentMode = 332,
                     slotId = 34,
@@ -56,7 +58,15 @@ class ReviewAndConfirm : AppCompatActivity() {
 
         viewModel.bookingResult.observe(this) { response ->
             response?.let {
-                Toast.makeText(this, "Booking successful!", Toast.LENGTH_SHORT).show()
+
+                Toastic.toastic(
+                    context = this@ReviewAndConfirm,
+                    message = "Booking successful!",
+                    duration = Toastic.LENGTH_SHORT,
+                    type = Toastic.SUCCESS,
+                    isIconAnimated = true,
+                    textColor = if (changeTextColor) Color.BLUE else null,
+                ).show()
                 // Handle successful booking (e.g., navigate to another activity)
                 finish()
             }

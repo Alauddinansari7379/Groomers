@@ -1,6 +1,7 @@
 package com.example.groomers.fragments
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.example.groomers.activity.OrderDetails
 import com.example.groomers.activity.OrderLists
 import com.example.groomers.adapter.BookingsAdapter
 import com.example.groomers.databinding.FragmentListUserBinding
+import com.example.groomers.helper.Toastic
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.BookingListViewModel
 import com.groomers.groomersvendor.helper.CustomLoader
@@ -30,6 +32,8 @@ class OrderListFragment : Fragment() {
     @Inject
     lateinit var sessionManager: SessionManager
 
+
+    private var changeTextColor: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,6 +81,13 @@ class OrderListFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        Toastic.toastic(
+            context = requireContext(),
+            message = message,
+            duration = Toastic.LENGTH_SHORT,
+            type = Toastic.ERROR,
+            isIconAnimated = true,
+            textColor = if (changeTextColor) Color.BLUE else null,
+        ).show()
     }
 }

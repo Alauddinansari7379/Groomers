@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
@@ -16,10 +17,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.groomers.R
 import com.example.groomers.databinding.ActivityRegisterUserBinding
+import com.example.groomers.helper.Toastic
 import com.example.groomers.retrofit.ApiServiceProvider
+import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.MyApplication
 import com.groomers.groomersvendor.helper.CustomLoader
 import com.groomers.groomersvendor.helper.UploadRequestBody
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -29,7 +33,9 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class Registration : AppCompatActivity() {
     private val binding by lazy { ActivityRegisterUserBinding.inflate(layoutInflater) }
     private val viewModel by lazy { (application as MyApplication).registerViewModel }
@@ -37,6 +43,9 @@ class Registration : AppCompatActivity() {
     private var formattedDate = ""
     private var selectedImageUri: Uri? = null
     lateinit var parts: MultipartBody.Part
+    private var changeTextColor: Boolean = false
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,10 +61,20 @@ class Registration : AppCompatActivity() {
             else CustomLoader.hideLoaderDialog()
         }
 
-        viewModel.modelRegister.observe(this) {
-            Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, Login::class.java))
-            finish()
+        viewModel.modelRegister.observe(this) {registerModel->
+            if (registerModel!=null && registerModel.status==1) {
+                sessionManager.userType = viewModel.user_type
+                Toastic.toastic(
+                    context = this@Registration,
+                    message = "Registration Successful",
+                    duration = Toastic.LENGTH_SHORT,
+                    type = Toastic.SUCCESS,
+                    isIconAnimated = true,
+                    textColor = if (changeTextColor) Color.BLUE else null,
+                ).show()
+                startActivity(Intent(this, Login::class.java))
+                finish()
+            }
         }
         with(binding) {
 //            imageViewProfile.setOnClickListener { pickImageLauncher.launch("image/*") }

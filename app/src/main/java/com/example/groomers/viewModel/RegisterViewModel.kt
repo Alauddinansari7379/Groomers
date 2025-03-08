@@ -7,13 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.groomers.model.modelregister.ModelRegesters
-
 import com.example.groomers.retrofit.ApiService
-import com.example.groomers.retrofit.ApiServiceProvider
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
-import okio.IOException
-import retrofit2.HttpException
 
 class RegisterViewModel(application: Application) : AndroidViewModel(application) {
     var username: String? = null
@@ -83,6 +79,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
                     response.body()?.let { body ->
                         if (body.status == 1) {
                             _modelRegister.postValue(body)
+
                         } else {
                             _errorMessage.postValue(body.message ?: "Registration unsuccessful. Please try again.")
                         }

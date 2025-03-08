@@ -13,11 +13,17 @@ class SessionManager(context: Context) {
         private const val MOBILE = "MOBILE"
         private const val EMAIL = "EMAIL"
         private const val IS_LOGIN = "IS_LOGIN"
+        private const val USERTYPE = "USERTYPE"
     }
     var accessToken: String?
         get() = prefs.getString(ACCESS_TOKEN, null)
         set(value) {
             prefs.edit().putString(ACCESS_TOKEN, value).apply()
+        }
+    var userType: String?
+        get() = prefs.getString(USERTYPE, null)
+        set(value) {
+            prefs.edit().putString(USERTYPE, value).apply()
         }
 
     var username: String?

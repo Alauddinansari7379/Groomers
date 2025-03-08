@@ -28,11 +28,11 @@ class ServiceViewModel @Inject constructor(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun getServiceList(accessToken: String) {
+    fun getServiceList(accessToken: String,userType : String) {
         _isLoading.postValue(true)
         viewModelScope.launch {
             try {
-                val response = apiService.getServiceList("Bearer $accessToken")
+                val response = apiService.getServiceList("Bearer $accessToken",userType)
                 _isLoading.postValue(false)
 
                 if (response.isSuccessful) {

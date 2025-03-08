@@ -51,6 +51,15 @@
             android:text="@string/entrepreneur"
             android:textColor="@color/gray"
             android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_bold"
+            android:text="@string/entrepreneur"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -66,20 +75,20 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/service"
-            android:layout_marginEnd="40dp"/>
+            android:layout_marginEnd="40dp"
+            android:text="@string/service" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reviews"
-            android:layout_marginEnd="40dp"/>
+            android:layout_marginEnd="40dp"
+            android:text="@string/reviews" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/portfolio"
-            android:layout_marginEnd="40dp"/>
+            android:layout_marginEnd="40dp"
+            android:text="@string/portfolio" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -88,7 +97,6 @@
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -118,7 +126,7 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/popularServicesSection"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
@@ -135,175 +143,11 @@
             android:textStyle="bold" />
 
 
-        <androidx.cardview.widget.CardView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPopularService"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:elevation="8dp"
-            app:cardCornerRadius="8dp">
-
-            <LinearLayout
-                android:id="@+id/serviceItem1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="8dp">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/skin_care2" />
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/serviceTitle11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/haircut"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/serviceDetails11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/classic_and_clean_40min"
-                        android:textSize="14sp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bookButton111"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/border"
-                    android:backgroundTint="@color/Blue"
-                    android:text="@string/book"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="11sp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView><androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:elevation="8dp"
-            app:cardCornerRadius="8dp">
-
-            <LinearLayout
-                android:id="@+id/serviceItem11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="8dp">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/skin_care2" />
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/serviceTitle111"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/haircut"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/serviceDetails111"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/classic_and_clean_40min"
-                        android:textSize="14sp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bookButton1111"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/border"
-                    android:backgroundTint="@color/Blue"
-                    android:text="@string/book"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="11sp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView><androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:elevation="8dp"
-            app:cardCornerRadius="8dp">
-
-            <LinearLayout
-                android:id="@+id/serviceItem111"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="8dp">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/skin_care2" />
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/serviceTitle1111"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/haircut"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/serviceDetails1111"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/classic_and_clean_40min"
-                        android:textSize="14sp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bookButton11111"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/border"
-                    android:backgroundTint="@color/Blue"
-                    android:text="@string/book"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="11sp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

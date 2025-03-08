@@ -1,14 +1,14 @@
 package com.example.groomers.activity
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.groomers.databinding.ActivityLoginBinding
+import com.example.groomers.helper.Toastic
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.LoginViewModel
-import com.example.groomers.viewModel.MyApplication
 import com.groomers.groomersvendor.helper.CustomLoader
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -20,6 +20,10 @@ class Login : AppCompatActivity() {
 
     @Inject
     lateinit var sessionManager: SessionManager
+    private var animateIcon: Boolean = false
+
+    private var changeTextColor: Boolean = false
+
     private val viewModel: LoginViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +89,14 @@ class Login : AppCompatActivity() {
         viewModel.modelLogin.observe(context) { modelLogin ->
             modelLogin?.let {
                 // If login is successful, navigate to MainActivity
+                Toastic.toastic(
+                    context = this@Login,
+                    message = "Log in successful",
+                    duration = Toastic.LENGTH_SHORT,
+                    type = Toastic.SUCCESS,
+                    isIconAnimated = true,
+                    textColor = if (changeTextColor) Color.BLUE else null,
+                ).show()
                 startActivity(Intent(context, Watching::class.java))
                 finish()
             }
@@ -93,7 +105,15 @@ class Login : AppCompatActivity() {
         // Observe error message if login fails
         viewModel.errorMessage.observe(context) { errorMessage ->
             if (errorMessage.isNotEmpty()) {
-                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                Toastic.toastic(
+                    context = this@Login,
+                    message = errorMessage,
+                    duration = Toastic.LENGTH_SHORT,
+                    type = Toastic.ERROR,
+                    isIconAnimated = true,
+                    textColor = if (changeTextColor) Color.BLUE else null,
+                ).show()
             }
         }
 
