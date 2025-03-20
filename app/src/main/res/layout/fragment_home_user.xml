@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="16dp">
+    android:background="@color/white"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,28 +79,80 @@
                 </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
         </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/rounded_background">
+
+            <ImageView
+                android:id="@+id/image_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitEnd"
+                android:src="@drawable/man" />
+
+            <TextView
+                android:id="@+id/location_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="40dp"
+                android:text="Raghuvir Ganj"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/sub_location_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/location_text"
+                android:layout_marginStart="40dp"
+                android:text="Hapur"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/location"
+                android:layout_marginTop="30dp"/>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@drawable/search_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="16dp"
+            >
 
             <EditText
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
+                android:id="@+id/search_bar"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/border"
-                android:drawableEnd="@drawable/baseline_search_24"
-                android:hint="@string/search"
-                android:padding="12dp" />
+                android:layout_weight="1"
+                android:paddingStart="5dp"
+                android:padding="4dp"
+                android:background="@android:color/transparent"
+                android:hint="Search here"
 
+                android:textColorHint="#888888"
+                android:textSize="14sp"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="7dp"
+                android:src="@drawable/baseline_search_24"
+                app:tint="#000000" />
         </LinearLayout>
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCategory1"
             android:layout_width="match_parent"

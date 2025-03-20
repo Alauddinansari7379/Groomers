@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Rounded Corners -->
+    <corners android:radius="16dp"/>
+
+    <!-- White Background -->
+    <solid android:color="#FFFFFF"/>
+
+    <!-- Shadow Effect (Only works on API 28 and below, for higher versions use CardView) -->
+    <padding android:left="4dp" android:top="4dp" android:right="4dp" android:bottom="4dp"/>
+</shape>

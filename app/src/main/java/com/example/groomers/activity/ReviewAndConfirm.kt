@@ -25,7 +25,7 @@ class ReviewAndConfirm : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        observeViewModel() // Set up observers before making API calls
+        observeViewModel()
 
         binding.btnContinue.setOnClickListener {
             sessionManager.accessToken?.let { token ->

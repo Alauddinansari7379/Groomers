@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.groomers.groomers"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -98,5 +98,12 @@ dependencies {
     kapt ("com.google.dagger:hilt-compiler:2.50")
     //SweetAlert
     implementation ("com.github.f0ris.sweetalert:library:1.6.2")
+    //Navigation
+//    implementation("com.github.qamarelsafadi:CurvedBottomNavigation:0.1.3")
+
+
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("com.google.android.material:material:1.9.0")
+
 
 }
