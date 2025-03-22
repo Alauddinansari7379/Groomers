@@ -16,9 +16,12 @@ import com.example.groomers.R
 import com.example.groomers.adapter.Booking
 import com.example.groomers.adapter.PopularServiceAdapter
 import com.example.groomers.adapter.ServiceAdapter
+import com.example.groomers.adapter.ViewPagerAdapter
+import com.example.groomers.adapter.ViewPagerAdapter1
 import com.example.groomers.databinding.ActivityBookingDetailBinding
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.ServiceViewModel
+import com.google.android.material.tabs.TabLayoutMediator
 import com.groomers.groomersvendor.helper.CustomLoader
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -40,7 +43,8 @@ class BookingDetail : AppCompatActivity(), Booking {
 
         receiveData() // Receive intent data
         setupListeners()
-        setupRecyclerView()
+//        setupRecyclerView()
+        setupFragment()
         sessionManager.accessToken?.let { token ->
             lifecycleScope.launch {
 //                viewModel.getServiceList(token, sessionManager.userType.toString())
@@ -101,10 +105,10 @@ class BookingDetail : AppCompatActivity(), Booking {
 
     }
 
-    private fun setupRecyclerView() {
-        serviceAdapter = PopularServiceAdapter(emptyList(),this,this)
-        binding.rvPopularService.adapter = serviceAdapter
-    }
+//    private fun setupRecyclerView() {
+//        serviceAdapter = PopularServiceAdapter(emptyList(),this,this)
+//        binding.rvPopularService.adapter = serviceAdapter
+//    }
 
     override fun booking() {
         startActivity(
@@ -113,5 +117,21 @@ class BookingDetail : AppCompatActivity(), Booking {
                 }
             )
             finish()
+    }
+    fun setupFragment(){
+
+        val adapter = ViewPagerAdapter1(this)
+        binding.viewPager.adapter = adapter
+
+        // Link TabLayout with ViewPager2
+        TabLayoutMediator(binding.tabLayout1, binding.viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Service"
+                1 -> "Reviews"
+                2 -> "Portfolio"
+                3 -> "Details"
+                else -> "Tab"
+            }
+        }.attach()
     }
 }

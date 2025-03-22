@@ -46,10 +46,12 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
     private lateinit var binding: FragmentHomeUserBinding
     private lateinit var serviceAdapter: ServiceAdapter
     private val categoryViewModel: CategoryViewModel by viewModels()
-
+    private var fusedLocationProviderClient: FusedLocationProviderClient? = null
+    private val REQUEST_CODE = 100
     @Inject
     lateinit var sessionManager: SessionManager
     private val viewModel: ServiceViewModel by viewModels()
+    private var currentAddress = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,10 +68,13 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         categoryViewModel.getCategory(apiService)
         setupRecyclerView()
         observeViewModel()
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
+        getLastLocation()
         sessionManager.accessToken?.let { token ->
             lifecycleScope.launch {
 //                viewModel.getServiceList(token, sessionManager.userType.toString())
-                viewModel.getServiceList(token, "Female")
+                viewModel.getServiceList(token, "Male")
             }
         } ?: run {
             Toast.makeText(requireContext(), "Error: Missing Token", Toast.LENGTH_LONG).show()
@@ -118,9 +123,12 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
         categoryViewModel.modelCategory.observe(requireActivity()) { modelCategory ->
             val gridLayoutManager =
-                GridLayoutManager(requireActivity(), 3, GridLayoutManager.VERTICAL, false)
-            binding.rvCategory1.layoutManager = gridLayoutManager
-            binding.rvCategory1.adapter = CategoryAdapter(modelCategory.result, requireActivity())
+//                GridLayoutManager(requireActivity(), 3, GridLayoutManager.VERTICAL, false)
+//            binding.rvCategory1.layoutManager = gridLayoutManager
+//            binding.rvCategory1.adapter = CategoryAdapter(modelCategory.result, requireActivity())
+            binding.rvCategory1.apply {
+                adapter = CategoryAdapter(modelCategory.result,requireActivity())
+            }
 
         }
         categoryViewModel.isLoading.observe(requireActivity()) { isLoading ->
@@ -138,6 +146,70 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         }
 
     }
+    @SuppressLint("SetTextI18n", "LogNotTimber")
+    private fun getLastLocation() {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationProviderClient!!.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        try {
+                            val geocoder = Geocoder(requireActivity(), Locale.getDefault())
+                            val addresses =
+                                geocoder.getFromLocation(location.latitude, location.longitude, 1)
 
+                            Log.e(
+                                ContentValues.TAG,
+                                " addresses[0].latitude${addresses?.get(0)?.latitude}"
+                            )
+                            Log.e(
+                                ContentValues.TAG,
+                                " addresses[0].latitude${addresses?.get(0)?.longitude}"
+                            )
+
+                            addresses?.get(0)?.getAddressLine(0)
+
+                            val locality = addresses?.get(0)?.locality
+                            val countryName = addresses?.get(0)?.countryName
+                            val countryCode = addresses?.get(0)?.countryCode
+                            val postalCode = addresses?.get(0)?.postalCode
+                            val subLocality = addresses?.get(0)?.subLocality
+                            val subAdminArea = addresses?.get(0)?.subAdminArea
+
+                            currentAddress = "$subLocality, $locality, $countryName"
+
+                             binding.locationText.text = currentAddress
+                            binding.subLocationText.text = addresses?.get(0)?.getAddressLine(0)
+
+                            Log.e(ContentValues.TAG, "locality-$locality")
+                            Log.e(ContentValues.TAG, "countryName-$countryName")
+                            Log.e(ContentValues.TAG, "countryCode-$countryCode")
+                            Log.e(ContentValues.TAG, "postalCode-$postalCode")
+                            Log.e(ContentValues.TAG, "subLocality-$subLocality")
+                            Log.e(ContentValues.TAG, "subAdminArea-$subAdminArea")
+
+                            Log.e(
+                                ContentValues.TAG,
+                                " addresses[0].Address${addresses?.get(0)?.getAddressLine(0)}"
+                            )
+
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+        } else {
+            askPermission()
+        }
+    }
+    private fun askPermission() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            REQUEST_CODE
+        )
+    }
 }
 

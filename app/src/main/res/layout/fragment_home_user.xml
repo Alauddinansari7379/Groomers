@@ -157,9 +157,14 @@
             android:id="@+id/rvCategory1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3"
+            android:layout_marginTop="16dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
             />
 
 
@@ -183,6 +188,8 @@
             android:drawablePadding="8dp"
             android:gravity="center"
             android:paddingEnd="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/go_to_my_appointments"
             android:textColor="@color/black" />
 
@@ -194,6 +201,7 @@
             android:fontFamily="sans-serif-medium"
             android:paddingBottom="8dp"
             android:text="Special Offers"
+            android:layout_marginStart="10dp"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -205,6 +213,8 @@
             android:layout_marginTop="16dp"
             android:overScrollMode="never"
             android:scrollbars="none"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/service_row" />
