@@ -22,6 +22,7 @@
     <string name="add_1">Add 1</string>
     <string name="add_2">Add 2</string>
     <string name="city">City</string>
+    <string name="appointment">appointment</string>
     <string name="pinCode">Pin code</string>
     <string name="welcome_new_user">Welcome New User</string>
     <string name="you_want_to_register_as_vendor">You want to Register as Vendor</string>
@@ -75,6 +76,7 @@
     <string name="new_user">New User?</string>
     <string name="create_account">Create Account</string>
     <string name="home">Home</string>
+    <string name="post">Orders</string>
     <string name="first_name">First Name</string>
     <string name="enter_first_name">Enter First Name</string>
     <string name="last_name">Last Name</string>
@@ -197,6 +199,7 @@
     <string name="add_profile">Add Profile</string>
     <string name="select_with">Select with?</string>
     <string name="profile_1">Profile 1</string>
+    <string name="profile">Profile </string>
     <string name="ayush">Ayush</string>
     <string name="profile_2">Profile 2</string>
     <string name="kids">Kids</string>

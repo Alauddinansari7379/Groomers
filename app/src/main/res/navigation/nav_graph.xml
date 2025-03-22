@@ -9,10 +9,6 @@
         android:name="com.example.groomers.fragments.HomeFragment"
         android:label="HomeFragment" />
     <fragment
-        android:id="@+id/addPostFragment"
-        android:name="com.example.groomers.fragments.AddPost"
-        android:label="Add_post" />
-    <fragment
         android:id="@+id/orderListFragment"
         android:name="com.example.groomers.fragments.OrderListFragment"
         android:label="OrderList" />

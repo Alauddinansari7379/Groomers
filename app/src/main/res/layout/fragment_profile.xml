@@ -62,7 +62,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/profile_circle"
                 android:scaleType="centerCrop"
-                android:src="@drawable/man" />
+                android:src="@drawable/male" />
 
 
             <TextView

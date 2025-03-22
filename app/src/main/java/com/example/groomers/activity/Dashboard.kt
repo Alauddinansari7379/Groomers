@@ -2,48 +2,75 @@ package com.example.groomers.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.groomers.R
 import com.example.groomers.databinding.ActivityVenderDashBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.qamar.curvedbottomnaviagtion.CurvedBottomNavigation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class Dashboard : AppCompatActivity() {
-    private val binding by lazy { ActivityVenderDashBinding.inflate(layoutInflater) }
-    lateinit var bottomNav: BottomNavigationView
-    var destinationFrom = ""
+    private lateinit var binding: ActivityVenderDashBinding
+    private lateinit var bottomNav: CurvedBottomNavigation
+    private lateinit var navController: NavController
+    private var destinationFrom: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Inflate the view with proper initialization
+        binding = ActivityVenderDashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Initialize the bottom navigation
         bottomNav = binding.bottomNavigation1
 
-        // Get NavHostFragment and NavController
+        // Set up the NavController
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
 
-        binding.bottomNavigation1.setupWithNavController(navController)
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation1)
-        destinationFrom = intent.getStringExtra("navigate_to").toString()
+        // Initialize navigation
+        setupBottomNavigation()
+
+        // Handle navigation based on the intent
+        destinationFrom = intent.getStringExtra("navigate_to") ?: ""
         if (destinationFrom == "fragment_cart") {
             navController.navigate(R.id.appointmentFragment)
-            bottomNavigationView.selectedItemId = R.id.appointmentFragment
-            // setFragment(CartFragment(), "CartFragment")
-            destinationFrom=""
+            bottomNav.id = R.id.appointmentFragment
+            destinationFrom = "" // Reset destinationFrom after navigation
         }
-        // Change the title based on the current destination
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.tvTitle.text = when (destination.id) {
-                R.id.homeFragment -> "Dashboard"
-                R.id.addPostFragment -> "Post"
-                R.id.orderListFragment -> "Order List"
-                R.id.appointmentFragment -> "Appointment"
-                else -> "Profile"
+    }
+
+    private fun setupBottomNavigation() {
+        val bottomNavigationItems = listOf(
+            CurvedBottomNavigation.Model(HOME_ITEM, getString(R.string.home), R.drawable.home),
+            CurvedBottomNavigation.Model(
+                ORDER_LIST,
+                getString(R.string.appointment),
+                R.drawable.calender
+            ),
+            CurvedBottomNavigation.Model(
+                PROFILE,
+                getString(R.string.profile),
+                R.drawable.baseline_person_24
+            ),
+        )
+
+        bottomNav.apply {
+            bottomNavigationItems.forEach { add(it) }
+            setOnClickMenuListener {
+                navController.navigate(it.id) // Ensure each item navigates correctly
             }
+            show(HOME_ITEM) // Default item to show
         }
+    }
+
+    companion object {
+        val HOME_ITEM = R.id.homeFragment
+        val ORDER_LIST = R.id.orderListFragment
+        val PROFILE = R.id.profileFragment
     }
 }

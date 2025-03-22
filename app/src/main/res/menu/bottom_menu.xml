@@ -17,7 +17,7 @@
         />
     <item
         android:id="@+id/appointmentFragment"
-        android:icon="@drawable/calendar"
+        android:icon="@drawable/calender"
         android:title="Appointments"
         />
     <item

@@ -60,8 +60,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
             app:navGraph="@navigation/nav_graph" />
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+        <com.qamar.curvedbottomnaviagtion.CurvedBottomNavigation
+            android:id="@+id/bottom_navigation1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cbn_background="@color/mainColor"
+            app:cbn_fabColor="@color/main_Color_Dark"
+            app:cbn_iconColor="@color/white"
+            app:cbn_height="70dp"
+            app:cbn_icon_size="20dp"
+            app:cbn_curve_radius="26dp"
+            app:cbn_selected_icon_size="40dp"
+            app:cbn_selectedIconColor="@color/white"
+            app:cbn_titleColor="@color/black"
+            app:cbn_titleFont="@font/sf_bold"
+             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+       <!-- <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation1"
             style="@style/BottomNavigationStyle"
             android:layout_width="match_parent"
@@ -76,7 +92,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_menu"
-            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>
+            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>-->
 
      </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

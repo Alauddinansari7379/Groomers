@@ -99,7 +99,7 @@ dependencies {
     //SweetAlert
     implementation ("com.github.f0ris.sweetalert:library:1.6.2")
     //Navigation
-//    implementation("com.github.qamarelsafadi:CurvedBottomNavigation:0.1.3")
+    implementation("com.github.qamarelsafadi:CurvedBottomNavigation:0.1.3")
 
 
     implementation("androidx.viewpager2:viewpager2:1.0.0")
