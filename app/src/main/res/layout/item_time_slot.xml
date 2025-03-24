@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
@@ -45,6 +44,41 @@
                 android:textColor="@android:color/darker_gray"
                 android:gravity="center"
                 android:layout_marginTop="4dp"/>
+
+            <!-- Seat Selection -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/btnDecreaseSeat"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/minus"
+                    android:background="@android:color/transparent"
+                    android:padding="4dp" />
+
+                <TextView
+                    android:id="@+id/tvSeatCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@android:color/black" />
+
+                <ImageView
+                    android:id="@+id/btnIncreaseSeat"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/plus2"
+                    android:background="@android:color/transparent"
+                    android:padding="4dp" />
+            </LinearLayout>
 
         </LinearLayout>
 

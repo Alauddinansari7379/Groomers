@@ -2,11 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#F5F7FA"
+    android:orientation="vertical"
     android:padding="0dp">
 
-    <!-- Scrollable Content -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Hero Section with Rounded Bottom -->
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
@@ -32,16 +32,17 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/man" />
 
-                <!-- Overlay -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#66000000"
                     android:gravity="bottom"
-                    android:padding="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/tvServiceName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Haircut"
@@ -50,6 +51,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Professional grooming with expert barbers"
@@ -58,66 +60,66 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <!-- Neumorphic Service Details -->
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="18dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <TextView
-                        android:text="Service Details"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#222222"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:layout_height="wrap_content"
-                         android:layout_width="wrap_content"/>
+                        android:text="Service Details"
+                        android:textColor="#222222"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_height="wrap_content"
+                        android:id="@+id/tvServiceName1"
                         android:layout_width="wrap_content"
-                        android:id="@+id/tvServiceName"
+                        android:layout_height="wrap_content"
                         android:text="Haircut"
+                        android:textColor="#333333"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="#333333" />
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
                         android:id="@+id/tvServiceAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:text="123 Barber Street, City Center"
-                        android:textSize="14sp"
                         android:textColor="#666666"
-                        android:layout_marginTop="4dp"/>
+                        android:textSize="14sp" />
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
                         android:id="@+id/tvServiceDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
                         android:text="Duration: 30 mins"
-                        android:textSize="14sp"
                         android:textColor="#666666"
-                        android:layout_marginTop="2dp"/>
+                        android:textSize="14sp" />
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
                         android:id="@+id/tvServicePrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
                         android:text="Price: $25.0"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
                         android:textColor="#2196F3"
-                        android:layout_marginTop="6dp"/>
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -126,16 +128,16 @@
                 android:id="@+id/tabLayoutDays"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
                 android:backgroundTint="@android:color/white"
                 app:tabIndicatorColor="#2196F3"
-                app:tabTextColor="#999999"
-                app:tabSelectedTextColor="#2196F3"
-                app:tabIndicatorHeight="3dp"
                 app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="3dp"
                 app:tabMode="scrollable"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="12dp"/>
+                app:tabSelectedTextColor="#2196F3"
+                app:tabTextColor="#999999" />
 
             <!-- Horizontal Time Slots -->
             <androidx.recyclerview.widget.RecyclerView
@@ -143,27 +145,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:orientation="horizontal"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:orientation="horizontal"
-                android:scrollbars="horizontal"/>
+                android:scrollbars="horizontal" />
         </LinearLayout>
     </ScrollView>
 
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnContinueToPayment"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="@string/continue1"
-            android:textAllCaps="false"
-            android:layout_margin="10dp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/button_background"
-            android:backgroundTint="#2196F3"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinueToPayment"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="#2196F3"
+        android:text="@string/continue1"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 
 </LinearLayout>

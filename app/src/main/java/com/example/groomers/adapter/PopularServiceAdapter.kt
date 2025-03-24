@@ -1,13 +1,11 @@
 package com.example.groomers.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.example.groomers.activity.ViewOrderDetails
 import com.example.groomers.databinding.PopulerServiceRowBinding
 import com.example.groomers.model.modelservice.Result
 
@@ -28,9 +26,7 @@ class PopularServiceAdapter(private var categoryList : List<Result>, val context
                 .load("https://groomers.co.in/public/uploads/" + image)
                 .into(holder.binding.ivServiceImage)
             holder.binding.btnBook.setOnClickListener {
-                val intent = Intent(context, ViewOrderDetails::class.java)
-                context.startActivity(intent)
-//                booking.booking()
+                booking.booking(serviceName,description,image,price,user_type)
             }
         }
 
@@ -41,5 +37,11 @@ class PopularServiceAdapter(private var categoryList : List<Result>, val context
     }
 }
 interface Booking{
-    fun booking()
+    fun booking(
+        serviceName: String,
+        description: String,
+        image: String,
+        price: Int,
+        user_type: String,
+    )
 }

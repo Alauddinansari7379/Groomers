@@ -2,21 +2,14 @@ package com.example.groomers.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.groomers.R
 import com.example.groomers.adapter.Booking
 import com.example.groomers.adapter.PopularServiceAdapter
-import com.example.groomers.adapter.ServiceAdapter
-import com.example.groomers.adapter.ViewPagerAdapter
 import com.example.groomers.adapter.ViewPagerAdapter1
 import com.example.groomers.databinding.ActivityBookingDetailBinding
 import com.example.groomers.sharedpreferences.SessionManager
@@ -110,15 +103,23 @@ class BookingDetail : AppCompatActivity(), Booking {
 //        binding.rvPopularService.adapter = serviceAdapter
 //    }
 
-    override fun booking() {
-        startActivity(
-                Intent(this, Dashboard::class.java).apply {
-                    putExtra("navigate_to", "fragment_cart")
-                }
-            )
-            finish()
+    override fun booking(
+        serviceName: String,
+        description: String,
+        image: String,
+        price: Int,
+        user_type: String
+    ) {
+        val intent = Intent(this, ViewOrderDetails::class.java).apply {
+            putExtra("serviceName", serviceName)
+            putExtra("description", description)
+            putExtra("image", image)
+            putExtra("price", price)
+            putExtra("user_type", user_type)
+        }
+        startActivity(intent)
     }
-    fun setupFragment(){
+    private fun setupFragment(){
 
         val adapter = ViewPagerAdapter1(this)
         binding.viewPager.adapter = adapter

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.groomers.R
@@ -15,7 +14,6 @@ import com.example.groomers.activity.ViewOrderDetails
 import com.example.groomers.adapter.Booking
 import com.example.groomers.adapter.PopularServiceAdapter
 import com.example.groomers.databinding.FragmentServiceBinding
-import com.example.groomers.databinding.FragmentUpcomingBinding
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.ServiceViewModel
 import com.groomers.groomersvendor.helper.CustomLoader
@@ -76,7 +74,20 @@ class ServiceFragment : Fragment(), Booking {
         binding.rvPopularService.adapter = serviceAdapter
     }
 
-    override fun booking() {
-//        startActivity(Intent(this@ServiceFragment,ViewOrderDetails::class.java))
+    override fun booking(
+        serviceName: String,
+        description: String,
+        image: String,
+        price: Int,
+        user_type: String
+    ) {
+        val intent = Intent(requireContext(), ViewOrderDetails::class.java).apply {
+            putExtra("serviceName", serviceName)
+            putExtra("description", description)
+            putExtra("image", image)
+            putExtra("price", price)
+            putExtra("user_type", user_type)
+        }
+        startActivity(intent)
     }
 }
