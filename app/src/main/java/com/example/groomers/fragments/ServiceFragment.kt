@@ -1,5 +1,6 @@
 package com.example.groomers.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.groomers.R
+import com.example.groomers.activity.ViewOrderDetails
 import com.example.groomers.adapter.Booking
 import com.example.groomers.adapter.PopularServiceAdapter
 import com.example.groomers.databinding.FragmentServiceBinding
@@ -75,6 +77,6 @@ class ServiceFragment : Fragment(), Booking {
     }
 
     override fun booking() {
-        TODO("Not yet implemented")
+//        startActivity(Intent(this@ServiceFragment,ViewOrderDetails::class.java))
     }
 }

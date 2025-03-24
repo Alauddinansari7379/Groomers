@@ -1,12 +1,17 @@
 package com.example.groomers.retrofit
 
 
+import com.example.groomers.model.modeladdresslist.ModelAddressList
 import com.example.groomers.model.modelbooking.ModelBooking
 import com.example.groomers.model.modelbookinglist.ModelBookingList
 import com.example.groomers.model.modelcategory.ModelCategory
+import com.example.groomers.model.modelcreateaddress.ModelCreateAddress
 import com.example.groomers.model.modellogin.ModelLogin
 import com.example.groomers.model.modelregister.ModelRegesters
 import com.example.groomers.model.modelservice.ModelService
+import com.example.groomers.model.modulcountry.ModelCountry
+import com.groomers.groomersvendor.model.modelcity.ModelCity
+import com.groomers.groomersvendor.model.modelstate.ModelState
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.GET
@@ -77,4 +82,24 @@ interface ApiService {
 
     @GET("getCategory")
     suspend fun getCategory(): Response<ModelCategory>
+    @POST("city")
+    suspend fun getCity(): Response<ModelCity>
+
+    @POST("state")
+    suspend fun getState(): Response<ModelState>
+
+    @POST("state")
+    suspend fun getCountry(): Response<ModelCountry>
+    @POST("customerCreateAddress")
+    suspend fun customerCreateAddress(
+        @Header("Authorization") authorization: String,
+        @Query("address") address: String,
+        @Query("zip_code") zipCode: String,
+        @Query("country") country: Int,
+        @Query("state") state: Int,
+        @Query("city") city: Int
+    ): Response<ModelCreateAddress>
+
+    @GET("getCustomerAddress")
+    suspend fun getCustomerAddress(@Header("Authorization") token: String): Response<ModelAddressList>
 }

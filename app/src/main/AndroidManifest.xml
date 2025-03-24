@@ -19,6 +19,15 @@
         android:theme="@style/Theme.groomers"
         tools:targetApi="31">
         <activity
+            android:name=".activity.AddAddress"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddressList"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ViewOrderDetails"
+            android:exported="false" />
+        <activity
             android:name=".activity.ReviewAndConfirm"
             android:exported="false" />
         <activity
@@ -32,8 +41,8 @@
             android:exported="false" />
         <activity
             android:name=".activity.Contact"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.OrderLists"
             android:exported="false" />
@@ -45,8 +54,8 @@
             android:exported="false" />
         <activity
             android:name=".activity.Registration"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.AboutYouActivity"
             android:exported="false" />
@@ -64,8 +73,8 @@
             android:exported="false" />
         <activity
             android:name=".activity.Login"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.SplashScreen"
             android:exported="true">

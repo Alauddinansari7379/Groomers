@@ -180,8 +180,8 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
                             currentAddress = "$subLocality, $locality, $countryName"
 
-                             binding.locationText.text = currentAddress
-                            binding.subLocationText.text = addresses?.get(0)?.getAddressLine(0)
+                             binding.locationText.text = sessionManager.name
+                            binding.subLocationText.text = locality
 
                             Log.e(ContentValues.TAG, "locality-$locality")
                             Log.e(ContentValues.TAG, "countryName-$countryName")

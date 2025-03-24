@@ -13,6 +13,14 @@
     <color name="bottomNavigationBackground">#2A2E43</color>
     <color name="bottomNavigationSelectedColor">#4C57DE</color>
     <color name="bottomNavigationTintColor">#B2B2B2</color>
+    <color name="selected_bg">#2196F3</color>  <!-- Blue for selected -->
+    <color name="unselected_bg">#F5F5F5</color>  <!-- Light Gray for unselected -->
+    <color name="selected_text">#FFFFFF</color>  <!-- White text for selected -->
+    <color name="unselected_text">#000000</color>  <!-- Black text for unselected -->
+    <color name="unselected_text_secondary">#757575</color>  <!-- Gray for end time -->
+
+
+
 
 
 </resources>

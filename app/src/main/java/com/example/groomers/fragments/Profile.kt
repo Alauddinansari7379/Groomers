@@ -16,6 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.groomers.R
+import com.example.groomers.activity.AddressList
 import com.example.groomers.activity.Login
 import com.example.groomers.databinding.FragmentProfileBinding
 import com.example.groomers.sharedpreferences.SessionManager
@@ -50,6 +51,9 @@ class Profile : Fragment() {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireContext())
         getLastLocation()
+        binding.llAddress.setOnClickListener {
+            startActivity(Intent(requireContext(),AddressList::class.java))
+        }
         binding.llLogout.setOnClickListener {
             SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Are you sure want to logout?")
@@ -105,8 +109,8 @@ class Profile : Fragment() {
 
                             currentAddress = "$subLocality, $locality, $countryName"
 
-                            binding.location.text = currentAddress
-                            binding.sublocation.text = addresses?.get(0)?.getAddressLine(0)
+                            binding.location.text = sessionManager.name
+                            binding.sublocation.text = locality
 
                             Log.e(ContentValues.TAG, "locality-$locality")
                             Log.e(ContentValues.TAG, "countryName-$countryName")

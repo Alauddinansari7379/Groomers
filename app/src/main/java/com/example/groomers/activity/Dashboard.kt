@@ -70,7 +70,7 @@ class Dashboard : AppCompatActivity() {
 
     companion object {
         val HOME_ITEM = R.id.homeFragment
-        val ORDER_LIST = R.id.orderListFragment
+        val ORDER_LIST = R.id.appointmentFragment
         val PROFILE = R.id.profileFragment
     }
 }
