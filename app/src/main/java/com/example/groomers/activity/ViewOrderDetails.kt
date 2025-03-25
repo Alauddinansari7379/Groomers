@@ -1,6 +1,7 @@
 package com.example.groomers.activity
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,9 @@ class ViewOrderDetails : AppCompatActivity() {
         setupTabs()
         setupRecyclerView()
         setupServiceDetails()
+        binding.btnContinueToPayment.setOnClickListener {
+            startActivity(Intent(this@ViewOrderDetails,ReviewAndConfirm::class.java))
+        }
     }
 
     private fun setupTabs() {

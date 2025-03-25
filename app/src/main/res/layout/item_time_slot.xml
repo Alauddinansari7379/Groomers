@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="6dp"
     android:gravity="center"
     android:orientation="vertical">
@@ -24,6 +24,7 @@
             android:orientation="vertical"
             android:gravity="center">
 
+            <!-- Start Time -->
             <TextView
                 android:id="@+id/tvStartTime"
                 android:layout_width="wrap_content"
@@ -34,6 +35,7 @@
                 android:textColor="@android:color/black"
                 android:gravity="center"/>
 
+            <!-- End Time -->
             <TextView
                 android:id="@+id/tvEndTime"
                 android:layout_width="wrap_content"
@@ -45,21 +47,32 @@
                 android:gravity="center"
                 android:layout_marginTop="4dp"/>
 
-            <!-- Seat Selection -->
-            <LinearLayout
+            <!-- Seat Count (Always Visible) -->
+            <TextView
+                android:id="@+id/tvSeats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:text="1 Seat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="8dp"
+                android:gravity="center"/>
+
+            <!-- Seat Selection (Initially Hidden) -->
+            <LinearLayout
+                android:id="@+id/seatSelectionLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:visibility="gone">
 
                 <ImageView
-                    android:id="@+id/btnDecreaseSeat"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/minus"
-                    android:background="@android:color/transparent"
-                    android:padding="4dp" />
+                    android:id="@+id/ivDecreaseSeats"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/minus"/>
 
                 <TextView
                     android:id="@+id/tvSeatCount"
@@ -68,20 +81,23 @@
                     android:text="1"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:paddingHorizontal="12dp"
-                    android:textColor="@android:color/black" />
+                    android:layout_marginHorizontal="8dp"/>
 
                 <ImageView
-                    android:id="@+id/btnIncreaseSeat"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/plus2"
-                    android:background="@android:color/transparent"
-                    android:padding="4dp" />
+                    android:id="@+id/ivIncreaseSeats"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/plus2"/>
             </LinearLayout>
 
+            <!-- Edit Icon -->
+            <ImageView
+                android:id="@+id/ivEditSeats"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/pen"
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

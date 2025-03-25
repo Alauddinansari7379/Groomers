@@ -29,9 +29,10 @@ interface ApiService {
         @Query("username") username: String,
         @Query("role") role: String,
     ): Response<ModelLogin>
+
     @Multipart
     @POST("register")
-   suspend fun registerUser(
+    suspend fun registerUser(
         @Query("username") username: String,
         @Query("name") name: String,
         @Query("mobile") mobile: String,
@@ -82,14 +83,16 @@ interface ApiService {
 
     @GET("getCategory")
     suspend fun getCategory(): Response<ModelCategory>
+
     @POST("city")
     suspend fun getCity(): Response<ModelCity>
 
     @POST("state")
     suspend fun getState(): Response<ModelState>
 
-    @POST("state")
+    @POST("country")
     suspend fun getCountry(): Response<ModelCountry>
+
     @POST("customerCreateAddress")
     suspend fun customerCreateAddress(
         @Header("Authorization") authorization: String,
