@@ -9,6 +9,7 @@ import com.example.groomers.model.modelcreateaddress.ModelCreateAddress
 import com.example.groomers.model.modellogin.ModelLogin
 import com.example.groomers.model.modelregister.ModelRegesters
 import com.example.groomers.model.modelservice.ModelService
+import com.example.groomers.model.modelslotbooking.ModelSlotBooking
 import com.example.groomers.model.modulcountry.ModelCountry
 import com.groomers.groomersvendor.model.modelcity.ModelCity
 import com.groomers.groomersvendor.model.modelstate.ModelState
@@ -29,6 +30,15 @@ interface ApiService {
         @Query("username") username: String,
         @Query("role") role: String,
     ): Response<ModelLogin>
+
+    @POST("getSlotBooking")
+   suspend fun getSlotBooking(
+        @Header("Authorization") authorization: String,
+        @Query("vendor_id") vendorId: String,
+        @Query("categoryid") categoryId: String,
+        @Query("day") day: String,
+        @Query("service_id") serviceId: String
+    ): Response<ModelSlotBooking>
 
     @Multipart
     @POST("register")

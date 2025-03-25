@@ -4,30 +4,33 @@ package com.example.groomers.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.groomers.R
 import com.example.groomers.adapter.TimeSlotAdapter
 import com.example.groomers.databinding.ActivityViewOrderDetailsBinding
+import com.example.groomers.viewModel.LocationViewModel
+import com.example.groomers.viewModel.SlotBookingViewModel
+import com.google.android.material.tabs.TabLayout
+import com.groomers.groomersvendor.helper.CustomLoader
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
 class ViewOrderDetails : AppCompatActivity() {
     private lateinit var binding: ActivityViewOrderDetailsBinding
     private lateinit var timeSlotAdapter: TimeSlotAdapter
+    private val viewModel: SlotBookingViewModel by viewModels()
 
     private var serviceName: String = ""
     private var description: String = ""
     private var image: String = ""
     private var price: Int = 0
     private var userType: String = ""
-
-    private val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-    private val timeSlots = listOf(
-        "10:00 AM" to "11:00 AM",
-        "11:30 AM" to "12:30 PM",
-        "2:00 PM" to "3:00 PM",
-        "4:00 PM" to "5:00 PM",
-        "6:00 PM" to "7:00 PM"
-    )
+    private var selectedDay: String = "1"  // Default to Monday
 
     private var selectedStartTime: String? = null
     private var selectedEndTime: String? = null
@@ -37,7 +40,7 @@ class ViewOrderDetails : AppCompatActivity() {
         binding = ActivityViewOrderDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // ✅ Retrieve intent data inside onCreate()
+        // ✅ Retrieve intent data
         serviceName = intent?.getStringExtra("serviceName") ?: ""
         description = intent?.getStringExtra("description") ?: ""
         image = intent?.getStringExtra("image") ?: ""
@@ -47,19 +50,36 @@ class ViewOrderDetails : AppCompatActivity() {
         setupTabs()
         setupRecyclerView()
         setupServiceDetails()
+        observeViewModel()
+
+        // Fetch slots for default day
+        fetchSlots()
+
         binding.btnContinueToPayment.setOnClickListener {
-            startActivity(Intent(this@ViewOrderDetails,ReviewAndConfirm::class.java))
+            startActivity(Intent(this@ViewOrderDetails, ReviewAndConfirm::class.java))
         }
     }
 
     private fun setupTabs() {
-        days.forEach { day ->
+        val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+        days.forEachIndexed { index, day ->
             binding.tabLayoutDays.addTab(binding.tabLayoutDays.newTab().setText(day))
         }
+
+        // Handle tab selection
+        binding.tabLayoutDays.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                selectedDay = (tab?.position?.plus(1)).toString() // Convert to "1" for Monday, "2" for Tuesday, etc.
+                fetchSlots()
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
     }
 
     private fun setupRecyclerView() {
-        timeSlotAdapter = TimeSlotAdapter(timeSlots) { startTime, endTime, seatCount ->
+        timeSlotAdapter = TimeSlotAdapter(emptyList()) { startTime, endTime, seatCount ->
             selectedStartTime = startTime
             selectedEndTime = endTime
             Log.d("TimeSlotSelection", "Selected Time: $startTime - $endTime, Seats: $seatCount")
@@ -68,15 +88,49 @@ class ViewOrderDetails : AppCompatActivity() {
         binding.rvTimeSlots.adapter = timeSlotAdapter
     }
 
-
     private fun setupServiceDetails() {
         binding.tvServiceName.text = serviceName
-        binding.tvServiceDuration.text = "Duration: ${30}"
+        binding.tvServiceDuration.text = "Duration: 30 mins"
         binding.tvServicePrice.text = "Price: $$price"
         val imageUrl = "https://groomers.co.in/public/uploads/$image"
         Glide.with(this)
             .load(imageUrl)
             .placeholder(R.drawable.noimage)
             .into(binding.ivServiceImage)
+    }
+
+    private fun fetchSlots() {
+        val vendorId = "3"      // Set dynamically if required
+        val categoryId = "2"    // Set dynamically if required
+        val serviceId = "1"     // Set dynamically if required
+
+        viewModel.fetchSlotBooking(vendorId, categoryId, selectedDay, serviceId)
+    }
+
+    private fun observeViewModel() {
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) CustomLoader.showLoaderDialog(this)
+            else CustomLoader.hideLoaderDialog()
+        }
+
+        viewModel.errorMessage.observe(this) { errorMessage ->
+            errorMessage?.let {
+                if (it.isNotEmpty()) {
+                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        viewModel.slotBookingData.observe(this) { response ->
+            if (response != null && response.status == 1) {
+                val timeSlotList = response.result.map { result ->
+                    Pair(result.start_time, result.end_time) // Ensure Result has these fields
+                }
+                timeSlotAdapter.updateData(timeSlotList)
+            } else {
+                Toast.makeText(this, "Failed to fetch time slots", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 }

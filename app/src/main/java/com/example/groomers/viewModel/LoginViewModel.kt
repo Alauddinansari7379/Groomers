@@ -82,15 +82,4 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun getStoredToken(): String? {
-        return sessionManager.accessToken
-    }
-
-    fun checkLoginStatus(): Boolean {
-        return sessionManager.isLogin
-    }
-
-    fun logout() {
-        sessionManager.clearSession()
-    }
 }

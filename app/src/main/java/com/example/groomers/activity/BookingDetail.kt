@@ -41,7 +41,7 @@ class BookingDetail : AppCompatActivity(), Booking {
         sessionManager.accessToken?.let { token ->
             lifecycleScope.launch {
 //                viewModel.getServiceList(token, sessionManager.userType.toString())
-                viewModel.getServiceList(token, "Female")
+//                viewModel.getServiceList(token, "Female")
             }
         } ?: run {
             Toast.makeText(this, "Error: Missing Token", Toast.LENGTH_LONG).show()
