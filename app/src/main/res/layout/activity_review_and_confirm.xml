@@ -40,6 +40,7 @@
         android:fontFamily="sans-serif" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/the_executive_men_s_hair_styling_503_18_ave_sw_t2s_0c6_calgary"
@@ -63,6 +64,7 @@
           >
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvServiceName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/haircut"
@@ -71,6 +73,7 @@
                 android:fontFamily="sans-serif-medium" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/_35_00"
@@ -94,6 +97,7 @@
                 android:textColor="#666666" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSlotTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/_10_00_am_10_40_am"
@@ -122,6 +126,7 @@
                 android:fontFamily="sans-serif" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPrice1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/_35_00"

@@ -18,18 +18,29 @@ class ReviewAndConfirm : AppCompatActivity() {
     private val binding by lazy { ActivityReviewAndConfirmBinding.inflate(layoutInflater) }
     private val viewModel: BookingViewModel by viewModels()
     private var changeTextColor: Boolean = false
+
     @Inject
     lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        val selectedStartTime = intent.getStringExtra("selectedStartTime")
+        val selectedEndTime = intent.getStringExtra("selectedEndTime")
+        val serviceName = intent.getStringExtra("serviceName")
+        val price = intent.getStringExtra("price")
+        val description = intent.getStringExtra("description")
+        val selectedSeats = intent.getIntExtra("selectedSeats", 1)
+        binding.tvPrice.text = price
+        binding.tvPrice1.text = price
+        binding.tvDescription.text = description
+        binding.tvServiceName.text = serviceName
         observeViewModel()
-
+        binding.tvSlotTime.text = "$selectedStartTime-$selectedEndTime"
         binding.btnContinue.setOnClickListener {
             sessionManager.accessToken?.let { token ->
-                viewModel.createBooking(token,
+                viewModel.createBooking(
+                    token,
                     customerId = 11111,
                     vendorId = 10,
                     total = 5009999,

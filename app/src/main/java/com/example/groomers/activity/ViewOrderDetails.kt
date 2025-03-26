@@ -7,13 +7,12 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.groomers.R
 import com.example.groomers.adapter.TimeSlotAdapter
 import com.example.groomers.databinding.ActivityViewOrderDetailsBinding
-import com.example.groomers.viewModel.LocationViewModel
 import com.example.groomers.viewModel.SlotBookingViewModel
 import com.google.android.material.tabs.TabLayout
 import com.groomers.groomersvendor.helper.CustomLoader
@@ -34,6 +33,7 @@ class ViewOrderDetails : AppCompatActivity() {
 
     private var selectedStartTime: String? = null
     private var selectedEndTime: String? = null
+    private var selectedSeatCount: Int = 1 // Default 1 seat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +56,20 @@ class ViewOrderDetails : AppCompatActivity() {
         fetchSlots()
 
         binding.btnContinueToPayment.setOnClickListener {
-            startActivity(Intent(this@ViewOrderDetails, ReviewAndConfirm::class.java))
+            if (selectedStartTime == null || selectedEndTime == null) {
+                Toast.makeText(this, "Please select a time slot", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val intent = Intent(this@ViewOrderDetails, ReviewAndConfirm::class.java).apply {
+                putExtra("startTime", selectedStartTime)
+                putExtra("endTime", selectedEndTime)
+                putExtra("seatCount", selectedSeatCount)
+                putExtra("serviceName", serviceName)
+                putExtra("price", price)
+                putExtra("description", description)
+            }
+            startActivity(intent)
         }
     }
 
@@ -66,7 +79,6 @@ class ViewOrderDetails : AppCompatActivity() {
             binding.tabLayoutDays.addTab(binding.tabLayoutDays.newTab().setText(day))
         }
 
-        // Handle tab selection
         binding.tabLayoutDays.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 selectedDay = (tab?.position?.plus(1)).toString() // Convert to "1" for Monday, "2" for Tuesday, etc.
@@ -82,7 +94,7 @@ class ViewOrderDetails : AppCompatActivity() {
         timeSlotAdapter = TimeSlotAdapter(emptyList()) { startTime, endTime, seatCount ->
             selectedStartTime = startTime
             selectedEndTime = endTime
-            Log.d("TimeSlotSelection", "Selected Time: $startTime - $endTime, Seats: $seatCount")
+            selectedSeatCount = seatCount // ✅ Store selected seat count
         }
         binding.rvTimeSlots.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvTimeSlots.adapter = timeSlotAdapter
@@ -108,29 +120,15 @@ class ViewOrderDetails : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.isLoading.observe(this) { isLoading ->
-            if (isLoading) CustomLoader.showLoaderDialog(this)
-            else CustomLoader.hideLoaderDialog()
-        }
-
-        viewModel.errorMessage.observe(this) { errorMessage ->
-            errorMessage?.let {
-                if (it.isNotEmpty()) {
-                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-        viewModel.slotBookingData.observe(this) { response ->
+        viewModel.slotBookingData.observe(this, Observer { response ->
             if (response != null && response.status == 1) {
                 val timeSlotList = response.result.map { result ->
-                    Pair(result.start_time, result.end_time) // Ensure Result has these fields
+                    Triple(result.start_time, result.end_time, result.seat_available)
                 }
                 timeSlotAdapter.updateData(timeSlotList)
             } else {
                 Toast.makeText(this, "Failed to fetch time slots", Toast.LENGTH_SHORT).show()
             }
-        }
-
+        })
     }
 }
