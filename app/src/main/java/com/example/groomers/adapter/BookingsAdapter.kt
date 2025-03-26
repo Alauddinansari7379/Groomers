@@ -8,7 +8,7 @@ import com.example.groomers.databinding.BookingsRowBinding
 import com.example.groomers.model.modelbookinglist.Result
 class BookingsAdapter(serviceList: List<Result>) : RecyclerView.Adapter<BookingsAdapter.BookingsViewMode>() {
 
-    private val filteredList = serviceList.filter { it.slug == "Accept from approval" }
+    private val filteredList = serviceList.filter { it.slug == "waiting_for_accept" }
 
     inner class BookingsViewMode(val binding: BookingsRowBinding) : RecyclerView.ViewHolder(binding.root)
 
