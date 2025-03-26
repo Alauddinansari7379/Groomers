@@ -62,11 +62,11 @@ class ViewOrderDetails : AppCompatActivity() {
             }
 
             val intent = Intent(this@ViewOrderDetails, ReviewAndConfirm::class.java).apply {
-                putExtra("startTime", selectedStartTime)
-                putExtra("endTime", selectedEndTime)
-                putExtra("seatCount", selectedSeatCount)
+                putExtra("selectedStartTime", selectedStartTime)
+                putExtra("selectedEndTime", selectedEndTime)
+                putExtra("selectedSeats", selectedSeatCount.toString())
                 putExtra("serviceName", serviceName)
-                putExtra("price", price)
+                putExtra("price", price.toString())
                 putExtra("description", description)
             }
             startActivity(intent)

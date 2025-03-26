@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:padding="16dp">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -28,9 +28,9 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:hint="Enter Address"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
@@ -41,14 +41,13 @@
                     android:id="@+id/etAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
                     android:inputType="textPostalAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:hint="Enter Zip Code"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
@@ -62,6 +61,7 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Country Searchable Spinner -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,12 +70,15 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <Spinner
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/spinnerCountry"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/corner_edt" />
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/corner_edt"
+                android:spinnerMode="dropdown" />
 
+            <!-- State Searchable Spinner -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,15 +87,15 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <Spinner
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/spinnerState"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="15dp"
                 android:background="@drawable/corner_edt"
-                android:padding="10dp" />
+                android:spinnerMode="dropdown" />
 
+            <!-- City Searchable Spinner -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,19 +104,16 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <Spinner
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/spinnerCity"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="16dp"
                 android:background="@drawable/corner_edt"
-                android:padding="10dp"
-                />
+                android:spinnerMode="dropdown" />
         </LinearLayout>
     </ScrollView>
 
-    <!-- Submit Button Fixed at the Bottom -->
+    <!-- Submit Button -->
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"

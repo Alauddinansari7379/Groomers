@@ -103,7 +103,11 @@ dependencies {
 
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("com.google.android.material:material:1.9.0")
-//    implementation ("com.github.AhmMhd:SearchableSpinner:1.0.4")
+
+    implementation ("com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1")
+
+
+
 
 
 }

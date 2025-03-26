@@ -1,5 +1,6 @@
 package com.example.groomers.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class PopularServiceAdapter(private var categoryList : List<Result>, val context
         }
 
     }
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newList: List<Result>) {
         categoryList = newList
         notifyDataSetChanged()

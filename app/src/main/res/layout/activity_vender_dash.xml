@@ -1,98 +1,82 @@
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.Dashboard">
 
+        <!-- Top Toolbar -->
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_gravity="center"
-            android:visibility="gone"
             android:background="@color/mainColor"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:fontFamily="@font/poppins_bold"
                 android:text="@string/dashboard"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end">
+                android:gravity="end"
+                android:paddingEnd="10dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgLan"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/user"
-                    app:layout_constraintBottom_toBottomOf="@+id/toolBar"
-                    app:layout_constraintEnd_toEndOf="@+id/toolBar"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </androidx.appcompat.widget.AppCompatImageView>
+                    android:layout_gravity="center"
+                    android:contentDescription="User"
+                    android:src="@drawable/user" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <!-- Fragment Host -->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/hostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation1"
+            app:layout_constraintBottom_toTopOf="@id/bottom_navigation1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat"
             app:navGraph="@navigation/nav_graph" />
+
         <com.qamar.curvedbottomnaviagtion.CurvedBottomNavigation
             android:id="@+id/bottom_navigation1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cbn_background="@color/mainColor"
+            app:cbn_curve_radius="40dp"
             app:cbn_fabColor="@color/main_Color_Dark"
+            app:cbn_height="75dp"
             app:cbn_iconColor="@color/white"
-            app:cbn_height="70dp"
-            app:cbn_icon_size="20dp"
-            app:cbn_curve_radius="26dp"
-            app:cbn_selected_icon_size="40dp"
+            app:cbn_icon_size="24dp"
             app:cbn_selectedIconColor="@color/white"
+            app:cbn_selected_icon_size="52dp"
             app:cbn_titleColor="@color/black"
             app:cbn_titleFont="@font/sf_bold"
-             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-       <!-- <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation1"
-            style="@style/BottomNavigationStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?selectableItemBackground"
-            app:elevation="10dp"
-            app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_menu"
-            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>-->
+            app:layout_constraintStart_toStartOf="parent" />
 
-     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

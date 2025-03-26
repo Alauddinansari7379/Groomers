@@ -1,5 +1,6 @@
 package com.example.groomers.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
@@ -30,7 +31,7 @@ class ReviewAndConfirm : AppCompatActivity() {
         val serviceName = intent.getStringExtra("serviceName")
         val price = intent.getStringExtra("price")
         val description = intent.getStringExtra("description")
-        val selectedSeats = intent.getIntExtra("selectedSeats", 1)
+        val selectedSeats = intent.getStringExtra("selectedSeats")
         binding.tvPrice.text = price
         binding.tvPrice1.text = price
         binding.tvDescription.text = description
@@ -69,7 +70,6 @@ class ReviewAndConfirm : AppCompatActivity() {
 
         viewModel.bookingResult.observe(this) { response ->
             response?.let {
-
                 Toastic.toastic(
                     context = this@ReviewAndConfirm,
                     message = "Booking successful!",
@@ -78,10 +78,16 @@ class ReviewAndConfirm : AppCompatActivity() {
                     isIconAnimated = true,
                     textColor = if (changeTextColor) Color.BLUE else null,
                 ).show()
-                // Handle successful booking (e.g., navigate to another activity)
-                finish()
+
+                // Clear all previous activities and navigate to the desired activity
+                val intent = Intent(this@ReviewAndConfirm, BookingDetail::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(intent)
+                finish() // Optional, just to be safe
             }
         }
+
     }
 
     private fun showError(message: String) {

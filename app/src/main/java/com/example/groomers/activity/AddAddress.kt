@@ -13,9 +13,6 @@ import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.LocationViewModel
 import com.groomers.groomersvendor.helper.CustomLoader
 
-
-
-
 class AddAddress : AppCompatActivity() {
     private val locationViewModel: LocationViewModel by viewModels()
     private val binding by lazy { ActivityAddAddressBinding.inflate(layoutInflater) }
@@ -30,7 +27,7 @@ class AddAddress : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        sessionManager = SessionManager(this)  // ✅ Initialize SessionManager
+        sessionManager = SessionManager(this)
         apiService = ApiServiceProvider.getApiService()
 
         locationViewModel.getCountry(apiService)
@@ -83,7 +80,7 @@ class AddAddress : AppCompatActivity() {
         locationViewModel.modelAddAddress.observe(this) { response ->
             if (response != null && response.status == 1) {
                 Toast.makeText(this, "Address added successfully!", Toast.LENGTH_SHORT).show()
-                finish()  // ✅ Close the activity after success
+                finish()
             } else {
                 Toast.makeText(this, "Failed to add address", Toast.LENGTH_SHORT).show()
             }
@@ -121,7 +118,7 @@ class AddAddress : AppCompatActivity() {
             return
         }
 
-        val token = sessionManager.accessToken  // ✅ Get Token
+        val token = sessionManager.accessToken
         if (token != null) {
             locationViewModel.addAddress(apiService, token, address, zipCode, countryId, stateId, cityId)
         }
