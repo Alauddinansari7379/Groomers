@@ -33,6 +33,7 @@ class ViewOrderDetails : AppCompatActivity() {
 
     private var selectedStartTime: String? = null
     private var selectedEndTime: String? = null
+    private var id: String? = null
     private var selectedSeatCount: Int = 1 // Default 1 seat
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +69,7 @@ class ViewOrderDetails : AppCompatActivity() {
                 putExtra("serviceName", serviceName)
                 putExtra("price", price.toString())
                 putExtra("description", description)
+                putExtra("slotId", id)
             }
             startActivity(intent)
         }
@@ -91,10 +93,11 @@ class ViewOrderDetails : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        timeSlotAdapter = TimeSlotAdapter(emptyList()) { startTime, endTime, seatCount ->
-            selectedStartTime = startTime
-            selectedEndTime = endTime
-            selectedSeatCount = seatCount // ✅ Store selected seat count
+        timeSlotAdapter = TimeSlotAdapter(emptyList()) { result, seatCount -> // ✅ Receive full result object
+            selectedStartTime = result.start_time
+            selectedEndTime = result.end_time
+            selectedSeatCount = seatCount
+            id = result.id.toString()
         }
         binding.rvTimeSlots.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvTimeSlots.adapter = timeSlotAdapter
@@ -122,10 +125,7 @@ class ViewOrderDetails : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.slotBookingData.observe(this, Observer { response ->
             if (response != null && response.status == 1) {
-                val timeSlotList = response.result.map { result ->
-                    Triple(result.start_time, result.end_time, result.seat_available)
-                }
-                timeSlotAdapter.updateData(timeSlotList)
+                timeSlotAdapter.updateData(response.result) // ✅ Pass the full result list
             } else {
                 Toast.makeText(this, "Failed to fetch time slots", Toast.LENGTH_SHORT).show()
             }
