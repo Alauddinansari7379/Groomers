@@ -7,6 +7,7 @@ import com.example.groomers.model.modelbookinglist.ModelBookingList
 import com.example.groomers.model.modelcategory.ModelCategory
 import com.example.groomers.model.modelcreateaddress.ModelCreateAddress
 import com.example.groomers.model.modellogin.ModelLogin
+import com.example.groomers.model.modelprofilepicupload.ModelUploadProfPhoto
 import com.example.groomers.model.modelregister.ModelRegesters
 import com.example.groomers.model.modelservice.ModelService
 import com.example.groomers.model.modelslotbooking.ModelSlotBooking
@@ -115,4 +116,10 @@ interface ApiService {
 
     @GET("getCustomerAddress")
     suspend fun getCustomerAddress(@Header("Authorization") token: String): Response<ModelAddressList>
+    @Multipart
+    @POST("updateCustomerPictures")
+    suspend fun uploadProfilePicture(
+        @Header("Authorization") authorization: String,
+        @Part image: MultipartBody.Part
+    ): Response<ModelUploadProfPhoto>
 }

@@ -14,6 +14,7 @@ class SessionManager(context: Context) {
         private const val EMAIL = "EMAIL"
         private const val IS_LOGIN = "IS_LOGIN"
         private const val USERTYPE = "USERTYPE"
+        private const val PROFILE_PICTURE_URL = "PROFILE_PICTURE_URL"
     }
     var accessToken: String?
         get() = prefs.getString(ACCESS_TOKEN, null)
@@ -59,5 +60,9 @@ class SessionManager(context: Context) {
     fun clearSession() {
         prefs.edit().clear().apply()
     }
-
+    var profilePictureUrl: String?
+        get() = prefs.getString(PROFILE_PICTURE_URL, null)
+        set(value) {
+            prefs.edit().putString(PROFILE_PICTURE_URL, value).apply()
+        }
 }

@@ -2,11 +2,15 @@ package com.example.groomers.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Geocoder
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,15 +18,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.bumptech.glide.Glide
 import com.example.groomers.R
 import com.example.groomers.activity.AddressList
 import com.example.groomers.activity.Login
 import com.example.groomers.databinding.FragmentProfileBinding
+import com.example.groomers.helper.Toastic
+import com.example.groomers.retrofit.ApiServiceProvider
 import com.example.groomers.sharedpreferences.SessionManager
+import com.example.groomers.viewModel.ProfileViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.io.IOException
 import java.util.Locale
 import javax.inject.Inject
@@ -36,6 +48,12 @@ class Profile : Fragment() {
     private var fusedLocationProviderClient: FusedLocationProviderClient? = null
     private val REQUEST_CODE = 100
     private var currentAddress = ""
+    private var selectedImageUri: Uri? = null
+    private val profileViewModel: ProfileViewModel by viewModels()
+
+    companion object {
+        const val REQUEST_CODE_IMAGE = 101
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,8 +70,17 @@ class Profile : Fragment() {
             LocationServices.getFusedLocationProviderClient(requireContext())
         getLastLocation()
         binding.llAddress.setOnClickListener {
-            startActivity(Intent(requireContext(),AddressList::class.java))
+            startActivity(Intent(requireContext(), AddressList::class.java))
         }
+        binding.profileImage.setOnClickListener {
+            openImageChooser()
+        }
+        // Load profile and cover images
+        Glide.with(requireContext())
+            .load("https://groomers.co.in/public/uploads/" + sessionManager.profilePictureUrl)
+            .placeholder(R.drawable.user) // Default placeholder
+            .into(binding.profileImage)
+
         binding.llLogout.setOnClickListener {
             SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Are you sure want to logout?")
@@ -72,6 +99,19 @@ class Profile : Fragment() {
                     sDialog.cancel()
                 }
                 .show()
+        }
+        profileViewModel.uploadResult.observe(viewLifecycleOwner) { message ->
+            if (message == "Uploading...") View.VISIBLE else View.GONE
+            message?.let {
+                Toastic.toastic(
+                    context = requireActivity(),
+                    message = it,
+                    duration = Toastic.LENGTH_SHORT,
+                    type = Toastic.SUCCESS,
+                    isIconAnimated = true,
+                    textColor = if (false) Color.BLUE else null,
+                ).show()
+            }
         }
     }
 
@@ -140,5 +180,54 @@ class Profile : Fragment() {
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
             REQUEST_CODE
         )
+    }
+
+    private fun openImageChooser() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_CODE_IMAGE)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_IMAGE && resultCode == Activity.RESULT_OK) {
+            selectedImageUri = data?.data
+            selectedImageUri?.let { uri ->
+                showConfirmationDialog(uri, true) // Update profile picture
+
+            }
+        }
+    }
+
+    private fun showConfirmationDialog(uri: Uri, isProfile: Boolean) {
+        SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
+            .setTitleText(if (isProfile) "Update Profile Picture?" else "Update Cover Picture?")
+            .setContentText("Do you want to set this image as your ${if (isProfile) "profile" else "cover"} picture?")
+            .setCancelText("No")
+            .setConfirmText("Yes")
+            .showCancelButton(true)
+            .setConfirmClickListener { sDialog ->
+                sDialog.dismissWithAnimation()
+                val file = uriToFile(uri)
+
+
+                binding.profileImage.setImageURI(uri)
+                file?.let { profileViewModel.uploadProfilePicture(it) }
+
+            }
+            .setCancelClickListener { sDialog -> sDialog.dismissWithAnimation() }
+            .show()
+    }
+
+    private fun uriToFile(uri: Uri): File? {
+        val resolver = requireContext().contentResolver
+        val fileDescriptor = resolver.openFileDescriptor(uri, "r")?.fileDescriptor ?: return null
+        val inputStream = FileInputStream(fileDescriptor)
+        val file = File(requireContext().cacheDir, "selected_image.jpg")
+        FileOutputStream(file).use { outputStream ->
+            inputStream.copyTo(outputStream)
+        }
+        return file
     }
 }

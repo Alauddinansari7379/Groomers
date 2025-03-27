@@ -38,14 +38,15 @@ class BookingViewModel @Inject constructor(
         serviceId: Int,
         date: String,
         time: String,
-        notes: String? = null
+        notes: String? = null,
+                      sit: String
     ) {
         _isLoading.postValue(true)
 
         viewModelScope.launch {
             try {
                 val response = apiService.createBooking("Bearer $token",
-                    customerId, vendorId, total, paymentMode, slotId, serviceId, date, time, notes,"12"
+                    customerId, vendorId, total, paymentMode, slotId, serviceId, date, time, notes,sit
                 )
 
                 if (response.isSuccessful) {

@@ -57,7 +57,8 @@ class ReviewAndConfirm : AppCompatActivity() {
                     serviceId = 21,
                     date,
                     time = "10:00",
-                    notes = ""
+                    notes = "",
+                    selectedSeats!!
                 )
             } ?: showError("Error: Missing Token")
         }
