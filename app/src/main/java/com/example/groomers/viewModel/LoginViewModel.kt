@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.groomers.model.modellogin.ModelLogin
+import com.example.groomers.model.modeluserdetails.ModelUserDetails
 import com.example.groomers.retrofit.ApiService
 import com.example.groomers.sharedpreferences.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +25,9 @@ class LoginViewModel @Inject constructor(
 
     private val _modelLogin = MutableLiveData<ModelLogin?>()
     val modelLogin: LiveData<ModelLogin?> = _modelLogin
+
+    private val _modelUserDetails = MutableLiveData<ModelUserDetails?>()
+    val modelUserDetails: LiveData<ModelUserDetails?> = _modelUserDetails
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
@@ -70,7 +74,39 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+    fun getUserDetails() {
+        _isLoading.postValue(true)
 
+        viewModelScope.launch {
+            try {
+                val response = apiService.getUserDetails("Bearer ${sessionManager.accessToken}")
+
+                if (response.isSuccessful && response.body() != null) {
+                    val responseBody = response.body()
+                    if (responseBody?.status == 1) {
+                        _modelUserDetails.postValue(responseBody)
+                    } else {
+                        _errorMessage.postValue("Oops! Something went wrong. Please try again.")
+                    }
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    val errorMessage = parseErrorMessage(response.code(), errorBody)
+                    _errorMessage.postValue(errorMessage)
+                }
+            } catch (e: IOException) {
+                // No internet or network issues
+                _errorMessage.postValue("No internet connection. Please check your network and try again.")
+            } catch (e: HttpException) {
+                // Handle HTTP-specific errors
+                _errorMessage.postValue("Server issue detected. Please try again in a few moments.")
+            } catch (e: Exception) {
+                // Catch-all for unexpected errors
+                _errorMessage.postValue("Something went wrong. We're working on it! Please try again shortly.")
+            } finally {
+                _isLoading.postValue(false)
+            }
+        }
+    }
     private fun parseErrorMessage(statusCode: Int, errorBody: String?): String {
         return when (statusCode) {
             400 -> "Invalid request. Please check your input."

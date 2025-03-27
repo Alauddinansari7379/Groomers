@@ -1,96 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
-    >
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="16dp"
-        >
+        android:paddingBottom="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:visibility="gone"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/location"
-                    android:backgroundTint="@color/main_Color_Dark">
-
-                </androidx.appcompat.widget.AppCompatImageView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvCurrentLocation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/current_address"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:gravity="end">
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="12sp">
-
-                </androidx.appcompat.widget.AppCompatTextView>
-            </LinearLayout>
-        </LinearLayout>
+        <!-- Location Section -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:background="@drawable/rounded_background">
 
-            <ImageView
-                android:id="@+id/image_profile"
+            <!-- Auto Slider for Services -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/imageService"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitEnd"
-                android:src="@drawable/man" />
+                android:clipToPadding="false"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:layout_marginTop="0dp" />
 
+            <!-- Location Texts -->
             <TextView
                 android:id="@+id/location_text"
                 android:layout_width="wrap_content"
@@ -117,10 +55,10 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/location"
-                android:layout_marginTop="30dp"/>
-
+                android:layout_marginTop="30dp" />
         </RelativeLayout>
 
+        <!-- Search Bar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -129,8 +67,7 @@
             android:orientation="horizontal"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
-            android:layout_marginTop="16dp"
-            >
+            android:layout_marginTop="16dp">
 
             <EditText
                 android:id="@+id/search_bar"
@@ -141,7 +78,6 @@
                 android:padding="4dp"
                 android:background="@android:color/transparent"
                 android:hint="Search here"
-
                 android:textColorHint="#888888"
                 android:textSize="14sp"
                 tools:ignore="RtlSymmetry" />
@@ -153,6 +89,8 @@
                 android:src="@drawable/baseline_search_24"
                 app:tint="#000000" />
         </LinearLayout>
+
+        <!-- Horizontal RecyclerView for Categories -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCategory1"
             android:layout_width="match_parent"
@@ -160,14 +98,12 @@
             android:layout_marginTop="16dp"
             android:overScrollMode="never"
             android:scrollbars="none"
+            android:orientation="horizontal"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            />
-
-
+        <!-- Upcoming Appointments Section -->
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -179,7 +115,7 @@
             android:textColor="#888888"
             android:textSize="14sp" />
 
-
+        <!-- Button to View Appointments -->
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -195,7 +131,7 @@
             android:text="@string/go_to_my_appointments"
             android:textColor="@color/black" />
 
-
+        <!-- Special Offers Section -->
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -207,7 +143,7 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
 
-
+        <!-- Horizontal RecyclerView for Special Offers -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHorizontalList"
             android:layout_width="match_parent"
@@ -215,11 +151,10 @@
             android:layout_marginTop="16dp"
             android:overScrollMode="never"
             android:scrollbars="none"
+            android:orientation="horizontal"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/service_row" />
-
     </LinearLayout>
 </ScrollView>

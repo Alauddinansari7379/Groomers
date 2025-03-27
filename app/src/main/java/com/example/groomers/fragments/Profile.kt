@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide
 import com.example.groomers.R
 import com.example.groomers.activity.AddressList
 import com.example.groomers.activity.Login
+import com.example.groomers.activity.UpdateProfileActivity
 import com.example.groomers.databinding.FragmentProfileBinding
 import com.example.groomers.helper.Toastic
 import com.example.groomers.retrofit.ApiServiceProvider
@@ -75,6 +76,11 @@ class Profile : Fragment() {
         binding.profileImage.setOnClickListener {
             openImageChooser()
         }
+        binding.username.text = sessionManager.username
+        binding.initialsLabel.text =getInitials(sessionManager.username)
+        binding.ivUpdateProfile.setOnClickListener {
+            startActivity(Intent(requireContext(), UpdateProfileActivity::class.java))
+        }
         // Load profile and cover images
         Glide.with(requireContext())
             .load("https://groomers.co.in/public/uploads/" + sessionManager.profilePictureUrl)
@@ -114,6 +120,16 @@ class Profile : Fragment() {
             }
         }
     }
+    fun getInitials(name: String?): String {
+        if (name.isNullOrBlank()) return ""
+
+        val parts = name.trim().split("\\s+".toRegex()) // Split by space
+        val firstInitial = parts.getOrNull(0)?.firstOrNull()?.uppercaseChar() ?: ""
+        val secondInitial = parts.getOrNull(1)?.firstOrNull()?.uppercaseChar() ?: ""
+
+        return "$firstInitial$secondInitial"
+    }
+
 
     @SuppressLint("SetTextI18n", "LogNotTimber")
     private fun getLastLocation() {

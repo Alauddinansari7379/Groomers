@@ -6,11 +6,13 @@ import com.example.groomers.model.modelbooking.ModelBooking
 import com.example.groomers.model.modelbookinglist.ModelBookingList
 import com.example.groomers.model.modelcategory.ModelCategory
 import com.example.groomers.model.modelcreateaddress.ModelCreateAddress
+import com.example.groomers.model.modeleditprofile.ModelEditProfile
 import com.example.groomers.model.modellogin.ModelLogin
 import com.example.groomers.model.modelprofilepicupload.ModelUploadProfPhoto
 import com.example.groomers.model.modelregister.ModelRegesters
 import com.example.groomers.model.modelservice.ModelService
 import com.example.groomers.model.modelslotbooking.ModelSlotBooking
+import com.example.groomers.model.modeluserdetails.ModelUserDetails
 import com.example.groomers.model.modulcountry.ModelCountry
 import com.groomers.groomersvendor.model.modelcity.ModelCity
 import com.groomers.groomersvendor.model.modelstate.ModelState
@@ -31,6 +33,11 @@ interface ApiService {
         @Query("username") username: String,
         @Query("role") role: String,
     ): Response<ModelLogin>
+
+    @POST("getUser")
+    suspend fun getUserDetails(
+        @Header("Authorization") authorization: String,
+    ): Response<ModelUserDetails>
 
     @POST("getSlotBooking")
    suspend fun getSlotBooking(
@@ -85,6 +92,17 @@ interface ApiService {
         @Query("notes") notes: String? = null,
         @Query("quantity") quantity: String
     ): Response<ModelBooking>
+
+    @POST("updateCustomerProfile")
+    suspend fun updateUserDetails(
+        @Header("Authorization") authorization: String,
+        @Query("name") name: String,
+        @Query("mobile") mobile: String,
+        @Query("email") email: String,
+        @Query("address") address: String,
+        @Query("gender") gender: String,
+        @Query("birthdate") birthdate: String
+    ): Response<ModelEditProfile>
 
     @POST("suggestServices")
     suspend fun getServiceList(

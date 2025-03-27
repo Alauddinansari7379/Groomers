@@ -1,0 +1,32 @@
+package com.example.groomers.model.modeluserdetails
+
+data class Result(
+    val VendorStatus: Int,
+    val address: Any,
+    val birthdate: String,
+    val city: String,
+    val countryname: String,
+    val created_at: String,
+    val email: String,
+    val email_verified_at: Any,
+    val gender: Any,
+    val id: Int,
+    val language: String,
+    val latitude: String,
+    val longitude: String,
+    val mobile: String,
+    val name: String,
+    val no_of_ratings: Int,
+    val overall_ratings: Int,
+    val password: String,
+    val profile_picture: String,
+    val remember_token: Any,
+    val role: String,
+    val statename: String,
+    val status: Int,
+    val updated_at: String,
+    val user_type: String,
+    val username: String,
+    val wallet: Int,
+    val zip_code: Int
+)

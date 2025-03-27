@@ -7,11 +7,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -19,14 +22,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.groomers.R
 import com.example.groomers.activity.BookingDetail
 import com.example.groomers.adapter.CategoryAdapter
 import com.example.groomers.adapter.ServiceAdapter
+import com.example.groomers.adapter.SliderAdapter
 import com.example.groomers.databinding.FragmentHomeUserBinding
 import com.example.groomers.retrofit.ApiServiceProvider
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.CategoryViewModel
+import com.example.groomers.viewModel.LoginViewModel
 import com.example.groomers.viewModel.ServiceViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -35,20 +41,27 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.util.Locale
+import java.util.Timer
+import java.util.TimerTask
 import javax.inject.Inject
-
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
     private lateinit var binding: FragmentHomeUserBinding
     private lateinit var serviceAdapter: ServiceAdapter
+    private lateinit var sliderAdapter: SliderAdapter
     private val categoryViewModel: CategoryViewModel by viewModels()
+    private val viewModel1: LoginViewModel by viewModels()
+    private val viewModel: ServiceViewModel by viewModels()
+
     private var fusedLocationProviderClient: FusedLocationProviderClient? = null
     private val REQUEST_CODE = 100
+    private var currentAddress = ""
+    private var currentPage = 0
+    private var timer: Timer? = null
+
     @Inject
     lateinit var sessionManager: SessionManager
-    private val viewModel: ServiceViewModel by viewModels()
-    private var currentAddress = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,16 +81,18 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireContext())
         getLastLocation()
+
         sessionManager.accessToken?.let { token ->
             lifecycleScope.launch {
-//                viewModel.getServiceList(token, sessionManager.userType.toString())
                 viewModel.getServiceList(token, "Male")
+                viewModel1.getUserDetails()
             }
         } ?: run {
             Toast.makeText(requireContext(), "Error: Missing Token", Toast.LENGTH_LONG).show()
         }
-    }
 
+        setupSlider(emptyList()) // Initialize slider with empty list
+    }
 
     private fun setupRecyclerView() {
         serviceAdapter = ServiceAdapter(emptyList()) { selectedService ->
@@ -95,13 +110,38 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
             )
             startActivity(intent)
         }
-
         binding.rvHorizontalList.adapter = serviceAdapter
     }
 
+    private fun setupSlider(imageUrls: List<String>) {
+        sliderAdapter = SliderAdapter(imageUrls)
+        binding.imageService.adapter = sliderAdapter
+
+        val handler = Handler(Looper.getMainLooper())
+        val update = Runnable {
+            if (currentPage == imageUrls.size) {
+                currentPage = 0
+            }
+            binding.imageService.setCurrentItem(currentPage++, true)
+        }
+
+        timer = Timer()
+        timer?.schedule(object : TimerTask() {
+            override fun run() {
+                handler.post(update)
+            }
+        }, 3000, 3000)
+
+        binding.imageService.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                currentPage = position
+            }
+        })
+    }
 
     private fun observeViewModel() {
-        viewModel.isLoading.observe(requireActivity()) { isLoading ->
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) CustomLoader.showLoaderDialog(requireContext())
             else CustomLoader.hideLoaderDialog()
         }
@@ -112,37 +152,42 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
         viewModel.modelService.observe(viewLifecycleOwner) { response ->
             response?.result?.let { services ->
-                serviceAdapter.updateData(services) // Update adapter data instead of reinitializing
+                serviceAdapter.updateData(services)
+                val imageUrls = services.map { it.image } // Extract image URLs for slider
+                setupSlider(imageUrls) // Update slider with images
             } ?: run {
                 Toast.makeText(requireContext(), "No data available", Toast.LENGTH_SHORT).show()
             }
         }
 
-        categoryViewModel.modelCategory.observe(requireActivity()) { modelCategory ->
-            val gridLayoutManager =
-//                GridLayoutManager(requireActivity(), 3, GridLayoutManager.VERTICAL, false)
-//            binding.rvCategory1.layoutManager = gridLayoutManager
-//            binding.rvCategory1.adapter = CategoryAdapter(modelCategory.result, requireActivity())
-            binding.rvCategory1.apply {
-                adapter = CategoryAdapter(modelCategory.result,requireActivity())
+        viewModel1.modelUserDetails.observe(viewLifecycleOwner) { response ->
+            response?.result?.firstOrNull()?.let { userDetail ->
+                sessionManager.username = userDetail.name
+                sessionManager.profilePictureUrl = userDetail.profile_picture
+                sessionManager.userType = userDetail.user_type
+            } ?: run {
+                Toast.makeText(requireContext(), "No data available.", Toast.LENGTH_SHORT).show()
             }
+        }
 
-        }
-        categoryViewModel.isLoading.observe(requireActivity()) { isLoading ->
-            if (isLoading) {
-                CustomLoader.showLoaderDialog(context)
-            } else {
-                CustomLoader.hideLoaderDialog()
+        categoryViewModel.modelCategory.observe(requireActivity()) { modelCategory ->
+            binding.rvCategory1.apply {
+                adapter = CategoryAdapter(modelCategory.result, requireActivity())
             }
         }
-        // Observe error message if login fails
+
+        categoryViewModel.isLoading.observe(requireActivity()) { isLoading ->
+            if (isLoading) CustomLoader.showLoaderDialog(context)
+            else CustomLoader.hideLoaderDialog()
+        }
+
         categoryViewModel.errorMessage.observe(requireActivity()) { errorMessage ->
             if (errorMessage.isNotEmpty()) {
                 Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
             }
         }
-
     }
+
     @SuppressLint("SetTextI18n", "LogNotTimber")
     private fun getLastLocation() {
         if (ContextCompat.checkSelfPermission(
@@ -157,41 +202,10 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
                             val addresses =
                                 geocoder.getFromLocation(location.latitude, location.longitude, 1)
 
-                            Log.e(
-                                ContentValues.TAG,
-                                " addresses[0].latitude${addresses?.get(0)?.latitude}"
-                            )
-                            Log.e(
-                                ContentValues.TAG,
-                                " addresses[0].latitude${addresses?.get(0)?.longitude}"
-                            )
+                            currentAddress = addresses?.get(0)?.getAddressLine(0).toString()
 
-                            addresses?.get(0)?.getAddressLine(0)
-
-                            val locality = addresses?.get(0)?.locality
-                            val countryName = addresses?.get(0)?.countryName
-                            val countryCode = addresses?.get(0)?.countryCode
-                            val postalCode = addresses?.get(0)?.postalCode
-                            val subLocality = addresses?.get(0)?.subLocality
-                            val subAdminArea = addresses?.get(0)?.subAdminArea
-
-                            currentAddress = "$subLocality, $locality, $countryName"
-
-                             binding.locationText.text = sessionManager.name
-                            binding.subLocationText.text = locality
-
-                            Log.e(ContentValues.TAG, "locality-$locality")
-                            Log.e(ContentValues.TAG, "countryName-$countryName")
-                            Log.e(ContentValues.TAG, "countryCode-$countryCode")
-                            Log.e(ContentValues.TAG, "postalCode-$postalCode")
-                            Log.e(ContentValues.TAG, "subLocality-$subLocality")
-                            Log.e(ContentValues.TAG, "subAdminArea-$subAdminArea")
-
-                            Log.e(
-                                ContentValues.TAG,
-                                " addresses[0].Address${addresses?.get(0)?.getAddressLine(0)}"
-                            )
-
+                            binding.locationText.text = sessionManager.name
+                            binding.subLocationText.text = addresses?.get(0)?.locality
                         } catch (e: IOException) {
                             e.printStackTrace()
                         }
@@ -201,6 +215,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
             askPermission()
         }
     }
+
     private fun askPermission() {
         ActivityCompat.requestPermissions(
             requireActivity(),
@@ -208,5 +223,9 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
             REQUEST_CODE
         )
     }
-}
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        timer?.cancel()
+    }
+}

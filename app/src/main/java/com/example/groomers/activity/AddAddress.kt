@@ -1,12 +1,15 @@
 package com.example.groomers.activity
 
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.groomers.activity.Login
 import com.example.groomers.databinding.ActivityAddAddressBinding
+import com.example.groomers.helper.Toastic
 import com.example.groomers.retrofit.ApiService
 import com.example.groomers.retrofit.ApiServiceProvider
 import com.example.groomers.sharedpreferences.SessionManager
@@ -73,16 +76,37 @@ class AddAddress : AppCompatActivity() {
 
         locationViewModel.errorMessage.observe(this) { errorMessage ->
             if (errorMessage.isNotEmpty()) {
-                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                 Toastic.toastic(
+                    context = this@AddAddress,
+                    message = errorMessage,
+                    duration = Toastic.LENGTH_SHORT,
+                    type = Toastic.ERROR,
+                    isIconAnimated = true,
+                    textColor = if (false) Color.BLUE else null,
+                ).show()
             }
         }
 
         locationViewModel.modelAddAddress.observe(this) { response ->
             if (response != null && response.status == 1) {
-                Toast.makeText(this, "Address added successfully!", Toast.LENGTH_SHORT).show()
+                Toastic.toastic(
+                    context = this@AddAddress,
+                    message = "Address added successfully!",
+                    duration = Toastic.LENGTH_SHORT,
+                    type = Toastic.SUCCESS,
+                    isIconAnimated = true,
+                    textColor = if (false) Color.BLUE else null,
+                ).show()
                 finish()
             } else {
-                Toast.makeText(this, "Failed to add address", Toast.LENGTH_SHORT).show()
+                 Toastic.toastic(
+                    context = this@AddAddress,
+                    message = "Failed to add address",
+                    duration = Toastic.LENGTH_SHORT,
+                    type = Toastic.ERROR,
+                    isIconAnimated = true,
+                    textColor = if (false) Color.BLUE else null,
+                ).show()
             }
         }
     }
@@ -114,7 +138,14 @@ class AddAddress : AppCompatActivity() {
         val cityId = cityIdMap[cityName] ?: -1
 
         if (address.isEmpty() || zipCode.isEmpty() || countryId == -1 || stateId == -1 || cityId == -1) {
-            Toast.makeText(this, "Please fill in all fields correctly", Toast.LENGTH_SHORT).show()
+             Toastic.toastic(
+                context = this@AddAddress,
+                message = "Please fill in all fields correctly",
+                duration = Toastic.LENGTH_SHORT,
+                type = Toastic.WARNING,
+                isIconAnimated = true,
+                textColor = if (false) Color.BLUE else null,
+            ).show()
             return
         }
 
