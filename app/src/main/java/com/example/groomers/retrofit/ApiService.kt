@@ -6,12 +6,14 @@ import com.example.groomers.model.modelbooking.ModelBooking
 import com.example.groomers.model.modelbookinglist.ModelBookingList
 import com.example.groomers.model.modelcategory.ModelCategory
 import com.example.groomers.model.modelcreateaddress.ModelCreateAddress
+import com.example.groomers.model.modeldeleteaddress.ModelDeleteAddress
 import com.example.groomers.model.modeleditprofile.ModelEditProfile
 import com.example.groomers.model.modellogin.ModelLogin
 import com.example.groomers.model.modelprofilepicupload.ModelUploadProfPhoto
 import com.example.groomers.model.modelregister.ModelRegesters
 import com.example.groomers.model.modelservice.ModelService
 import com.example.groomers.model.modelslotbooking.ModelSlotBooking
+import com.example.groomers.model.modelupdateaddress.ModelUpdateAddress
 import com.example.groomers.model.modeluserdetails.ModelUserDetails
 import com.example.groomers.model.modulcountry.ModelCountry
 import com.groomers.groomersvendor.model.modelcity.ModelCity
@@ -40,7 +42,7 @@ interface ApiService {
     ): Response<ModelUserDetails>
 
     @POST("getSlotBooking")
-   suspend fun getSlotBooking(
+    suspend fun getSlotBooking(
         @Header("Authorization") authorization: String,
         @Query("vendor_id") vendorId: String,
         @Query("categoryid") categoryId: String,
@@ -134,10 +136,28 @@ interface ApiService {
 
     @GET("getCustomerAddress")
     suspend fun getCustomerAddress(@Header("Authorization") token: String): Response<ModelAddressList>
+
     @Multipart
     @POST("updateCustomerPictures")
     suspend fun uploadProfilePicture(
         @Header("Authorization") authorization: String,
         @Part image: MultipartBody.Part
     ): Response<ModelUploadProfPhoto>
+    @POST("customerDeleteAddress")
+    suspend fun deleteAddress(
+        @Header("Authorization") authorization: String,
+        @Query("id") id: Int
+    ): Response<ModelDeleteAddress>
+
+    @POST("customerUpdateAddress")
+    suspend fun updateAddress(
+        @Header("Authorization") authorization: String,
+        @Query("address") address: String,
+        @Query("zip_code") zipCode: String,
+        @Query("country") country: String,
+        @Query("state") state: String,
+        @Query("city") city: String,
+        @Query("id") id: Int
+    ): Response<ModelUpdateAddress>
+
 }

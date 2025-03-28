@@ -1,34 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/white">
 
-
-    <TextView
+    <!-- Header Layout with Back Arrow and Title -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My Addresses"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:paddingBottom="8dp"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
+        <!-- Back Arrow -->
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:layout_gravity="center_vertical"
+            app:tint="@color/black" />
 
-    <Button
-        android:id="@+id/btnAddAddress"
+        <!-- Title -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="My Addresses"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:textColor="@color/black" />
+
+        <!-- Add Address Button -->
+        <ImageView
+            android:id="@+id/btnAddAddress"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="end"
+            android:src="@drawable/addlocation"
+            android:layout_marginStart="8dp"
+            app:tint="@color/black" />
+    </LinearLayout>
+
+    <!-- Divider for UI Separation -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="Add Address"
-        android:backgroundTint="@color/mainColor"
-        android:layout_marginBottom="8dp"/>
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
 
-
+    <!-- RecyclerView for Address List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewAddresses"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:scrollbars="none"
+        android:paddingTop="8dp" />
 </LinearLayout>

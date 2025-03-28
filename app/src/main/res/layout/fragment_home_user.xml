@@ -16,7 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:background="@drawable/rounded_background">
+            >
 
             <!-- Auto Slider for Services -->
             <androidx.viewpager2.widget.ViewPager2
