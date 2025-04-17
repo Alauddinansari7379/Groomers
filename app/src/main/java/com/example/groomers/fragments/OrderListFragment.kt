@@ -73,7 +73,7 @@ class OrderListFragment : Fragment() {
         viewModel.bookingList.observe(viewLifecycleOwner) { modelBookingList ->
             modelBookingList?.let { bookingData ->
                 binding.rvBookings.apply {
-                    adapter = BookingsAdapter(bookingData.result)
+                    adapter = BookingsAdapter(bookingData.result,context)
                 }
 
             }

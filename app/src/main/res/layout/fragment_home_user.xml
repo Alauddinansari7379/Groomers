@@ -52,10 +52,17 @@
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
                 android:src="@drawable/location"
                 android:layout_marginTop="30dp" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/baseline_keyboard_arrow_down_24"
+                android:layout_marginTop="53dp" />
         </RelativeLayout>
 
         <!-- Search Bar -->
@@ -146,6 +153,19 @@
         <!-- Horizontal RecyclerView for Special Offers -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHorizontalList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/service_row" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHorizontalVendorList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

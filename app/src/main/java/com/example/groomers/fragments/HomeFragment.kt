@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.groomers.R
 import com.example.groomers.activity.BookingDetail
+import com.example.groomers.adapter.AllVendorsAdapter
 import com.example.groomers.adapter.CategoryAdapter
 import com.example.groomers.adapter.ServiceAdapter
 import com.example.groomers.adapter.SliderAdapter
@@ -49,6 +50,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
     private lateinit var binding: FragmentHomeUserBinding
     private lateinit var serviceAdapter: ServiceAdapter
+    private lateinit var allVendorsAdapter: AllVendorsAdapter
     private lateinit var sliderAdapter: SliderAdapter
     private val categoryViewModel: CategoryViewModel by viewModels()
     private val viewModel1: LoginViewModel by viewModels()
@@ -86,6 +88,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
             lifecycleScope.launch {
                 viewModel.getServiceList(token, "Male")
                 viewModel1.getUserDetails()
+                viewModel.getAllVendors(token)
             }
         } ?: run {
             Toast.makeText(requireContext(), "Error: Missing Token", Toast.LENGTH_LONG).show()
@@ -113,6 +116,27 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
             startActivity(intent)
         }
         binding.rvHorizontalList.adapter = serviceAdapter
+
+
+
+        allVendorsAdapter = AllVendorsAdapter(emptyList()) { selectedService ->
+            val intent = Intent(requireContext(), BookingDetail::class.java).apply {
+                putExtra("service_name", selectedService.name)
+                putExtra("service_image", selectedService.profile_picture.toString())
+                putExtra("service_description", selectedService.aboutBusiness)
+                putExtra("service_type", selectedService.services)
+                putExtra("service_address", selectedService.address)
+                putExtra("vendorId", selectedService.id)
+                putExtra("serviceId", selectedService.id)
+                putExtra("service_price", selectedService.teamSize.toString())
+            }
+            Log.d(
+                "HomeFragment",
+                "Navigating to BookingDetail with: ${selectedService.name}"
+            )
+            startActivity(intent)
+        }
+        binding.rvHorizontalVendorList.adapter = allVendorsAdapter
     }
 
     private fun setupSlider(imageUrls: List<String>) {
@@ -157,6 +181,14 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
                 serviceAdapter.updateData(services)
                 val imageUrls = services.map { it.image } // Extract image URLs for slider
                 setupSlider(imageUrls) // Update slider with images
+            } ?: run {
+                Toast.makeText(requireContext(), "No data available", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.modelAllVendors.observe(viewLifecycleOwner) { response ->
+            response?.result?.let { services ->
+                allVendorsAdapter.updateData(services)
             } ?: run {
                 Toast.makeText(requireContext(), "No data available", Toast.LENGTH_SHORT).show()
             }

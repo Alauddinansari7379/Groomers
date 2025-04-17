@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.groomers.R
 import com.example.groomers.adapter.AdapterConfirmeBooking
-import com.example.groomers.adapter.BookingsAdapter
 import com.example.groomers.databinding.FragmentConfirmedBinding
 import com.example.groomers.helper.Toastic
 import com.example.groomers.sharedpreferences.SessionManager

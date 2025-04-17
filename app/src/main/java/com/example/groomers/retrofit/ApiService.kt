@@ -2,6 +2,7 @@ package com.example.groomers.retrofit
 
 
 import com.example.groomers.model.modeladdresslist.ModelAddressList
+import com.example.groomers.model.modelallvendors.ModelAllVendors
 import com.example.groomers.model.modelbooking.ModelBooking
 import com.example.groomers.model.modelbookinglist.ModelBookingList
 import com.example.groomers.model.modelcategory.ModelCategory
@@ -143,11 +144,17 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Part image: MultipartBody.Part
     ): Response<ModelUploadProfPhoto>
+
     @POST("customerDeleteAddress")
     suspend fun deleteAddress(
         @Header("Authorization") authorization: String,
         @Query("id") id: Int
     ): Response<ModelDeleteAddress>
+
+    @GET("getAllVendors")
+    suspend fun getAllVendors(
+        @Header("Authorization") authorization: String,
+    ): Response<ModelAllVendors>
 
     @POST("customerUpdateAddress")
     suspend fun updateAddress(

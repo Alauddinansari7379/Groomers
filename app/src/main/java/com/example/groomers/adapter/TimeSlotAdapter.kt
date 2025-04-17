@@ -24,6 +24,7 @@ class TimeSlotAdapter(
         return TimeSlotViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: TimeSlotViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val result = timeSlots[position] // ✅ Get full Result object
         val selectedSeats = seatCount.getValue(position).coerceAtMost(result.seat_available)
@@ -85,6 +86,7 @@ class TimeSlotAdapter(
         onSeatsSelected(timeSlots[position], newSeatCount) // ✅ Pass full Result object
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newSlots: List<Result>) {
         timeSlots = newSlots
         seatCount.clear()
