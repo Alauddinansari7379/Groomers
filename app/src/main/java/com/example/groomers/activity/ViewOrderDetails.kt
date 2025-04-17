@@ -20,6 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ViewOrderDetails : AppCompatActivity() {
+    private lateinit var vendorId: String
+    private lateinit var serviceId: String
     private lateinit var binding: ActivityViewOrderDetailsBinding
     private lateinit var timeSlotAdapter: TimeSlotAdapter
     private val viewModel: SlotBookingViewModel by viewModels()
@@ -29,6 +31,7 @@ class ViewOrderDetails : AppCompatActivity() {
     private var image: String = ""
     private var price: Int = 0
     private var userType: String = ""
+    private var categoryId: String = ""
     private var selectedDay: String = "1"  // Default to Monday
 
     private var selectedStartTime: String? = null
@@ -44,9 +47,12 @@ class ViewOrderDetails : AppCompatActivity() {
         // ✅ Retrieve intent data
         serviceName = intent?.getStringExtra("serviceName") ?: ""
         description = intent?.getStringExtra("description") ?: ""
+        vendorId = intent?.getStringExtra("vendorId") ?: ""
+        serviceId = intent?.getStringExtra("serviceId") ?: ""
         image = intent?.getStringExtra("image") ?: ""
         price = intent?.getIntExtra("price", 0) ?: 0
         userType = intent?.getStringExtra("user_type") ?: ""
+        categoryId = intent?.getStringExtra("categoryId") ?: ""
 
         setupTabs()
         setupRecyclerView()
@@ -70,6 +76,8 @@ class ViewOrderDetails : AppCompatActivity() {
                 putExtra("price", price.toString())
                 putExtra("description", description)
                 putExtra("slotId", id)
+                putExtra("serviceId", serviceId)
+                putExtra("vendorId", vendorId)
             }
             startActivity(intent)
         }
@@ -115,9 +123,9 @@ class ViewOrderDetails : AppCompatActivity() {
     }
 
     private fun fetchSlots() {
-        val vendorId = "3"      // Set dynamically if required
-        val categoryId = "2"    // Set dynamically if required
-        val serviceId = "1"     // Set dynamically if required
+        val vendorId = vendorId  // Set dynamically if required
+        val categoryId = categoryId    // Set dynamically if required
+        val serviceId = serviceId  // Set dynamically if required
 
         viewModel.fetchSlotBooking(vendorId, categoryId, selectedDay, serviceId)
     }
@@ -125,7 +133,7 @@ class ViewOrderDetails : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.slotBookingData.observe(this, Observer { response ->
             if (response != null && response.status == 1) {
-                timeSlotAdapter.updateData(response.result) // ✅ Pass the full result list
+                timeSlotAdapter.updateData(response.result)
             } else {
                 Toast.makeText(this, "Failed to fetch time slots", Toast.LENGTH_SHORT).show()
             }

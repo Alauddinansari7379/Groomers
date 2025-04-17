@@ -77,7 +77,8 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/corner_edt"
-                android:spinnerMode="dropdown" />
+                android:spinnerMode="dropdown"
+                />
 
             <!-- State Searchable Spinner -->
             <TextView

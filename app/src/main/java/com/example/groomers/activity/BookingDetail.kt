@@ -23,6 +23,8 @@ import kotlin.getValue
 @AndroidEntryPoint
 class BookingDetail : AppCompatActivity(), Booking {
 
+    private var vendorId: String? = null
+    private var serviceId: String? = null
     private lateinit var binding: ActivityBookingDetailBinding
     @Inject
     lateinit var sessionManager: SessionManager
@@ -69,6 +71,8 @@ class BookingDetail : AppCompatActivity(), Booking {
         val serviceImage = intent.getStringExtra("service_image")
         val serviceType = intent.getStringExtra("service_type")
         val address = intent.getStringExtra("service_address")
+        vendorId = intent.getStringExtra("vendorId")
+        serviceId = intent.getStringExtra("serviceId")
         val serviceDescription = intent.getStringExtra("service_description")
         val servicePrice = intent.getStringExtra("service_price")
 
@@ -108,13 +112,18 @@ class BookingDetail : AppCompatActivity(), Booking {
         description: String,
         image: String,
         price: Int,
-        user_type: String
+        user_type: String,
+        id: String,
+        userid: String,
+        categoryId: String
     ) {
         val intent = Intent(this, ViewOrderDetails::class.java).apply {
             putExtra("serviceName", serviceName)
             putExtra("description", description)
             putExtra("image", image)
             putExtra("price", price)
+            putExtra("vendorId", vendorId)
+            putExtra("serviceId", serviceId)
             putExtra("user_type", user_type)
         }
         startActivity(intent)

@@ -38,6 +38,8 @@ class ReviewAndConfirm : AppCompatActivity() {
         val description = intent.getStringExtra("description")
         val selectedSeats = intent.getStringExtra("selectedSeats")
         val slotId = intent.getStringExtra("slotId")
+        val serviceId = intent.getStringExtra("serviceId")
+        val vendorId = intent.getStringExtra("vendorId")
         binding.tvPrice.text = price
         binding.tvPrice1.text = price
         binding.tvDescription.text = description
@@ -50,11 +52,11 @@ class ReviewAndConfirm : AppCompatActivity() {
                 viewModel.createBooking(
                     token,
                     customerId = 11111,
-                    vendorId = 10,
+                    vendorId!!.toInt(),
                     price!!.toInt(),
-                    paymentMode = 332,
+                    paymentMode = 2,
                     slotId!!.toInt(),
-                    serviceId = 21,
+                    serviceId!!.toInt(),
                     date,
                     time = "10:00",
                     notes = "",

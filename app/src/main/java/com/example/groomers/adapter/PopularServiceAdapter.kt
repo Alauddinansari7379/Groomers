@@ -27,7 +27,9 @@ class PopularServiceAdapter(private var categoryList : List<Result>, val context
                 .load("https://groomers.co.in/public/uploads/" + image)
                 .into(holder.binding.ivServiceImage)
             holder.binding.btnBook.setOnClickListener {
-                booking.booking(serviceName,description,image,price,user_type)
+                booking.booking(serviceName,description,image,price,user_type, id.toString(),
+                    user_id.toString(),serviceType
+                )
             }
         }
 
@@ -45,5 +47,8 @@ interface Booking{
         image: String,
         price: Int,
         user_type: String,
+        id: String,
+        user_id: String,
+        serviceType: String,
     )
 }

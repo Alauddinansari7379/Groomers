@@ -39,6 +39,9 @@ class AddressList : AppCompatActivity(), ClickEvent {
         apiService = ApiServiceProvider.getApiService()
 
         setupRecyclerView()
+        binding.btnBack.setOnClickListener{
+            finish()
+        }
 
         binding.btnAddAddress.setOnClickListener {
             startActivity(Intent(this@AddressList, AddAddress::class.java))
