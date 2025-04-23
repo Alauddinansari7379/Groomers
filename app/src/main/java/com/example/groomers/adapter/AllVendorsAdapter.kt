@@ -25,6 +25,7 @@ class AllVendorsAdapter(private var serviceList: List<Result>,
                 root.setOnClickListener {
                     onItemClick(service) // Call click listener
                 }
+                tvService.text = service.services
                 tvName.text = service.name.toString()
                 tvBusinessName.text = service.businessName
                 tvAboutBusiness.text = service.aboutBusiness

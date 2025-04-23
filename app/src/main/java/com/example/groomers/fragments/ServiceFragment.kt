@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.groomers.R
@@ -16,6 +17,7 @@ import com.example.groomers.adapter.PopularServiceAdapter
 import com.example.groomers.databinding.FragmentServiceBinding
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.ServiceViewModel
+import com.example.groomers.viewModel.SharedViewModel
 import com.groomers.groomersvendor.helper.CustomLoader
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -28,6 +30,7 @@ class ServiceFragment : Fragment(), Booking {
     lateinit var sessionManager: SessionManager
     private val viewModel: ServiceViewModel by viewModels()
     private lateinit var serviceAdapter: PopularServiceAdapter
+    private val shareViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +51,10 @@ class ServiceFragment : Fragment(), Booking {
             lifecycleScope.launch {
 //                viewModel.getServiceList(token, sessionManager.userType.toString())
                 viewModel.getServiceList(token, "Male")
+                shareViewModel.selectedItem.observe(viewLifecycleOwner) { item ->
+                    viewModel.getServiceListByVendorId(token,item.toInt())
+                }
+
             }
         } ?: run {
             Toast.makeText(requireActivity(), "Error: Missing Token", Toast.LENGTH_LONG).show()
@@ -61,13 +68,21 @@ class ServiceFragment : Fragment(), Booking {
             Toast.makeText(requireActivity(), errorMessage, Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.modelService.observe(requireActivity()) { response ->
+        viewModel.modelAllPostByVendorId.observe(requireActivity()) { response ->
             response?.result?.let { services ->
                 serviceAdapter.updateData(services) // Update adapter data instead of reinitializing
             } ?: run {
                 Toast.makeText(requireActivity(), "No data available", Toast.LENGTH_SHORT).show()
             }
         }
+
+//        viewModel.modelService.observe(requireActivity()) { response ->
+//            response?.result?.let { services ->
+//                serviceAdapter.updateData(services) // Update adapter data instead of reinitializing
+//            } ?: run {
+//                Toast.makeText(requireActivity(), "No data available", Toast.LENGTH_SHORT).show()
+//            }
+//        }
     }
     private fun setupRecyclerView() {
         serviceAdapter = PopularServiceAdapter(emptyList(),requireActivity(),this)

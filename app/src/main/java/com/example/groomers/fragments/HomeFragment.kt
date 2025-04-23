@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -35,6 +36,7 @@ import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.CategoryViewModel
 import com.example.groomers.viewModel.LoginViewModel
 import com.example.groomers.viewModel.ServiceViewModel
+import com.example.groomers.viewModel.SharedViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.groomers.groomersvendor.helper.CustomLoader
@@ -55,6 +57,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
     private val categoryViewModel: CategoryViewModel by viewModels()
     private val viewModel1: LoginViewModel by viewModels()
     private val viewModel: ServiceViewModel by viewModels()
+    private val shareViewModel: SharedViewModel by activityViewModels()
 
     private var fusedLocationProviderClient: FusedLocationProviderClient? = null
     private val REQUEST_CODE = 100
@@ -120,9 +123,11 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
 
         allVendorsAdapter = AllVendorsAdapter(emptyList()) { selectedService ->
+            shareViewModel.selectItem(selectedService.id.toString())
             val intent = Intent(requireContext(), BookingDetail::class.java).apply {
                 putExtra("service_name", selectedService.name)
-                putExtra("service_image", selectedService.profile_picture.toString())
+//                putExtra("service_image", selectedService.profile_picture.toString())
+                putExtra("service_image", "")
                 putExtra("service_description", selectedService.aboutBusiness)
                 putExtra("service_type", selectedService.services)
                 putExtra("service_address", selectedService.address)

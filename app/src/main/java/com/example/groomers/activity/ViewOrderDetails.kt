@@ -2,6 +2,7 @@ package com.example.groomers.activity
 
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.example.groomers.R
 import com.example.groomers.adapter.TimeSlotAdapter
 import com.example.groomers.databinding.ActivityViewOrderDetailsBinding
+import com.example.groomers.helper.Toastic
 import com.example.groomers.viewModel.SlotBookingViewModel
 import com.google.android.material.tabs.TabLayout
 import com.groomers.groomersvendor.helper.CustomLoader
@@ -138,5 +140,22 @@ class ViewOrderDetails : AppCompatActivity() {
                 Toast.makeText(this, "Failed to fetch time slots", Toast.LENGTH_SHORT).show()
             }
         })
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) CustomLoader.showLoaderDialog(this)
+            else CustomLoader.hideLoaderDialog()
+        }
+
+        viewModel.errorMessage.observe(this) { errorMessage ->
+            if (errorMessage != null) {
+                Toastic.toastic(
+                    context = this@ViewOrderDetails,
+                    message = errorMessage,
+                    duration = Toastic.LENGTH_SHORT,
+                    type = Toastic.ERROR,
+                    isIconAnimated = true,
+                    textColor = if (false) Color.BLUE else null,
+                ).show()
+            }
+        }
     }
 }

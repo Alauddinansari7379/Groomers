@@ -9,6 +9,7 @@ import com.example.groomers.model.modelcategory.ModelCategory
 import com.example.groomers.model.modelcreateaddress.ModelCreateAddress
 import com.example.groomers.model.modeldeleteaddress.ModelDeleteAddress
 import com.example.groomers.model.modeleditprofile.ModelEditProfile
+import com.example.groomers.model.modelgetallvendorbyid.ModelAllPostByVendorId
 import com.example.groomers.model.modellogin.ModelLogin
 import com.example.groomers.model.modelprofilepicupload.ModelUploadProfPhoto
 import com.example.groomers.model.modelregister.ModelRegesters
@@ -150,6 +151,12 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Query("id") id: Int
     ): Response<ModelDeleteAddress>
+
+    @POST("getAllPostByVendorId")
+    suspend fun getAllPostByVendorId(
+        @Header("Authorization") authorization: String,
+        @Query("vendor_id") vendorId: Int
+    ): Response<ModelService>
 
     @GET("getAllVendors")
     suspend fun getAllVendors(

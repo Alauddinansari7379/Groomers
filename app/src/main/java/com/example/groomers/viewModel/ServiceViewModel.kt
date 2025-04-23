@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.groomers.model.modelallvendors.ModelAllVendors
+import com.example.groomers.model.modelgetallvendorbyid.ModelAllPostByVendorId
 import com.example.groomers.model.modelservice.ModelService
 import com.example.groomers.retrofit.ApiService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +26,9 @@ class ServiceViewModel @Inject constructor(
 
     private val _modelAllVendors = MutableLiveData<ModelAllVendors>()
     val modelAllVendors: LiveData<ModelAllVendors?> = _modelAllVendors
+
+    private val _modelAllPostByVendorId = MutableLiveData<ModelService>()
+    val modelAllPostByVendorId: LiveData<ModelService?> = _modelAllPostByVendorId
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
@@ -96,6 +100,36 @@ class ServiceViewModel @Inject constructor(
             }
         }
     }
+    fun getServiceListByVendorId(accessToken: String,id : Int) {
+        _isLoading.postValue(true)
+        viewModelScope.launch {
+            try {
+                val response = apiService.getAllPostByVendorId("Bearer $accessToken",id)
+                _isLoading.postValue(false)
 
+                if (response.isSuccessful) {
+                    response.body()?.let { body ->
+                        if (body.status == 1) {
+                            _modelAllPostByVendorId.postValue(body)
+                        } else {
+                            _errorMessage.postValue(body.message ?: "Failed to fetch services. Please try again.")
+                        }
+                    } ?: run {
+                        _errorMessage.postValue("Unexpected response from the server.")
+                    }
+                } else {
+                    _errorMessage.postValue("Failed to load services. Please try again later.")
+                }
+            } catch (e: IOException) {
+                _errorMessage.postValue("No internet connection. Please check your network.")
+            } catch (e: HttpException) {
+                _errorMessage.postValue("Server error. Please try again later.")
+            } catch (e: Exception) {
+                _errorMessage.postValue("Something went wrong. Please try again.")
+            } finally {
+                _isLoading.postValue(false)
+            }
+        }
+    }
 
 }
