@@ -1,14 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.DetailsFragment">
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Header Section with Image and Title -->
+    <ImageView
+        android:id="@+id/serviceImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="200dp"
+        android:src="@drawable/growmer_app_logo"
+        android:contentDescription="Grooming service image" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/serviceTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Premium Pet Grooming"
+        android:textSize="24sp"
+        android:padding="16dp"
+        android:textStyle="bold"/>
+
+    <!-- Rating and Reviews -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RatingBar
+            android:id="@+id/serviceRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="4.5"/>
+        <TextView
+            android:id="@+id/reviewCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(150 reviews)"
+            android:paddingStart="8dp"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <!-- Service Description -->
+    <TextView
+        android:id="@+id/serviceDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Full grooming service for dogs of all breeds. Includes washing, hair trimming, and nail cutting."
+        android:padding="16dp"
+        android:textSize="16sp"/>
+
+    <!-- Price and Duration -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/servicePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$40"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/serviceDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="45 minutes"
+            android:textSize="16sp"
+            android:paddingStart="16dp"/>
+    </LinearLayout>
+
+    <!-- Available Slots Section -->
+    <Button
+        android:id="@+id/checkAvailabilityButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Available Slots"
+        android:backgroundTint="#FF6347"/>
+
+    <!-- Book Appointment Button -->
+    <Button
+        android:id="@+id/bookAppointmentButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Book Appointment"
+        android:backgroundTint="#32CD32"/>
+
+    <!-- Contact Information -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+        <Button
+            android:id="@+id/contactButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact Us"
+            android:backgroundTint="#1E90FF"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

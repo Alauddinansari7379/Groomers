@@ -227,24 +227,30 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         }
     }
 
-    @SuppressLint("SetTextI18n", "LogNotTimber")
+    @SuppressLint("SetTextI18n", "MissingPermission")
     private fun getLastLocation() {
         if (ContextCompat.checkSelfPermission(
-                requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
+                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            fusedLocationProviderClient!!.lastLocation
-                .addOnSuccessListener { location ->
-                    if (location != null) {
+            fusedLocationProviderClient?.lastLocation
+                ?.addOnSuccessListener { location ->
+                    // Check if fragment is still attached before accessing context or binding
+                    if (isAdded && location != null) {
                         try {
-                            val geocoder = Geocoder(requireActivity(), Locale.getDefault())
-                            val addresses =
-                                geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                            val context = context ?: return@addOnSuccessListener
+                            val geocoder = Geocoder(context, Locale.getDefault())
+                            val addresses = geocoder.getFromLocation(
+                                location.latitude,
+                                location.longitude,
+                                1
+                            )
 
-                            currentAddress = addresses?.get(0)?.getAddressLine(0).toString()
-
-                            binding.locationText.text = sessionManager.name
-                            binding.subLocationText.text = addresses?.get(0)?.locality
+                            if (!addresses.isNullOrEmpty()) {
+                                currentAddress = addresses[0].getAddressLine(0).toString()
+                                binding.locationText.text = sessionManager.name
+                                binding.subLocationText.text = addresses[0].locality
+                            }
                         } catch (e: IOException) {
                             e.printStackTrace()
                         }
@@ -254,6 +260,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
             askPermission()
         }
     }
+
 
     private fun askPermission() {
         ActivityCompat.requestPermissions(
