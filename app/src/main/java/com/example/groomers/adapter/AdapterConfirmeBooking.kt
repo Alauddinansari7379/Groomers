@@ -10,7 +10,7 @@ import com.example.groomers.model.modelbookinglist.Result
 
 class AdapterConfirmeBooking(serviceList: List<Result>) : RecyclerView.Adapter<AdapterConfirmeBooking.BookingsViewMode1>() {
 
-    private val filteredList = serviceList.filter { it.slug == "Accepted" }
+    private val filteredList = serviceList.filter { it.slug == "accepted" }
 
     inner class BookingsViewMode1(val binding: BookingsRowBinding) : RecyclerView.ViewHolder(binding.root)
 

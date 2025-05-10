@@ -8,7 +8,7 @@ data class Result(
     val city: Any,
     val countryname: String,
     val email: String,
-    val id: Int,
+    val user_id: Int,
     val mobile: String,
     val name: String,
     val profile_picture: Any,

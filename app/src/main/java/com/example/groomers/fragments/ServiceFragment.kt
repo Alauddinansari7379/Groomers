@@ -15,6 +15,7 @@ import com.example.groomers.activity.ViewOrderDetails
 import com.example.groomers.adapter.Booking
 import com.example.groomers.adapter.PopularServiceAdapter
 import com.example.groomers.databinding.FragmentServiceBinding
+import com.example.groomers.fragments.HomeFragment.Companion.userId
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.ServiceViewModel
 import com.example.groomers.viewModel.SharedViewModel
@@ -50,10 +51,13 @@ class ServiceFragment : Fragment(), Booking {
         sessionManager.accessToken?.let { token ->
             lifecycleScope.launch {
 //                viewModel.getServiceList(token, sessionManager.userType.toString())
-                viewModel.getServiceList(token, "Male")
-                shareViewModel.selectedItem.observe(viewLifecycleOwner) { item ->
-                    viewModel.getServiceListByVendorId(token,item.toInt())
-                }
+//                viewModel.getServiceList(token, "Male")
+//                shareViewModel.selectedItem.observe(viewLifecycleOwner) { event ->
+//                    event.getContentIfNotHandled()?.let { item ->
+                        viewModel.getServiceListByVendorId(token, userId.toInt())
+//                    }
+//                }
+
 
             }
         } ?: run {

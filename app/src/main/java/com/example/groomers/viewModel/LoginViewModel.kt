@@ -51,6 +51,7 @@ class LoginViewModel @Inject constructor(
                         sessionManager.email = responseBody!!.user.email
                         sessionManager.name = responseBody!!.user.name
                         sessionManager.username = responseBody!!.user.username
+                        sessionManager.userId = responseBody!!.user.id.toString()
                        // sessionManager.accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dyb29tZXJzLmNvLmluL2FwaS9sb2dpbiIsImlhdCI6MTczOTk2NjkwMywiZXhwIjoxNzQxMjYyOTAzLCJuYmYiOjE3Mzk5NjY5MDMsImp0aSI6IllSdkEyQmFVOU5Gbm0yTzQiLCJzdWIiOiI1MiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W0Lr0OYWvznJfvJJ-rF82UcWmXzkaXqYrCXoy1YjLE0"
                         sessionManager.isLogin = true
                     } else {

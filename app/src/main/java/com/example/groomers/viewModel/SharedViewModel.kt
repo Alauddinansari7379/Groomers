@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 
 
 class SharedViewModel : ViewModel() {
-    private val _selectedItem = MutableLiveData<String>()
-    val selectedItem: LiveData<String> get() = _selectedItem
+    private val _selectedItem = MutableLiveData<Event<String>>()
+    val selectedItem: LiveData<Event<String>> get() = _selectedItem
 
     fun selectItem(item: String) {
-        _selectedItem.value = item
+        _selectedItem.value = Event(item)
     }
 }

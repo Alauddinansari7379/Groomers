@@ -9,6 +9,7 @@ class SessionManager(context: Context) {
     companion object {
         private const val ACCESS_TOKEN = "ACCESS_TOKEN"
         private const val USER_NAME = "USER_NAME"
+        private const val USER_ID = "USER_ID"
         private const val NAME = "NAME"
         private const val MOBILE = "MOBILE"
         private const val EMAIL = "EMAIL"
@@ -31,6 +32,11 @@ class SessionManager(context: Context) {
         get() = prefs.getString(USER_NAME, null)
         set(value) {
             prefs.edit().putString(USER_NAME, value).apply()
+        }
+    var userId: String?
+        get() = prefs.getString(USER_ID, null)
+        set(value) {
+            prefs.edit().putString(USER_ID, value).apply()
         }
 
     var name: String?

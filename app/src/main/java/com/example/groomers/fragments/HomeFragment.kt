@@ -102,6 +102,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
     private fun setupRecyclerView() {
         serviceAdapter = ServiceAdapter(emptyList()) { selectedService ->
+            userId = selectedService.user_id.toString()
             val intent = Intent(requireContext(), BookingDetail::class.java).apply {
                 putExtra("service_name", selectedService.serviceName)
                 putExtra("service_image", selectedService.image)
@@ -123,7 +124,8 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
 
         allVendorsAdapter = AllVendorsAdapter(emptyList()) { selectedService ->
-            shareViewModel.selectItem(selectedService.id.toString())
+//            shareViewModel.selectItem(selectedService.user_id.toString())
+            userId = selectedService.user_id.toString()
             val intent = Intent(requireContext(), BookingDetail::class.java).apply {
                 putExtra("service_name", selectedService.name)
 //                putExtra("service_image", selectedService.profile_picture.toString())
@@ -131,8 +133,8 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
                 putExtra("service_description", selectedService.aboutBusiness)
                 putExtra("service_type", selectedService.services)
                 putExtra("service_address", selectedService.address)
-                putExtra("vendorId", selectedService.id)
-                putExtra("serviceId", selectedService.id)
+                putExtra("vendorId", selectedService.user_id)
+                putExtra("serviceId", selectedService.user_id)
                 putExtra("service_price", selectedService.teamSize.toString())
             }
             Log.d(
@@ -273,5 +275,8 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
     override fun onDestroyView() {
         super.onDestroyView()
         timer?.cancel()
+    }
+    companion object{
+        var userId = ""
     }
 }

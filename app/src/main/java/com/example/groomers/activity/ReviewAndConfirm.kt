@@ -14,8 +14,11 @@ import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.BookingViewModel
 import com.groomers.groomersvendor.helper.CustomLoader
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -45,20 +48,21 @@ class ReviewAndConfirm : AppCompatActivity() {
         binding.tvDescription.text = description
         binding.tvServiceName.text = serviceName
         val date = getCurrentDate()
+
         observeViewModel()
         binding.tvSlotTime.text = "$selectedStartTime-$selectedEndTime"
         binding.btnContinue.setOnClickListener {
             sessionManager.accessToken?.let { token ->
                 viewModel.createBooking(
                     token,
-                    customerId = 11111,
+                    sessionManager.userId!!.toInt(),
                     vendorId!!.toInt(),
                     price!!.toInt(),
                     paymentMode = 2,
                     slotId!!.toInt(),
                     serviceId!!.toInt(),
                     date,
-                    time = "10:00",
+                    getCurrentTime(),
                     notes = "",
                     selectedSeats!!
                 )
@@ -96,7 +100,7 @@ class ReviewAndConfirm : AppCompatActivity() {
                     ).show()
 
                     // Clear all previous activities and navigate to the desired activity
-                    val intent = Intent(this@ReviewAndConfirm, BookingDetail::class.java).apply {
+                    val intent = Intent(this@ReviewAndConfirm, Dashboard::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     }
                     startActivity(intent)
@@ -118,5 +122,9 @@ class ReviewAndConfirm : AppCompatActivity() {
 
     private fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+    fun getCurrentTime(): String {
+        val dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        return dateFormat.format(Date())
     }
 }
