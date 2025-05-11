@@ -211,11 +211,17 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
             }
         }
 
-        categoryViewModel.modelCategory.observe(requireActivity()) { modelCategory ->
-            binding.rvCategory1.apply {
-                adapter = CategoryAdapter(modelCategory.result, requireActivity())
+        categoryViewModel.modelCategory.observe(viewLifecycleOwner) { modelCategory ->
+            binding.rvCategory1.adapter = CategoryAdapter(modelCategory.result) { selectedCategory ->
+                userId = selectedCategory.id.toString()
+                val intent = Intent(requireContext(), BookingDetail::class.java).apply {
+                    putExtra("category_id", selectedCategory.id)
+                    putExtra("category_name", selectedCategory.category_name)
+                }
+                startActivity(intent)
             }
         }
+
 
         categoryViewModel.isLoading.observe(requireActivity()) { isLoading ->
             if (isLoading) CustomLoader.showLoaderDialog(context)

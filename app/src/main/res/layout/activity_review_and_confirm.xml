@@ -31,6 +31,7 @@
 
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCurrentDateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fri_jan_3_2025_10_00_am"

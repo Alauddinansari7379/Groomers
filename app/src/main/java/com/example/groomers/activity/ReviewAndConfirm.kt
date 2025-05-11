@@ -48,6 +48,7 @@ class ReviewAndConfirm : AppCompatActivity() {
         binding.tvDescription.text = description
         binding.tvServiceName.text = serviceName
         val date = getCurrentDate()
+        binding.tvCurrentDateTime.text = getFormattedCurrentDateTime()
 
         observeViewModel()
         binding.tvSlotTime.text = "$selectedStartTime-$selectedEndTime"
@@ -69,12 +70,14 @@ class ReviewAndConfirm : AppCompatActivity() {
             } ?: showError("Error: Missing Token")
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun getCurrentDate(): String {
         val currentDate = LocalDate.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         return currentDate.format(formatter)
     }
+
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
             if (isLoading) CustomLoader.showLoaderDialog(this)
@@ -105,7 +108,7 @@ class ReviewAndConfirm : AppCompatActivity() {
                     }
                     startActivity(intent)
                     finish() // Optional, just to be safe
-                }else{
+                } else {
                     Toastic.toastic(
                         context = this@ReviewAndConfirm,
                         message = response.message,
@@ -123,8 +126,14 @@ class ReviewAndConfirm : AppCompatActivity() {
     private fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-    fun getCurrentTime(): String {
+
+    private fun getCurrentTime(): String {
         val dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         return dateFormat.format(Date())
+    }
+    fun getFormattedCurrentDateTime(): String {
+        val date = Date()
+        val formatter = SimpleDateFormat("EEE, MMM d, yyyy • h:mm a", Locale.ENGLISH)
+        return formatter.format(date)
     }
 }

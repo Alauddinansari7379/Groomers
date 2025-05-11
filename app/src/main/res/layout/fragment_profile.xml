@@ -134,7 +134,8 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="8dp"
-                        android:src="@drawable/management" />
+                        android:src="@drawable/management"
+                        app:tint="@color/black" />
 
                     <Button
                         android:layout_width="110dp"
@@ -169,14 +170,28 @@
                 </LinearLayout>
 
                 <!-- Past Orders Button -->
-                <Button
-                    android:layout_width="110dp"
-                    android:layout_height="35dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:backgroundTint="@color/Blue"
-                    android:text="Past Orders"
-                    android:textColor="@android:color/white"
-                    android:textSize="11sp" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/delay" />
+
+                    <Button
+                        android:layout_width="110dp"
+                        android:layout_height="35dp"
+                        android:backgroundTint="@color/Blue"
+                        android:text="Post order"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        app:tint="@color/black"/>
+                </LinearLayout>
             </LinearLayout>
 
             <!-- Right Column -->
@@ -207,7 +222,8 @@
                         android:backgroundTint="@color/Blue"
                         android:text="Address"
                         android:textColor="@android:color/white"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        app:tint="@color/black"/>
                 </LinearLayout>
 
                 <!-- Suggestions Button -->
@@ -230,7 +246,8 @@
                         android:backgroundTint="@color/Blue"
                         android:text="Suggestions"
                         android:textColor="@android:color/white"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        app:tint="@color/black"/>
                 </LinearLayout>
 
                 <!-- Logout Button -->
@@ -254,7 +271,8 @@
                         android:backgroundTint="@color/Blue"
                         android:text="Logout"
                         android:textColor="@android:color/white"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        app:tint="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
