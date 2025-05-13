@@ -19,6 +19,9 @@ import com.example.groomers.viewModel.SlotBookingViewModel
 import com.google.android.material.tabs.TabLayout
 import com.groomers.groomersvendor.helper.CustomLoader
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 @AndroidEntryPoint
 class ViewOrderDetails : AppCompatActivity() {
@@ -34,10 +37,12 @@ class ViewOrderDetails : AppCompatActivity() {
     private var price: Int = 0
     private var userType: String = ""
     private var categoryId: String = ""
+    private var selectedDayNew: String = ""
+    private var formattedDate: String = ""
     private var selectedDay: String = "1"  // Default to Monday
 
-    private var selectedStartTime: String? = null
-    private var selectedEndTime: String? = null
+    private var selectedStartTime: String? = ""
+    private var selectedEndTime: String? = ""
     private var id: String? = null
     private var selectedSeatCount: Int = 1 // Default 1 seat
 
@@ -56,7 +61,7 @@ class ViewOrderDetails : AppCompatActivity() {
         userType = intent?.getStringExtra("user_type") ?: ""
         categoryId = intent?.getStringExtra("categoryId") ?: ""
 
-        setupTabs()
+       // setupTabs()
         setupRecyclerView()
         setupServiceDetails()
         observeViewModel()
@@ -65,13 +70,14 @@ class ViewOrderDetails : AppCompatActivity() {
         fetchSlots()
 
         binding.btnContinueToPayment.setOnClickListener {
-            if (selectedStartTime == null || selectedEndTime == null) {
+            if (selectedStartTime!!.isEmpty()|| selectedEndTime!!.isEmpty()) {
                 Toast.makeText(this, "Please select a time slot", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val intent = Intent(this@ViewOrderDetails, ReviewAndConfirm::class.java).apply {
                 putExtra("selectedStartTime", selectedStartTime)
+                putExtra("formattedDate", formattedDate)
                 putExtra("selectedEndTime", selectedEndTime)
                 putExtra("selectedSeats", selectedSeatCount.toString())
                 putExtra("serviceName", serviceName)
@@ -83,9 +89,49 @@ class ViewOrderDetails : AppCompatActivity() {
             }
             startActivity(intent)
         }
+        val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+
+
+        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, dayOfMonth)
+
+            val dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1 // Sunday = 1, so subtract 1
+             selectedDayNew = days[dayIndex] // Get "Mon", "Tue", etc.
+
+            Log.d("SelectedDay", selectedDayNew)
+            selectedDay = when (selectedDayNew) {
+                "Mon" -> "1"
+                "Tue" -> "2"
+                "Wed" -> "3"
+                "Thu" -> "4"
+                "Fri" -> "5"
+                "Sat" -> "6"
+                "Sun" -> "7"
+                else -> "1"
+            }
+            fetchSlots()
+            Log.d("SelectedDayNumber", selectedDay ?: "null")
+            // Set only date (time stays as current system time)
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            // Format: Fri, Jan 3, 2025 • 10:41 AM (or whatever current time is)
+           // val formatter = SimpleDateFormat("EEE, MMM d, yyyy • hh:mm a", Locale.getDefault())
+            val formatter = SimpleDateFormat("EEE, MMM d, yyyy", Locale.getDefault())
+
+            val formattedDateNew = formatter.format(calendar.time)
+            formattedDate = formattedDateNew
+
+            Log.d("FormattedDate", formattedDate)
+        }
+
+
+
     }
 
-    private fun setupTabs() {
+/*    private fun setupTabs() {
         val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
         days.forEachIndexed { index, day ->
             binding.tabLayoutDays.addTab(binding.tabLayoutDays.newTab().setText(day))
@@ -93,23 +139,26 @@ class ViewOrderDetails : AppCompatActivity() {
 
         binding.tabLayoutDays.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                selectedDay = (tab?.position?.plus(1)).toString() // Convert to "1" for Monday, "2" for Tuesday, etc.
+                selectedDay =
+                    (tab?.position?.plus(1)).toString() // Convert to "1" for Monday, "2" for Tuesday, etc.
                 fetchSlots()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
-    }
+    }*/
 
     private fun setupRecyclerView() {
-        timeSlotAdapter = TimeSlotAdapter(emptyList()) { result, seatCount -> // ✅ Receive full result object
-            selectedStartTime = result.start_time
-            selectedEndTime = result.end_time
-            selectedSeatCount = seatCount
-            id = result.id.toString()
-        }
-        binding.rvTimeSlots.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        timeSlotAdapter =
+            TimeSlotAdapter(emptyList()) { result, seatCount -> // ✅ Receive full result object
+                selectedStartTime = result.start_time
+                selectedEndTime = result.end_time
+                selectedSeatCount = seatCount
+                id = result.id.toString()
+            }
+        binding.rvTimeSlots.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvTimeSlots.adapter = timeSlotAdapter
     }
 
@@ -125,6 +174,7 @@ class ViewOrderDetails : AppCompatActivity() {
     }
 
     private fun fetchSlots() {
+        selectedStartTime=""
         val vendorId = vendorId  // Set dynamically if required
         val categoryId = categoryId    // Set dynamically if required
         val serviceId = serviceId  // Set dynamically if required

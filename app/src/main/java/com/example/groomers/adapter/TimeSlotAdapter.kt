@@ -1,10 +1,14 @@
 package com.example.groomers.adapter
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ehcf.Helper.changeDateFormat6
+import com.example.ehcf.Helper.convertTo12Hour
 import com.example.groomers.R
 import com.example.groomers.databinding.ItemTimeSlotBinding
 import com.example.groomers.model.modelslotbooking.Result
@@ -24,6 +28,7 @@ class TimeSlotAdapter(
         return TimeSlotViewHolder(binding)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: TimeSlotViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val result = timeSlots[position] // ✅ Get full Result object
@@ -32,8 +37,8 @@ class TimeSlotAdapter(
         val isEditing = (editingPosition == position)
 
         holder.binding.apply {
-            tvStartTime.text = result.start_time
-            tvEndTime.text = result.end_time
+            tvStartTime.text = convertTo12Hour(result.start_time)
+            tvEndTime.text = convertTo12Hour(result.end_time)
             tvSeats.text = "${result.seat_available} Seats Available"
             tvSeatCount.text = selectedSeats.toString()
 
@@ -82,6 +87,7 @@ class TimeSlotAdapter(
 
     private fun updateSeatUI(holder: TimeSlotViewHolder, position: Int) {
         val newSeatCount = seatCount.getValue(position)
+        seat=newSeatCount.toString()
         holder.binding.tvSeatCount.text = newSeatCount.toString()
         onSeatsSelected(timeSlots[position], newSeatCount) // ✅ Pass full Result object
     }
@@ -93,5 +99,8 @@ class TimeSlotAdapter(
         selectedPosition = null
         editingPosition = null
         notifyDataSetChanged()
+    }
+    companion object{
+        var seat=""
     }
 }

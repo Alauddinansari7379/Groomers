@@ -2,8 +2,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="6dp"
-    android:gravity="center"
+     android:gravity="center"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -20,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="5dp"
             android:orientation="vertical"
             android:gravity="center">
 
@@ -30,20 +29,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10:00 AM"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:gravity="center"/>
 
             <!-- End Time -->
             <TextView
+                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/darker_gray"
+                android:gravity="center"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
                 android:id="@+id/tvEndTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="11:00 AM"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@android:color/black"
                 android:gravity="center"
                 android:layout_marginTop="4dp"/>
 
@@ -53,9 +62,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1 Seat"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/holo_green_dark"
                 android:layout_marginTop="8dp"
                 android:gravity="center"/>
 

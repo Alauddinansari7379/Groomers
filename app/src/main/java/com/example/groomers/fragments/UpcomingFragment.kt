@@ -60,9 +60,22 @@ class UpcomingFragment : Fragment() {
                 binding.rvBookings.apply {
                     adapter = BookingsAdapter(bookingData.result,requireContext())
                 }
+                for (i in bookingData.result){
+                    if (i.slug!="waiting_for_accept"){
+                        binding.tvNoDataFound.visibility=View.VISIBLE
+                    }else{
+                        binding.tvNoDataFound.visibility = View.GONE
+
+                    }
+                }
 
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observeViewModel()
     }
 
     private fun showError(message: String) {

@@ -14,11 +14,11 @@ import com.example.groomers.R
 import com.example.groomers.databinding.BookingItemNewBinding
 import com.example.groomers.databinding.BookingsRowBinding
 import com.example.groomers.model.modelbookinglist.Result
-class BookingsAdapter(private val serviceList: List<Result>, private val context: Context) :
-    RecyclerView.Adapter<BookingsAdapter.BookingsViewMode>() {
+class BookingsAdapterCanclled(private val serviceList: List<Result>, private val context: Context) :
+    RecyclerView.Adapter<BookingsAdapterCanclled.BookingsViewMode>() {
 
     // Filtered list with condition
-    private val filteredList = serviceList.filter { it.slug == "waiting_for_accept" }
+    private val filteredList = serviceList.filter { it.slug == "rejected" }
 
     inner class BookingsViewMode(val binding: BookingItemNewBinding) : RecyclerView.ViewHolder(binding.root)
 
