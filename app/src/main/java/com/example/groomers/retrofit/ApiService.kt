@@ -17,6 +17,7 @@ import com.example.groomers.model.modelservice.ModelService
 import com.example.groomers.model.modelslotbooking.ModelSlotBooking
 import com.example.groomers.model.modelupdateaddress.ModelUpdateAddress
 import com.example.groomers.model.modeluserdetails.ModelUserDetails
+import com.example.groomers.model.modelvendorlists.ModelVendorsList
 import com.example.groomers.model.modulcountry.ModelCountry
 import com.groomers.groomersvendor.model.modelcity.ModelCity
 import com.groomers.groomersvendor.model.modelstate.ModelState
@@ -157,6 +158,12 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Query("vendor_id") vendorId: Int
     ): Response<ModelService>
+
+    @POST("getAllVendorsByCategoryId")
+    suspend fun getAllVendorsByCategoryId(
+        @Header("Authorization") authorization: String,
+        @Query("categoryid") categoryid: String
+    ): Response<ModelVendorsList>
 
     @GET("getAllVendors")
     suspend fun getAllVendors(

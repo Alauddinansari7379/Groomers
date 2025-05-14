@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.groomers.R
 import com.example.groomers.activity.BookingDetail
+import com.example.groomers.activity.ShowVendors
 import com.example.groomers.adapter.AllVendorsAdapter
 import com.example.groomers.adapter.CategoryAdapter
 import com.example.groomers.adapter.ServiceAdapter
@@ -214,8 +215,8 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         categoryViewModel.modelCategory.observe(viewLifecycleOwner) { modelCategory ->
             binding.rvCategory1.adapter = CategoryAdapter(modelCategory.result) { selectedCategory ->
                 userId = selectedCategory.id.toString()
-                val intent = Intent(requireContext(), BookingDetail::class.java).apply {
-                    putExtra("category_id", selectedCategory.id)
+                val intent = Intent(requireContext(), ShowVendors::class.java).apply {
+                    putExtra("category_id", selectedCategory.id.toString())
                     putExtra("category_name", selectedCategory.category_name)
                 }
                 startActivity(intent)
