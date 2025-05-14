@@ -43,17 +43,8 @@
                     android:fontFamily="@font/sf_bold"
                     android:gravity="center"
                     android:paddingStart="8dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/main_blue_color" />
 
-                <!-- Add Address Button -->
-                <ImageView
-                    android:id="@+id/btnAddAddress"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="end"
-                    android:src="@drawable/addlocation"
-                    android:layout_marginStart="8dp"
-                    app:tint="@color/black" />
             </LinearLayout>
 
 
@@ -72,6 +63,7 @@
                     android:id="@+id/etAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="14sp"
                     android:fontFamily="@font/sf_regular"
                     android:inputType="textPostalAddress" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -92,6 +84,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sf_regular"
                     android:inputType="number"
+                    android:textSize="14sp"
                     android:maxLength="8"/>
             </com.google.android.material.textfield.TextInputLayout>
 

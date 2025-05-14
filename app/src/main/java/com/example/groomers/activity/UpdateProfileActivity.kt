@@ -54,6 +54,11 @@ class UpdateProfileActivity : AppCompatActivity() {
         binding.btnUpdate.setOnClickListener {
             updateProfile()
         }
+        with(binding){
+            etName.setText(sessionManager.name)
+            etMobile.setText(sessionManager.mobile)
+            etEmail.setText(sessionManager.email)
+        }
 
         // Observe LiveData from ViewModel
         observeViewModel()

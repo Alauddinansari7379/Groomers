@@ -34,7 +34,7 @@
             android:textStyle="bold"
             android:gravity="center"
             android:paddingStart="8dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/main_blue_color" />
 
         <!-- Add Address Button -->
         <ImageView
@@ -44,7 +44,7 @@
             android:layout_gravity="end"
             android:src="@drawable/addlocation"
             android:layout_marginStart="8dp"
-            app:tint="@color/black" />
+            app:tint="#31A535" />
     </LinearLayout>
 
     <!-- Divider for UI Separation -->
