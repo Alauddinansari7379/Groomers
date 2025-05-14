@@ -8,6 +8,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ehcf.Helper.convertTo12Hour
+import com.example.ehcf.Helper.currency
+import com.example.groomers.adapter.TimeSlotAdapter.Companion.seat
 import com.example.groomers.databinding.ActivityReviewAndConfirmBinding
 import com.example.groomers.helper.Toastic
 import com.example.groomers.sharedpreferences.SessionManager
@@ -43,15 +46,26 @@ class ReviewAndConfirm : AppCompatActivity() {
         val slotId = intent.getStringExtra("slotId")
         val serviceId = intent.getStringExtra("serviceId")
         val vendorId = intent.getStringExtra("vendorId")
-        binding.tvPrice.text = price
-        binding.tvPrice1.text = price
+        var selectedDayNew = intent.getStringExtra("formattedDate")
+         binding.tvPrice1.text = currency+price
         binding.tvDescription.text = description
         binding.tvServiceName.text = serviceName
         val date = getCurrentDate()
-        binding.tvCurrentDateTime.text = getFormattedCurrentDateTime()
+
+        if (selectedDayNew!!.isEmpty()) {
+            val formatter = SimpleDateFormat("EEE, MMM d, yyyy", Locale.getDefault())
+            val currentDate = formatter.format(Date())
+            selectedDayNew = currentDate
+        }
+        seat
+        binding.tvCurrentDateTime.text = selectedDayNew + " " + convertTo12Hour(selectedStartTime!!)
+        binding.tvSlotTime.text =  convertTo12Hour(selectedStartTime!!)+ " To "  +convertTo12Hour(selectedEndTime!!)
 
         observeViewModel()
-        binding.tvSlotTime.text = "$selectedStartTime-$selectedEndTime"
+
+        binding.imgBack.setOnClickListener {
+            onBackPressed()
+        }
         binding.btnContinue.setOnClickListener {
             sessionManager.accessToken?.let { token ->
                 viewModel.createBooking(
@@ -131,6 +145,7 @@ class ReviewAndConfirm : AppCompatActivity() {
         val dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         return dateFormat.format(Date())
     }
+
     fun getFormattedCurrentDateTime(): String {
         val date = Date()
         val formatter = SimpleDateFormat("EEE, MMM d, yyyy • h:mm a", Locale.ENGLISH)

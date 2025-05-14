@@ -184,6 +184,7 @@
                         android:src="@drawable/delay" />
 
                     <Button
+                        android:id="@+id/btnPastOrder"
                         android:layout_width="110dp"
                         android:layout_height="35dp"
                         android:backgroundTint="@color/Blue"

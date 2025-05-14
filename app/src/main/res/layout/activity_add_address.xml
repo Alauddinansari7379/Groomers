@@ -17,15 +17,45 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingBottom="8dp"
-                android:text="Add New Address"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Back Arrow -->
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    android:layout_gravity="center_vertical"
+                    app:tint="@color/black" />
+
+                <!-- Title -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Add New Address"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/sf_bold"
+                    android:gravity="center"
+                    android:paddingStart="8dp"
+                    android:textColor="@color/black" />
+
+                <!-- Add Address Button -->
+                <ImageView
+                    android:id="@+id/btnAddAddress"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end"
+                    android:src="@drawable/addlocation"
+                    android:layout_marginStart="8dp"
+                    app:tint="@color/black" />
+            </LinearLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -34,6 +64,7 @@
                 android:hint="Enter Address"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
+                android:layout_marginTop="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp">
 
@@ -41,6 +72,7 @@
                     android:id="@+id/etAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_regular"
                     android:inputType="textPostalAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,6 +90,7 @@
                     android:id="@+id/etZipCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_regular"
                     android:inputType="number"
                     android:maxLength="8"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -122,6 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/sf_regular"
         android:backgroundTint="@color/mainColor"
         android:text="Save Address" />
 </RelativeLayout>

@@ -51,6 +51,7 @@ class AddAddress : AppCompatActivity() {
         observeViewModel()
         setupListeners()
         binding.btnSubmit.setOnClickListener { submitAddress() }
+        binding.btnBack.setOnClickListener { onBackPressed() }
     }
 
     // ✅ Get data if we are editing an address

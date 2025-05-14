@@ -18,6 +18,7 @@
     <color name="selected_text">#FFFFFF</color>  <!-- White text for selected -->
     <color name="unselected_text">#000000</color>  <!-- Black text for unselected -->
     <color name="unselected_text_secondary">#757575</color>  <!-- Gray for end time -->
+    <color name="yellow">#FFEB3B</color>
 
 
 

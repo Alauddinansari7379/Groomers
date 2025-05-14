@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.groomers.R
-import com.example.groomers.adapter.AdapterConfirmeBooking
+import com.example.groomers.adapter.BookingsAdapter
+import com.example.groomers.adapter.BookingsAdapterConfirm
 import com.example.groomers.databinding.FragmentConfirmedBinding
 import com.example.groomers.helper.Toastic
 import com.example.groomers.sharedpreferences.SessionManager
@@ -59,8 +60,17 @@ class ConfirmedFragment : Fragment() {
         viewModel.bookingList.observe(viewLifecycleOwner) { modelBookingList ->
             modelBookingList?.let { bookingData ->
                 binding.rvBookings.apply {
-                    adapter = AdapterConfirmeBooking(bookingData.result)
+                     adapter = BookingsAdapterConfirm(bookingData.result,requireContext())
+                 }
+                for (i in bookingData.result){
+                    if (i.slug!="accepted"){
+                        binding.tvNoDataFound.visibility=View.VISIBLE
+                    }else{
+                        binding.tvNoDataFound.visibility = View.GONE
+
+                    }
                 }
+
 
             }
         }

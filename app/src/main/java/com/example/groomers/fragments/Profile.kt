@@ -19,6 +19,10 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.example.groomers.R
@@ -32,6 +36,8 @@ import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.ProfileViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.qamar.curvedbottomnaviagtion.CurvedBottomNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileInputStream
@@ -119,6 +125,21 @@ class Profile : Fragment() {
                 ).show()
             }
         }
+
+        binding.btnPastOrder.setOnClickListener {
+            val navController = findNavController()
+
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(navController.graph.startDestinationId, true)
+                .build()
+
+            navController.navigate(R.id.appointmentFragment, null, navOptions)
+
+            val bottomNavView = requireActivity().findViewById<CurvedBottomNavigation>(R.id.bottom_navigation1)
+            bottomNavView.setupNavController(navController)
+        }
+
+
     }
     fun getInitials(name: String?): String {
         if (name.isNullOrBlank()) return ""
