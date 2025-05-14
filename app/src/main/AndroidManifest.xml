@@ -20,6 +20,11 @@
         android:theme="@style/Theme.groomers"
         tools:targetApi="31">
         <activity
+            android:name=".activity.EnterOTP"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity
             android:name=".activity.ShowVendors"
             android:exported="false"
             android:theme="@style/Theme.groomers" />

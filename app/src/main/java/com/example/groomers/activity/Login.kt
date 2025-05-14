@@ -33,7 +33,9 @@ class Login : AppCompatActivity() {
             finish()
         }
         with(binding) {
-
+            tvForget.setOnClickListener {
+                startActivity(Intent(context, ForgetPassword::class.java))
+            }
             btnContinue.setOnClickListener {
                 var email = ""
                 var username = ""

@@ -131,6 +131,18 @@
                 android:backgroundTint="@color/mainColor"
                 android:text="@string/continue1"
                 android:textColor="@android:color/white" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvForget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/sf_regular"
+                android:layout_marginBottom="15dp"
+                android:text="@string/forget_password"
+                android:textColor="@color/mainColor"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -147,7 +159,7 @@
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
                 android:text="Register new User !"
-                android:textColor="@color/purple" />
+                android:textColor="@color/mainColor" />
 
 
             <LinearLayout

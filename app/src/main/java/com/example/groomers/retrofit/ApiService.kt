@@ -1,6 +1,7 @@
 package com.example.groomers.retrofit
 
 
+import com.example.groomers.model.modelForgot.ModelForgot
 import com.example.groomers.model.modeladdresslist.ModelAddressList
 import com.example.groomers.model.modelallvendors.ModelAllVendors
 import com.example.groomers.model.modelbooking.ModelBooking
@@ -22,6 +23,7 @@ import com.example.groomers.model.modulcountry.ModelCountry
 import com.groomers.groomersvendor.model.modelcity.ModelCity
 import com.groomers.groomersvendor.model.modelstate.ModelState
 import okhttp3.MultipartBody
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -181,4 +183,16 @@ interface ApiService {
         @Query("id") id: Int
     ): Response<ModelUpdateAddress>
 
+    @POST("forgotPassword")
+    fun forgotPassword(
+        @Query("email") email: String,
+        @Query("role") role: String,
+    ): Call<ModelForgot>
+
+    @POST("reset_password")
+    fun resetPassword(
+        @Query("email") email: String,
+        @Query("role") role: String,
+        @Query("password") password: String,
+    ): Call<ModelForgot>
 }

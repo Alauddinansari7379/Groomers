@@ -72,8 +72,9 @@ class Registration : AppCompatActivity() {
                     isIconAnimated = true,
                     textColor = if (changeTextColor) Color.BLUE else null,
                 ).show()
-                startActivity(Intent(this, Login::class.java))
-                finish()
+                val intent = Intent(this@Registration, Login::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             }
         }
         with(binding) {
