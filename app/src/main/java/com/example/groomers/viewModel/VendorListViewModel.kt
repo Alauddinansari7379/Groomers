@@ -39,7 +39,7 @@ class VendorListViewModel @Inject constructor(
             }
 
             try {
-                val response = apiService.getAllVendorsByCategoryId(token, categoryId)
+                val response = apiService.getAllVendorsByCategoryId("Bearer $token", categoryId)
 
                 if (response.isSuccessful) {
                     val body = response.body()

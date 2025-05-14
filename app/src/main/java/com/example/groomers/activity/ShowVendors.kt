@@ -1,12 +1,17 @@
 package com.example.groomers.activity
 
+
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.groomers.adapter.VendorsListAdapter
 import com.example.groomers.databinding.ActivityShowVendorsBinding
+import com.example.groomers.fragments.HomeFragment.Companion.userId
 import com.example.groomers.helper.Toastic
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.VendorListViewModel
@@ -18,6 +23,7 @@ import javax.inject.Inject
 class ShowVendors : AppCompatActivity() {
 
     private val viewModel: VendorListViewModel by viewModels()
+    private lateinit var adapter: VendorsListAdapter
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -30,7 +36,6 @@ class ShowVendors : AppCompatActivity() {
         setContentView(binding.root)
 
         val categoryId = intent.getStringExtra("category_id")
-
         if (categoryId.isNullOrEmpty()) {
             Toastic.toastic(
                 context = this@ShowVendors,
@@ -44,9 +49,10 @@ class ShowVendors : AppCompatActivity() {
             return
         }
 
+        setupRecyclerView()
+
         viewModel.getAllVendorsByCategoryId(categoryId)
 
-        // Observe isLoading to show/hide progress
         viewModel.isLoading.observe(context) { isLoading ->
             if (isLoading) {
                 CustomLoader.showLoaderDialog(context)
@@ -55,26 +61,21 @@ class ShowVendors : AppCompatActivity() {
             }
         }
 
-        // Observe the result of the vendor list
         viewModel.vendorList.observe(context) { modelVendors ->
             modelVendors?.let {
                 if (modelVendors.status == 1) {
-                    binding.rvVendorList.apply {
-                        adapter = VendorsListAdapter(modelVendors.result) { selectedCategory ->
-                            val selectedUserId = selectedCategory.user_id?.toString() ?: ""
-                            if (selectedUserId.isNotEmpty() && selectedUserId != categoryId) {
-                                val intent = Intent(context, BookingDetail::class.java).apply {
-                                    putExtra("category_id", selectedUserId)
-                                }
-                                startActivity(intent)
-                            }
-                        }
+                    if (modelVendors.result.isNotEmpty()) {
+                        binding.tvNoDataFound.visibility = View.GONE
+                        binding.rvVendorList.visibility = View.VISIBLE
+                        adapter.updateData(modelVendors.result)
+                    } else {
+                        binding.tvNoDataFound.visibility = View.VISIBLE
+                        binding.rvVendorList.visibility = View.GONE
                     }
                 }
             }
         }
 
-        // Observe error messages
         viewModel.errorMessage.observe(context) { errorMessage ->
             if (errorMessage.isNotEmpty()) {
                 Toastic.toastic(
@@ -88,4 +89,28 @@ class ShowVendors : AppCompatActivity() {
             }
         }
     }
+
+    private fun setupRecyclerView() {
+        adapter = VendorsListAdapter(emptyList()) { selectedService ->
+            userId = selectedService.user_id.toString()
+            val intent = Intent(this@ShowVendors, BookingDetail::class.java).apply {
+                putExtra("service_name", selectedService.name)
+                putExtra("service_image", "") // Replace if image needed
+                putExtra("service_description", selectedService.aboutBusiness)
+                putExtra("service_type", selectedService.services)
+                putExtra("service_address", selectedService.address)
+                putExtra("vendorId", selectedService.user_id)
+                putExtra("serviceId", selectedService.user_id)
+                putExtra("service_price", selectedService.teamSize.toString())
+            }
+            Log.d("ShowVendors", "Navigating to BookingDetail with: ${selectedService.name}")
+            startActivity(intent)
+        }
+
+        binding.rvVendorList.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = this@ShowVendors.adapter
+        }
+    }
+
 }
