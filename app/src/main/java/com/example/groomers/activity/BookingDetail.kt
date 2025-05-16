@@ -2,6 +2,8 @@ package com.example.groomers.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.groomers.R
 import com.example.groomers.adapter.Booking
+import com.example.groomers.adapter.ImageSliderAdapter
 import com.example.groomers.adapter.PopularServiceAdapter
 import com.example.groomers.adapter.ViewPagerAdapter1
 import com.example.groomers.databinding.ActivityBookingDetailBinding
@@ -20,16 +23,21 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.getValue
+
 @AndroidEntryPoint
 class BookingDetail : AppCompatActivity(), Booking {
 
     private var vendorId: String? = null
     private var serviceId: String? = null
     private lateinit var binding: ActivityBookingDetailBinding
+    private lateinit var imageSliderAdapter: ImageSliderAdapter
     @Inject
     lateinit var sessionManager: SessionManager
     private val viewModel: ServiceViewModel by viewModels()
     private lateinit var serviceAdapter: PopularServiceAdapter
+    private val imageUrls = mutableListOf<String>()
+    private val sliderHandler = Handler(Looper.getMainLooper())
+    private var currentPage = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,6 +48,7 @@ class BookingDetail : AppCompatActivity(), Booking {
         setupListeners()
 //        setupRecyclerView()
         setupFragment()
+        setupImageSlider()
         sessionManager.accessToken?.let { token ->
             lifecycleScope.launch {
 //                viewModel.getServiceList(token, sessionManager.userType.toString())
@@ -81,12 +90,18 @@ class BookingDetail : AppCompatActivity(), Booking {
         binding.shopAddress.text = address
         binding.ownerDetails.text = serviceDescription
         binding.tvPrice.text = servicePrice
+//        serviceImage?.let {
+//            val imageUrl = "https://groomers.co.in/public/uploads/$it"
+//            Glide.with(this)
+//                .load(imageUrl)
+//                .placeholder(R.drawable.noimage)
+//                .into(binding.headerImage)
+//        }
+        // Image list (duplicating the same image for slider)
         serviceImage?.let {
-            val imageUrl = "https://groomers.co.in/public/uploads/$it"
-            Glide.with(this)
-                .load(imageUrl)
-                .placeholder(R.drawable.noimage)
-                .into(binding.headerImage)
+            val baseUrl = "https://groomers.co.in/public/uploads/"
+            val imageUrl = baseUrl + it
+            imageUrls.addAll(listOf(imageUrl, imageUrl, imageUrl))
         }
     }
 
@@ -143,5 +158,29 @@ class BookingDetail : AppCompatActivity(), Booking {
                 else -> "Tab"
             }
         }.attach()
+    }
+    private fun setupImageSlider() {
+        imageSliderAdapter = ImageSliderAdapter(imageUrls)
+        binding.imageSlider.adapter = imageSliderAdapter
+
+        val runnable = object : Runnable {
+            override fun run() {
+                if (imageUrls.isNotEmpty()) {
+                    currentPage = (currentPage + 1) % imageUrls.size
+                    binding.imageSlider.setCurrentItem(currentPage, true)
+                    sliderHandler.postDelayed(this, 3000)
+                }
+            }
+        }
+        sliderHandler.post(runnable)
+
+        binding.imageSlider.registerOnPageChangeCallback(object :
+            androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                currentPage = position
+                sliderHandler.removeCallbacksAndMessages(null)
+                sliderHandler.postDelayed(runnable, 3000)
+            }
+        })
     }
 }
