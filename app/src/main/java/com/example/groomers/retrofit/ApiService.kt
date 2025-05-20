@@ -12,6 +12,8 @@ import com.example.groomers.model.modeldeleteaddress.ModelDeleteAddress
 import com.example.groomers.model.modeleditprofile.ModelEditProfile
 import com.example.groomers.model.modelgetallvendorbyid.ModelAllPostByVendorId
 import com.example.groomers.model.modellogin.ModelLogin
+import com.example.groomers.model.modelmultiuser.ModelMultiUser
+import com.example.groomers.model.modelmultiuserlist.ModelMultiuserList
 import com.example.groomers.model.modelprofilepicupload.ModelUploadProfPhoto
 import com.example.groomers.model.modelregister.ModelRegesters
 import com.example.groomers.model.modelservice.ModelService
@@ -172,6 +174,11 @@ interface ApiService {
         @Header("Authorization") authorization: String,
     ): Response<ModelAllVendors>
 
+    @POST("getCustomerProfile")
+    suspend fun getCustomerProfile(
+        @Header("Authorization") authorization: String,
+    ): Response<ModelMultiuserList>
+
     @POST("customerUpdateAddress")
     suspend fun updateAddress(
         @Header("Authorization") authorization: String,
@@ -182,6 +189,15 @@ interface ApiService {
         @Query("city") city: String,
         @Query("id") id: Int
     ): Response<ModelUpdateAddress>
+
+    @POST("createCustomerProfile")
+    suspend fun createCustomerProfile(
+        @Header("Authorization") authorization: String,
+        @Query("username") username: String,
+        @Query("name") name: String,
+        @Query("password") password: String,
+        @Query("user_type") user_type: String,
+    ): Response<ModelMultiUser>
 
     @POST("forgotPassword")
     fun forgotPassword(

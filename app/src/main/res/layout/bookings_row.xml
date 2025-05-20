@@ -3,245 +3,202 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="12dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginBottom="2dp"
-        android:backgroundTint="#F8FAFD"
-        app:cardCornerRadius="10dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="16dp"
+            android:gravity="center_vertical">
 
-            <!-- Smaller Service Image on the Left -->
-            <ImageView
+            <!-- Circle Image -->
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivServiceImage"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/shop_1" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/shop_1"
 
-            <!-- Content Layout on the Right -->
+                 />
+
+
+            <!-- Info Section -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="start">
 
-                <!-- Order No -->
+                <!-- Row Template -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatTextView
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp">
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Order No- "
-                        android:textColor="@color/main_Color_Dark"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvId"
+                        android:text="Order No: "
+                        android:textColor="@color/mainColor"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_semibold" />
+                    <TextView
+                        android:id="@+id/tvOrderId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="7438648721"
-                        android:textColor="@color/text_color"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:text="213133"
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_regular" />
                 </LinearLayout>
 
-                <!-- Name and User Type -->
+                <!-- Name -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="5dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    android:paddingBottom="6dp">
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="Name- "
-                            android:textColor="@color/main_Color_Dark"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="testio2"
-                            android:textColor="@color/text_color"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                        android:text="Name: "
+                        android:textColor="@color/mainColor"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_semibold" />
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="User Type- "
-                            android:textColor="@color/main_Color_Dark"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvUserType"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="2"
-                            android:textColor="@color/text_color"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                        android:text="testio2"
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_regular" />
                 </LinearLayout>
 
-                <!-- Description and Service Hours -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <!-- User Type -->
+                <LinearLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="5dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    android:paddingBottom="6dp">
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="Description- "
-                            android:textColor="@color/main_Color_Dark"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvDescription"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="Test"
-                            android:textColor="@color/text_color"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                        android:text="User Type: "
+                        android:textColor="@color/mainColor"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_semibold" />
+                    <TextView
+                        android:id="@+id/tvUserType"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="Service Hours- "
-                            android:textColor="@color/main_Color_Dark"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="2"
-                            android:textColor="@color/text_color"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                        android:text="2"
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_regular" />
                 </LinearLayout>
 
-                <!-- Service Type and Price -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <!-- Description -->
+                <LinearLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="5dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    android:paddingBottom="6dp">
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="Service Type- "
-                            android:textColor="@color/main_Color_Dark"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvServiceType"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="Hair Cutting"
-                            android:textColor="@color/text_color"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                        android:text="Description: "
+                        android:textColor="@color/mainColor"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_semibold" />
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:text="Test"
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_regular" />
+                </LinearLayout>
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="Price- "
-                            android:textColor="@color/main_Color_Dark"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
+                <!-- Service Hours -->
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Service Hours: "
+                        android:textColor="@color/mainColor"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_semibold" />
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_regular" />
+                </LinearLayout>
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvPrice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="$100"
-                            android:textColor="@color/text_color"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                <!-- Service Type -->
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Service Type: "
+                        android:textColor="@color/mainColor"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_semibold" />
+                    <TextView
+                        android:id="@+id/tvServiceType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hair Cutting"
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_regular" />
+                </LinearLayout>
+
+                <!-- Price -->
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price: "
+                        android:textColor="#00796B"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_semibold" />
+                    <TextView
+                        android:id="@+id/tvPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$100"
+                        android:textColor="#00796B"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_regular" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
