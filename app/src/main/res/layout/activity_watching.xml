@@ -1,69 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/mainColor"
-    android:gravity="center"
     android:padding="16dp">
 
+    <!-- Skip Text Top Right -->
     <TextView
-        android:id="@+id/headerText"
+        android:id="@+id/skipText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Profile"
+        android:text="Skip"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        android:layout_marginBottom="24dp"
-        android:fontFamily="sans-serif-medium" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewProfiles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:clipToPadding="false"
-        android:layout_gravity="center"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="horizontal" />
-
-    <LinearLayout
-        android:id="@+id/layoutAddPro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:padding="8dp"
         android:clickable="true"
         android:focusable="true"
-        android:background="?attr/actionBarItemBackground"
-        android:padding="8dp">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
 
-        <LinearLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/add_profile_border"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/addIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp"
-                android:fontFamily="sans-serif-light" />
-        </LinearLayout>
+    <!-- Main Content Layout Centered -->
+    <LinearLayout
+        android:id="@+id/mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_below="@id/skipText"
+        android:paddingTop="16dp">
 
         <TextView
-            android:id="@+id/addProfileText"
+            android:id="@+id/headerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Profile"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif" />
+            android:text="Select Profile"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="sans-serif-medium" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewProfiles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:clipToPadding="false"
+            android:layout_gravity="center"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal" />
+
+        <LinearLayout
+            android:id="@+id/layoutAddPro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/actionBarItemBackground"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/add_profile_border"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/addIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="36sp"
+                    android:fontFamily="sans-serif-light" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/addProfileText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Profile"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -4,6 +4,7 @@ package com.example.groomers.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.groomers.R
 import com.example.groomers.databinding.ItemProfileBinding
 import com.example.groomers.model.modelmultiuserlist.Result
@@ -20,6 +21,13 @@ class ProfileAdapter(
             binding.profileName.text = profile.name
             // Set profile image if available, currently using placeholder
             binding.profileImage.setImageResource(R.drawable.profile)
+            val imageUrl = "https://groomers.co.in/public/uploads/${profile.image}"
+
+            Glide.with(binding.profileImage.context)
+                .load(imageUrl)
+                .placeholder(R.drawable.profile) // optional placeholder
+                // optional error image
+                .into(binding.profileImage)
 
             binding.root.setOnClickListener {
                 onItemClick(profile)

@@ -25,11 +25,12 @@ import java.io.File
 import java.util.regex.Pattern
 
 @AndroidEntryPoint
-class Contact : AppCompatActivity() {
+class Contact() : AppCompatActivity() {
     val binding by lazy { ActivityContactBinding.inflate(layoutInflater) }
     private val viewModel by lazy {
         (application as MyApplication).registerViewModel
     }
+    var userImageMp: MultipartBody.Part? = null
     private val viewModel1: MultiuserListViewModel by viewModels()
     private var selectedImageUri: Uri? = null
     private var selectedImagePath: String? = null
@@ -92,7 +93,7 @@ class Contact : AppCompatActivity() {
                         edtPassword.requestFocus()
                         return@setOnClickListener
                     }
-                    val userImageMp = selectedImagePath?.let { prepareFilePart("UserImage", it) }
+                     userImageMp = selectedImagePath?.let { prepareFilePart("UserImage", it) }
                     if (userImageMp == null) {
                         Toast.makeText(
                             this@Contact,
@@ -142,7 +143,8 @@ class Contact : AppCompatActivity() {
                 if (intent.getStringExtra("AddPro").toString() == "AddPro") {
                     viewModel1.createCustomerProfile(
                         viewModel.email.toString(),
-                        viewModel.name.toString(), viewModel.password!!, viewModel.user_type.toString()
+                        viewModel.name.toString(), viewModel.password!!, viewModel.user_type.toString(),
+                        userImageMp
                     )
                 }else{
                     startActivity(Intent(this@Contact,ChooseProfile::class.java))

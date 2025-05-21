@@ -7,11 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.groomers.model.modelmultiuser.ModelMultiUser
 import com.example.groomers.model.modelmultiuserlist.ModelMultiuserList
-import com.example.groomers.model.modelvendorlists.ModelVendorsList
 import com.example.groomers.retrofit.ApiService
 import com.example.groomers.sharedpreferences.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -75,7 +75,10 @@ class MultiuserListViewModel
         }
     }
 
-    fun createCustomerProfile(userName : String, name : String, password : String, userType : String) {
+    fun createCustomerProfile(
+        userName: String, name: String, password: String, userType: String,
+        userImage: MultipartBody.Part?
+    ) {
         _isLoading.postValue(true)
 
         viewModelScope.launch {
@@ -87,7 +90,7 @@ class MultiuserListViewModel
             }
 
             try {
-                val response = apiService.createCustomerProfile("Bearer $token",userName,name,password,userType)
+                val response = apiService.createCustomerProfile("Bearer $token",userName,name,password,userType,userImage)
 
                 if (response.isSuccessful) {
                     val body = response.body()

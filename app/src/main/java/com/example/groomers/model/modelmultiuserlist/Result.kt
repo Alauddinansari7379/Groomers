@@ -6,6 +6,7 @@ data class Result(
     val email: String,
     val id: Int,
     val name: String,
+    val image: String,
     val password: String,
     val status: Int,
     val updated_at: String,

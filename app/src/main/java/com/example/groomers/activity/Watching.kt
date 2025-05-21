@@ -6,17 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.groomers.R
-import com.example.groomers.activity.ViewOrderDetails
 import com.example.groomers.adapter.ProfileAdapter
 import com.example.groomers.databinding.ActivityWatchingBinding
 import com.example.groomers.helper.Toastic
@@ -77,6 +74,10 @@ class Watching : AppCompatActivity() {
             intent.putExtra("AddPro", "AddPro")
             startActivity(intent)
         }
+        binding.skipText.setOnClickListener {
+            startActivity(Intent(this, Dashboard::class.java))
+            finish()
+        }
     }
 
     private fun showPasswordPromptDialog(username: String, email: String) {
@@ -89,6 +90,7 @@ class Watching : AppCompatActivity() {
         val tvUsername = dialogView.findViewById<TextView>(R.id.tvUsername)
         val etPassword = dialogView.findViewById<EditText>(R.id.etPassword)
         val btnContinue = dialogView.findViewById<Button>(R.id.btnContinue)
+        val btnClose = dialogView.findViewById<ImageView>(R.id.ivClose)
 
         tvUsername.text = "Username: $username"
 
@@ -100,6 +102,9 @@ class Watching : AppCompatActivity() {
                 dialog.dismiss()
                 callLoginApi(username, password)
             }
+        }
+        btnClose.setOnClickListener {
+            dialog.dismiss()
         }
 
         dialog.show()
