@@ -40,7 +40,7 @@ class MultiuserListViewModel
         _isLoading.postValue(true)
 
         viewModelScope.launch {
-            val token = sessionManager.accessToken
+            val token = sessionManager.mainAccessToken
             if (token.isNullOrEmpty()) {
                 _errorMessage.postValue("Session expired. Please log in again.")
                 _isLoading.postValue(false)

@@ -64,7 +64,7 @@ class Login : AppCompatActivity() {
                 }
 
                 // If both fields are non-empty, proceed with login
-                viewModel.login(email, username, password,)
+                viewModel.login(email, username, password,"login")
 
             }
 

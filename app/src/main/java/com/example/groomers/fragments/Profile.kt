@@ -29,6 +29,7 @@ import com.example.groomers.R
 import com.example.groomers.activity.AddressList
 import com.example.groomers.activity.Login
 import com.example.groomers.activity.UpdateProfileActivity
+import com.example.groomers.activity.Watching
 import com.example.groomers.databinding.FragmentProfileBinding
 import com.example.groomers.helper.Toastic
 import com.example.groomers.retrofit.ApiServiceProvider
@@ -81,6 +82,9 @@ class Profile : Fragment() {
         }
         binding.profileImage.setOnClickListener {
             openImageChooser()
+        }
+        binding.btnSwitch.setOnClickListener {
+            startActivity(Intent(requireContext(),Watching::class.java))
         }
         binding.username.text = sessionManager.username
         binding.initialsLabel.text =getInitials(sessionManager.username)

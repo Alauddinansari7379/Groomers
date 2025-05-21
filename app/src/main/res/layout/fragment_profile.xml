@@ -138,6 +138,7 @@
                         app:tint="@color/black" />
 
                     <Button
+                        android:id="@+id/btnSwitch"
                         android:layout_width="110dp"
                         android:layout_height="35dp"
                         android:backgroundTint="@color/Blue"

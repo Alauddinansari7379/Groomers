@@ -106,7 +106,7 @@ class Watching : AppCompatActivity() {
     }
 
     private fun callLoginApi(username: String, password: String) {
-        viewModel1.login("", username, password,)
+        viewModel1.login("", username, password,"watch")
         // Observe isLoading to show/hide progress
         viewModel1.isLoading.observe(this@Watching,) { isLoading ->
             if (isLoading) {
