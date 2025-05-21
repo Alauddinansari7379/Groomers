@@ -82,7 +82,7 @@ class MultiuserListViewModel
         _isLoading.postValue(true)
 
         viewModelScope.launch {
-            val token = sessionManager.accessToken
+            val token = sessionManager.mainAccessToken
             if (token.isNullOrEmpty()) {
                 _errorMessage.postValue("Session expired. Please log in again.")
                 _isLoading.postValue(false)
@@ -97,7 +97,7 @@ class MultiuserListViewModel
                     if (body?.status == 1) {
                         _multiUser.postValue(body)
                     } else {
-                        _errorMessage.postValue("No vendors found for this category.")
+                        _errorMessage.postValue(response.body()?.message)
                     }
                 } else {
                     val errorText = response.errorBody()?.string()

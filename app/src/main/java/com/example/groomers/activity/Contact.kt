@@ -62,6 +62,9 @@ class Contact() : AppCompatActivity() {
 
 
             }
+
+
+
             val countryCodeWithPlus: String =
                 spinnerCountryCode.selectedCountryCodeWithPlus // Example: "+91"
             imageViewProfile.setOnClickListener { pickImageLauncher.launch("image/*") }
@@ -151,7 +154,7 @@ class Contact() : AppCompatActivity() {
                 }
             }
         }
-        viewModel.errorMessage.observe(this) { errorMessage ->
+        viewModel1.errorMessage.observe(this) { errorMessage ->
             if (errorMessage != null) {
                 Toastic.toastic(
                     context = this@Contact,
@@ -176,7 +179,7 @@ class Contact() : AppCompatActivity() {
                 finish()
             }
         }
-        viewModel.isLoading.observe(this) { isLoading ->
+        viewModel1.isLoading.observe(this) { isLoading ->
             if (isLoading) {
                 CustomLoader.showLoaderDialog(this)
             } else {
