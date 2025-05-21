@@ -1,5 +1,6 @@
 package com.example.groomers.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -56,6 +57,8 @@ class Contact : AppCompatActivity() {
                 layoutName.visibility = View.VISIBLE
                 profile.visibility = View.VISIBLE
                 logo.visibility = View.GONE
+                spinnerUserType.visibility = View.VISIBLE
+
 
             }
             val countryCodeWithPlus: String =
@@ -136,10 +139,14 @@ class Contact : AppCompatActivity() {
                     }
                 }
 
-                viewModel1.createCustomerProfile(
-                    viewModel.email.toString(),
-                    viewModel.name.toString(), viewModel.password!!, viewModel.user_type.toString()
-                )
+                if (intent.getStringExtra("AddPro").toString() == "AddPro") {
+                    viewModel1.createCustomerProfile(
+                        viewModel.email.toString(),
+                        viewModel.name.toString(), viewModel.password!!, viewModel.user_type.toString()
+                    )
+                }else{
+                    startActivity(Intent(this@Contact,ChooseProfile::class.java))
+                }
             }
         }
         viewModel.errorMessage.observe(this) { errorMessage ->

@@ -20,6 +20,7 @@ import com.example.groomers.activity.ViewOrderDetails
 import com.example.groomers.adapter.ProfileAdapter
 import com.example.groomers.databinding.ActivityWatchingBinding
 import com.example.groomers.helper.Toastic
+import com.example.groomers.viewModel.LoginViewModel
 import com.example.groomers.viewModel.MultiuserListViewModel
 import com.groomers.groomersvendor.helper.CustomLoader
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +31,7 @@ class Watching : AppCompatActivity() {
 
     private val binding by lazy { ActivityWatchingBinding.inflate(layoutInflater) }
     private val viewModel: MultiuserListViewModel by viewModels()
+    private val viewModel1: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,12 +106,41 @@ class Watching : AppCompatActivity() {
     }
 
     private fun callLoginApi(username: String, password: String) {
-        // TODO: Replace this with actual login API call via Retrofit or ViewModel
-        Toast.makeText(this, "Logging in as $username", Toast.LENGTH_SHORT).show()
+        viewModel1.login("", username, password,)
+        // Observe isLoading to show/hide progress
+        viewModel1.isLoading.observe(this@Watching,) { isLoading ->
+            if (isLoading) {
+                CustomLoader.showLoaderDialog(this@Watching,)
+            } else {
+                CustomLoader.hideLoaderDialog()
+            }
+        }
 
-        // Simulate success and go to Dashboard
-        val intent = Intent(this, Dashboard::class.java)
-        intent.putExtra("USERNAME", username)
-        startActivity(intent)
+        // Observe the result of the login attempt
+        viewModel1.modelLogin.observe(this@Watching,) { modelLogin ->
+            modelLogin?.let {
+                // If login is successful, navigate to MainActivity
+                Toastic.toastic(
+                    context = this@Watching,
+                    message = "Log in successful",
+                    duration = Toastic.LENGTH_SHORT,
+                    type = Toastic.SUCCESS,
+                    isIconAnimated = true,
+                    textColor = if (false) Color.BLUE else null,
+                ).show()
+                // Simulate success and go to Dashboard
+                val intent = Intent(this, Dashboard::class.java)
+                intent.putExtra("USERNAME", username)
+                startActivity(intent)
+                finish()
+            }
+        }
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAllVendorsByCategoryId()
     }
 }
