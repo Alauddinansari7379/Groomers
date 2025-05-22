@@ -2,7 +2,6 @@ package com.example.groomers.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
@@ -14,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -22,7 +20,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.groomers.R
 import com.example.groomers.activity.BookingDetail
@@ -48,6 +45,7 @@ import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
 import javax.inject.Inject
+
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
