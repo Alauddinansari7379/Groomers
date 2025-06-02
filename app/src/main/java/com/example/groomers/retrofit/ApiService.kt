@@ -23,6 +23,7 @@ import com.example.groomers.model.modelvendorlists.ModelVendorsList
 import com.example.groomers.model.modulcountry.ModelCountry
 import com.groomers.groomersvendor.model.modelcity.ModelCity
 import com.groomers.groomersvendor.model.modelstate.ModelState
+import com.groomers.groomersvendor.model.rating.Rating
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Response
@@ -212,4 +213,12 @@ interface ApiService {
         @Query("role") role: String,
         @Query("password") password: String,
     ): Call<ModelForgot>
+
+    @POST("customer_rating")
+    suspend fun customerRating(
+        @Header("Authorization") authorization: String,
+        @Query("bookingId") bookingId: String,
+        @Query("rating") rating: String,
+        @Query("comments") comments: String,
+    ): Response<Rating>
 }

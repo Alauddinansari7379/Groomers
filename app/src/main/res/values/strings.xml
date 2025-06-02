@@ -232,5 +232,6 @@
     <string name="english">🌐 English</string>
     <string name="support">⚙️ Support</string>
     <string name="have_a_business_account">Have a business account?</string>
+    <string name="don_t_have_account">Don\'t have account?</string>
 
 </resources>

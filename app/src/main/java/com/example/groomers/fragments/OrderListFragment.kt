@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import com.example.groomers.R
 import com.example.groomers.activity.OrderDetails
 import com.example.groomers.activity.OrderLists
+import com.example.groomers.activity.Rating
 import com.example.groomers.adapter.BookingsAdapter
 import com.example.groomers.databinding.FragmentListUserBinding
 import com.example.groomers.helper.Toastic
@@ -25,7 +26,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class OrderListFragment : Fragment() {
+class OrderListFragment : Fragment(), BookingsAdapter.Review {
 
     private lateinit var binding: FragmentListUserBinding
     private val viewModel: BookingListViewModel by viewModels()
@@ -73,7 +74,7 @@ class OrderListFragment : Fragment() {
         viewModel.bookingList.observe(viewLifecycleOwner) { modelBookingList ->
             modelBookingList?.let { bookingData ->
                 binding.rvBookings.apply {
-                    adapter = BookingsAdapter(bookingData.result,context)
+                    adapter = BookingsAdapter(bookingData.result,context,this@OrderListFragment)
                 }
 
             }
@@ -89,5 +90,11 @@ class OrderListFragment : Fragment() {
             isIconAnimated = true,
             textColor = if (changeTextColor) Color.BLUE else null,
         ).show()
+    }
+
+    override fun rating(bookingId: String) {
+        val intent = Intent(requireActivity(), Rating::class.java)
+            .putExtra("meetingId", bookingId)
+        startActivity(intent)
     }
 }

@@ -3,6 +3,7 @@ package com.example.groomers.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import com.example.groomers.R
 import com.example.groomers.databinding.BookingItemNewBinding
 import com.example.groomers.model.modelbookinglist.Result
 
-class BookingsAdapter(private val serviceList: List<Result>, private val context: Context) :
+class BookingsAdapter(private val serviceList: List<Result>, private val context: Context,val review: Review) :
     RecyclerView.Adapter<BookingsAdapter.BookingsViewMode>() {
 
     // Filtered list with condition
@@ -67,12 +68,20 @@ class BookingsAdapter(private val serviceList: List<Result>, private val context
 
                     "completed" -> {
                         tvBookingStatues.background.setTint(ContextCompat.getColor(context, R.color.green))
+                        btnReview.visibility = View.GONE
                      }
+                }
+                btnReview.setOnClickListener {
+                    review.rating(id.toString())
                 }
 
             }
 
         }
+    }
+    interface Review {
+        fun rating(bookingId: String)
+
     }
 }
 

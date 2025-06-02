@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.groomers.R
-import com.example.groomers.adapter.BookingsAdapter
 import com.example.groomers.adapter.BookingsAdapterConfirm
 import com.example.groomers.databinding.FragmentConfirmedBinding
 import com.example.groomers.helper.Toastic
