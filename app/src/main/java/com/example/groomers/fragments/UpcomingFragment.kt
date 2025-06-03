@@ -77,6 +77,7 @@ class UpcomingFragment : Fragment(),BookingsAdapter.Review {
 
     override fun onResume() {
         super.onResume()
+        fetchBookings()
         observeViewModel()
     }
 
@@ -97,5 +98,6 @@ class UpcomingFragment : Fragment(),BookingsAdapter.Review {
         startActivity(intent)
 
     }
+
 
 }

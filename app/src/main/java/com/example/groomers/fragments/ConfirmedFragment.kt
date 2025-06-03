@@ -1,5 +1,6 @@
 package com.example.groomers.fragments
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.groomers.R
+import com.example.groomers.activity.Rating
 import com.example.groomers.adapter.BookingsAdapterConfirm
 import com.example.groomers.databinding.FragmentConfirmedBinding
 import com.example.groomers.helper.Toastic
@@ -18,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ConfirmedFragment : Fragment() {
+class ConfirmedFragment : Fragment(), BookingsAdapterConfirm.Review {
     lateinit var binding: FragmentConfirmedBinding
     @Inject
     lateinit var sessionManager: SessionManager
@@ -59,7 +61,7 @@ class ConfirmedFragment : Fragment() {
         viewModel.bookingList.observe(viewLifecycleOwner) { modelBookingList ->
             modelBookingList?.let { bookingData ->
                 binding.rvBookings.apply {
-                     adapter = BookingsAdapterConfirm(bookingData.result,requireContext())
+                     adapter = BookingsAdapterConfirm(bookingData.result,requireContext(),this@ConfirmedFragment)
                  }
                 for (i in bookingData.result){
                     if (i.slug!="accepted"){
@@ -84,5 +86,11 @@ class ConfirmedFragment : Fragment() {
             isIconAnimated = true,
             textColor = if (false) Color.BLUE else null,
         ).show()
+    }
+
+    override fun rating(bookingId: String) {
+        val intent = Intent(requireActivity(), Rating::class.java)
+            .putExtra("meetingId", bookingId)
+        startActivity(intent)
     }
 }

@@ -214,7 +214,7 @@ interface ApiService {
         @Query("password") password: String,
     ): Call<ModelForgot>
 
-    @POST("customer_rating")
+    @POST("vendor_rating")
     suspend fun customerRating(
         @Header("Authorization") authorization: String,
         @Query("bookingId") bookingId: String,

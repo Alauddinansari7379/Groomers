@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Skip"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:fontFamily="sans-serif-medium"
         android:padding="8dp"
         android:clickable="true"

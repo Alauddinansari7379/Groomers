@@ -14,7 +14,9 @@ import com.example.groomers.R
 import com.example.groomers.databinding.BookingItemNewBinding
 import com.example.groomers.databinding.BookingsRowBinding
 import com.example.groomers.model.modelbookinglist.Result
-class BookingsAdapterConfirm(private val serviceList: List<Result>, private val context: Context) :
+import kotlin.toString
+
+class BookingsAdapterConfirm(private val serviceList: List<Result>, private val context: Context,val review: Review) :
     RecyclerView.Adapter<BookingsAdapterConfirm.BookingsViewMode>() {
 
     // Filtered list with condition
@@ -60,11 +62,16 @@ class BookingsAdapterConfirm(private val serviceList: List<Result>, private val 
 
                     "accepted" -> {
                         tvBookingStatues.background.setTint(ContextCompat.getColor(context, R.color.green))
-
+                        if (comments == null){
+                            btnReview.visibility = View.VISIBLE
+                        }else{
+                            btnReview.visibility = View.GONE
+                        }
                     }
 
                     "rejected" -> {
                         tvBookingStatues.background.setTint(ContextCompat.getColor(context, R.color.red))
+
                      }
 
                     "completed" -> {
@@ -72,9 +79,17 @@ class BookingsAdapterConfirm(private val serviceList: List<Result>, private val 
                      }
                 }
 
+                btnReview.setOnClickListener {
+                    review.rating(id.toString())
+                }
+
             }
 
         }
+    }
+    interface Review {
+        fun rating(bookingId: String)
+
     }
 }
 
