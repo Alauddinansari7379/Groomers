@@ -81,6 +81,12 @@ class UpcomingFragment : Fragment(),BookingsAdapter.Review {
         observeViewModel()
     }
 
+    override fun onPause() {
+        super.onPause()
+        fetchBookings()
+        observeViewModel()
+    }
+
     private fun showError(message: String) {
         Toastic.toastic(
             context = requireContext(),

@@ -84,10 +84,10 @@ class Profile : Fragment() {
             openImageChooser()
         }
         binding.btnSwitch.setOnClickListener {
-            startActivity(Intent(requireContext(),Watching::class.java))
+            startActivity(Intent(requireContext(), Watching::class.java))
         }
         binding.username.text = sessionManager.username
-        binding.initialsLabel.text =getInitials(sessionManager.username)
+        binding.initialsLabel.text = getInitials(sessionManager.username)
         binding.ivUpdateProfile.setOnClickListener {
             startActivity(Intent(requireContext(), UpdateProfileActivity::class.java))
         }
@@ -139,12 +139,14 @@ class Profile : Fragment() {
 
             navController.navigate(R.id.appointmentFragment, null, navOptions)
 
-            val bottomNavView = requireActivity().findViewById<CurvedBottomNavigation>(R.id.bottom_navigation1)
+            val bottomNavView =
+                requireActivity().findViewById<CurvedBottomNavigation>(R.id.bottom_navigation1)
             bottomNavView.setupNavController(navController)
         }
 
 
     }
+
     fun getInitials(name: String?): String {
         if (name.isNullOrBlank()) return ""
 
