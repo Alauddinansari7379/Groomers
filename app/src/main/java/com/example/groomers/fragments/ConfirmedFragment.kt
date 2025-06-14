@@ -65,9 +65,10 @@ class ConfirmedFragment : Fragment(), BookingsAdapterConfirm.Review {
                  }
                 for (i in bookingData.result){
                     if (i.slug!="accepted"){
-                        binding.tvNoDataFound.visibility=View.VISIBLE
+                        binding.tvNoDataFound.visibility=View.GONE
+                        break
                     }else{
-                        binding.tvNoDataFound.visibility = View.GONE
+                        binding.tvNoDataFound.visibility = View.VISIBLE
 
                     }
                 }

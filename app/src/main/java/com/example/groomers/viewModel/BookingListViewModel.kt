@@ -52,7 +52,7 @@ class BookingListViewModel @Inject constructor(
             } catch (e: HttpException) {
                 _errorMessage.value = "Server error (${e.code()}): Please try again later."
             } catch (e: Exception) {
-                _errorMessage.value = "Something went wrong. Please try again."
+                _errorMessage.value = "Something went wrong. Please try again($e)."
             } finally {
                 _isLoading.value = false
             }

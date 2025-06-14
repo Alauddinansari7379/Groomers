@@ -6,7 +6,7 @@ data class Result(
     val created_at: String,
     val customer_comments: Any,
     val customer_id: Int,
-    val customer_rating: Int,
+    val customer_rating: String,
     val date: String,
     val description: String,
     val email: String,

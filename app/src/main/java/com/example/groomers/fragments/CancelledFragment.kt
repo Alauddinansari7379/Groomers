@@ -68,9 +68,10 @@ class CancelledFragment : Fragment() {
                 }
                 for (i in bookingData.result){
                     if (i.slug!="rejected"){
-                        binding.tvNoDataFound.visibility=View.VISIBLE
+                        binding.tvNoDataFound.visibility=View.GONE
+                        break
                     }else{
-                        binding.tvNoDataFound.visibility = View.GONE
+                        binding.tvNoDataFound.visibility = View.VISIBLE
 
                     }
                 }
