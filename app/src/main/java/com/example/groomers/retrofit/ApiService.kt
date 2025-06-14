@@ -21,6 +21,7 @@ import com.example.groomers.model.modelupdateaddress.ModelUpdateAddress
 import com.example.groomers.model.modeluserdetails.ModelUserDetails
 import com.example.groomers.model.modelvendorlists.ModelVendorsList
 import com.example.groomers.model.modulcountry.ModelCountry
+import com.groomers.groomersvendor.model.modeladdhelp.ModelAddHelp
 import com.groomers.groomersvendor.model.modelcity.ModelCity
 import com.groomers.groomersvendor.model.modelstate.ModelState
 import com.groomers.groomersvendor.model.rating.Rating
@@ -221,4 +222,15 @@ interface ApiService {
         @Query("rating") rating: String,
         @Query("comments") comments: String,
     ): Response<Rating>
+
+    @Multipart
+    @POST("addHelp")
+    suspend fun addHelp(
+        @Header("Authorization") authorization: String,
+        @Query("name") name: String,
+        @Query("mobile") mobile: String,
+        @Query("query") query: String,
+        @Query("description") description: String,
+        @Part image: MultipartBody.Part
+    ): Response<ModelAddHelp>
 }

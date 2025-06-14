@@ -23,6 +23,9 @@
             android:name=".activity.Rating"
             android:exported="false" />
         <activity
+            android:name=".activity.AddHelp"
+            android:exported="false" />
+        <activity
             android:name=".activity.EnterOTP"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />

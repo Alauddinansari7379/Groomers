@@ -37,6 +37,7 @@ class ViewOrderDetails : AppCompatActivity() {
     private var price: Int = 0
     private var userType: String = ""
     private var categoryId: String = ""
+    private var address: String = ""
     private var selectedDayNew: String = ""
     private var formattedDate: String = ""
     private var selectedDay: String = "1"  // Default to Monday
@@ -60,8 +61,10 @@ class ViewOrderDetails : AppCompatActivity() {
         price = intent?.getIntExtra("price", 0) ?: 0
         userType = intent?.getStringExtra("user_type") ?: ""
         categoryId = intent?.getStringExtra("categoryId") ?: ""
-
-       // setupTabs()
+        address = intent?.getStringExtra("address") ?: ""
+        binding.tvServiceName1.text = serviceName
+        binding.tvServiceAddress.text = address
+        // setupTabs()
         setupRecyclerView()
         setupServiceDetails()
         observeViewModel()
@@ -70,7 +73,7 @@ class ViewOrderDetails : AppCompatActivity() {
         fetchSlots()
 
         binding.btnContinueToPayment.setOnClickListener {
-            if (selectedStartTime!!.isEmpty()|| selectedEndTime!!.isEmpty()) {
+            if (selectedStartTime!!.isEmpty() || selectedEndTime!!.isEmpty()) {
                 Toast.makeText(this, "Please select a time slot", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -83,6 +86,7 @@ class ViewOrderDetails : AppCompatActivity() {
                 putExtra("serviceName", serviceName)
                 putExtra("price", price.toString())
                 putExtra("description", description)
+                putExtra("formattedDate", formattedDate)
                 putExtra("slotId", id)
                 putExtra("serviceId", serviceId)
                 putExtra("vendorId", vendorId)
@@ -97,7 +101,7 @@ class ViewOrderDetails : AppCompatActivity() {
             calendar.set(year, month, dayOfMonth)
 
             val dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1 // Sunday = 1, so subtract 1
-             selectedDayNew = days[dayIndex] // Get "Mon", "Tue", etc.
+            selectedDayNew = days[dayIndex] // Get "Mon", "Tue", etc.
 
             Log.d("SelectedDay", selectedDayNew)
             selectedDay = when (selectedDayNew) {
@@ -118,36 +122,36 @@ class ViewOrderDetails : AppCompatActivity() {
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
             // Format: Fri, Jan 3, 2025 • 10:41 AM (or whatever current time is)
-           // val formatter = SimpleDateFormat("EEE, MMM d, yyyy • hh:mm a", Locale.getDefault())
-            val formatter = SimpleDateFormat("EEE, MMM d, yyyy", Locale.getDefault())
+            // val formatter = SimpleDateFormat("EEE, MMM d, yyyy • hh:mm a", Locale.getDefault())
+//            val formatter = SimpleDateFormat("EEE, MMM d, yyyy", Locale.getDefault())
+            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-            val formattedDateNew = formatter.format(calendar.time)
-            formattedDate = formattedDateNew
+            formattedDate = formatter.format(calendar.time)
 
             Log.d("FormattedDate", formattedDate)
-        }
 
+        }
 
 
     }
 
-/*    private fun setupTabs() {
-        val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-        days.forEachIndexed { index, day ->
-            binding.tabLayoutDays.addTab(binding.tabLayoutDays.newTab().setText(day))
-        }
-
-        binding.tabLayoutDays.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                selectedDay =
-                    (tab?.position?.plus(1)).toString() // Convert to "1" for Monday, "2" for Tuesday, etc.
-                fetchSlots()
+    /*    private fun setupTabs() {
+            val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+            days.forEachIndexed { index, day ->
+                binding.tabLayoutDays.addTab(binding.tabLayoutDays.newTab().setText(day))
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
-    }*/
+            binding.tabLayoutDays.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    selectedDay =
+                        (tab?.position?.plus(1)).toString() // Convert to "1" for Monday, "2" for Tuesday, etc.
+                    fetchSlots()
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
+            })
+        }*/
 
     private fun setupRecyclerView() {
         timeSlotAdapter =
@@ -174,7 +178,7 @@ class ViewOrderDetails : AppCompatActivity() {
     }
 
     private fun fetchSlots() {
-        selectedStartTime=""
+        selectedStartTime = ""
         val vendorId = vendorId  // Set dynamically if required
         val categoryId = categoryId    // Set dynamically if required
         val serviceId = serviceId  // Set dynamically if required

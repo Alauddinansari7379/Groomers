@@ -44,6 +44,7 @@ class ReviewAndConfirm : AppCompatActivity() {
         val description = intent.getStringExtra("description")
         val selectedSeats = intent.getStringExtra("selectedSeats")
         val slotId = intent.getStringExtra("slotId")
+        val formattedDate = intent.getStringExtra("formattedDate")
         val serviceId = intent.getStringExtra("serviceId")
         val vendorId = intent.getStringExtra("vendorId")
         var selectedDayNew = intent.getStringExtra("formattedDate")
@@ -68,19 +69,21 @@ class ReviewAndConfirm : AppCompatActivity() {
         }
         binding.btnContinue.setOnClickListener {
             sessionManager.accessToken?.let { token ->
-                viewModel.createBooking(
-                    token,
-                    sessionManager.userId!!.toInt(),
-                    vendorId!!.toInt(),
-                    price!!.toInt(),
-                    paymentMode = 2,
-                    slotId!!.toInt(),
-                    serviceId!!.toInt(),
-                    date,
-                    getCurrentTime(),
-                    notes = "",
-                    selectedSeats!!
-                )
+                if (formattedDate != null) {
+                    viewModel.createBooking(
+                        token,
+                        sessionManager.userId!!.toInt(),
+                        vendorId!!.toInt(),
+                        price!!.toInt(),
+                        paymentMode = 2,
+                        slotId!!.toInt(),
+                        serviceId!!.toInt(),
+                        formattedDate,
+                        getCurrentTime(),
+                        notes = "",
+                        selectedSeats!!
+                    )
+                }
             } ?: showError("Error: Missing Token")
         }
     }

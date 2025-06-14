@@ -102,6 +102,7 @@ class ServiceFragment : Fragment(), Booking {
         id: String,
         user_id: String,
         serviceType: String,
+        address: String,
     ) {
         val intent = Intent(requireContext(), ViewOrderDetails::class.java).apply {
             putExtra("serviceName", serviceName)
@@ -112,6 +113,7 @@ class ServiceFragment : Fragment(), Booking {
             putExtra("serviceId", id)
             putExtra("vendorId", user_id)
             putExtra("categoryId", serviceType)
+            putExtra("address", address)
         }
         startActivity(intent)
     }

@@ -243,6 +243,7 @@
                         android:src="@drawable/suggestion" />
 
                     <Button
+                        android:id="@+id/btnSuggestion"
                         android:layout_width="110dp"
                         android:layout_height="35dp"
                         android:backgroundTint="@color/Blue"

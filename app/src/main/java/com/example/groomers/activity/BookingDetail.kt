@@ -8,8 +8,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
-import com.example.groomers.R
 import com.example.groomers.adapter.Booking
 import com.example.groomers.adapter.ImageSliderAdapter
 import com.example.groomers.adapter.PopularServiceAdapter
@@ -130,7 +128,8 @@ class BookingDetail : AppCompatActivity(), Booking {
         user_type: String,
         id: String,
         userid: String,
-        categoryId: String
+        categoryId: String,
+        address: String
     ) {
         val intent = Intent(this, ViewOrderDetails::class.java).apply {
             putExtra("serviceName", serviceName)
@@ -140,6 +139,7 @@ class BookingDetail : AppCompatActivity(), Booking {
             putExtra("vendorId", vendorId)
             putExtra("serviceId", serviceId)
             putExtra("user_type", user_type)
+            putExtra("address", address)
         }
         startActivity(intent)
     }

@@ -28,7 +28,7 @@ class PopularServiceAdapter(private var categoryList : List<Result>, val context
                 .into(holder.binding.ivServiceImage)
             holder.binding.btnBook.setOnClickListener {
                 booking.booking(serviceName,description,image,price,user_type, id.toString(),
-                    user_id.toString(),serviceType
+                    user_id.toString(),serviceType,address
                 )
             }
         }
@@ -50,5 +50,6 @@ interface Booking{
         id: String,
         user_id: String,
         serviceType: String,
+        address: String,
     )
 }
