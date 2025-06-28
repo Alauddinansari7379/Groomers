@@ -8,6 +8,8 @@ import android.location.Geocoder
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -45,7 +47,6 @@ import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
 import javax.inject.Inject
-
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
@@ -67,6 +68,10 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
     @Inject
     lateinit var sessionManager: SessionManager
 
+    private var originalCategoryList: List<com.example.groomers.model.modelcategory.Result> = emptyList()
+    private var originalServiceList: List<com.example.groomers.model.modelservice.Result> = emptyList()
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,6 +83,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         val apiService = ApiServiceProvider.getApiService()
         categoryViewModel.getCategory(apiService)
         setupRecyclerView()
@@ -97,6 +103,8 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         }
 
         setupSlider(emptyList()) // Initialize slider with empty list
+
+        setupSearchBar()
     }
 
     private fun setupRecyclerView() {
@@ -112,22 +120,15 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
                 putExtra("serviceId", selectedService.id)
                 putExtra("service_price", selectedService.price.toString())
             }
-            Log.d(
-                "HomeFragment",
-                "Navigating to BookingDetail with: ${selectedService.serviceName}"
-            )
+            Log.d("HomeFragment", "Navigating to BookingDetail with: ${selectedService.serviceName}")
             startActivity(intent)
         }
         binding.rvHorizontalList.adapter = serviceAdapter
 
-
-
         allVendorsAdapter = AllVendorsAdapter(emptyList()) { selectedService ->
-//            shareViewModel.selectItem(selectedService.user_id.toString())
             userId = selectedService.user_id.toString()
             val intent = Intent(requireContext(), BookingDetail::class.java).apply {
                 putExtra("service_name", selectedService.name)
-//                putExtra("service_image", selectedService.profile_picture.toString())
                 putExtra("service_image", "")
                 putExtra("service_description", selectedService.aboutBusiness)
                 putExtra("service_type", selectedService.services)
@@ -136,10 +137,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
                 putExtra("serviceId", selectedService.user_id)
                 putExtra("service_price", selectedService.teamSize.toString())
             }
-            Log.d(
-                "HomeFragment",
-                "Navigating to BookingDetail with: ${selectedService.name}"
-            )
+            Log.d("HomeFragment", "Navigating to BookingDetail with: ${selectedService.name}")
             startActivity(intent)
         }
         binding.rvHorizontalVendorList.adapter = allVendorsAdapter
@@ -184,9 +182,10 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
         viewModel.modelService.observe(viewLifecycleOwner) { response ->
             response?.result?.let { services ->
+                originalServiceList = services
                 serviceAdapter.updateData(services)
-                val imageUrls = services.map { it.image } // Extract image URLs for slider
-                setupSlider(imageUrls) // Update slider with images
+                val imageUrls = services.map { it.image }
+                setupSlider(imageUrls)
             } ?: run {
                 Toast.makeText(requireContext(), "No data available", Toast.LENGTH_SHORT).show()
             }
@@ -211,7 +210,8 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         }
 
         categoryViewModel.modelCategory.observe(viewLifecycleOwner) { modelCategory ->
-            binding.rvCategory1.adapter = CategoryAdapter(modelCategory.result) { selectedCategory ->
+            originalCategoryList = modelCategory.result
+            binding.rvCategory1.adapter = CategoryAdapter(originalCategoryList) { selectedCategory ->
                 userId = selectedCategory.id.toString()
                 val intent = Intent(requireContext(), ShowVendors::class.java).apply {
                     putExtra("category_id", selectedCategory.id.toString())
@@ -220,7 +220,6 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
                 startActivity(intent)
             }
         }
-
 
         categoryViewModel.isLoading.observe(requireActivity()) { isLoading ->
             if (isLoading) CustomLoader.showLoaderDialog(context)
@@ -242,7 +241,6 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         ) {
             fusedLocationProviderClient?.lastLocation
                 ?.addOnSuccessListener { location ->
-                    // Check if fragment is still attached before accessing context or binding
                     if (isAdded && location != null) {
                         try {
                             val context = context ?: return@addOnSuccessListener
@@ -268,7 +266,6 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         }
     }
 
-
     private fun askPermission() {
         ActivityCompat.requestPermissions(
             requireActivity(),
@@ -277,11 +274,35 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         )
     }
 
+    private fun setupSearchBar() {
+        binding.searchBar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val query = s.toString().trim().lowercase()
+
+                val filteredCategories = originalCategoryList.filter {
+                    it.category_name.contains(query, ignoreCase = true)
+                }
+                (binding.rvCategory1.adapter as? CategoryAdapter)?.updateData(filteredCategories)
+
+                val filteredServices = originalServiceList.filter {
+                    it.serviceName.contains(query, ignoreCase = true) ||
+                            it.description.contains(query, ignoreCase = true) ||
+                            it.address.contains(query, ignoreCase = true)
+                }
+                serviceAdapter.updateData(filteredServices)
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         timer?.cancel()
     }
-    companion object{
+
+    companion object {
         var userId = ""
     }
 }

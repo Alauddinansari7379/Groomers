@@ -8,7 +8,7 @@ import com.example.groomers.databinding.CategoryCell1Binding
 import com.example.groomers.model.modelcategory.Result
 
 class CategoryAdapter(
-    private val categoryList: List<Result>,
+    private var categoryList: List<Result>,
     private val onItemClick: (Result) -> Unit
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
@@ -33,5 +33,10 @@ class CategoryAdapter(
         holder.binding.root.setOnClickListener {
             onItemClick(item)
         }
+    }
+    // ✅ Add this function to update the adapter's list
+    fun updateData(newList: List<Result>) {
+        categoryList = newList
+        notifyDataSetChanged()
     }
 }

@@ -1,6 +1,4 @@
 package com.example.groomers.activity
-
-
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -22,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-
 @AndroidEntryPoint
 class ViewOrderDetails : AppCompatActivity() {
     private lateinit var vendorId: String
@@ -62,14 +59,35 @@ class ViewOrderDetails : AppCompatActivity() {
         userType = intent?.getStringExtra("user_type") ?: ""
         categoryId = intent?.getStringExtra("categoryId") ?: ""
         address = intent?.getStringExtra("address") ?: ""
+
         binding.tvServiceName1.text = serviceName
         binding.tvServiceAddress.text = address
-        // setupTabs()
+
         setupRecyclerView()
         setupServiceDetails()
         observeViewModel()
 
-        // Fetch slots for default day
+        // ✅ Initialize selected day and formattedDate with today's date
+        val calendar = Calendar.getInstance()
+        val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+        val dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1 // Sunday = 1, so subtract 1
+
+        selectedDayNew = days[dayIndex]
+        selectedDay = when (selectedDayNew) {
+            "Mon" -> "1"
+            "Tue" -> "2"
+            "Wed" -> "3"
+            "Thu" -> "4"
+            "Fri" -> "5"
+            "Sat" -> "6"
+            "Sun" -> "7"
+            else -> "1"
+        }
+
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        formattedDate = formatter.format(calendar.time)
+
+        // ✅ Now fetch with correct day and date
         fetchSlots()
 
         binding.btnContinueToPayment.setOnClickListener {
@@ -86,24 +104,20 @@ class ViewOrderDetails : AppCompatActivity() {
                 putExtra("serviceName", serviceName)
                 putExtra("price", price.toString())
                 putExtra("description", description)
-                putExtra("formattedDate", formattedDate)
                 putExtra("slotId", id)
                 putExtra("serviceId", serviceId)
                 putExtra("vendorId", vendorId)
             }
             startActivity(intent)
         }
-        val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-
 
         binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val calendar = Calendar.getInstance()
-            calendar.set(year, month, dayOfMonth)
+            val calendarNew = Calendar.getInstance()
+            calendarNew.set(year, month, dayOfMonth)
 
-            val dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1 // Sunday = 1, so subtract 1
-            selectedDayNew = days[dayIndex] // Get "Mon", "Tue", etc.
+            val dayIndexNew = calendarNew.get(Calendar.DAY_OF_WEEK) - 1
+            selectedDayNew = days[dayIndexNew]
 
-            Log.d("SelectedDay", selectedDayNew)
             selectedDay = when (selectedDayNew) {
                 "Mon" -> "1"
                 "Tue" -> "2"
@@ -114,48 +128,21 @@ class ViewOrderDetails : AppCompatActivity() {
                 "Sun" -> "7"
                 else -> "1"
             }
-            fetchSlots()
-            Log.d("SelectedDayNumber", selectedDay ?: "null")
-            // Set only date (time stays as current system time)
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            // Format: Fri, Jan 3, 2025 • 10:41 AM (or whatever current time is)
-            // val formatter = SimpleDateFormat("EEE, MMM d, yyyy • hh:mm a", Locale.getDefault())
-//            val formatter = SimpleDateFormat("EEE, MMM d, yyyy", Locale.getDefault())
-            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val formatterNew = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            formattedDate = formatterNew.format(calendarNew.time)
 
-            formattedDate = formatter.format(calendar.time)
-
+            Log.d("SelectedDay", selectedDayNew)
+            Log.d("SelectedDayNumber", selectedDay)
             Log.d("FormattedDate", formattedDate)
 
+            fetchSlots()
         }
-
-
     }
-
-    /*    private fun setupTabs() {
-            val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-            days.forEachIndexed { index, day ->
-                binding.tabLayoutDays.addTab(binding.tabLayoutDays.newTab().setText(day))
-            }
-
-            binding.tabLayoutDays.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    selectedDay =
-                        (tab?.position?.plus(1)).toString() // Convert to "1" for Monday, "2" for Tuesday, etc.
-                    fetchSlots()
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            })
-        }*/
 
     private fun setupRecyclerView() {
         timeSlotAdapter =
-            TimeSlotAdapter(emptyList()) { result, seatCount -> // ✅ Receive full result object
+            TimeSlotAdapter(emptyList()) { result, seatCount ->
                 selectedStartTime = result.start_time
                 selectedEndTime = result.end_time
                 selectedSeatCount = seatCount
@@ -179,10 +166,6 @@ class ViewOrderDetails : AppCompatActivity() {
 
     private fun fetchSlots() {
         selectedStartTime = ""
-        val vendorId = vendorId  // Set dynamically if required
-        val categoryId = categoryId    // Set dynamically if required
-        val serviceId = serviceId  // Set dynamically if required
-
         viewModel.fetchSlotBooking(vendorId, categoryId, selectedDay, serviceId)
     }
 
@@ -194,6 +177,7 @@ class ViewOrderDetails : AppCompatActivity() {
                 Toast.makeText(this, "Failed to fetch time slots", Toast.LENGTH_SHORT).show()
             }
         })
+
         viewModel.isLoading.observe(this) { isLoading ->
             if (isLoading) CustomLoader.showLoaderDialog(this)
             else CustomLoader.hideLoaderDialog()
@@ -207,7 +191,7 @@ class ViewOrderDetails : AppCompatActivity() {
                     duration = Toastic.LENGTH_SHORT,
                     type = Toastic.ERROR,
                     isIconAnimated = true,
-                    textColor = if (false) Color.BLUE else null,
+                    textColor = null
                 ).show()
             }
         }

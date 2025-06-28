@@ -2,16 +2,14 @@ package com.example.groomers.fragments
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.groomers.R
 import com.example.groomers.adapter.BookingsAdapterCanclled
-import com.example.groomers.adapter.BookingsAdapterConfirm
 import com.example.groomers.databinding.FragmentCancelledBinding
-import com.example.groomers.databinding.FragmentConfirmedBinding
 import com.example.groomers.helper.Toastic
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.BookingListViewModel

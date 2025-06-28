@@ -30,9 +30,9 @@ class BookingsAdapter(private val serviceList: List<Result>, private val context
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BookingsViewMode, position: Int) {
-        with(serviceList[position]) {
+        with(filteredList[position]) {
             with(holder.binding) {
-                if (serviceList[position].profile_picture != null) {
+                if (filteredList[position].profile_picture != null) {
                     Glide.with(context)
                         .load("https://groomers.co.in/public/uploads/$profile_picture")
                         .into(holder.binding.imageView)
