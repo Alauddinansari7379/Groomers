@@ -127,7 +127,7 @@ class EnterOTP : AppCompatActivity() {
 
     private fun apiCallResetPass(confirmPassword: String) {
         CustomLoader.showLoaderDialog(context)
-        ApiClient.apiService.resetPassword(email, "customer", confirmPassword)
+        ApiClient.apiService.resetPassword(email, "user", confirmPassword)
             .enqueue(object : Callback<ModelForgot> {
                 override fun onResponse(
                     call: Call<ModelForgot>, response: Response<ModelForgot>
@@ -138,10 +138,16 @@ class EnterOTP : AppCompatActivity() {
                             404 -> myToast(context, "Something went wrong", false)
                             500 -> myToast(context, "Server Error", false)
                             else -> {
-                                myToast(context, "Password changed successfully", true)
-                                val intent = Intent(context, Login::class.java)
-                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(intent)
+                                if (response.body()!!.status==1){
+                                    myToast(context, "Password changed successfully", true)
+                                    val intent = Intent(context, Login::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    startActivity(intent)
+                                }else{
+                                    myToast(context, response.body()!!.message, true)
+
+                                }
+
 
 
                             }
