@@ -64,7 +64,7 @@ class ConfirmedFragment : Fragment(), BookingsAdapterConfirm.Review {
                      adapter = BookingsAdapterConfirm(bookingData.result,requireContext(),this@ConfirmedFragment)
                  }
                 for (i in bookingData.result){
-                    if (i.slug!="accepted"){
+                    if (i.slug=="accepted"){
                         binding.tvNoDataFound.visibility=View.GONE
                         break
                     }else{

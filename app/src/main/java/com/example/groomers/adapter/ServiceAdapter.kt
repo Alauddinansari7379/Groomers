@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.ehcf.Helper.currency
 import com.example.groomers.R
 import com.example.groomers.databinding.ServiceRowBinding
 import com.example.groomers.model.modelservice.Result
@@ -28,7 +29,7 @@ class ServiceAdapter(
                     Log.d("ServiceAdapter", "Item Clicked: ${service.serviceName}") // Debug log
                     onItemClick(service) // Call click listener
                 }
-                tvPrice.text = service.price.toString()
+                tvPrice.text = "$currency"+service.price.toString()
                 tvDescription.text = service.description
                 tvServiceName.text = service.serviceName
                 tvAddress.text = service.address

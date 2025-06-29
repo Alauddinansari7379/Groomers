@@ -28,7 +28,7 @@ class AllVendorsAdapter(private var serviceList: List<Result>,
                 tvService.text = service.services
                 tvName.text = service.name.toString()
                 tvBusinessName.text = service.businessName
-                tvAboutBusiness.text = service.aboutBusiness
+                tvAboutBusiness.text = service.address
 //                tvAddress.text = service.address
             }
         }

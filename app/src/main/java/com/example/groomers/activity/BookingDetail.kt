@@ -4,10 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.ehcf.Helper.currency
 import com.example.groomers.adapter.Booking
 import com.example.groomers.adapter.ImageSliderAdapter
 import com.example.groomers.adapter.PopularServiceAdapter
@@ -42,6 +44,7 @@ class BookingDetail : AppCompatActivity(), Booking {
         binding = ActivityBookingDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.tvPriceSymbol.text= currency
         receiveData() // Receive intent data
         setupListeners()
 //        setupRecyclerView()
@@ -100,6 +103,7 @@ class BookingDetail : AppCompatActivity(), Booking {
             val baseUrl = "https://groomers.co.in/public/uploads/"
             val imageUrl = baseUrl + it
             imageUrls.addAll(listOf(imageUrl, imageUrl, imageUrl))
+            Log.e("ImageSlider",imageUrls.toString())
         }
     }
 

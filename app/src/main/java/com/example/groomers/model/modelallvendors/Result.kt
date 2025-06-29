@@ -11,10 +11,11 @@ data class Result(
     val user_id: Int,
     val mobile: String,
     val name: String,
-    val profile_picture: Any,
+    val image: String,
+    val profile_picture: String,
     val services: String,
     val statename: String,
     val teamSize: String,
-    val vendorCoverImage: Any,
+    val vendorCoverImage: String,
     val zipcode: Int
 )

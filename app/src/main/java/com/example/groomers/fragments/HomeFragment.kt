@@ -129,7 +129,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
             userId = selectedService.user_id.toString()
             val intent = Intent(requireContext(), BookingDetail::class.java).apply {
                 putExtra("service_name", selectedService.name)
-                putExtra("service_image", "")
+                putExtra("service_image", selectedService.profile_picture.toString())
                 putExtra("service_description", selectedService.aboutBusiness)
                 putExtra("service_type", selectedService.services)
                 putExtra("service_address", selectedService.address)

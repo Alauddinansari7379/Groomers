@@ -78,7 +78,7 @@ class BookingsAdapterConfirm(
                                 R.color.green
                             )
                         )
-                        if (comments == null) {
+                        if (!slug.equals("accepted")&&comments == null) {
                             btnReview.visibility = View.VISIBLE
                         } else {
                             btnReview.visibility = View.GONE

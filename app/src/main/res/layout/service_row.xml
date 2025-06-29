@@ -65,6 +65,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hair Cut"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:textColor="#444444"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -79,7 +81,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Discount: "
+                    android:text="Price: "
                     android:textColor="#666666"
                     android:textSize="12sp"
                     android:fontFamily="sans-serif-medium" />
@@ -105,6 +107,7 @@
                     android:layout_height="wrap_content"
                     android:text="Address: "
                     android:textColor="#666666"
+                    android:visibility="gone"
                     android:textSize="12sp"
                     android:fontFamily="sans-serif-medium" />
 
@@ -116,6 +119,7 @@
                     android:textColor="#444444"
                     android:textSize="12sp"
                     android:maxLines="2"
+                    android:visibility="gone"
                     android:ellipsize="end" />
             </LinearLayout>
         </LinearLayout>

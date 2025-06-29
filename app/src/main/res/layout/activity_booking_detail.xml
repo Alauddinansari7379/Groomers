@@ -97,9 +97,17 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginEnd="4dp"
+                    android:visibility="gone"
                     android:src="@drawable/rupeesymbol"
                     app:tint="@color/black" />
-
+                <TextView
+                    android:id="@+id/tvPriceSymbol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_bold"
+                    android:text="$"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
                 <TextView
                     android:id="@+id/tvPrice"
                     android:layout_width="wrap_content"
