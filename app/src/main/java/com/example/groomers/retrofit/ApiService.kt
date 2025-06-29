@@ -100,7 +100,8 @@ interface ApiService {
         @Query("date") date: String,
         @Query("time") time: String,
         @Query("notes") notes: String? = null,
-        @Query("quantity") quantity: String
+        @Query("quantity") quantity: String,
+        @Query("currentAddress") currentAddress: String,
     ): Response<ModelBooking>
 
     @POST("updateCustomerProfile")

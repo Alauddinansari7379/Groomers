@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import okio.IOException
 import retrofit2.HttpException
 import javax.inject.Inject
+
 @HiltViewModel
 class BookingViewModel @Inject constructor(
     private val apiService: ApiService,
@@ -29,7 +30,8 @@ class BookingViewModel @Inject constructor(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun createBooking(token: String,
+    fun createBooking(
+        token: String,
         customerId: Int,
         vendorId: Int,
         total: Int,
@@ -39,14 +41,26 @@ class BookingViewModel @Inject constructor(
         date: String,
         time: String,
         notes: String? = null,
-                      sit: String
+        sit: String,
+        currentAddress: String,
     ) {
         _isLoading.postValue(true)
 
         viewModelScope.launch {
             try {
-                val response = apiService.createBooking("Bearer $token",
-                    customerId, vendorId, total, paymentMode, slotId, serviceId, date, time, notes,sit
+                val response = apiService.createBooking(
+                    "Bearer $token",
+                    customerId,
+                    vendorId,
+                    total,
+                    paymentMode,
+                    slotId,
+                    serviceId,
+                    date,
+                    time,
+                    notes,
+                    sit,
+                    currentAddress
                 )
 
                 if (response.isSuccessful) {
@@ -55,7 +69,9 @@ class BookingViewModel @Inject constructor(
                             _bookingResult.postValue(result)
 
                         } else {
-                            _errorMessage.postValue(result.message ?: "Booking failed. Please try again.")
+                            _errorMessage.postValue(
+                                result.message ?: "Booking failed. Please try again."
+                            )
                         }
                     } ?: run {
                         _errorMessage.postValue("Server returned an empty response. Please try again.")

@@ -34,5 +34,6 @@ data class Result(
     val updated_at: String,
     val user_type: String,
     val vendorName: String,
+    val currentAddress: String,
     val vendor_id: Int
 )

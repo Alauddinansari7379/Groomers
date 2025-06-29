@@ -1,4 +1,5 @@
 package com.example.groomers.sharedpreferences
+
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
@@ -18,11 +19,25 @@ class SessionManager(context: Context) {
         private const val IS_LOGIN = "IS_LOGIN"
         private const val USERTYPE = "USERTYPE"
         private const val PROFILE_PICTURE_URL = "PROFILE_PICTURE_URL"
+        private const val ADDRESS = "ADDRESS"
+        private const val ADDRESS_ID = "ADDRESS_ID"
     }
+
     var accessToken: String?
         get() = prefs.getString(ACCESS_TOKEN, null)
         set(value) {
             prefs.edit { putString(ACCESS_TOKEN, value) }
+        }
+    var address: String?
+        get() = prefs.getString(ADDRESS, null)
+        set(value) {
+            prefs.edit { putString(ADDRESS, value) }
+        }
+
+    var addressId: String?
+        get() = prefs.getString(ADDRESS_ID, null)
+        set(value) {
+            prefs.edit { putString(ADDRESS_ID, value) }
         }
     var mainAccessToken: String?
         get() = prefs.getString(MAIN_ACCESS_TOKEN, null)
@@ -73,6 +88,7 @@ class SessionManager(context: Context) {
     fun clearSession() {
         prefs.edit { clear() }
     }
+
     var profilePictureUrl: String?
         get() = prefs.getString(PROFILE_PICTURE_URL, null)
         set(value) {

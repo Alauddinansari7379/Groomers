@@ -47,9 +47,9 @@ class BookingsAdapterCanclled(private val serviceList: List<Result>, private val
                 tvGender.text = user_type
                 tvStartTime.text = start_time
                 tvEndTime.text = end_time
-                tvAddress.text = address
+                tvAddress.text = currentAddress
                 tvDescription.text = description
-                tvBookingStatues.text = slug
+                tvBookingStatues.text = status_for_customer
                 tvRating.text = rating.toString()
                 when (slug) {
                     "waiting_for_accept" -> {

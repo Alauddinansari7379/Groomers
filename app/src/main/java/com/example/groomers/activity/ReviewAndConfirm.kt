@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.convertTo12Hour
 import com.example.ehcf.Helper.currency
 import com.example.groomers.adapter.TimeSlotAdapter.Companion.seat
@@ -48,7 +49,7 @@ class ReviewAndConfirm : AppCompatActivity() {
         val serviceId = intent.getStringExtra("serviceId")
         val vendorId = intent.getStringExtra("vendorId")
         var selectedDayNew = intent.getStringExtra("formattedDate")
-         binding.tvPrice1.text = currency+price
+        binding.tvPrice1.text = currency + price
         binding.tvDescription.text = description
         binding.tvServiceName.text = serviceName
         val date = getCurrentDate()
@@ -60,7 +61,8 @@ class ReviewAndConfirm : AppCompatActivity() {
         }
         seat
         binding.tvCurrentDateTime.text = selectedDayNew + " " + convertTo12Hour(selectedStartTime!!)
-        binding.tvSlotTime.text =  convertTo12Hour(selectedStartTime!!)+ " To "  +convertTo12Hour(selectedEndTime!!)
+        binding.tvSlotTime.text =
+            convertTo12Hour(selectedStartTime!!) + " To " + convertTo12Hour(selectedEndTime!!)
 
         observeViewModel()
 
@@ -68,23 +70,39 @@ class ReviewAndConfirm : AppCompatActivity() {
             onBackPressed()
         }
         binding.btnContinue.setOnClickListener {
-            sessionManager.accessToken?.let { token ->
-                if (formattedDate != null) {
-                    viewModel.createBooking(
-                        token,
-                        sessionManager.userId!!.toInt(),
-                        vendorId!!.toInt(),
-                        price!!.toInt(),
-                        paymentMode = 2,
-                        slotId!!.toInt(),
-                        serviceId!!.toInt(),
-                        formattedDate,
-                        getCurrentTime(),
-                        notes = "",
-                        selectedSeats!!
-                    )
-                }
-            } ?: showError("Error: Missing Token")
+            if (sessionManager.address!!.isEmpty()) {
+                SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Please add your address.")
+                    .setConfirmText("Add address")
+                    .showCancelButton(true)
+                    .setConfirmClickListener { sDialog ->
+                        sDialog.cancel()
+                        startActivity(Intent(this, AddAddress::class.java))
+                    }
+                    .setCancelClickListener { sDialog ->
+                        sDialog.cancel()
+                    }
+                    .show()
+            } else {
+                sessionManager.accessToken?.let { token ->
+                    if (formattedDate != null) {
+                        viewModel.createBooking(
+                            token,
+                            sessionManager.userId!!.toInt(),
+                            vendorId!!.toInt(),
+                            price!!.toInt(),
+                            paymentMode = 2,
+                            slotId!!.toInt(),
+                            serviceId!!.toInt(),
+                            formattedDate,
+                            getCurrentTime(),
+                            notes = "",
+                            selectedSeats!!,
+                            sessionManager.address.toString()
+                        )
+                    }
+                } ?: showError("Error: Missing Token")
+            }
         }
     }
 

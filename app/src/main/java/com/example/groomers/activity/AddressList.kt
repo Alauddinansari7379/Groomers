@@ -52,7 +52,7 @@ class AddressList : AppCompatActivity(), ClickEvent {
     }
 
     private fun setupRecyclerView() {
-        adapter = AddressListAdapter(emptyList(), this)
+        adapter = AddressListAdapter(emptyList(), this,this)
         binding.recyclerViewAddresses.apply {
             layoutManager = LinearLayoutManager(this@AddressList)
             adapter = this@AddressList.adapter

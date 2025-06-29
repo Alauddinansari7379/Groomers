@@ -2,11 +2,12 @@ package com.example.groomers.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +17,7 @@ import com.example.groomers.adapter.Booking
 import com.example.groomers.adapter.PopularServiceAdapter
 import com.example.groomers.databinding.FragmentServiceBinding
 import com.example.groomers.fragments.HomeFragment.Companion.userId
+import com.example.groomers.model.modelservice.Result
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.ServiceViewModel
 import com.example.groomers.viewModel.SharedViewModel
@@ -26,71 +28,80 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ServiceFragment : Fragment(), Booking {
-    lateinit var binding: FragmentServiceBinding
+
+    private lateinit var binding: FragmentServiceBinding
+
     @Inject
     lateinit var sessionManager: SessionManager
+
     private val viewModel: ServiceViewModel by viewModels()
-    private lateinit var serviceAdapter: PopularServiceAdapter
     private val shareViewModel: SharedViewModel by activityViewModels()
+
+    private lateinit var serviceAdapter: PopularServiceAdapter
+    private var fullServiceList: List<Result> = emptyList() // For search filtering
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         return inflater.inflate(R.layout.fragment_service, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentServiceBinding.bind(view)
+
         setupRecyclerView()
-        observer()
+        setupSearch()
+
+
+        binding.edtSearch.addTextChangedListener { str ->
+            if (fullServiceList.isNotEmpty()) {
+                val filtered = fullServiceList.filter {
+                    it.serviceName?.contains(str.toString(), ignoreCase = true) == true ||
+                            it.description?.contains(str.toString(), ignoreCase = true) == true
+                }
+                serviceAdapter.updateData(filtered)
+            }
+        }
+        observeViewModel()
     }
-    fun observer(){
+
+    private fun setupRecyclerView() {
+        serviceAdapter = PopularServiceAdapter(emptyList(), requireActivity(), this)
+        binding.rvPopularService.adapter = serviceAdapter
+    }
+
+    private fun setupSearch() {
+
+    }
+
+    private fun observeViewModel() {
         sessionManager.accessToken?.let { token ->
             lifecycleScope.launch {
-//                viewModel.getServiceList(token, sessionManager.userType.toString())
-//                viewModel.getServiceList(token, "Male")
-//                shareViewModel.selectedItem.observe(viewLifecycleOwner) { event ->
-//                    event.getContentIfNotHandled()?.let { item ->
-                        viewModel.getServiceListByVendorId(token, userId.toInt())
-//                    }
-//                }
-
-
+                viewModel.getServiceListByVendorId(token, userId.toInt())
             }
         } ?: run {
-            Toast.makeText(requireActivity(), "Error: Missing Token", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireActivity(), "Missing token", Toast.LENGTH_LONG).show()
         }
-        viewModel.isLoading.observe(requireActivity()) { isLoading ->
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) CustomLoader.showLoaderDialog(requireActivity())
             else CustomLoader.hideLoaderDialog()
         }
 
-        viewModel.errorMessage.observe(requireActivity()) { errorMessage ->
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             Toast.makeText(requireActivity(), errorMessage, Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.modelAllPostByVendorId.observe(requireActivity()) { response ->
+        viewModel.modelAllPostByVendorId.observe(viewLifecycleOwner) { response ->
             response?.result?.let { services ->
-                serviceAdapter.updateData(services) // Update adapter data instead of reinitializing
+                fullServiceList = services
+                serviceAdapter.updateData(services)
             } ?: run {
                 Toast.makeText(requireActivity(), "No data available", Toast.LENGTH_SHORT).show()
             }
         }
-
-//        viewModel.modelService.observe(requireActivity()) { response ->
-//            response?.result?.let { services ->
-//                serviceAdapter.updateData(services) // Update adapter data instead of reinitializing
-//            } ?: run {
-//                Toast.makeText(requireActivity(), "No data available", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-    }
-    private fun setupRecyclerView() {
-        serviceAdapter = PopularServiceAdapter(emptyList(),requireActivity(),this)
-        binding.rvPopularService.adapter = serviceAdapter
     }
 
     override fun booking(
@@ -102,7 +113,7 @@ class ServiceFragment : Fragment(), Booking {
         id: String,
         user_id: String,
         serviceType: String,
-        address: String,
+        address: String
     ) {
         val intent = Intent(requireContext(), ViewOrderDetails::class.java).apply {
             putExtra("serviceName", serviceName)

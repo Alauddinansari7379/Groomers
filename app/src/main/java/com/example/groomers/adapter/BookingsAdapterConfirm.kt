@@ -24,7 +24,7 @@ class BookingsAdapterConfirm(
     RecyclerView.Adapter<BookingsAdapterConfirm.BookingsViewMode>() {
 
     // Filtered list with condition
-    private val filteredList = serviceList.filter { it.slug == "accepted" }
+    private val filteredList = serviceList.filter { it.slug == "accepted" || it.slug == "completed"  }
 
     inner class BookingsViewMode(val binding: BookingItemNewBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -78,6 +78,7 @@ class BookingsAdapterConfirm(
                                 R.color.green
                             )
                         )
+
                         if (!slug.equals("accepted")&&comments == null) {
                             btnReview.visibility = View.VISIBLE
                         } else {
@@ -102,6 +103,11 @@ class BookingsAdapterConfirm(
                                 R.color.green
                             )
                         )
+                        if (slug.contains("completed")&& comments == null) {
+                            btnReview.visibility = View.VISIBLE
+                        } else {
+                            btnReview.visibility = View.GONE
+                        }
                     }
                 }
 
