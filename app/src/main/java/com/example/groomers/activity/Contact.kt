@@ -91,8 +91,8 @@ class Contact() : AppCompatActivity() {
                         edtPassword.requestFocus()
                         return@setOnClickListener
                     }
-                    if (viewModel.password!!.length < 6) {
-                        edtPassword.error = "Please enter at least 6 digit password"
+                    if (viewModel.password!!.length < 8) {
+                        edtPassword.error = "Please enter at least 8 digit password"
                         edtPassword.requestFocus()
                         return@setOnClickListener
                     }
@@ -125,8 +125,8 @@ class Contact() : AppCompatActivity() {
                         edtPassword.requestFocus()
                         return@setOnClickListener
                     }
-                    if (viewModel.password!!.length < 6) {
-                        edtPassword.error = "Please enter at least 6 digit password"
+                    if (viewModel.password!!.length < 8) {
+                        edtPassword.error = "Please enter at least 8 digit password"
                         edtPassword.requestFocus()
                         return@setOnClickListener
                     }

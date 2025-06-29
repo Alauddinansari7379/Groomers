@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
@@ -30,6 +32,7 @@ class EnterOTP : AppCompatActivity() {
         setContentView(binding.root)
         setupOtpInputs(binding.etOtp1, binding.etOtp2, binding.etOtp3, binding.etOtp4,binding.etOtp5,binding.etOtp6)
 
+        setupOtpBackspaceHandler(binding.etOtp1, binding.etOtp2, binding.etOtp3, binding.etOtp4, binding.etOtp5, binding.etOtp6)
 
         otp = intent.getStringExtra("OTP").toString()
         email = intent.getStringExtra("Email").toString()
@@ -58,7 +61,24 @@ class EnterOTP : AppCompatActivity() {
             }
         }
     }
-   private fun showChangePasswordDialog(context: Context) {
+    private fun setupOtpBackspaceHandler(vararg editTexts: EditText) {
+        for (i in 1 until editTexts.size) {
+            editTexts[i].addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                    // If deleting text (count == 1, after == 0), and it's the only character
+                    if (count == 1 && after == 0 && s?.length == 1) {
+                        editTexts[i - 1].requestFocus()
+                        editTexts[i - 1].setSelection(editTexts[i - 1].text.length)
+                    }
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                override fun afterTextChanged(s: Editable?) {}
+            })
+        }
+    }
+
+    private fun showChangePasswordDialog(context: Context) {
         val binding = DialogChangePasswordBinding.inflate(LayoutInflater.from(context))
 
         val dialog = AlertDialog.Builder(context)
