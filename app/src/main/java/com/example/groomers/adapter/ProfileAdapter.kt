@@ -18,7 +18,7 @@ class ProfileAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(profile: Result) {
-            binding.profileName.text = profile.name
+            binding.profileName.text = profile.username
             // Set profile image if available, currently using placeholder
             binding.profileImage.setImageResource(R.drawable.profile)
             val imageUrl = "https://groomers.co.in/public/uploads/${profile.image}"

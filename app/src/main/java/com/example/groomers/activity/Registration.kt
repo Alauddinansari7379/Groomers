@@ -27,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -44,6 +45,7 @@ class Registration : AppCompatActivity() {
     private var selectedImageUri: Uri? = null
     lateinit var parts: MultipartBody.Part
     private var changeTextColor: Boolean = false
+
     @Inject
     lateinit var sessionManager: SessionManager
 
@@ -61,8 +63,8 @@ class Registration : AppCompatActivity() {
             else CustomLoader.hideLoaderDialog()
         }
 
-        viewModel.modelRegister.observe(this) {registerModel->
-            if (registerModel!=null && registerModel.status==1) {
+        viewModel.modelRegister.observe(this) { registerModel ->
+            if (registerModel != null && registerModel.status == 1) {
                 sessionManager.userType = viewModel.user_type
                 Toastic.toastic(
                     context = this@Registration,
@@ -131,12 +133,17 @@ class Registration : AppCompatActivity() {
             }
 
             // Validate Image Selection
+//            val userImageMp = selectedImagePath?.let { prepareFilePart("UserImage", it) }
             val userImageMp = selectedImagePath?.let { prepareFilePart("UserImage", it) }
-            if (userImageMp == null) {
-                Toast.makeText(this, "Please select a valid image", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
+                ?: run {
+                    val dummy = "".toRequestBody("image/*".toMediaTypeOrNull())
+                    MultipartBody.Part.createFormData("UserImage", "", dummy)
+                }
+//            if (userImageMp == null) {
+//                Toast.makeText(this, "Please select a valid image", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
+            Log.d("Image_Path", userImageMp.toString())
             registerUser(userImageMp)
         }
     }
@@ -205,5 +212,15 @@ class Registration : AppCompatActivity() {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.show()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.clearData()
+    }
+
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        viewModel.clearData()
     }
 }

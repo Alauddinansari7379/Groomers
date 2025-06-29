@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:context=".activity.BookingDetail">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,9 +17,9 @@
             android:id="@+id/imageSlider"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/titleSection"
@@ -25,9 +27,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/imageSlider"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/imageSlider">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/shopTitle"
@@ -42,8 +44,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="16dp"
@@ -65,8 +67,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="16dp"
@@ -88,8 +90,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="16dp"
@@ -102,10 +104,10 @@
                     android:id="@+id/tvPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_bold"
                     android:text="@string/entrepreneur"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/sf_bold" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -119,20 +121,27 @@
             android:background="@drawable/search_background"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/titleSection"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/titleSection">
+
 
             <EditText
+                android:id="@+id/search_bar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:ellipsize="end"
                 android:hint="Search here"
+                android:inputType="text"
                 android:maxLines="1"
                 android:padding="4dp"
+                android:paddingStart="5dp"
+                android:singleLine="true"
                 android:textColorHint="#888888"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="RtlSymmetry" />
 
             <ImageView
                 android:layout_width="24dp"
@@ -143,15 +152,14 @@
         </LinearLayout>
 
 
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/searchBar"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchBar"
             app:tabIndicatorColor="@color/mainColor"
             app:tabSelectedTextColor="@color/black"
             app:tabTextColor="@color/gray" />
@@ -161,10 +169,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:overScrollMode="never"
-            app:layout_constraintTop_toBottomOf="@id/tabLayout1"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tabLayout1" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

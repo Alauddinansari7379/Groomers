@@ -18,13 +18,13 @@ class AboutYouActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_about_you)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.Blue))
+        window.setStatusBarColor(ContextCompat.getColor(applicationContext, R.color.Blue))
 
-         val continebtn = findViewById<Button>(R.id.btnRegister)
+         val continent = findViewById<Button>(R.id.btnRegister)
 
         //Alauddin
 
-        continebtn.setOnClickListener {
+        continent.setOnClickListener {
             val intent = Intent(this, BusinessSizeActivity::class.java)
             startActivity(intent)
 

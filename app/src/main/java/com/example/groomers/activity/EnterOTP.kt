@@ -66,25 +66,29 @@ class EnterOTP : AppCompatActivity() {
             .setCancelable(true)
             .create()
 
-        binding.btnSubmit.setOnClickListener {
-            val password = binding.etPassword.text.toString().trim()
-            val confirmPassword = binding.etConfirmPassword.text.toString().trim()
+       binding.btnSubmit.setOnClickListener {
+           val password = binding.etPassword.text.toString().trim()
+           val confirmPassword = binding.etConfirmPassword.text.toString().trim()
 
-            when {
-                password.isEmpty() || confirmPassword.isEmpty() -> {
-                    myToast(context, "Please fill all fields", false)
-                }
-                password != confirmPassword -> {
-                    myToast(context, "Passwords do not match", false)
-                }
-                else -> {
-                    apiCallResetPass(confirmPassword)
-                    dialog.dismiss()
-                }
-            }
-        }
+           when {
+               password.isEmpty() || confirmPassword.isEmpty() -> {
+                   myToast(context, "Please fill all fields", false)
+               }
+               password.length < 8 -> {
+                   myToast(context, "Password must be at least 8 characters long", false)
+               }
+               password != confirmPassword -> {
+                   myToast(context, "Passwords do not match", false)
+               }
+               else -> {
+                   apiCallResetPass(confirmPassword)
+                   dialog.dismiss()
+               }
+           }
+       }
 
-        dialog.show()
+
+       dialog.show()
     }
 
 

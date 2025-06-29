@@ -21,7 +21,7 @@ class ServiceAdapter(
 
                 Glide.with(root.context)
                     .load(imageUrl)
-                    .placeholder(R.drawable.noimage)
+                    .placeholder(R.drawable.photo)
                     .into(ivImage)
 
                 root.setOnClickListener {

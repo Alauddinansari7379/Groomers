@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:scrollbars="none"
+    android:background="@color/white"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,11 +86,15 @@
                 android:paddingStart="5dp"
                 android:padding="4dp"
                 android:maxLines="1"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:inputType="text"
                 android:background="@android:color/transparent"
                 android:hint="Search here"
                 android:textColorHint="#888888"
                 android:textSize="14sp"
                 tools:ignore="RtlSymmetry" />
+
 
             <ImageView
                 android:layout_width="20dp"

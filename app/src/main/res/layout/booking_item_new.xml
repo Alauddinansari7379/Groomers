@@ -200,8 +200,9 @@
                     android:id="@+id/imageView"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+
+                    android:src="@drawable/errorimage"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/user"
                     app:layout_constraintBottom_toBottomOf="@+id/toolBar"
                     app:layout_constraintEnd_toEndOf="@+id/toolBar"
                     app:layout_constraintTop_toTopOf="parent">

@@ -39,14 +39,14 @@ class BookingsAdapterConfirm(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BookingsViewMode, position: Int) {
-        with(serviceList[position]) {
+        with(filteredList[position]) {
             with(holder.binding) {
-                if (serviceList[position].profile_picture != null) {
+                if (filteredList[position].profile_picture != null) {
                     Glide.with(context)
                         .load("https://groomers.co.in/public/uploads/$profile_picture")
                         .into(holder.binding.imageView)
                 } else {
-                    imageView.setImageResource(R.drawable.error) // Correct method to set the image
+                    imageView.setImageResource(R.drawable.errorimage) // Correct method to set the image
                 }
 
 
