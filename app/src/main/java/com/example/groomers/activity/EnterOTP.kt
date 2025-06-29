@@ -5,13 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.ehcf.Helper.myToast
+import com.example.groomers.R
 import com.example.groomers.databinding.ActivityEnterOtpBinding
 import com.example.groomers.databinding.DialogChangePasswordBinding
 import com.example.groomers.model.modelForgot.ModelForgot
@@ -26,6 +29,8 @@ class EnterOTP : AppCompatActivity() {
     var otp = ""
     var email = ""
     var count = 0
+    private var isPasswordVisible = false
+    private var isConfirmPasswordVisible = false
     private val binding by lazy { ActivityEnterOtpBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +90,15 @@ class EnterOTP : AppCompatActivity() {
             .setView(binding.root)
             .setCancelable(true)
             .create()
+        binding.ivTogglePassword.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            togglePasswordVisibility(binding.etPassword, binding.ivTogglePassword, isPasswordVisible)
+        }
 
+        binding.ivToggleConfirmPassword.setOnClickListener {
+            isConfirmPasswordVisible = !isConfirmPasswordVisible
+            togglePasswordVisibility(binding.etConfirmPassword, binding.ivToggleConfirmPassword, isConfirmPasswordVisible)
+        }
        binding.btnSubmit.setOnClickListener {
            val password = binding.etPassword.text.toString().trim()
            val confirmPassword = binding.etConfirmPassword.text.toString().trim()
@@ -155,4 +168,14 @@ class EnterOTP : AppCompatActivity() {
     }
 
 
+    private fun togglePasswordVisibility(editText: EditText, icon: ImageView, isVisible: Boolean) {
+        if (isVisible) {
+            editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            icon.setImageResource(R.drawable.visibility_on)
+        } else {
+            editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            icon.setImageResource(R.drawable.visibility_off)
+        }
+        editText.setSelection(editText.text.length) // Move cursor to end
+    }
 }
