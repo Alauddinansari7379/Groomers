@@ -70,14 +70,14 @@ class ReviewAndConfirm : AppCompatActivity() {
             onBackPressed()
         }
         binding.btnContinue.setOnClickListener {
-            if (sessionManager.address!!.isEmpty()) {
+            if (sessionManager.address.isNullOrEmpty()) {
                 SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("Please add your address.")
                     .setConfirmText("Add address")
                     .showCancelButton(true)
                     .setConfirmClickListener { sDialog ->
                         sDialog.cancel()
-                        startActivity(Intent(this, AddAddress::class.java))
+                        startActivity(Intent(this, AddressList::class.java))
                     }
                     .setCancelClickListener { sDialog ->
                         sDialog.cancel()

@@ -12,7 +12,7 @@ data class Result(
     val mobile: String,
     val name: String,
     val image: String,
-    val profile_picture: String,
+    val profile_picture: String?,
     val services: String,
     val statename: String,
     val teamSize: String,

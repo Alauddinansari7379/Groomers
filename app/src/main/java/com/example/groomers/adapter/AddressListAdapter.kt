@@ -30,6 +30,11 @@ class AddressListAdapter(
             binding.tvCountry.text = "Country: ${address.countryname}"
             sessionManager = SessionManager(context)
 
+            if (sessionManager.address.isNullOrEmpty()){
+                sessionManager.addressId = "0"
+                sessionManager.address =addressList[0].address + " " + addressList[0].city + " " + addressList[0].name + " " + addressList[0].countryname + " " + addressList[0].zip_code
+            }
+
             if (addressList.size == 1) {
                 sessionManager.addressId = position.toString()
                 sessionManager.address =
