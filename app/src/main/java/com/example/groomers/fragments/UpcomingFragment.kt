@@ -63,15 +63,14 @@ class UpcomingFragment : Fragment(),BookingsAdapter.Review {
                     adapter = BookingsAdapter(bookingData.result,requireContext(),this@UpcomingFragment)
                 }
 
-                for (i in bookingData.result){
-                    if (i.slug!="waiting_for_accept"){
-                        binding.tvNoDataFound.visibility=View.GONE
-                        break
-                    }else{
-                        binding.tvNoDataFound.visibility = View.VISIBLE
+                val allWaiting = bookingData.result.all { it.slug == "waiting_for_accept" }
 
-                    }
+                if (allWaiting) {
+                    binding.tvNoDataFound.visibility = View.VISIBLE
+                } else {
+                    binding.tvNoDataFound.visibility = View.GONE
                 }
+
 
             }
         }

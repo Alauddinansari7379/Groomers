@@ -63,15 +63,14 @@ class ConfirmedFragment : Fragment(), BookingsAdapterConfirm.Review {
                 binding.rvBookings.apply {
                      adapter = BookingsAdapterConfirm(bookingData.result,requireContext(),this@ConfirmedFragment)
                  }
-                for (i in bookingData.result){
-                    if (i.slug=="accepted"){
-                        binding.tvNoDataFound.visibility=View.GONE
-                        break
-                    }else{
-                        binding.tvNoDataFound.visibility = View.VISIBLE
+                val allWaiting = bookingData.result.all { it.slug == "accepted" }
 
-                    }
+                if (allWaiting) {
+                    binding.tvNoDataFound.visibility = View.VISIBLE
+                } else {
+                    binding.tvNoDataFound.visibility = View.GONE
                 }
+
 
 
             }

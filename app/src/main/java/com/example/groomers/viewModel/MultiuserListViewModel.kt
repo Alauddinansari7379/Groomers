@@ -110,7 +110,7 @@ class MultiuserListViewModel
             } catch (e: HttpException) {
                 _errorMessage.postValue("Oops! Server error (${e.code()}). Please try again.")
             } catch (e: Exception) {
-                _errorMessage.postValue("An unexpected error occurred. Please try again.")
+                _errorMessage.postValue("An unexpected error occurred. Please try again.$e")
             } finally {
                 _isLoading.postValue(false)
             }

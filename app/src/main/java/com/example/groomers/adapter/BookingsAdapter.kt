@@ -2,16 +2,20 @@ package com.example.groomers.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ehcf.Helper.currency
 import com.example.groomers.R
+import com.example.groomers.activity.UpcomingDetail
 import com.example.groomers.databinding.BookingItemNewBinding
 import com.example.groomers.model.modelbookinglist.Result
+import com.google.gson.Gson
 
 class BookingsAdapter(private val serviceList: List<Result>, private val context: Context,val review: Review) :
     RecyclerView.Adapter<BookingsAdapter.BookingsViewMode>() {
@@ -45,10 +49,6 @@ class BookingsAdapter(private val serviceList: List<Result>, private val context
                 tvDate.text = date
                 tvPrice.text = currency + total.toString()
                 tvCustomerName.text = vendorName
-                tvGender.text = user_type
-                tvStartTime.text = start_time
-                tvEndTime.text = end_time
-                tvAddress.text = currentAddress
                 tvDescription.text = description
                 tvBookingStatues.text = status_for_customer
                 tvRating.text = rating.toString()
@@ -70,6 +70,12 @@ class BookingsAdapter(private val serviceList: List<Result>, private val context
                         tvBookingStatues.background.setTint(ContextCompat.getColor(context, R.color.green))
                         btnReview.visibility = View.GONE
                      }
+                }
+                root.setOnClickListener {
+                    val intent = Intent(context, UpcomingDetail::class.java).apply {
+                        putExtra("data", Gson().toJson(filteredList[position])) // Send as JSON
+                    }
+                    context.startActivity(intent)
                 }
                 btnReview.setOnClickListener {
                     review.rating(id.toString())

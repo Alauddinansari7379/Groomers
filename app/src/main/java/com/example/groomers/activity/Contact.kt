@@ -21,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.util.regex.Pattern
 
@@ -64,7 +65,6 @@ class Contact() : AppCompatActivity() {
             }
 
 
-
             val countryCodeWithPlus: String =
                 spinnerCountryCode.selectedCountryCodeWithPlus // Example: "+91"
             imageViewProfile.setOnClickListener { pickImageLauncher.launch("image/*") }
@@ -96,15 +96,11 @@ class Contact() : AppCompatActivity() {
                         edtPassword.requestFocus()
                         return@setOnClickListener
                     }
-                     userImageMp = selectedImagePath?.let { prepareFilePart("UserImage", it) }
-                    if (userImageMp == null) {
-                        Toast.makeText(
-                            this@Contact,
-                            "Please select a valid image",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        return@setOnClickListener
-                    }
+                    userImageMp = selectedImagePath?.let { prepareFilePart("UserImage", it) }
+                        ?: run {
+                            val dummy = "".toRequestBody("image/*".toMediaTypeOrNull())
+                            MultipartBody.Part.createFormData("UserImage", "", dummy)
+                        }
                     if (userType.isEmpty()) {
                         showError1("Please select a user type")
                         return@setOnClickListener
@@ -146,11 +142,13 @@ class Contact() : AppCompatActivity() {
                 if (intent.getStringExtra("AddPro").toString() == "AddPro") {
                     viewModel1.createCustomerProfile(
                         viewModel.email.toString(),
-                        viewModel.name.toString(), viewModel.password!!, viewModel.user_type.toString(),
+                        viewModel.name.toString(),
+                        viewModel.password!!,
+                        viewModel.user_type.toString(),
                         userImageMp
                     )
-                }else{
-                    startActivity(Intent(this@Contact,ChooseProfile::class.java))
+                } else {
+                    startActivity(Intent(this@Contact, ChooseProfile::class.java))
                 }
             }
         }
@@ -167,7 +165,7 @@ class Contact() : AppCompatActivity() {
             }
         }
         viewModel1.multiuser.observe(this) { response ->
-            if (response?.status == 1){
+            if (response?.status == 1) {
                 Toastic.toastic(
                     context = this@Contact,
                     message = response.message,

@@ -64,15 +64,14 @@ class CancelledFragment : Fragment() {
                     adapter = BookingsAdapterCanclled(bookingData.result, requireContext())
 
                 }
-                for (i in bookingData.result){
-                    if (i.slug!="rejected"){
-                        binding.tvNoDataFound.visibility=View.GONE
-                        break
-                    }else{
-                        binding.tvNoDataFound.visibility = View.VISIBLE
+                val allWaiting = bookingData.result.all { it.slug == "rejected" }
 
-                    }
+                if (allWaiting) {
+                    binding.tvNoDataFound.visibility = View.VISIBLE
+                } else {
+                    binding.tvNoDataFound.visibility = View.GONE
                 }
+
 
 
             }

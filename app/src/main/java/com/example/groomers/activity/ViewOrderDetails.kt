@@ -37,12 +37,12 @@ class ViewOrderDetails : AppCompatActivity() {
     private var address: String = ""
     private var selectedDayNew: String = ""
     private var formattedDate: String = ""
-    private var selectedDay: String = "1"  // Default to Monday
+    private var selectedDay: String = "1"
 
     private var selectedStartTime: String? = ""
     private var selectedEndTime: String? = ""
     private var id: String? = null
-    private var selectedSeatCount: Int = 1 // Default 1 seat
+    private var selectedSeatCount: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,10 +67,12 @@ class ViewOrderDetails : AppCompatActivity() {
         setupServiceDetails()
         observeViewModel()
 
-        // ✅ Initialize selected day and formattedDate with today's date
+        // ✅ Initialize current date
         val calendar = Calendar.getInstance()
+        binding.calendarView.minDate = calendar.timeInMillis // Disable past dates
+
         val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-        val dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1 // Sunday = 1, so subtract 1
+        val dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1
 
         selectedDayNew = days[dayIndex]
         selectedDay = when (selectedDayNew) {
@@ -87,7 +89,6 @@ class ViewOrderDetails : AppCompatActivity() {
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         formattedDate = formatter.format(calendar.time)
 
-        // ✅ Now fetch with correct day and date
         fetchSlots()
 
         binding.btnContinueToPayment.setOnClickListener {
@@ -141,15 +142,13 @@ class ViewOrderDetails : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        timeSlotAdapter =
-            TimeSlotAdapter(emptyList()) { result, seatCount ->
-                selectedStartTime = result.start_time
-                selectedEndTime = result.end_time
-                selectedSeatCount = seatCount
-                id = result.id.toString()
-            }
-        binding.rvTimeSlots.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        timeSlotAdapter = TimeSlotAdapter(emptyList()) { result, seatCount ->
+            selectedStartTime = result.start_time
+            selectedEndTime = result.end_time
+            selectedSeatCount = seatCount
+            id = result.id.toString()
+        }
+        binding.rvTimeSlots.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvTimeSlots.adapter = timeSlotAdapter
     }
 
@@ -170,13 +169,13 @@ class ViewOrderDetails : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.slotBookingData.observe(this, Observer { response ->
+        viewModel.slotBookingData.observe(this) { response ->
             if (response != null && response.status == 1) {
                 timeSlotAdapter.updateData(response.result)
             } else {
                 Toast.makeText(this, "Failed to fetch time slots", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
 
         viewModel.isLoading.observe(this) { isLoading ->
             if (isLoading) CustomLoader.showLoaderDialog(this)
