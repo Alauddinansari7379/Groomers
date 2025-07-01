@@ -46,7 +46,6 @@ class BookingDetail : AppCompatActivity(), Booking {
 
         binding.tvPriceSymbol.text= currency
         receiveData() // Receive intent data
-        setupListeners()
 //        setupRecyclerView()
         setupFragment()
         setupImageSlider()
@@ -107,22 +106,7 @@ class BookingDetail : AppCompatActivity(), Booking {
         }
     }
 
-    private fun setupListeners() {
-//        binding.bookButton111.setOnClickListener {
-//            startActivity(
-//                Intent(this, Dashboard::class.java).apply {
-//                    putExtra("navigate_to", "fragment_cart")
-//                }
-//            )
-//            finish() // Close this activity after navigation
-//        }
 
-    }
-
-//    private fun setupRecyclerView() {
-//        serviceAdapter = PopularServiceAdapter(emptyList(),this,this)
-//        binding.rvPopularService.adapter = serviceAdapter
-//    }
 
     override fun booking(
         serviceName: String,
