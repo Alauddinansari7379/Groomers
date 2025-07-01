@@ -33,6 +33,7 @@ class UpcomingDetail : AppCompatActivity() {
         binding.tvDescription.text = item.description
         binding.tvPrice.text = currency + item.total.toString()
         binding.tvRating.text = item.rating.toString()
+        binding.tvReview.text = item.comments.toString()
         binding.tvUserType.text = item.user_type
 
         // Load image using Glide

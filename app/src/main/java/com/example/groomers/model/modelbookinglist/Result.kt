@@ -2,7 +2,7 @@ package com.example.groomers.model.modelbookinglist
 
 data class Result(
     val address: String,
-    val comments: Any,
+    val comments: String?,
     val created_at: String,
     val customer_comments: Any,
     val customer_id: Int,
