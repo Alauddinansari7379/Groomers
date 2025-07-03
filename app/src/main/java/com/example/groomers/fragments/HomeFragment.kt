@@ -47,6 +47,7 @@ import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
 import javax.inject.Inject
+
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
@@ -118,6 +119,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
                 putExtra("service_address", selectedService.address)
                 putExtra("vendorId", selectedService.user_id)
                 putExtra("serviceId", selectedService.id)
+//                putExtra("rating", selectedService.rating.toString())
                 putExtra("service_price", selectedService.price.toString())
             }
             Log.d("HomeFragment", "Navigating to BookingDetail with: ${selectedService.serviceName}")
@@ -146,7 +148,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
     private fun setupSlider(imageUrls: List<String>) {
         sliderAdapter = SliderAdapter(imageUrls)
         binding.imageService.adapter = sliderAdapter
-
+        binding.dotsIndicator.setViewPager2(binding.imageService)
         val handler = Handler(Looper.getMainLooper())
         val update = Runnable {
             if (currentPage == imageUrls.size) {
@@ -154,7 +156,6 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
             }
             binding.imageService.setCurrentItem(currentPage++, true)
         }
-
         timer = Timer()
         timer?.schedule(object : TimerTask() {
             override fun run() {

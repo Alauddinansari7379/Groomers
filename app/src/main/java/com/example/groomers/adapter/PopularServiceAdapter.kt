@@ -23,12 +23,13 @@ class PopularServiceAdapter(private var categoryList : List<Result>, val context
         with(categoryList[position]) {
             holder.binding.tvServiceName.text = serviceName
             holder.binding.tvDescription.text = description
+            holder.binding.tvPrice.text = "CS$"+price.toString()
             Glide.with(context)
                 .load("https://groomers.co.in/public/uploads/" + image)
                 .into(holder.binding.ivServiceImage)
             holder.binding.btnBook.setOnClickListener {
                 booking.booking(serviceName,description,image,price,user_type, id.toString(),
-                    user_id.toString(),serviceType,address
+                    user_id.toString(),serviceType,address,time
                 )
             }
         }
@@ -51,5 +52,6 @@ interface Booking{
         user_id: String,
         serviceType: String,
         address: String,
+        time: String,
     )
 }

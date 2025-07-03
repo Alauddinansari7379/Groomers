@@ -4,25 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/mainColor"
+    android:background="@color/white"
     android:padding="16dp"
     tools:context=".activity.Watching">
 
     <!-- Skip Text Top Right -->
     <TextView
-        android:id="@+id/skipText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Skip"
-        android:textColor="@color/white"
+        android:text="Who's watching?"
+        android:textColor="@color/black"
         android:textSize="18sp"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@font/sf_bold"
         android:padding="8dp"
         android:clickable="true"
         android:focusable="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/skipText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="sans-serif-medium"
+        android:padding="8dp"
+        android:text="Skip"
+        android:textColor="@color/mainColor"
+        android:textSize="18sp" />
 
     <!-- Main Content Layout Centered -->
     <LinearLayout
@@ -39,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select Profile"
-            android:textColor="@color/white"
+            android:textColor="@color/gray"
             android:textSize="16sp"
             android:layout_marginBottom="24dp"
             android:fontFamily="sans-serif-medium" />
@@ -77,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="+"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/mainColor"
                     android:textSize="36sp" />
             </LinearLayout>
 
@@ -86,10 +100,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add Profile"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
+                android:textColor="@color/mainColor"
+                android:textSize="16sp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="sans-serif" />
+                android:fontFamily="@font/sf_bold" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

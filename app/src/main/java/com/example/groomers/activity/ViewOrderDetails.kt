@@ -35,6 +35,7 @@ class ViewOrderDetails : AppCompatActivity() {
     private var userType: String = ""
     private var categoryId: String = ""
     private var address: String = ""
+    private var time: String = ""
     private var selectedDayNew: String = ""
     private var formattedDate: String = ""
     private var selectedDay: String = "1"
@@ -59,6 +60,7 @@ class ViewOrderDetails : AppCompatActivity() {
         userType = intent?.getStringExtra("user_type") ?: ""
         categoryId = intent?.getStringExtra("categoryId") ?: ""
         address = intent?.getStringExtra("address") ?: ""
+        time = intent?.getStringExtra("time") ?: ""
 
         binding.tvServiceName1.text = serviceName
         binding.tvServiceAddress.text = address
@@ -154,8 +156,8 @@ class ViewOrderDetails : AppCompatActivity() {
 
     private fun setupServiceDetails() {
         binding.tvServiceName.text = serviceName
-        binding.tvServiceDuration.text = "Duration: 30 mins"
-        binding.tvServicePrice.text = "Price: $$price"
+        binding.tvServiceDuration.text = time+" min"
+        binding.tvServicePrice.text = "$$price"
         val imageUrl = "https://groomers.co.in/public/uploads/$image"
         Glide.with(this)
             .load(imageUrl)

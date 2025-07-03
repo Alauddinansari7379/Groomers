@@ -91,6 +91,8 @@ class Watching : AppCompatActivity() {
         val etPassword = dialogView.findViewById<EditText>(R.id.etPassword)
         val btnContinue = dialogView.findViewById<Button>(R.id.btnContinue)
         val btnClose = dialogView.findViewById<ImageView>(R.id.ivClose)
+        val canclled = dialogView.findViewById<Button>(R.id.btnCancel)
+        canclled.setOnClickListener { dialog.dismiss() }
 
         tvUsername.text = "Username: $username"
 
@@ -111,18 +113,18 @@ class Watching : AppCompatActivity() {
     }
 
     private fun callLoginApi(username: String, password: String) {
-        viewModel1.login("", username, password,"watch")
+        viewModel1.login("", username, password, "watch")
         // Observe isLoading to show/hide progress
-        viewModel1.isLoading.observe(this@Watching,) { isLoading ->
+        viewModel1.isLoading.observe(this@Watching) { isLoading ->
             if (isLoading) {
-                CustomLoader.showLoaderDialog(this@Watching,)
+                CustomLoader.showLoaderDialog(this@Watching)
             } else {
                 CustomLoader.hideLoaderDialog()
             }
         }
 
         // Observe the result of the login attempt
-        viewModel1.modelLogin.observe(this@Watching,) { modelLogin ->
+        viewModel1.modelLogin.observe(this@Watching) { modelLogin ->
             modelLogin?.let {
                 // If login is successful, navigate to MainActivity
                 Toastic.toastic(

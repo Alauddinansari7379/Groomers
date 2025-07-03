@@ -40,7 +40,34 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/star"
+                     />
+
+                <TextView
+                    android:id="@+id/tvRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.8"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvReview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(123reviews)"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp" />
+            </LinearLayout>
             <!-- Address -->
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -124,6 +151,34 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvAbout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_503_18_ave_sw_t2s_0c6_calgary"
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvViewMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View More"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/sf_bold"
+                android:textColor="@color/mainColor"
+                android:textSize="16sp" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <!-- Tabs -->
@@ -132,12 +187,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/titleSection"
             app:tabIndicatorColor="@color/mainColor"
-            app:tabSelectedTextColor="@color/black"
-            app:tabTextColor="@color/gray" />
+            app:tabSelectedTextColor="@color/mainColor"
+            app:tabTextColor="@color/black" />
 
         <!-- ViewPager2 with fixed height -->
         <androidx.viewpager2.widget.ViewPager2

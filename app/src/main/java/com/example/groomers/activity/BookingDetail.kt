@@ -82,6 +82,7 @@ class BookingDetail : AppCompatActivity(), Booking {
         val address = intent.getStringExtra("service_address")
         vendorId = intent.getStringExtra("vendorId")
         serviceId = intent.getStringExtra("serviceId")
+//       val rating = intent.getStringExtra("rating")
         val serviceDescription = intent.getStringExtra("service_description")
         val servicePrice = intent.getStringExtra("service_price")
 
@@ -90,6 +91,7 @@ class BookingDetail : AppCompatActivity(), Booking {
         binding.shopAddress.text = address
         binding.ownerDetails.text = serviceDescription
         binding.tvPrice.text = servicePrice
+//        binding.tvRating.text = rating
 //        serviceImage?.let {
 //            val imageUrl = "https://groomers.co.in/public/uploads/$it"
 //            Glide.with(this)
@@ -117,7 +119,8 @@ class BookingDetail : AppCompatActivity(), Booking {
         id: String,
         userid: String,
         categoryId: String,
-        address: String
+        address: String,
+        time: String,
     ) {
         val intent = Intent(this, ViewOrderDetails::class.java).apply {
             putExtra("serviceName", serviceName)

@@ -4,31 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
     android:background="@color/white"
-    >
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="16dp">
+        android:orientation="vertical">
 
         <!-- Location Section -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            >
+            android:layout_height="250dp">
 
             <!-- Auto Slider for Services -->
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/imageService"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingEnd="10dp"
-                android:paddingStart="10dp"
-                android:layout_marginTop="0dp" />
+                android:layout_marginTop="0dp"
+                android:clipToPadding="false" />
+
+            <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
+                android:id="@+id/dotsIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="12dp"
+                app:cornerRadius="50dp"
+                app:dotsColor="@color/mainColor"
+                app:selectedDotColor="@color/mainColor" />
 
             <!-- Location Texts -->
             <TextView
@@ -36,12 +42,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="30dp"
                 android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
                 android:text="Raghuvir Ganj"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/sub_location_text"
@@ -51,46 +58,50 @@
                 android:layout_marginStart="40dp"
                 android:text="Hapur"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
                 android:src="@drawable/location"
-                android:layout_marginTop="30dp" />
+                android:visibility="gone" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="53dp"
                 android:src="@drawable/baseline_keyboard_arrow_down_24"
-                android:layout_marginTop="53dp" />
+                android:visibility="gone" />
         </RelativeLayout>
 
         <!-- Search Bar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="50dp"
             android:background="@drawable/search_background"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginTop="16dp">
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/search_bar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingStart="5dp"
-                android:padding="4dp"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:inputType="text"
                 android:background="@android:color/transparent"
+                android:ellipsize="end"
                 android:hint="Search here"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:paddingStart="5dp"
+                android:singleLine="true"
                 android:textColorHint="#888888"
                 android:textSize="14sp"
                 tools:ignore="RtlSymmetry" />
@@ -104,17 +115,49 @@
                 app:tint="#000000" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:paddingBottom="8dp"
+                android:text="Our Service"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="2.7"
+                android:fontFamily="sans-serif-medium"
+                android:paddingBottom="8dp"
+                android:text="View All"
+                android:textColor="@color/mainColor"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
         <!-- Horizontal RecyclerView for Categories -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCategory1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
             android:overScrollMode="never"
             android:scrollbars="none"
-            android:orientation="horizontal"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <!-- Upcoming Appointments Section -->
@@ -123,73 +166,79 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif"
-            android:visibility="gone"
             android:gravity="center"
             android:text="@string/no_upcoming_appointments"
             android:textColor="#888888"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="gone" />
 
-        <!-- Button to View Appointments -->
-        <androidx.appcompat.widget.AppCompatButton
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:visibility="gone"
-            android:background="@drawable/border"
-            android:drawableEnd="@drawable/baseline_arrow_forward_24"
-            android:drawablePadding="8dp"
-            android:gravity="center"
-            android:paddingEnd="20dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="@string/go_to_my_appointments"
-            android:textColor="@color/black" />
-
-        <!-- Special Offers Section -->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:fontFamily="sans-serif-medium"
-            android:paddingBottom="8dp"
-            android:text="Special Offers"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:paddingBottom="8dp"
+                android:text="Special Offers"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="2.7"
+                android:fontFamily="sans-serif-medium"
+                android:paddingBottom="8dp"
+                android:text="View All"
+                android:textColor="@color/mainColor"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <!-- Horizontal RecyclerView for Special Offers -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHorizontalList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
             android:overScrollMode="never"
             android:scrollbars="none"
-            android:orientation="horizontal"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/service_row" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="24dp"
             android:fontFamily="sans-serif-medium"
             android:paddingBottom="8dp"
             android:text="Vendors"
-            android:layout_marginStart="10dp"
             android:textColor="@color/black"
             android:textSize="16sp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHorizontalVendorList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
             android:overScrollMode="never"
             android:scrollbars="none"
-            android:orientation="horizontal"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/service_row" />
     </LinearLayout>

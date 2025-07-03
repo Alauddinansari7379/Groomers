@@ -107,6 +107,8 @@ dependencies {
 
     implementation ("com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1")
 
+    implementation("com.tbuonomo:dotsindicator:4.3")
+
 
 
 

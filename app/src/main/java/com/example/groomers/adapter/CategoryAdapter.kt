@@ -25,10 +25,10 @@ class CategoryAdapter(
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = categoryList[position]
-        holder.binding.tvCategory.text = item.category_name
+        holder.binding.tvDescription.text = item.category_name
         Glide.with(holder.binding.root.context)
             .load("https://groomers.co.in/public/uploads/" + item.category_image)
-            .into(holder.binding.ivCategory)
+            .into(holder.binding.ivImage)
 
         holder.binding.root.setOnClickListener {
             onItemClick(item)

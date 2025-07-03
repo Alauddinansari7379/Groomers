@@ -11,20 +11,110 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
             android:background="@color/mainColor"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical"
+                android:background="@android:color/white">
+
+                <!-- Location Info -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/maps"
+                            app:tint="@color/mainColor" />
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/tvAddress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="123 Main Street"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/tvCity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="New York City"
+                                android:textColor="#888888"
+                                android:textSize="13sp"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginTop="2dp" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <!-- Notification Icon with Red Dot -->
+                <FrameLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/bg_circle_gray"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/bell"
+                        app:tint="@android:color/black" />
+
+                    <!-- Red Dot -->
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:background="@drawable/bg_red_circle"
+                        android:layout_gravity="top|end"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="2dp" />
+                </FrameLayout>
+
+                <!-- Profile Image -->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/profile"
+                    android:scaleType="centerCrop" />
+            </LinearLayout>
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:visibility="gone"
                 android:text="@string/dashboard"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -34,6 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
+                android:visibility="gone"
                 android:paddingEnd="10dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
