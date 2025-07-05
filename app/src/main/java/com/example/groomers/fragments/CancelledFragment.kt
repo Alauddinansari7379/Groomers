@@ -66,13 +66,11 @@ class CancelledFragment : Fragment() {
                 }
                 val allWaiting = bookingData.result.all { it.slug == "rejected" }
 
-                if (allWaiting) {
+                if (!allWaiting) {
                     binding.tvNoDataFound.visibility = View.VISIBLE
                 } else {
                     binding.tvNoDataFound.visibility = View.GONE
                 }
-
-
 
             }
         }

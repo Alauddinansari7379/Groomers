@@ -95,7 +95,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
         sessionManager.accessToken?.let { token ->
             lifecycleScope.launch {
-                viewModel.getServiceList(token, "Male")
+                viewModel.getServiceList(token, sessionManager.userType.toString())
                 viewModel1.getUserDetails()
                 viewModel.getAllVendors(token)
             }
@@ -119,6 +119,9 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
                 putExtra("service_address", selectedService.address)
                 putExtra("vendorId", selectedService.user_id)
                 putExtra("serviceId", selectedService.id)
+                putExtra("aboutBusiness", selectedService.aboutBusiness)
+                putExtra("overall_ratings", selectedService.overall_ratings)
+                putExtra("no_of_ratings", selectedService.no_of_ratings)
 //                putExtra("rating", selectedService.rating.toString())
                 putExtra("service_price", selectedService.price.toString())
             }

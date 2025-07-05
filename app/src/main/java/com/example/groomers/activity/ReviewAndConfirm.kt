@@ -48,10 +48,20 @@ class ReviewAndConfirm : AppCompatActivity() {
         val formattedDate = intent.getStringExtra("formattedDate")
         val serviceId = intent.getStringExtra("serviceId")
         val vendorId = intent.getStringExtra("vendorId")
+        val time = intent.getStringExtra("time")
+        val overAllRating = intent.getStringExtra("overAllRating")
         var selectedDayNew = intent.getStringExtra("formattedDate")
         binding.tvPrice1.text = currency + price
         binding.tvDescription.text = description
         binding.tvServiceName.text = serviceName
+        binding.tvDuration.text = time
+        binding.tvRating.text = if (overAllRating.isNullOrBlank() || overAllRating == "null") {
+            "0"
+        } else {
+            overAllRating
+        }
+
+
         val date = getCurrentDate()
 
         if (selectedDayNew!!.isEmpty()) {

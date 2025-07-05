@@ -17,16 +17,22 @@ import com.example.groomers.databinding.BookingItemNewBinding
 import com.example.groomers.model.modelbookinglist.Result
 import com.google.gson.Gson
 
-class BookingsAdapter(private val serviceList: List<Result>, private val context: Context,val review: Review) :
+class BookingsAdapter(
+    private val serviceList: List<Result>,
+    private val context: Context,
+    val review: Review
+) :
     RecyclerView.Adapter<BookingsAdapter.BookingsViewMode>() {
 
     // Filtered list with condition
     private val filteredList = serviceList.filter { it.slug == "waiting_for_accept" }
 
-    inner class BookingsViewMode(val binding: BookingItemNewBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class BookingsViewMode(val binding: BookingItemNewBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookingsViewMode {
-        val binding = BookingItemNewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            BookingItemNewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BookingsViewMode(binding)
     }
 
@@ -54,22 +60,42 @@ class BookingsAdapter(private val serviceList: List<Result>, private val context
                 tvRating.text = rating.toString()
                 when (slug) {
                     "waiting_for_accept" -> {
-                        tvBookingStatues.background.setTint(ContextCompat.getColor(context, R.color.yellow))
+                        tvBookingStatues.background.setTint(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.yellow
+                            )
+                        )
                     }
 
                     "accepted" -> {
-                        tvBookingStatues.background.setTint(ContextCompat.getColor(context, R.color.green))
+                        tvBookingStatues.background.setTint(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.green
+                            )
+                        )
 
                     }
 
                     "rejected" -> {
-                        tvBookingStatues.background.setTint(ContextCompat.getColor(context, R.color.red))
-                     }
+                        tvBookingStatues.background.setTint(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.red
+                            )
+                        )
+                    }
 
                     "completed" -> {
-                        tvBookingStatues.background.setTint(ContextCompat.getColor(context, R.color.green))
+                        tvBookingStatues.background.setTint(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.green
+                            )
+                        )
                         btnReview.visibility = View.GONE
-                     }
+                    }
                 }
                 root.setOnClickListener {
                     val intent = Intent(context, UpcomingDetail::class.java).apply {
@@ -85,6 +111,7 @@ class BookingsAdapter(private val serviceList: List<Result>, private val context
 
         }
     }
+
     interface Review {
         fun rating(bookingId: String)
 

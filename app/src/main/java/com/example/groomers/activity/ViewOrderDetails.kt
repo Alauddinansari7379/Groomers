@@ -36,6 +36,7 @@ class ViewOrderDetails : AppCompatActivity() {
     private var categoryId: String = ""
     private var address: String = ""
     private var time: String = ""
+    private var overAllRating: String = ""
     private var selectedDayNew: String = ""
     private var formattedDate: String = ""
     private var selectedDay: String = "1"
@@ -61,9 +62,11 @@ class ViewOrderDetails : AppCompatActivity() {
         categoryId = intent?.getStringExtra("categoryId") ?: ""
         address = intent?.getStringExtra("address") ?: ""
         time = intent?.getStringExtra("time") ?: ""
+        overAllRating = intent?.getStringExtra("overAllRating") ?: ""
 
         binding.tvServiceName1.text = serviceName
         binding.tvServiceAddress.text = address
+
 
         setupRecyclerView()
         setupServiceDetails()
@@ -110,6 +113,8 @@ class ViewOrderDetails : AppCompatActivity() {
                 putExtra("slotId", id)
                 putExtra("serviceId", serviceId)
                 putExtra("vendorId", vendorId)
+                putExtra("time", time)
+                putExtra("overAllRating", overAllRating)
             }
             startActivity(intent)
         }

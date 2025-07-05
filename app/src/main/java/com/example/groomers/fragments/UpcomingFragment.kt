@@ -65,7 +65,7 @@ class UpcomingFragment : Fragment(),BookingsAdapter.Review {
 
                 val allWaiting = bookingData.result.all { it.slug == "waiting_for_accept" }
 
-                if (allWaiting) {
+                if (!allWaiting) {
                     binding.tvNoDataFound.visibility = View.VISIBLE
                 } else {
                     binding.tvNoDataFound.visibility = View.GONE

@@ -85,12 +85,18 @@ class BookingDetail : AppCompatActivity(), Booking {
 //       val rating = intent.getStringExtra("rating")
         val serviceDescription = intent.getStringExtra("service_description")
         val servicePrice = intent.getStringExtra("service_price")
+        val aboutBusiness = intent.getStringExtra("aboutBusiness")
+        val overall_ratings = intent.getStringExtra("overall_ratings")
+        val no_of_ratings = intent.getStringExtra("no_of_ratings")
 
         // Set data to UI elements
         binding.shopTitle.text = serviceName
         binding.shopAddress.text = address
         binding.ownerDetails.text = serviceDescription
         binding.tvPrice.text = servicePrice
+        binding.tvAbout.text = aboutBusiness
+        binding.tvRating.text = "${overall_ratings ?: 0}"
+        binding.tvReview.text = " (${no_of_ratings ?: 0} reviews)"
 //        binding.tvRating.text = rating
 //        serviceImage?.let {
 //            val imageUrl = "https://groomers.co.in/public/uploads/$it"
@@ -121,6 +127,7 @@ class BookingDetail : AppCompatActivity(), Booking {
         categoryId: String,
         address: String,
         time: String,
+        rating: String,
     ) {
         val intent = Intent(this, ViewOrderDetails::class.java).apply {
             putExtra("serviceName", serviceName)

@@ -65,7 +65,7 @@ class ConfirmedFragment : Fragment(), BookingsAdapterConfirm.Review {
                  }
                 val allWaiting = bookingData.result.all { it.slug == "accepted" }
 
-                if (allWaiting) {
+                if (!allWaiting) {
                     binding.tvNoDataFound.visibility = View.VISIBLE
                 } else {
                     binding.tvNoDataFound.visibility = View.GONE
