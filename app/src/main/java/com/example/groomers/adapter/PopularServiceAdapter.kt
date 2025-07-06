@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.example.ehcf.Helper.currency
 import com.example.groomers.databinding.PopulerServiceRowBinding
 import com.example.groomers.model.modelservice.Result
 
@@ -23,7 +24,7 @@ class PopularServiceAdapter(private var categoryList : List<Result>, val context
         with(categoryList[position]) {
             holder.binding.tvServiceName.text = serviceName
             holder.binding.tvDescription.text = description
-            holder.binding.tvPrice.text = "CS$"+price.toString()
+            holder.binding.tvPrice.text = currency+price.toString()
             holder.binding.tvTime.text = time +" min"
             Glide.with(context)
                 .load("https://groomers.co.in/public/uploads/" + image)
