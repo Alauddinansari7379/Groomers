@@ -20,6 +20,7 @@ import com.example.groomers.model.modelslotbooking.ModelSlotBooking
 import com.example.groomers.model.modelupdateaddress.ModelUpdateAddress
 import com.example.groomers.model.modeluserdetails.ModelUserDetails
 import com.example.groomers.model.modelvendorlists.ModelVendorsList
+import com.example.groomers.model.modelvendorrating.ModelVendorRating
 import com.example.groomers.model.modulcountry.ModelCountry
 import com.groomers.groomersvendor.model.modeladdhelp.ModelAddHelp
 import com.groomers.groomersvendor.model.modelcity.ModelCity
@@ -223,6 +224,12 @@ interface ApiService {
         @Query("rating") rating: String,
         @Query("comments") comments: String,
     ): Response<Rating>
+
+    @POST("getAllVendorRatings")
+    suspend fun getAllVendorRatings(
+        @Header("Authorization") authorization: String,
+        @Query("vendor_id") vendor_id: String,
+    ): Response<ModelVendorRating>
 
     @Multipart
     @POST("addHelp")

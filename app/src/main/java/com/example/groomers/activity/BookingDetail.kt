@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.ehcf.Helper.currency
 import com.example.groomers.adapter.Booking
@@ -17,6 +18,7 @@ import com.example.groomers.adapter.ViewPagerAdapter1
 import com.example.groomers.databinding.ActivityBookingDetailBinding
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.ServiceViewModel
+import com.example.groomers.viewModel.SharedViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import com.groomers.groomersvendor.helper.CustomLoader
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +33,7 @@ class BookingDetail : AppCompatActivity(), Booking {
     private var serviceId: String? = null
     private lateinit var binding: ActivityBookingDetailBinding
     private lateinit var imageSliderAdapter: ImageSliderAdapter
+
     @Inject
     lateinit var sessionManager: SessionManager
     private val viewModel: ServiceViewModel by viewModels()
@@ -38,13 +41,14 @@ class BookingDetail : AppCompatActivity(), Booking {
     private val imageUrls = mutableListOf<String>()
     private val sliderHandler = Handler(Looper.getMainLooper())
     private var currentPage = 0
+    private val shareViewModel: SharedViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityBookingDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvPriceSymbol.text= currency
+        binding.tvPriceSymbol.text = currency
         receiveData() // Receive intent data
 //        setupRecyclerView()
         setupFragment()
@@ -88,7 +92,8 @@ class BookingDetail : AppCompatActivity(), Booking {
         val aboutBusiness = intent.getStringExtra("aboutBusiness")
         val overall_ratings = intent.getStringExtra("overall_ratings")
         val no_of_ratings = intent.getStringExtra("no_of_ratings")
-
+        shareViewModel.selectItem(vendorId.toString())
+        compVendorId = vendorId.toString()
         // Set data to UI elements
         binding.shopTitle.text = serviceName
         binding.shopAddress.text = address
@@ -110,10 +115,9 @@ class BookingDetail : AppCompatActivity(), Booking {
             val baseUrl = "https://groomers.co.in/public/uploads/"
             val imageUrl = baseUrl + it
             imageUrls.addAll(listOf(imageUrl, imageUrl, imageUrl))
-            Log.e("ImageSlider",imageUrls.toString())
+            Log.e("ImageSlider", imageUrls.toString())
         }
     }
-
 
 
     override fun booking(
@@ -141,7 +145,8 @@ class BookingDetail : AppCompatActivity(), Booking {
         }
         startActivity(intent)
     }
-    private fun setupFragment(){
+
+    private fun setupFragment() {
 
         val adapter = ViewPagerAdapter1(this)
         binding.viewPager.adapter = adapter
@@ -157,6 +162,7 @@ class BookingDetail : AppCompatActivity(), Booking {
             }
         }.attach()
     }
+
     private fun setupImageSlider() {
         imageSliderAdapter = ImageSliderAdapter(imageUrls)
         binding.imageSlider.adapter = imageSliderAdapter
@@ -180,5 +186,8 @@ class BookingDetail : AppCompatActivity(), Booking {
                 sliderHandler.postDelayed(runnable, 3000)
             }
         })
+    }
+    companion object{
+        var compVendorId = ""
     }
 }
