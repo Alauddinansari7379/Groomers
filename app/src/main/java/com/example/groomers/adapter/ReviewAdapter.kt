@@ -1,12 +1,15 @@
 package com.example.groomers.adapter
+
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.groomers.databinding.ItemReviewBinding
-import com.example.groomers.model.Review
+import com.example.groomers.model.modelvendorrating.Result
 
 
-class ReviewAdapter(private val reviews: List<Review>) :
+class ReviewAdapter(private val reviews: List<Result>, val context: Context) :
     RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
 
     inner class ReviewViewHolder(val binding: ItemReviewBinding) :
@@ -22,8 +25,10 @@ class ReviewAdapter(private val reviews: List<Review>) :
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
         val review = reviews[position]
         holder.binding.tvReviewerName.text = review.name
-        holder.binding.ratingBarUser.rating = review.rating
-        holder.binding.tvReviewText.text = review.comment
+        holder.binding.ratingBarUser.rating = review.rating.toFloat()
+        holder.binding.tvReviewText.text = review.comments
+        val imageUrl = "https://groomers.co.in/public/uploads/${review.profile_picture}"
+        Glide.with(context).load(imageUrl).into(holder.binding.ivProfile)
     }
 
     override fun getItemCount(): Int = reviews.size

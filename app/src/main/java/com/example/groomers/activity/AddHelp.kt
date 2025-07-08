@@ -93,20 +93,22 @@ class AddHelp : AppCompatActivity() {
             }
         }
 
-        // Observe the result of the login attempt
         viewModel.modelAddHelp.observe(this) { response ->
-            if (response!!.status == 1) {
-                Toastic.toastic(
-                    context = this@AddHelp,
-                    message = "Data submitted Successfully",
-                    duration = Toastic.LENGTH_SHORT,
-                    type = Toastic.SUCCESS,
-                    isIconAnimated = true,
-                    textColor = if (false) Color.BLUE else null,
-                ).show()
-                finish()
+            response?.let {
+                if (it.status == 1) {
+                    Toastic.toastic(
+                        context = this@AddHelp,
+                        message = "Data submitted Successfully",
+                        duration = Toastic.LENGTH_SHORT,
+                        type = Toastic.SUCCESS,
+                        isIconAnimated = true,
+                        textColor = if (false) Color.BLUE else null,
+                    ).show()
+                    finish()
+                }
             }
         }
+
         // Observe error message if login fails
         viewModel.errorMessage.observe(this) { errorMessage ->
             if (errorMessage!!.isNotEmpty()) {
@@ -147,6 +149,11 @@ class AddHelp : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         viewModel.clearRegisterData()
     }
 }

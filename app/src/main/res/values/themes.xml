@@ -12,8 +12,17 @@
         <item name="itemIconTint">@color/bottom_navigation_color</item>
         <item name="itemTextColor">@color/bottom_navigation_color</item>
         <item name="fontFamily">@font/poppins_regular</item>
+
         <!--        <item name="android:fontFamily">@font/varela_round</item>-->
 
     </style>
+
+    <style name="CompactRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_rating_stars</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:maxHeight">0dp</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
     <style name="Theme.groomers" parent="Base.Theme.groomers" />
 </resources>

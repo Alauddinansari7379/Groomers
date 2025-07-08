@@ -22,10 +22,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
+                android:background="@android:color/white"
                 android:gravity="center_vertical"
-                android:background="@android:color/white">
+                android:orientation="horizontal"
+                android:padding="16dp">
 
                 <!-- Location Info -->
                 <LinearLayout
@@ -37,18 +37,20 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:src="@drawable/maps"
                             app:tint="@color/mainColor" />
+
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
                             <TextView
                                 android:id="@+id/tvAddress"
                                 android:layout_width="wrap_content"
@@ -56,26 +58,23 @@
                                 android:layout_marginStart="6dp"
                                 android:text="123 Main Street"
                                 android:textColor="#000000"
-                                android:textStyle="bold"
-                                android:textSize="15sp" />
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:id="@+id/tvCity"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginTop="2dp"
                                 android:text="New York City"
                                 android:textColor="#888888"
-                                android:textSize="13sp"
-                                android:layout_marginStart="6dp"
-                                android:layout_marginTop="2dp" />
+                                android:textSize="13sp" />
                         </androidx.appcompat.widget.LinearLayoutCompat>
-
-
                     </LinearLayout>
-
-
                 </LinearLayout>
 
-                <!-- Notification Icon with Red Dot -->
+                <!-- Notification Icon -->
                 <FrameLayout
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -93,10 +92,10 @@
                     <View
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:background="@drawable/bg_red_circle"
                         android:layout_gravity="top|end"
                         android:layout_marginTop="2dp"
-                        android:layout_marginEnd="2dp" />
+                        android:layout_marginEnd="2dp"
+                        android:background="@drawable/bg_red_circle" />
                 </FrameLayout>
 
                 <!-- Profile Image -->
@@ -104,70 +103,60 @@
                     android:id="@+id/profileImage"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/profile"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile" />
             </LinearLayout>
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:visibility="gone"
-                android:text="@string/dashboard"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:visibility="gone"
-                android:paddingEnd="10dp">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgLan"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="User"
-                    android:src="@drawable/user" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <!-- Fragment Host -->
+        <!-- NavHostFragment -->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/hostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@id/bottom_navigation1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat"
             app:navGraph="@navigation/nav_graph" />
 
-        <com.qamar.curvedbottomnaviagtion.CurvedBottomNavigation
-            android:id="@+id/bottom_navigation1"
+        <!-- Floating Bottom Navigation -->
+        <FrameLayout
+            android:id="@+id/bottom_navigation_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cbn_background="@color/mainColor"
-            app:cbn_curve_radius="40dp"
-            app:cbn_fabColor="@color/main_Color_Dark"
-            app:cbn_height="75dp"
-            app:cbn_iconColor="@color/white"
-            app:cbn_icon_size="24dp"
-            app:cbn_selectedIconColor="@color/white"
-            app:cbn_selected_icon_size="52dp"
-            app:cbn_titleColor="@color/black"
-            app:cbn_titleFont="@font/sf_bold"
+            android:layout_margin="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
 
+            <!--            <com.google.android.material.bottomnavigation.BottomNavigationView-->
+            <!--                android:id="@+id/bottom_navigation1"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="60dp"-->
+            <!--                android:background="@drawable/bottom_nav_background"-->
+            <!--                android:elevation="10dp"-->
+            <!--                android:translationZ="10dp"-->
+            <!--                app:itemRippleColor="@color/nav_ripple_color"-->
+            <!--                app:itemIconTint="@color/nav_item_color"-->
+            <!--                app:itemTextColor="@color/nav_item_color"-->
+            <!--                app:itemBackground="@drawable/nav_item_background"-->
+            <!--                app:labelVisibilityMode="unlabeled"-->
+            <!--                app:menu="@menu/bottom_menu" />-->
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation1"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/bottom_nav_background"
+                app:itemIconTint="@color/bottom_nav_colors"
+                app:itemTextColor="@color/bottom_nav_colors"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/bottom_menu" />
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/ic_home"
         android:title="@string/home"
         />
     <!--<item
@@ -10,11 +10,11 @@
         android:icon="@drawable/add"
         android:title="@string/add_post"
         />-->
-    <item
+    <!--<item
         android:id="@+id/orderListFragment"
         android:icon="@drawable/list"
         android:title="@string/orders"
-        />
+        />-->
     <item
         android:id="@+id/appointmentFragment"
         android:icon="@drawable/calender"

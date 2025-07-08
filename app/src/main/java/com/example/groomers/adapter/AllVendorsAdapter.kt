@@ -20,16 +20,19 @@ class AllVendorsAdapter(private var serviceList: List<Result>,
                 Glide.with(root.context)
                     .load(imageUrl)
                     .placeholder(R.drawable.photo)
-                    .into(ivImage)
+                    .into(vendorImage)
 
                 root.setOnClickListener {
                     onItemClick(service) // Call click listener
                 }
-                tvService.text = service.services
-                tvName.text = service.name.toString()
-                tvBusinessName.text = service.businessName
-                tvAboutBusiness.text = service.address
-//                tvAddress.text = service.address
+                vendorName.text = service.name
+//                    vendorRating.text = service.rating
+//                    vendorReviews.text = "(${service.reviews})"
+//                    vendorDistance.text = service.distance
+
+                vendorRating.text = "4.8"
+                vendorReviews.text = "(345)"
+                vendorDistance.text = "10 KM"
             }
         }
     }

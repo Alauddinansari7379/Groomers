@@ -15,7 +15,7 @@ data class Result(
     val status: Int,
     val time: String,
     val updated_at: String,
-    val user_id: Int,
+    val user_id: String,
     val user_type: String,
     val aboutBusiness: String,
     val overall_ratings: String?,

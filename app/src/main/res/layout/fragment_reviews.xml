@@ -27,7 +27,7 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/tvAverageRating"
+                    android:id="@+id/ratingBarAverage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5.0"
@@ -36,16 +36,15 @@
                     android:textStyle="bold" />
 
                 <RatingBar
-                    android:id="@+id/ratingBarAverage"
+                    android:id="@+id/ratingBarDProfile"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:isIndicator="true"
+                    android:hapticFeedbackEnabled="true"
                     android:numStars="5"
-                    android:scaleX="0.4"
-                    android:scaleY="0.4"
-
-                    android:stepSize="0.5" />
+                    android:progressTint="#ffc107"
+                    android:rating="1.0"
+                    android:stepSize=".2" />
 
                 <TextView
                     android:id="@+id/tvReviewCount"
@@ -66,7 +65,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="4dp">
 
-                <!-- Repeat this block for 5★ to 1★ -->
+                <!-- 5 Star -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -81,22 +80,25 @@
                         android:textSize="14sp" />
 
                     <ProgressBar
+                        android:id="@+id/pbStar5"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="8dp"
                         android:layout_marginHorizontal="8dp"
                         android:layout_weight="1"
                         android:max="100"
-                        android:progress="90"
+                        android:progress="0"
                         android:progressTint="#FFA000" />
 
                     <TextView
+                        android:id="@+id/tvStarCount5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="23"
+                        android:text="0"
                         android:textSize="14sp" />
                 </LinearLayout>
 
+                <!-- 4 Star -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -111,22 +113,25 @@
                         android:textSize="14sp" />
 
                     <ProgressBar
+                        android:id="@+id/pbStar4"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="8dp"
                         android:layout_marginHorizontal="8dp"
                         android:layout_weight="1"
                         android:max="100"
-                        android:progress="90"
+                        android:progress="0"
                         android:progressTint="#FFA000" />
 
                     <TextView
+                        android:id="@+id/tvStarCount4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="23"
+                        android:text="0"
                         android:textSize="14sp" />
                 </LinearLayout>
 
+                <!-- 3 Star -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -141,22 +146,25 @@
                         android:textSize="14sp" />
 
                     <ProgressBar
+                        android:id="@+id/pbStar3"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="8dp"
                         android:layout_marginHorizontal="8dp"
                         android:layout_weight="1"
                         android:max="100"
-                        android:progress="50"
+                        android:progress="0"
                         android:progressTint="#FFA000" />
 
                     <TextView
+                        android:id="@+id/tvStarCount3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="21"
+                        android:text="0"
                         android:textSize="14sp" />
                 </LinearLayout>
 
+                <!-- 2 Star -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -171,25 +179,58 @@
                         android:textSize="14sp" />
 
                     <ProgressBar
+                        android:id="@+id/pbStar2"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="8dp"
                         android:layout_marginHorizontal="8dp"
                         android:layout_weight="1"
                         android:max="100"
-                        android:progress="40"
+                        android:progress="0"
                         android:progressTint="#FFA000" />
+
+                    <TextView
+                        android:id="@+id/tvStarCount2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- 1 Star -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="22"
+                        android:text="1★"
+                        android:textSize="14sp" />
+
+                    <ProgressBar
+                        android:id="@+id/pbStar1"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="8dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_weight="1"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressTint="#FFA000" />
+
+                    <TextView
+                        android:id="@+id/tvStarCount1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
                         android:textSize="14sp" />
                 </LinearLayout>
-
-                <!-- Repeat similar blocks for 4★, 3★, 2★, 1★ -->
-
             </LinearLayout>
+
         </LinearLayout>
 
         <!-- Review List Title -->

@@ -12,16 +12,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.ThemedSpinnerAdapter.Helper
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -34,7 +32,6 @@ import com.example.groomers.activity.UpdateProfileActivity
 import com.example.groomers.activity.Watching
 import com.example.groomers.databinding.FragmentProfileBinding
 import com.example.groomers.helper.Toastic
-import com.example.groomers.retrofit.ApiServiceProvider
 import com.example.groomers.sharedpreferences.SessionManager
 import com.example.groomers.viewModel.ProfileViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -100,7 +97,7 @@ class Profile : Fragment() {
             .placeholder(R.drawable.user) // Default placeholder
             .into(binding.profileImage)
 
-        binding.llLogout.setOnClickListener {
+        binding.btnLogout.setOnClickListener {
             SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Are you sure want to logout?")
                 .setCancelText("No")
@@ -137,14 +134,11 @@ class Profile : Fragment() {
             val navController = findNavController()
 
             val navOptions = NavOptions.Builder()
-                .setPopUpTo(navController.graph.startDestinationId, true)
+                .setPopUpTo(navController.graph.startDestinationId, false)
+                .setLaunchSingleTop(true)
                 .build()
 
             navController.navigate(R.id.appointmentFragment, null, navOptions)
-
-            val bottomNavView =
-                requireActivity().findViewById<CurvedBottomNavigation>(R.id.bottom_navigation1)
-            bottomNavView.setupNavController(navController)
         }
 
 
@@ -195,8 +189,7 @@ class Profile : Fragment() {
 
                             currentAddress = "$subLocality, $locality, $countryName"
 
-                            binding.location.text = sessionManager.name
-                            binding.sublocation.text = locality
+
 
                             Log.e(ContentValues.TAG, "locality-$locality")
                             Log.e(ContentValues.TAG, "countryName-$countryName")

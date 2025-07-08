@@ -1,60 +1,65 @@
 package com.example.groomers.fragments
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.example.groomers.R
+import com.example.groomers.databinding.FragmentPortfolioBinding
+import com.google.android.flexbox.FlexboxLayout
+import com.google.android.material.chip.Chip
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PortfolioFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PortfolioFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentPortfolioBinding? = null
+    private val binding get() = _binding!!
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentPortfolioBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        binding.stylistImage.load(R.drawable.women) {
+//            crossfade(true)
+//            transformations(CircleCropTransformation())
+//        }
+        val services = listOf("Facial", "Pedicure", "Hair Treatment", "Haircut", "Threading", "Makeup", "Waxing", "Hair Styling", "Face Clean Up", "Hair Spa", "Hair Color", "Massage", "Manicure", "Body Scrub", "Beard Trim")
+        addServiceTags(services)
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    // UPDATED FUNCTION TO IMPROVE CHIP LAYOUT
+    private fun addServiceTags(tags: List<String>) {
+        val chipBackgroundColor = ContextCompat.getColor(requireContext(), R.color.chip_background)
+        // Convert dp to pixels for margins
+        val marginInPixels = (4 * resources.displayMetrics.density).toInt()
+
+        for (tag in tags) {
+            val chip = Chip(requireContext()).apply {
+                text = tag
+                setChipBackgroundColor(ColorStateList.valueOf(chipBackgroundColor))
+                // Using a slightly darker text color for better contrast on the light blue
+                setTextColor(Color.parseColor("#0D47A1"))
+                isClickable = false
+                isCheckable = false
+            }
+
+            // Create LayoutParams and set margins
+            val params = FlexboxLayout.LayoutParams(
+                FlexboxLayout.LayoutParams.WRAP_CONTENT,
+                FlexboxLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.setMargins(marginInPixels, marginInPixels, marginInPixels, marginInPixels)
+            chip.layoutParams = params
+
+            binding.servicesTagsLayout.addView(chip)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_portfolio, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PortfolioFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PortfolioFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

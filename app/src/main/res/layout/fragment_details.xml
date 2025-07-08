@@ -1,106 +1,146 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
 
-    <!-- Header Section with Image and Title -->
-    <ImageView
-        android:id="@+id/serviceImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/growmer_app_logo"
-        android:contentDescription="Grooming service image" />
-
-    <TextView
-        android:id="@+id/serviceTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Premium Pet Grooming"
-        android:textSize="24sp"
-        android:padding="16dp"
-        android:textStyle="bold"/>
-
-    <!-- Rating and Reviews -->
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <RatingBar
-            android:id="@+id/serviceRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="5"
-            android:rating="4.5"/>
-        <TextView
-            android:id="@+id/reviewCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(150 reviews)"
-            android:paddingStart="8dp"
-            android:textSize="14sp"/>
-    </LinearLayout>
-
-    <!-- Service Description -->
-    <TextView
-        android:id="@+id/serviceDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Full grooming service for dogs of all breeds. Includes washing, hair trimming, and nail cutting."
-        android:padding="16dp"
-        android:textSize="16sp"/>
-
-    <!-- Price and Duration -->
-    <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:id="@+id/salon_interior_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/b3" />
+
+        </com.google.android.material.card.MaterialCardView>
+
         <TextView
-            android:id="@+id/servicePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$40"
+            android:layout_marginTop="24dp"
+            android:text="Charges"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/serviceDuration"
-            android:layout_width="wrap_content"
+            android:textStyle="bold" />
+
+        <!-- Charges List -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="45 minutes"
-            android:textSize="16sp"
-            android:paddingStart="16dp"/>
-    </LinearLayout>
+            android:layout_marginTop="8dp"
+            android:background="@drawable/card_background_stroke"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <!-- Available Slots Section -->
-    <Button
-        android:id="@+id/checkAvailabilityButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Check Available Slots"
-        android:backgroundTint="#FF6347"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
 
-    <!-- Book Appointment Button -->
-    <Button
-        android:id="@+id/bookAppointmentButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Book Appointment"
-        android:backgroundTint="#32CD32"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Basic Services"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="16sp" />
 
-    <!-- Contact Information -->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹299/hr"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Premium Services"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹499/hr"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Luxury Services"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹799/hr"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
         <Button
-            android:id="@+id/contactButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact Us"
-            android:backgroundTint="#1E90FF"/>
+            android:id="@+id/btBookSlot"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#03A9F4"
+            android:text="Check Available Slots"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:cornerRadius="28dp" />
+
     </LinearLayout>
-
-
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

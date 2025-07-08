@@ -138,7 +138,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
                 putExtra("service_description", selectedService.aboutBusiness)
                 putExtra("service_type", selectedService.services)
                 putExtra("service_address", selectedService.address)
-                putExtra("vendorId", selectedService.user_id)
+                putExtra("vendorId", selectedService.user_id.toString())
                 putExtra("serviceId", selectedService.user_id)
                 putExtra("service_price", selectedService.teamSize.toString())
             }

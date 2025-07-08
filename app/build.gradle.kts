@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.groomers.groomers"
-        minSdk = 24
+        minSdk = 33
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -108,6 +108,9 @@ dependencies {
     implementation ("com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1")
 
     implementation("com.tbuonomo:dotsindicator:4.3")
+
+    implementation ("com.google.android.flexbox:flexbox:3.0.0")
+    implementation("io.coil-kt:coil:2.4.0")
 
 
 

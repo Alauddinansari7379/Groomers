@@ -1,156 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollView"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#FFFFFF">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <!-- Profile Image -->
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageProfile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/man"
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="16dp"
-            android:padding="4dp" />
-
-        <!-- Name -->
-        <TextView
-            android:id="@+id/textName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alex the Groomer"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="4dp" />
-
-        <!-- Bio -->
-        <TextView
-            android:id="@+id/textBio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10+ years experience in pet grooming. Specializing in all breeds."
-            android:textSize="14sp"
-            android:textColor="#666666"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Rating -->
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="5"
-            android:stepSize="0.5"
-            android:rating="4.5"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Services -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Services Offered"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
-
-        <HorizontalScrollView
+        <!-- Stylist Info Card -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:layout_marginBottom="16dp">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageProfile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/women" />
+
 
                 <TextView
+                    android:id="@+id/textName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Haircut"
-                    android:textColor="#00796B"
-                    android:background="@drawable/rounded_chip"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp"
-                    android:textSize="14sp"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginTop="16dp"
+                    android:text="Sarah Johnson"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/textBio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nail Clipping"
-                    android:textColor="#00796B"
-                    android:background="@drawable/rounded_chip"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp"
-                    android:textSize="14sp"
-                    android:layout_marginEnd="8dp" />
+                    android:text="Owner &amp; Master Stylist"
+                    android:textColor="@android:color/darker_gray" />
 
-                <TextView
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bathing"
-                    android:textColor="#00796B"
-                    android:background="@drawable/rounded_chip"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp"
-                    android:textSize="14sp"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginTop="8dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="5" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ear Cleaning"
-                    android:textColor="#00796B"
-                    android:background="@drawable/rounded_chip"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp"
-                    android:textSize="14sp"
-                    android:layout_marginEnd="8dp" />
             </LinearLayout>
-        </HorizontalScrollView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Gallery -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gallery"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginTop="24dp"
+            android:text="Welcome to Our Salon"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-        <GridView
-            android:id="@+id/galleryGrid"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:numColumns="3"
-            android:verticalSpacing="8dp"
-            android:horizontalSpacing="8dp"
-            android:stretchMode="columnWidth"
-            android:layout_marginBottom="24dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="4dp"
+            android:text="With over 15 years of experience in the beauty industry, we are committed to providing you with the highest quality services and an unforgettable experience."
+            android:textColor="@android:color/darker_gray" />
 
-        <!-- Book Button -->
-        <Button
-            android:id="@+id/btnBookAppointment"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Services Offered"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Service Tags -->
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/services_tags_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Book Appointment"
-            android:backgroundTint="#00796B"
-            android:textColor="#FFFFFF"
-            android:paddingVertical="12dp"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            app:flexWrap="wrap"
+            app:alignItems="flex_start"
+            app:alignContent="flex_start" />
+
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
