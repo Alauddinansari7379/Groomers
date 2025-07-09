@@ -16,9 +16,9 @@ object ApiClient {
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             val apiClient: OkHttpClient = OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(false)
                 .build()
             val gson = GsonBuilder().setLenient().create()
@@ -34,8 +34,8 @@ object ApiClient {
         get() = client!!.create(ApiService::class.java)
 
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-        .connectTimeout(60, TimeUnit.SECONDS)
-        .writeTimeout(60, TimeUnit.SECONDS)
-        .readTimeout(60, TimeUnit.SECONDS).build()
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS).build()
 
 }

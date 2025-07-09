@@ -42,8 +42,8 @@ class AddHelp : AppCompatActivity() {
         binding.btnChooseImage.setOnClickListener {
             pickImageLauncher.launch("image/*")
         }
-        binding.imgBack.setOnClickListener {
-            finish()
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
         binding.btnSubmit.setOnClickListener {
             val name = binding.etName.text.toString()

@@ -4,178 +4,142 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     android:orientation="vertical"
-   android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    tools:context=".activity.AddHelp"
-    android:background="@android:color/white">
+    tools:context=".activity.AddHelp">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:gravity="center"
-        android:layout_marginBottom="16dp"
-        android:layout_gravity="center"
-        >
-
-        <androidx.constraintlayout.utils.widget.ImageFilterButton
-            android:id="@+id/imgBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:background="?actionBarItemBackground"
-            android:tint="@color/black"
-            android:src="@drawable/baseline_arrow_back_24">
-
-        </androidx.constraintlayout.utils.widget.ImageFilterButton>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTitle"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="15dp"
-            android:fontFamily="@font/sf_bold"
-            android:text="Add help"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <!-- Custom Toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:hint="Enter your Name"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeColor="@color/mainColor"
-        app:boxBackgroundMode="outline">
+        android:background="@android:color/white"
+        app:elevation="4dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etName"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="Suggestions"
+            app:titleTextColor="@android:color/black" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sf_regular"
-            android:paddingVertical="8dp"
-            android:inputType="text"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your Mobile"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginTop="8dp"
-        app:boxStrokeColor="@color/mainColor"
-        app:boxBackgroundMode="outline">
+            <!-- Info Box -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/info_box_background"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="24dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etMobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:paddingVertical="8dp"
-            android:fontFamily="@font/sf_regular"
-            android:maxLength="10"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_feedback"
+                    app:tint="#03A9F4" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your Query"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginTop="8dp"
-        app:boxStrokeColor="@color/mainColor"
-        app:boxBackgroundMode="outline">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="We Value Your Feedback"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etQuery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="8dp"
-            android:fontFamily="@font/sf_regular"
-            android:inputType="text"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="4dp"
+                    android:text="Your feedback helps us improve our services and provide a better experience for all our customers."
+                    android:textColor="@android:color/darker_gray" />
+            </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Description"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        app:boxStrokeColor="@color/mainColor"
-        app:boxBackgroundMode="outline">
+            <!-- Input Fields -->
+            <EditText
+                android:id="@+id/etName"
+                style="@style/FeedbackEditText"
+                android:layout_marginTop="24dp"
+                android:hint="Name" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etDescription"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:inputType="textMultiLine"
-            android:fontFamily="@font/sf_regular"
-            android:minLines="4"
-            android:gravity="top"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/etMobile"
+                style="@style/FeedbackEditText"
+                android:hint="Mobile Number"
+                android:inputType="phone" />
 
-    <LinearLayout
-        android:id="@+id/btnChooseImage"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:background="@drawable/dashed_border_background"
-        android:layout_marginBottom="24dp">
+            <EditText
+                android:id="@+id/etQuery"
+                style="@style/FeedbackEditText"
+                android:hint="Query Type" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/previewImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            android:scaleType="centerCrop"
-            android:contentDescription="Selected Image Preview" />
+            <EditText
+                android:id="@+id/etDescription"
+                style="@style/FeedbackEditText"
+                android:gravity="top"
+                android:hint="Description"
+                android:lines="4" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imagePickerIcon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/camera"
-            android:tint="#CCCCCC"
-            android:layout_gravity="center" />
+            <!-- Attach Image Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Attach Image (Optional)"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textUploadHint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choose image"
-            android:textColor="#666666"
-            android:fontFamily="@font/sf_regular"
-            android:gravity="center"
-            android:padding="16dp"
-            android:textSize="14sp" />
-    </LinearLayout>
-    
+            <LinearLayout
+                android:id="@+id/btnChooseImage"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/image_attach_background"
+                android:gravity="center"
+                android:orientation="vertical">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:cornerRadius="8dp"
-        android:layout_marginTop="16dp"
-        app:backgroundTint="@color/mainColor"/>
+                <ImageView
+                    android:id="@+id/imagePickerIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_camera"
+                    app:tint="@android:color/darker_gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Tap to select image"
+                    android:textColor="@android:color/darker_gray" />
+            </LinearLayout>
+
+            <!-- Submit Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="#03A9F4"
+                android:text="Submit Feedback"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                app:cornerRadius="28dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

@@ -51,18 +51,18 @@ class Contact() : AppCompatActivity() {
         setContentView(binding.root)
         setupSpinners1()
         with(binding) {
-            if (intent.getStringExtra("AddPro").toString() == "AddPro") {
-                mobile.visibility = View.GONE
-                layoutEmail.hint = "Username"
-                title.text = "Add profile"
-                subtitle.text = "Enter your details"
-                layoutName.visibility = View.VISIBLE
-                profile.visibility = View.VISIBLE
-                logo.visibility = View.GONE
-                spinnerUserType.visibility = View.VISIBLE
-
-
-            }
+//            if (intent.getStringExtra("AddPro").toString() == "AddPro") {
+//                mobile.visibility = View.GONE
+//                edtUserName.hint = "Username"
+//                title.text = "Add profile"
+//                subtitle.text = "Enter your details"
+//                layoutName.visibility = View.VISIBLE
+//                profile.visibility = View.VISIBLE
+//                logo.visibility = View.GONE
+//                spinnerUserType.visibility = View.VISIBLE
+//
+//
+//            }
 
 
             val countryCodeWithPlus: String =

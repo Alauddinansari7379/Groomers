@@ -49,6 +49,9 @@ class BookingDetail : AppCompatActivity(), Booking {
         setContentView(binding.root)
 
         binding.tvPriceSymbol.text = currency
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
         receiveData() // Receive intent data
 //        setupRecyclerView()
         setupFragment()

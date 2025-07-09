@@ -51,6 +51,10 @@ class ShowVendors : AppCompatActivity() {
 
         setupRecyclerView()
 
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
         viewModel.getAllVendorsByCategoryId(categoryId)
 
         viewModel.isLoading.observe(context) { isLoading ->

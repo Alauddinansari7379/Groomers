@@ -78,43 +78,43 @@
                 android:src="@drawable/baseline_keyboard_arrow_down_24"
                 android:visibility="gone" />
         </RelativeLayout>
-
-        <!-- Search Bar -->
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/search_background"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_margin="16dp"
 
-            <EditText
-                android:id="@+id/search_bar"
-                android:layout_width="0dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:ellipsize="end"
-                android:hint="Search here"
-                android:inputType="text"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:paddingStart="5dp"
-                android:singleLine="true"
-                android:textColorHint="#888888"
-                android:textSize="14sp"
-                tools:ignore="RtlSymmetry" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_search"
+                    app:tint="@color/main_blue_color" />
+
+                <EditText
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@null"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Search for services..."
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/gray"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="7dp"
-                android:src="@drawable/baseline_search_24"
-                app:tint="#000000" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,8 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="24dp"
-                android:layout_weight="1"
+                 android:layout_weight="1"
                 android:fontFamily="sans-serif-medium"
                 android:paddingBottom="8dp"
                 android:text="Our Service"
@@ -139,6 +138,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="10dp"
+                android:visibility="gone"
                 android:layout_weight="2.7"
                 android:fontFamily="sans-serif-medium"
                 android:paddingBottom="8dp"
@@ -154,8 +154,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="10dp"
+             android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             android:overScrollMode="never"
             android:scrollbars="none"
@@ -183,7 +182,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-medium"
                 android:paddingBottom="8dp"
@@ -197,6 +196,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="10dp"
+                android:visibility="gone"
                 android:layout_weight="2.7"
                 android:fontFamily="sans-serif-medium"
                 android:paddingBottom="8dp"
@@ -211,7 +211,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             android:overScrollMode="never"
@@ -223,8 +223,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="sans-serif-medium"
+             android:fontFamily="sans-serif-medium"
             android:paddingBottom="8dp"
             android:text="Vendors"
             android:textColor="@color/black"

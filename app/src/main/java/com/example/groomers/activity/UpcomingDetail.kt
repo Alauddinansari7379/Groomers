@@ -21,7 +21,9 @@ class UpcomingDetail : AppCompatActivity() {
         // Retrieve data
         val json = intent.getStringExtra("data")
         val item = Gson().fromJson(json, Result::class.java)
-
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
         // Populate UI elements
         binding.tvServiceName.text = item.serviceName
         binding.tvCustomerName.text = item.vendorName

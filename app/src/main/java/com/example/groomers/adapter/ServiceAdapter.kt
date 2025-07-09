@@ -1,5 +1,7 @@
 package com.example.groomers.adapter
 
+import android.text.SpannableString
+import android.text.style.StrikethroughSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +11,7 @@ import com.example.ehcf.Helper.currency
 import com.example.groomers.R
 import com.example.groomers.databinding.ServiceRowBinding
 import com.example.groomers.model.modelservice.Result
+
 
 class ServiceAdapter(
     private var serviceList: List<Result>,
@@ -33,6 +36,12 @@ class ServiceAdapter(
                 tvDescription.text = service.description
                 tvServiceName.text = service.serviceName
                 tvAddress.text = service.address
+                val strikethroughPrice = SpannableString("$0")
+                strikethroughPrice.setSpan(StrikethroughSpan(), 0, strikethroughPrice.length, 0)
+                tvDiscount.text = strikethroughPrice
+
+
+
             }
         }
     }

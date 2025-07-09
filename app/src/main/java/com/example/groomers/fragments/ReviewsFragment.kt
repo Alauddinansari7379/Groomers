@@ -57,6 +57,7 @@ class ReviewsFragment : Fragment() {
                 updateRatingProgressBars(counts, modelRating.result.size)
                 binding.ratingBarAverage.text = overAllRating
                 binding.ratingBarDProfile.rating = overAllRating.toFloat()
+                binding.tvReviewCount.text = modelRating.result.size.toString()
                 binding.rvReviewList.apply {
                     adapter = ReviewAdapter(modelRating.result,requireActivity())
                 }

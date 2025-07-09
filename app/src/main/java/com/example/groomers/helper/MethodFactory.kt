@@ -27,7 +27,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 
-val  currency="CA$"
+val  currency="$"
 fun progrossDilog(context: Context) {
 
     var progressDialog: ProgressDialog? = null
