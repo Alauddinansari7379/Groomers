@@ -1,300 +1,222 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="#FFFFFF">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".activity.Contact">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:scrollbars="none">
 
-        <!-- Location Section -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/location"
-                app:tint="@color/black" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Raghuvir Ganj"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hapur"
-                    android:textColor="#666666"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Profile Image -->
-        <RelativeLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="20dp">
+            android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@drawable/man"
-                android:scaleType="centerCrop"
-                android:background="@drawable/profile_circle"
-                android:layout_centerHorizontal="true"/>
 
-            <!-- Initials Label (JS) -->
-            <TextView
-                android:id="@+id/initials_label"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_below="@id/profile_image"
-                android:layout_centerHorizontal="true"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:gravity="center"
-                android:text="JS"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/circle_blue"/>
-        </RelativeLayout>
+                android:orientation="vertical">
 
-        <!-- Name and Edit -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="8dp">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/logo"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/logo_white" />
 
-            <TextView
-                android:id="@+id/username"
+                <LinearLayout
+                    android:id="@+id/profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+
+                    <LinearLayout
+                        android:id="@+id/layoutMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/imageViewProfile"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:padding="8dp"
+                            android:src="@drawable/male" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/maleText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:text="Choose profile image"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jasmeet Singh Lubana"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="@string/complete_profile"
+                android:textSize="16sp" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/baseline_edit_square_24"
-                android:layout_marginStart="8dp"
-                app:tint="#000000" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
-
-                <!-- Manage -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="32dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/logout"
-                        android:layout_marginEnd="8dp" />
-
-                    <Button
-                        android:layout_width="110dp"
-                        android:layout_height="30dp"
-                        android:textSize="8sp"
-                        android:text="Manage"
-                        android:backgroundTint="@color/Blue"
-                        android:textColor="@android:color/white"/>
-                </LinearLayout>
-
-                <!-- Help -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="24dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/baseline_help_24"
-                        android:layout_marginEnd="8dp" />
-
-                    <Button
-                        android:layout_width="110dp"
-                        android:layout_height="30dp"
-                        android:textSize="8sp"
-                        android:text="Help"
-                        android:backgroundTint="@color/Blue"
-                        android:textColor="@android:color/white"/>
-                </LinearLayout>
-
-                <!-- Past Orders -->
-                <Button
-                    android:layout_width="110dp"
-                    android:layout_height="30dp"
-                    android:textSize="8sp"
-                    android:text="Past Orders"
-                    android:layout_marginStart="20dp"
-                    android:backgroundTint="@color/Blue"
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="24dp"/>
-
-            </LinearLayout>
-
-            <!-- Right Side -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
-
-                <!-- Address -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="32dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/location"
-                        android:layout_marginEnd="8dp" />
-
-                    <Button
-                        android:layout_width="110dp"
-                        android:layout_height="30dp"
-                        android:textSize="8sp"
-                        android:text="Address"
-                        android:backgroundTint="@color/Blue"
-                        android:textColor="@android:color/white"/>
-                </LinearLayout>
-
-                <!-- Suggestions -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="24dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/logout"
-                        android:layout_marginEnd="8dp" />
-
-                    <Button
-                        android:layout_width="110dp"
-                        android:layout_height="30dp"
-                        android:textSize="8sp"
-                        android:text="Suggestions"
-                        android:backgroundTint="@color/Blue"
-                        android:textColor="@android:color/white"/>
-                </LinearLayout>
-
-                <!-- Logout -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="24dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/logout"
-                        android:layout_marginEnd="8dp" />
-
-                    <Button
-                        android:layout_width="110dp"
-                        android:layout_height="30dp"
-                        android:textSize="8sp"
-                        android:text="Logout"
-                        android:backgroundTint="@color/Blue"
-                        android:textColor="@android:color/white"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <!-- Offer Banner -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/rounded_white_box"
-            android:padding="16dp"
-            android:layout_marginTop="16dp"
-            android:elevation="4dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/baseline_card_giftcard_24"
-                app:tint="@color/mainColor" />
-
-            <LinearLayout
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="8dp">
+                android:layout_marginBottom="24dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="@string/enter_your_mobile_number_to_finish_sign_up"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
 
-                <TextView
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutEmail"
+                style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingVertical="8dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutName"
+                style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="@string/name"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingVertical="8dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:endIconMode="password_toggle"
+                android:hint="@string/password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:paddingVertical="8dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
+                android:id="@+id/mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Your next grooming on us"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:textColor="#000000"/>
+                    android:layout_marginTop="2dp"
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Get yourself a free grooming session from us."
-                    android:textSize="12sp"
-                    android:textColor="#666666"/>
+                    >
+
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/spinnerCountryCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="55dp"
+                        android:background="@drawable/cornercountrtcode"
+                        android:padding="5dp"
+                        app:ccp_showFlag="false"
+                        app:ccp_textSize="15sp" />
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputUser"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:hint="Phone Number">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="12" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
-        </LinearLayout>
 
-    </LinearLayout>
-</ScrollView>
+            <Spinner
+
+                android:id="@+id/spinnerUserType"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/corner_edt"
+                android:padding="10dp"
+                android:visibility="gone"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnContinue"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/gradient_button"
+                android:backgroundTint="@color/mainColor"
+                android:maxLength="12"
+                android:text="@string/continue1"
+                android:textColor="@android:color/white" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+</LinearLayout>

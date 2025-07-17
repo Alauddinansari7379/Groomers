@@ -18,6 +18,6 @@ data class Result(
     val updated_at: String,
     val user_id: Int,
     val user_type: String,
-    val wallet: Int,
+    val wallet: Float,
     val zip_code: Int
 )

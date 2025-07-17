@@ -3,8 +3,10 @@ package com.example.groomers.activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.InputType
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.groomers.R
 import com.example.groomers.databinding.ActivityLoginBinding
 import com.example.groomers.helper.Toastic
 import com.example.groomers.sharedpreferences.SessionManager
@@ -28,6 +30,7 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupPasswordToggle()
         if (sessionManager.isLogin) {
             startActivity(Intent(this@Login, Dashboard::class.java))
             finish()
@@ -119,5 +122,26 @@ class Login : AppCompatActivity() {
             }
         }
 
+    }
+    private fun setupPasswordToggle() {
+        var isPasswordVisible = false
+
+
+        binding.buttonTogglePassword.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+
+            if (isPasswordVisible) {
+                // Show password
+                binding.edtPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                binding.buttonTogglePassword.setImageResource(R.drawable.ic_visibility) // Eye open icon
+            } else {
+                // Hide password
+                binding.edtPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                binding.buttonTogglePassword.setImageResource(R.drawable.ic_visibility_off) // Eye slash icon
+            }
+
+            // Keep cursor at the end
+            binding.edtPassword.setSelection(binding.edtPassword.text.length)
+        }
     }
 }

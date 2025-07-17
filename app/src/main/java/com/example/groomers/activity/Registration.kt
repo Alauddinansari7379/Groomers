@@ -55,7 +55,9 @@ class Registration : AppCompatActivity() {
 
         // Observe ViewModel
         viewModel.errorMessage.observe(this) { errorMessage ->
-            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            if (!errorMessage.isNullOrBlank()) {
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            }
         }
 
         viewModel.isLoading.observe(this) { isLoading ->
@@ -213,6 +215,7 @@ class Registration : AppCompatActivity() {
         )
         datePickerDialog.show()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         viewModel.clearData()

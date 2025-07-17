@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -11,7 +12,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.example.groomers.R
 import com.example.groomers.databinding.ActivityContactBinding
 import com.example.groomers.helper.Toastic
 import com.example.groomers.viewModel.MultiuserListViewModel
@@ -50,20 +53,21 @@ class Contact() : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupSpinners1()
+        setupPasswordToggle()
         with(binding) {
-//            if (intent.getStringExtra("AddPro").toString() == "AddPro") {
-//                mobile.visibility = View.GONE
-//                edtUserName.hint = "Username"
-//                title.text = "Add profile"
-//                subtitle.text = "Enter your details"
-//                layoutName.visibility = View.VISIBLE
-//                profile.visibility = View.VISIBLE
-//                logo.visibility = View.GONE
-//                spinnerUserType.visibility = View.VISIBLE
-//
-//
-//            }
-
+            if (intent.getStringExtra("AddPro").toString() == "AddPro") {
+                edtName.hint = "Username"
+                layoutUserName.visibility = View.VISIBLE
+                imageViewProfile.visibility = View.VISIBLE
+//                layoutEmail.visibility = View.GONE
+                spinnerUserType.visibility = View.VISIBLE
+                imageViewProfile.setImageDrawable(ContextCompat.getDrawable(this@Contact, R.drawable.ic_username))
+            }
+            textSignIn.setOnClickListener {
+                val intent = Intent(this@Contact, Login::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
 
             val countryCodeWithPlus: String =
                 spinnerCountryCode.selectedCountryCodeWithPlus // Example: "+91"
@@ -246,4 +250,26 @@ class Contact() : AppCompatActivity() {
             .setConfirmText("Ok")
             .show()
     }
+    private fun setupPasswordToggle() {
+        var isPasswordVisible = false
+
+
+       binding.buttonTogglePassword.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+
+            if (isPasswordVisible) {
+                // Show password
+                binding.edtPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                binding.buttonTogglePassword.setImageResource(R.drawable.ic_visibility) // Eye open icon
+            } else {
+                // Hide password
+                binding.edtPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                binding.buttonTogglePassword.setImageResource(R.drawable.ic_visibility_off) // Eye slash icon
+            }
+
+            // Keep cursor at the end
+           binding.edtPassword.setSelection(binding.edtPassword.text.length)
+        }
+    }
+
 }

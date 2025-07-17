@@ -1,222 +1,321 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/white"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".activity.Contact">
 
+    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:background="#FFFFFF"
+            android:paddingBottom="100dp">
 
+            <!-- Top right decorative circle -->
+            <View
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/circle_shape_light_blue"
+                android:layout_marginEnd="-75dp"
+                android:layout_marginTop="-75dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:gravity="center"
-                android:orientation="vertical">
+            <!-- Profile Icon -->
+            <ImageView
+                android:id="@+id/imageViewProfile"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="64dp"
+                android:background="@drawable/circle_background"
+                android:contentDescription="Scissor Icon"
+                android:padding="20dp"
+                android:src="@drawable/ic_scissor"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/logo"
-                    android:layout_width="250dp"
-                    android:layout_height="200dp"
-                    android:background="@drawable/logo_white" />
-
-                <LinearLayout
-                    android:id="@+id/profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-
-                    <LinearLayout
-                        android:id="@+id/layoutMale"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/imageViewProfile"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:padding="8dp"
-                            android:src="@drawable/male" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/maleText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="sans-serif-medium"
-                            android:gravity="center"
-                            android:text="Choose profile image"
-                            android:textColor="@android:color/black"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/title"
+            <!-- Create Account -->
+            <TextView
+                android:id="@+id/text_create_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="center"
-                android:text="@string/complete_profile"
-                android:textSize="16sp" />
+                android:layout_marginTop="48dp"
+                android:layout_marginStart="20dp"
+                android:text="Create Account"
+                android:textColor="#212121"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_bold"
+                app:layout_constraintTop_toBottomOf="@id/imageViewProfile"
+                app:layout_constraintStart_toStartOf="parent" />
 
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/subtitle"
+            <!-- Subtitle -->
+            <TextView
+                android:id="@+id/text_sign_up_continue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="@string/enter_your_mobile_number_to_finish_sign_up"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="12sp" />
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="20dp"
+                android:text="Sign up to continue"
+                android:textColor="#757575"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/text_create_account"
+                app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutEmail"
-                style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-                android:layout_width="match_parent"
+            <!-- Email input -->
+            <LinearLayout
+                android:id="@+id/layout_email"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:hint="Email">
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/input_background"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="2dp"
+                app:layout_constraintTop_toBottomOf="@id/text_sign_up_continue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_email"
+                    app:tint="#757575" />
+
+                <EditText
                     android:id="@+id/edtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="5dp"
-                    android:fontFamily="@font/poppins_regular"
+                    android:background="@null"
+                    android:hint="Email"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:paddingVertical="8dp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:padding="16dp"
+                    android:textColor="#212121"
+                    android:textColorHint="#9E9E9E"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutName"
-                style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-                android:layout_width="match_parent"
+            <!-- Hidden Username (optional) -->
+            <LinearLayout
+                android:id="@+id/layoutUserName"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:hint="@string/name"
-                android:visibility="gone">
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/input_background"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="2dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/layout_email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_username"
+                    app:tint="#757575" />
+
+                <EditText
                     android:id="@+id/edtName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="5dp"
-                    android:fontFamily="@font/poppins_regular"
+                    android:background="@null"
+                    android:hint="Email/ Username"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:paddingVertical="8dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:endIconMode="password_toggle"
-                android:hint="@string/password">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="5dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:paddingVertical="8dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <LinearLayout
-                android:id="@+id/mobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-
-                    >
-
-                    <com.hbb20.CountryCodePicker
-                        android:id="@+id/spinnerCountryCode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="55dp"
-                        android:background="@drawable/cornercountrtcode"
-                        android:padding="5dp"
-                        app:ccp_showFlag="false"
-                        app:ccp_textSize="15sp" />
-                </LinearLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputUser"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:hint="Phone Number">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:maxLength="12" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:padding="16dp"
+                    android:textColor="#212121"
+                    android:textColorHint="#9E9E9E"
+                    android:textSize="16sp" />
             </LinearLayout>
 
-            <Spinner
+            <!-- Phone input -->
+            <LinearLayout
+                android:id="@+id/layout_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/input_background"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="2dp"
+                app:layout_constraintTop_toBottomOf="@id/layoutUserName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/spinnerCountryCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:ccp_showFlag="true"
+                    app:ccp_showNameCode="false"
+                    app:ccp_textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="Phone Number"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:padding="16dp"
+                    android:textColor="#212121"
+                    android:textColorHint="#9E9E9E"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Hidden user type spinner -->
+            <Spinner
                 android:id="@+id/spinnerUserType"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/corner_edt"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/input_background"
                 android:padding="10dp"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/layout_phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <!-- Password -->
+            <LinearLayout
+                android:id="@+id/layout_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/input_background"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="2dp"
+                app:layout_constraintTop_toBottomOf="@id/spinnerUserType"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_lock"
+                    app:tint="#757575" />
+
+                <EditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="16dp"
+                    android:textColor="#212121"
+                    android:textColorHint="#9E9E9E"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/button_toggle_password"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_visibility_off"
+                    app:tint="#757575" />
+            </LinearLayout>
+
+            <!-- Terms -->
+            <CheckBox
+                android:id="@+id/checkbox_terms"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="I agree to the Terms and Conditions"
+                android:textColor="#757575"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/layout_password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Sign Up Button -->
+            <Button
                 android:id="@+id/btnContinue"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/gradient_button"
-                android:backgroundTint="@color/mainColor"
-                android:maxLength="12"
-                android:text="@string/continue1"
-                android:textColor="@android:color/white" />
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="#5AB0F4"
+                android:text="Sign Up"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                app:layout_constraintTop_toBottomOf="@id/checkbox_terms"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            <!-- Centered bottom text: Already have an account? Sign In -->
+            <TextView
+                android:id="@+id/text_have_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="40dp"
+                android:text="Already have an account?"
+                android:textColor="#757575"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/btnContinue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/text_sign_in"
+                app:layout_constraintHorizontal_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/text_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="Sign In"
+                android:textColor="#5AB0F4"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/text_have_account"
+                app:layout_constraintBottom_toBottomOf="@id/text_have_account"
+                app:layout_constraintStart_toEndOf="@id/text_have_account"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-</LinearLayout>
+
+    <!-- Bottom-left fixed circle decoration (non-scrolling) -->
+    <View
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="-75dp"
+        android:layout_marginBottom="-75dp"
+        android:background="@drawable/circle_shape_light_blue" />
+
+</FrameLayout>

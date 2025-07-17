@@ -69,8 +69,10 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
     @Inject
     lateinit var sessionManager: SessionManager
 
-    private var originalCategoryList: List<com.example.groomers.model.modelcategory.Result> = emptyList()
-    private var originalServiceList: List<com.example.groomers.model.modelservice.Result> = emptyList()
+    private var originalCategoryList: List<com.example.groomers.model.modelcategory.Result> =
+        emptyList()
+    private var originalServiceList: List<com.example.groomers.model.modelservice.Result> =
+        emptyList()
 
 
     override fun onCreateView(
@@ -84,7 +86,9 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
+        lifecycleScope.launch {
+            viewModel1.getUserDetails()
+        }
         val apiService = ApiServiceProvider.getApiService()
         categoryViewModel.getCategory(apiService)
         setupRecyclerView()
@@ -95,8 +99,10 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
         sessionManager.accessToken?.let { token ->
             lifecycleScope.launch {
-                viewModel.getServiceList(token, sessionManager.userType.toString())
                 viewModel1.getUserDetails()
+                if (!sessionManager.userType.isNullOrEmpty()) {
+                    viewModel.getServiceList(token, sessionManager.userType.toString())
+                }
                 viewModel.getAllVendors(token)
             }
         } ?: run {
@@ -125,7 +131,10 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 //                putExtra("rating", selectedService.rating.toString())
                 putExtra("service_price", selectedService.price.toString())
             }
-            Log.d("HomeFragment", "Navigating to BookingDetail with: ${selectedService.serviceName}")
+            Log.d(
+                "HomeFragment",
+                "Navigating to BookingDetail with: ${selectedService.serviceName}"
+            )
             startActivity(intent)
         }
         binding.rvHorizontalList.adapter = serviceAdapter
@@ -183,6 +192,14 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
         }
+        viewModel1.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) CustomLoader.showLoaderDialog(requireContext())
+            else CustomLoader.hideLoaderDialog()
+        }
+
+        viewModel1.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+        }
 
         viewModel.modelService.observe(viewLifecycleOwner) { response ->
             response?.result?.let { services ->
@@ -208,6 +225,7 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
                 sessionManager.username = userDetail.name
                 sessionManager.profilePictureUrl = userDetail.profile_picture
                 sessionManager.userType = userDetail.user_type
+                getService()
             } ?: run {
                 Toast.makeText(requireContext(), "No data available.", Toast.LENGTH_SHORT).show()
             }
@@ -215,14 +233,15 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
         categoryViewModel.modelCategory.observe(viewLifecycleOwner) { modelCategory ->
             originalCategoryList = modelCategory.result
-            binding.rvCategory1.adapter = CategoryAdapter(originalCategoryList) { selectedCategory ->
-                userId = selectedCategory.id.toString()
-                val intent = Intent(requireContext(), ShowVendors::class.java).apply {
-                    putExtra("category_id", selectedCategory.id.toString())
-                    putExtra("category_name", selectedCategory.category_name)
+            binding.rvCategory1.adapter =
+                CategoryAdapter(originalCategoryList) { selectedCategory ->
+                    userId = selectedCategory.id.toString()
+                    val intent = Intent(requireContext(), ShowVendors::class.java).apply {
+                        putExtra("category_id", selectedCategory.id.toString())
+                        putExtra("category_name", selectedCategory.category_name)
+                    }
+                    startActivity(intent)
                 }
-                startActivity(intent)
-            }
         }
 
         categoryViewModel.isLoading.observe(requireActivity()) { isLoading ->
@@ -236,7 +255,16 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
             }
         }
     }
-
+    fun getService(){
+        sessionManager.accessToken?.let { token ->
+            lifecycleScope.launch {
+                viewModel.getServiceList(token, sessionManager.userType.toString())
+                viewModel.getAllVendors(token)
+            }
+        } ?: run {
+            Toast.makeText(requireContext(), "Error: Missing Token", Toast.LENGTH_LONG).show()
+        }
+    }
     @SuppressLint("SetTextI18n", "MissingPermission")
     private fun getLastLocation() {
         if (ContextCompat.checkSelfPermission(

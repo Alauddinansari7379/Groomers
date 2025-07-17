@@ -106,7 +106,7 @@ class LoginViewModel @Inject constructor(
                 _errorMessage.postValue("Server issue detected. Please try again in a few moments.")
             } catch (e: Exception) {
                 // Catch-all for unexpected errors
-                _errorMessage.postValue("Something went wrong. We're working on it! Please try again shortly.")
+                _errorMessage.postValue("Something went wrong. We're working on it! Please try again shortly.$e")
             } finally {
                 _isLoading.postValue(false)
             }

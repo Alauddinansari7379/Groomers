@@ -99,7 +99,7 @@
         <activity
             android:name=".activity.Login"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.SplashScreen"
             android:exported="true">

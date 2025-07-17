@@ -102,12 +102,16 @@
 
                 <EditText
                     android:id="@+id/search_bar"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
                     android:background="@null"
-                    android:fontFamily="@font/poppins_regular"
                     android:hint="Search for services..."
+                    android:inputType="text"
+                    android:imeOptions="actionSearch"
+                    android:maxLines="1"
+                    android:fontFamily="@font/poppins_regular"
                     android:textColor="@color/text_color"
                     android:textColorHint="@color/gray"
                     android:textSize="14sp" />

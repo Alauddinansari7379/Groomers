@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide
 import com.example.groomers.R
 import com.example.groomers.activity.AddHelp
 import com.example.groomers.activity.AddressList
+import com.example.groomers.activity.Dashboard
 import com.example.groomers.activity.Login
 import com.example.groomers.activity.UpdateProfileActivity
 import com.example.groomers.activity.Watching
@@ -139,12 +140,14 @@ class Profile : Fragment() {
                 .build()
 
             navController.navigate(R.id.appointmentFragment, null, navOptions)
+            (requireActivity() as Dashboard).selectBottomTab(Dashboard.ORDER_LIST)
+
         }
 
 
     }
 
-    fun getInitials(name: String?): String {
+    private fun getInitials(name: String?): String {
         if (name.isNullOrBlank()) return ""
 
         val parts = name.trim().split("\\s+".toRegex()) // Split by space

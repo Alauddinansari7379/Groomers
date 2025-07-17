@@ -27,6 +27,6 @@ data class Result(
     val updated_at: String,
     val user_type: String,
     val username: String,
-    val wallet: Int,
+    val wallet: Float,
     val zip_code: Int
 )
