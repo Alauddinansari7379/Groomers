@@ -10,10 +10,10 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.groomers.groomers"
-        minSdk = 33
+        applicationId = "com.customer.groomers"
+        minSdk = 30
         targetSdk = 35
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
