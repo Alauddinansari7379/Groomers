@@ -157,17 +157,28 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         binding.rvHorizontalVendorList.adapter = allVendorsAdapter
     }
 
+
+
     private fun setupSlider(imageUrls: List<String>) {
+        // Cancel any existing timer to avoid multiple fast triggers
+        timer?.cancel()
+        timer = null
+
         sliderAdapter = SliderAdapter(imageUrls)
         binding.imageService.adapter = sliderAdapter
         binding.dotsIndicator.setViewPager2(binding.imageService)
+
+        currentPage = 0 // reset to 0 for a fresh start
+
         val handler = Handler(Looper.getMainLooper())
         val update = Runnable {
-            if (currentPage == imageUrls.size) {
+            if (currentPage >= imageUrls.size) {
                 currentPage = 0
             }
-            binding.imageService.setCurrentItem(currentPage++, true)
+            binding.imageService.setCurrentItem(currentPage, true)
+            currentPage++
         }
+
         timer = Timer()
         timer?.schedule(object : TimerTask() {
             override fun run() {
@@ -182,6 +193,8 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
             }
         })
     }
+
+
 
     private fun observeViewModel() {
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->

@@ -8,18 +8,17 @@
     android:orientation="vertical"
     tools:context=".activity.ForgetPassword">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:gravity="center"
-         android:orientation="vertical">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="250dp"
-            android:layout_height="200dp"
-            android:background="@drawable/logo_white"/>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
+    <ImageView
+        android:id="@+id/icon_scissor"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/circle_background"
+        android:contentDescription="Scissor Icon"
+        android:padding="20dp"
+        android:src="@drawable/ic_scissor" />
 
     <TextView
         android:id="@+id/welcome"
@@ -119,7 +118,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginStart="10dp"
         android:layout_marginTop="50dp"

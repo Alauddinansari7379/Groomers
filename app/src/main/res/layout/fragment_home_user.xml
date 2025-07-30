@@ -137,12 +137,13 @@
                 android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvViewAllService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="10dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_weight="2.7"
                 android:fontFamily="sans-serif-medium"
                 android:paddingBottom="8dp"
@@ -195,12 +196,13 @@
                 android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSpecialService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="10dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_weight="2.7"
                 android:fontFamily="sans-serif-medium"
                 android:paddingBottom="8dp"

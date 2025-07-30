@@ -20,6 +20,9 @@
         android:theme="@style/Theme.groomers"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ShowServices"
+            android:exported="false" />
+        <activity
             android:name=".activity.UpcomingDetail"
             android:exported="false" />
         <activity

@@ -17,7 +17,7 @@ data class Result(
     val mobile: String,
     val name: String,
     val no_of_ratings: Int,
-    val overall_ratings: Int,
+    val overall_ratings: Float,
     val password: String,
     val profile_picture: String,
     val remember_token: Any,
