@@ -3,13 +3,20 @@ package com.example.groomers.fragments
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.groomers.R
+import com.example.groomers.activity.BookingDetail.Companion.aboutBusiness
+import com.example.groomers.activity.BookingDetail.Companion.address
+import com.example.groomers.activity.BookingDetail.Companion.serviceDescription
+import com.example.groomers.activity.BookingDetail.Companion.serviceImage
 import com.example.groomers.databinding.FragmentPortfolioBinding
+import com.example.groomers.fragments.ServiceFragment.Companion.serviceNameList
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.chip.Chip
 
@@ -26,8 +33,20 @@ class PortfolioFragment : Fragment() {
 //            crossfade(true)
 //            transformations(CircleCropTransformation())
 //        }
-        val services = listOf("Facial", "Pedicure", "Hair Treatment", "Haircut", "Threading", "Makeup", "Waxing", "Hair Styling", "Face Clean Up", "Hair Spa", "Hair Color", "Massage", "Manicure", "Body Scrub", "Beard Trim")
-        addServiceTags(services)
+       // val services = listOf("Facial", "Pedicure", "Hair Treatment", "Haircut", "Threading", "Makeup", "Waxing", "Hair Styling", "Face Clean Up", "Hair Spa", "Hair Color", "Massage", "Manicure", "Body Scrub", "Beard Trim")
+        addServiceTags(serviceNameList)
+        binding.textName.text=serviceDescription
+        binding.tvAbout.text=aboutBusiness
+        binding.textBio.text=address
+        serviceImage?.let {
+            val baseUrl = "https://groomers.co.in/public/uploads/"
+            val imageUrl = baseUrl + it
+            Glide.with(this)
+                .load(imageUrl)
+                .placeholder(R.drawable.noimage)
+                .into(binding.imageProfile)
+        }
+
     }
 
     // UPDATED FUNCTION TO IMPROVE CHIP LAYOUT

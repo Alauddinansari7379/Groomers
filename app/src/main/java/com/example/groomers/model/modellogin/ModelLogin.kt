@@ -4,5 +4,8 @@ data class ModelLogin(
     val access_token: String,
     val expires_in: Int,
     val token_type: String,
-    val user: User
+    val user: User,
+    val message: String,
+    val result: List<String>,
+    val status: Int
 )

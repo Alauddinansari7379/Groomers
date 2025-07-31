@@ -84,15 +84,15 @@ class BookingDetail : AppCompatActivity(), Booking {
 
     private fun receiveData() {
         val serviceName = intent.getStringExtra("service_name") ?: "No Name Provided"
-        val serviceImage = intent.getStringExtra("service_image")
+         serviceImage = intent.getStringExtra("service_image").toString()
         val serviceType = intent.getStringExtra("service_type")
-        val address = intent.getStringExtra("service_address")
+         address = intent.getStringExtra("service_address").toString()
         vendorId = intent.getStringExtra("vendorId")
         serviceId = intent.getStringExtra("serviceId")
 //       val rating = intent.getStringExtra("rating")
-        val serviceDescription = intent.getStringExtra("service_description")
+         serviceDescription = intent.getStringExtra("service_description").toString()
         val servicePrice = intent.getStringExtra("service_price")
-        val aboutBusiness = intent.getStringExtra("aboutBusiness")
+         aboutBusiness = intent.getStringExtra("aboutBusiness").toString()
         val overall_ratings = intent.getStringExtra("overall_ratings")
         val no_of_ratings = intent.getStringExtra("no_of_ratings")
         shareViewModel.selectItem(vendorId.toString())
@@ -192,5 +192,9 @@ class BookingDetail : AppCompatActivity(), Booking {
     }
     companion object{
         var compVendorId = ""
+        var serviceDescription = ""
+        var aboutBusiness = ""
+        var address = ""
+        var serviceImage = ""
     }
 }

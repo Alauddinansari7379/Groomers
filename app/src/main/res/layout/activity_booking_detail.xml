@@ -208,6 +208,7 @@
                 android:layout_height="wrap_content"
                 android:text="View More"
                 android:layout_marginTop="16dp"
+                android:visibility="gone"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/sf_bold"
                 android:textColor="@color/mainColor"

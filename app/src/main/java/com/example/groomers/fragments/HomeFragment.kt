@@ -26,6 +26,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.groomers.R
 import com.example.groomers.activity.BookingDetail
 import com.example.groomers.activity.ShowVendors
+import com.example.groomers.activity.ViewAllActivity
 import com.example.groomers.adapter.AllVendorsAdapter
 import com.example.groomers.adapter.CategoryAdapter
 import com.example.groomers.adapter.ServiceAdapter
@@ -96,6 +97,20 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireContext())
         getLastLocation()
+
+        binding.tvViewAllOffer.setOnClickListener {
+            viewAllClick="Offer"
+            val intent = Intent(requireContext(), ViewAllActivity::class.java)
+                startActivity(intent)
+
+        }
+
+        binding.tvViewAllService.setOnClickListener {
+            viewAllClick="Service"
+            val intent = Intent(requireContext(), ViewAllActivity::class.java)
+                startActivity(intent)
+
+        }
 
         sessionManager.accessToken?.let { token ->
             lifecycleScope.launch {
@@ -349,5 +364,6 @@ class HomeFragment : Fragment(R.layout.fragment_home_user) {
 
     companion object {
         var userId = ""
+        var viewAllClick=""
     }
 }

@@ -3,6 +3,8 @@ package com.example.groomers.activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
@@ -29,7 +31,7 @@ class Watching : AppCompatActivity() {
     private val binding by lazy { ActivityWatchingBinding.inflate(layoutInflater) }
     private val viewModel: MultiuserListViewModel by viewModels()
     private val viewModel1: LoginViewModel by viewModels()
-
+    private var isLogin=true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -113,8 +115,9 @@ class Watching : AppCompatActivity() {
     }
 
     private fun callLoginApi(username: String, password: String) {
+        isLogin = true // assume failure initially
+
         viewModel1.login("", username, password, "watch")
-        // Observe isLoading to show/hide progress
         viewModel1.isLoading.observe(this@Watching) { isLoading ->
             if (isLoading) {
                 CustomLoader.showLoaderDialog(this@Watching)
@@ -123,19 +126,19 @@ class Watching : AppCompatActivity() {
             }
         }
 
-        // Observe the result of the login attempt
         viewModel1.modelLogin.observe(this@Watching) { modelLogin ->
             modelLogin?.let {
-                // If login is successful, navigate to MainActivity
+                // ✅ Success → set isLogin to false
+                isLogin = false
                 Toastic.toastic(
                     context = this@Watching,
                     message = "Log in successful",
                     duration = Toastic.LENGTH_SHORT,
                     type = Toastic.SUCCESS,
                     isIconAnimated = true,
-                    textColor = if (false) Color.BLUE else null,
+                    textColor = null,
                 ).show()
-                // Simulate success and go to Dashboard
+
                 val intent = Intent(this, Dashboard::class.java)
                 intent.putExtra("USERNAME", username)
                 startActivity(intent)
@@ -143,7 +146,19 @@ class Watching : AppCompatActivity() {
             }
         }
 
-
+        // ⏳ Delay for 3 seconds to check if login failed
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (isLogin) {
+                Toastic.toastic(
+                    context = this@Watching,
+                    message = "Wrong Password login failed",
+                    duration = Toastic.LENGTH_SHORT,
+                    type = Toastic.ERROR,
+                    isIconAnimated = true,
+                    textColor = Color.RED,
+                ).show()
+            }
+        }, 3000)
     }
 
     override fun onResume() {
